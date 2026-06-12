@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fryda Café — Cafeteria no Centro de Taubaté</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700;800&family=Great+Vibes&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --caramelo:#E3C590;
+    --caramelo-claro:#EED9B0;
+    --creme:#F8EFDC;
+    --preto:#221A14;
+    --vermelho:#B93A2B;
+    --laranja:#D96B2B;
+    --verde:#45703B;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Jost',sans-serif;background:var(--caramelo);color:var(--preto)}
+  h1,h2,h3{font-family:'Playfair Display',serif}
+  .script{font-family:'Great Vibes',cursive;font-weight:400}
+  .wrap{max-width:1100px;margin:0 auto;padding:0 24px}
+
+  /* ===== Nav ===== */
+  nav{position:sticky;top:0;z-index:10;background:rgba(227,197,144,.95);backdrop-filter:blur(6px);border-bottom:1px solid rgba(34,26,20,.15)}
+  .nav-in{display:flex;align-items:center;justify-content:space-between;padding:14px 24px;max-width:1100px;margin:0 auto}
+  .brand{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--preto)}
+  .brand h1{font-size:1.5rem;letter-spacing:.18em;font-weight:700;line-height:1}
+  .brand .script{font-size:1.25rem;color:var(--vermelho);margin-left:-2px}
+  .nav-links{display:flex;gap:28px;align-items:center}
+  .nav-links a{color:var(--preto);text-decoration:none;font-weight:500;font-size:.95rem;letter-spacing:.04em}
+  .nav-links a:hover{color:var(--vermelho)}
+  .btn{display:inline-block;background:var(--preto);color:var(--creme);padding:12px 26px;border-radius:999px;text-decoration:none;font-weight:500;letter-spacing:.04em;transition:.2s}
+  .btn:hover{background:var(--vermelho);color:#fff}
+  .btn.red{background:var(--vermelho);color:#fff}
+  .btn.red:hover{background:var(--preto)}
+  .btn.ghost{background:transparent;border:2px solid var(--preto);color:var(--preto)}
+  .btn.ghost:hover{background:var(--preto);color:var(--creme)}
+  .nav-links .btn{padding:9px 20px;font-size:.9rem}
+
+  /* ===== Hero ===== */
+  header{padding:72px 0 64px;position:relative;overflow:hidden}
+  .hero{display:grid;grid-template-columns:1.15fr .85fr;gap:48px;align-items:center}
+  .kicker{display:inline-flex;align-items:center;gap:8px;background:var(--creme);border:1px solid rgba(34,26,20,.2);padding:6px 16px;border-radius:999px;font-size:.85rem;font-weight:500;letter-spacing:.06em;margin-bottom:22px}
+  .kicker .dot{width:8px;height:8px;border-radius:50%;background:var(--verde)}
+  header h2{font-size:clamp(2.4rem,5vw,3.6rem);line-height:1.08;font-weight:800;margin-bottom:18px}
+  header h2 em{font-style:normal;color:var(--vermelho)}
+  header p.lead{font-size:1.15rem;font-weight:300;max-width:34rem;margin-bottom:30px;line-height:1.6}
+  .cta-row{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:26px}
+  .hours{font-size:.92rem;color:rgba(34,26,20,.75)}
+  .hours strong{font-weight:600;color:var(--preto)}
+
+  .hero-art{position:relative;display:flex;justify-content:center}
+  .hero-card{background:var(--creme);border-radius:24px;padding:40px 36px;box-shadow:0 24px 60px rgba(34,26,20,.18);text-align:center;width:min(360px,100%);border:1px solid rgba(34,26,20,.08)}
+  .hero-card .logo-big{margin:0 auto 14px}
+  .hero-card h3{font-size:2rem;letter-spacing:.2em;font-weight:700}
+  .hero-card .script{display:block;font-size:1.9rem;color:var(--vermelho);margin-top:-6px}
+  .hero-card p{margin-top:14px;font-size:.95rem;color:rgba(34,26,20,.7);line-height:1.55}
+  .stamp{position:absolute;top:-16px;right:4px;background:var(--vermelho);color:#fff;border-radius:50%;width:108px;height:108px;display:flex;align-items:center;justify-content:center;text-align:center;font-size:.72rem;font-weight:600;letter-spacing:.08em;transform:rotate(10deg);line-height:1.3;padding:10px;box-shadow:0 10px 24px rgba(34,26,20,.25)}
+
+  /* ===== Sections ===== */
+  section{padding:72px 0}
+  .sec-title{text-align:center;margin-bottom:14px;font-size:clamp(1.8rem,3.5vw,2.5rem);font-weight:700;letter-spacing:.06em}
+  .sec-sub{text-align:center;font-weight:300;max-width:38rem;margin:0 auto 48px;line-height:1.6;color:rgba(34,26,20,.8)}
+  .rule{display:flex;align-items:center;gap:14px;justify-content:center;margin-bottom:10px}
+  .rule::before,.rule::after{content:"";height:2px;width:60px;background:var(--preto);opacity:.5}
+  .rule span{font-size:1.3rem}
+
+  /* Especialidade */
+  .spec{background:var(--preto);color:var(--creme)}
+  .spec-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:56px;align-items:center}
+  .spec .photo{aspect-ratio:1/1;border-radius:24px;background:
+      radial-gradient(circle at 30% 25%,#F0D9A8 0 18%,transparent 19%),
+      radial-gradient(circle at 72% 70%,#C98A3B 0 24%,transparent 25%),
+      linear-gradient(140deg,#E3C590,#C98A3B);display:flex;align-items:center;justify-content:center;font-size:6rem;box-shadow:0 24px 60px rgba(0,0,0,.4)}
+  .spec h2{color:var(--creme)}
+  .spec .badge{display:inline-block;background:var(--vermelho);color:#fff;font-size:.78rem;font-weight:600;letter-spacing:.14em;padding:7px 16px;border-radius:999px;margin-bottom:18px}
+  .spec h2.title{font-size:clamp(1.9rem,4vw,2.8rem);text-align:left;margin-bottom:16px;line-height:1.15}
+  .spec p{font-weight:300;line-height:1.7;color:rgba(248,239,220,.85);margin-bottom:26px;max-width:30rem}
+  .spec .preco{font-family:'Playfair Display',serif;font-size:2rem;font-weight:700;color:var(--caramelo);margin-bottom:26px}
+  .spec .preco small{font-size:1rem;font-family:'Jost',sans-serif;font-weight:300;color:rgba(248,239,220,.7)}
+
+  /* Cards do cardápio */
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+  .card{background:var(--creme);border-radius:20px;overflow:hidden;border:1px solid rgba(34,26,20,.1);box-shadow:0 10px 30px rgba(34,26,20,.08);transition:.2s}
+  .card:hover{transform:translateY(-4px);box-shadow:0 18px 40px rgba(34,26,20,.15)}
+  .card .thumb{height:150px;display:flex;align-items:center;justify-content:center;font-size:3.4rem;background:linear-gradient(140deg,var(--caramelo-claro),var(--caramelo))}
+  .card .body{padding:20px 22px 24px}
+  .card h3{font-size:1.15rem;font-weight:700;margin-bottom:6px}
+  .card p{font-size:.9rem;font-weight:300;line-height:1.5;color:rgba(34,26,20,.75);margin-bottom:14px;min-height:2.7em}
+  .card .preco{font-family:'Playfair Display',serif;font-weight:700;font-size:1.2rem;color:var(--vermelho)}
+  .tag{display:inline-block;font-size:.7rem;font-weight:600;letter-spacing:.1em;padding:4px 10px;border-radius:999px;margin-bottom:10px}
+  .tag.fav{background:var(--vermelho);color:#fff}
+  .tag.veg{background:var(--verde);color:#fff}
+
+  /* Veganos */
+  .vegan{background:var(--creme)}
+  .vegan .grid{grid-template-columns:repeat(3,1fr)}
+  .vegan .card{background:#fff}
+  .vegan .nota{text-align:center;margin-top:30px;font-size:.9rem;color:rgba(34,26,20,.65);font-weight:300}
+
+  /* Visite */
+  .visit-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;text-align:center}
+  .visit-card{background:var(--creme);border-radius:20px;padding:34px 26px;border:1px solid rgba(34,26,20,.1)}
+  .visit-card .ico{font-size:2rem;margin-bottom:12px}
+  .visit-card h3{font-size:1.1rem;margin-bottom:10px;letter-spacing:.04em}
+  .visit-card p{font-weight:300;font-size:.95rem;line-height:1.6;color:rgba(34,26,20,.8)}
+
+  /* CTA final */
+  .cta-final{background:var(--vermelho);color:#fff;text-align:center;border-radius:28px;padding:64px 32px;margin:0 24px}
+  .cta-final h2{font-size:clamp(1.8rem,4vw,2.6rem);margin-bottom:14px}
+  .cta-final p{font-weight:300;margin-bottom:30px;opacity:.92}
+  .cta-final .btn{background:#fff;color:var(--vermelho);font-weight:600}
+  .cta-final .btn:hover{background:var(--preto);color:#fff}
+
+  footer{padding:48px 0 36px;text-align:center}
+  footer .brand{justify-content:center;margin-bottom:14px}
+  footer p{font-size:.85rem;font-weight:300;color:rgba(34,26,20,.65)}
+  footer .social{margin:10px 0 18px;font-weight:500}
+  footer .social a{color:var(--preto);text-decoration:none}
+  footer .social a:hover{color:var(--vermelho)}
+  .mock-note{background:var(--preto);color:var(--caramelo);text-align:center;font-size:.78rem;letter-spacing:.08em;padding:8px}
+
+  @media(max-width:860px){
+    .hero,.spec-grid{grid-template-columns:1fr}
+    .grid,.visit-grid,.vegan .grid{grid-template-columns:1fr 1fr}
+    .nav-links a:not(.btn){display:none}
+  }
+  @media(max-width:560px){
+    .grid,.visit-grid,.vegan .grid{grid-template-columns:1fr}
+  }
+</style>
+</head>
+<body>
+
+<div class="mock-note">MOCKUP · proposta de site — MarioLucash · dados ilustrativos sujeitos a ajuste</div>
+
+<nav>
+  <div class="nav-in">
+    <a class="brand" href="#">
+      <svg width="44" height="44" viewBox="0 0 100 100" aria-hidden="true">
+        <path d="M22 62 Q14 38 30 28 Q42 20 50 22 Q58 20 70 28 Q86 38 78 62 Q74 48 68 42 Q60 34 50 34 Q40 34 32 42 Q26 48 22 62Z" fill="#221A14"/>
+        <circle cx="50" cy="24" r="9" fill="#B93A2B"/>
+        <circle cx="36" cy="28" r="7" fill="#D96B2B"/>
+        <circle cx="64" cy="28" r="7" fill="#D96B2B"/>
+        <path d="M27 24 Q33 18 38 22Z M73 24 Q67 18 62 22Z" fill="#45703B"/>
+        <path d="M34 56 Q42 50 48 55 M52 55 Q58 50 66 56" stroke="#221A14" stroke-width="3" fill="none" stroke-linecap="round"/>
+        <path d="M36 64 Q40 67 44 64 M56 64 Q60 67 64 64" stroke="#221A14" stroke-width="2.4" fill="none" stroke-linecap="round"/>
+      </svg>
+      <span><h1>FRYDA<span class="script"> café</span></h1></span>
+    </a>
+    <div class="nav-links">
+      <a href="#cardapio">Cardápio</a>
+      <a href="#especialidade">Torta de Frango</a>
+      <a href="#veganos">Veganos</a>
+      <a href="#visite">Onde Estamos</a>
+      <a class="btn red" href="https://wa.me/message/BZHB7FBA2ZPFO1">Pedir no WhatsApp</a>
+    </div>
+  </div>
+</nav>
+
+<header>
+  <div class="wrap hero">
+    <div>
+      <span class="kicker"><span class="dot"></span> Aberto hoje · seg–sex 09h às 19h</span>
+      <h2>Café passado com calma,<br><em>torta de frango famosa</em><br>e um lugar pra ficar.</h2>
+      <p class="lead">Cafeteria e cozinha afetiva no Centro de Taubaté. Cappuccino com chocolate belga, bolos generosos e o almocinho do dia — tudo feito aqui dentro.</p>
+      <div class="cta-row">
+        <a class="btn red" href="https://wa.me/message/BZHB7FBA2ZPFO1">Pedir no WhatsApp</a>
+        <a class="btn ghost" href="#cardapio">Ver o cardápio</a>
+      </div>
+      <p class="hours"><strong>Seg a sex</strong> 09h–19h · <strong>Sáb e feriados</strong> 09h–18h · Delivery via iFood</p>
+    </div>
+    <div class="hero-art">
+      <div class="hero-card">
+        <svg class="logo-big" width="110" height="110" viewBox="0 0 100 100" aria-hidden="true">
+          <path d="M22 62 Q14 38 30 28 Q42 20 50 22 Q58 20 70 28 Q86 38 78 62 Q74 48 68 42 Q60 34 50 34 Q40 34 32 42 Q26 48 22 62Z" fill="#221A14"/>
+          <circle cx="50" cy="24" r="9" fill="#B93A2B"/>
+          <circle cx="36" cy="28" r="7" fill="#D96B2B"/>
+          <circle cx="64" cy="28" r="7" fill="#D96B2B"/>
+          <path d="M27 24 Q33 18 38 22Z M73 24 Q67 18 62 22Z" fill="#45703B"/>
+          <path d="M34 56 Q42 50 48 55 M52 55 Q58 50 66 56" stroke="#221A14" stroke-width="3" fill="none" stroke-linecap="round"/>
+          <path d="M36 64 Q40 67 44 64 M56 64 Q60 67 64 64" stroke="#221A14" stroke-width="2.4" fill="none" stroke-linecap="round"/>
+        </svg>
+        <h3>FRYDA</h3>
+        <span class="script">café</span>
+        <p>Desde sempre no Centro de Taubaté.<br>Café, afeto e comida de verdade.</p>
+      </div>
+      <div class="stamp">A FAMOSA<br>TORTA DE<br>FRANGO ★</div>
+    </div>
+  </div>
+</header>
+
+<section class="spec" id="especialidade">
+  <div class="wrap spec-grid">
+    <div class="photo">🥧</div>
+    <div>
+      <span class="badge">ESPECIALIDADE DA CASA</span>
+      <h2 class="title">Torta de Frango<br><span class="script" style="font-size:.85em;color:var(--caramelo)">da Tia Branca</span></h2>
+      <p>A FAMOSA! Massa que desmancha, recheio cremoso de frango com catupiry e milho. É o motivo de muita gente atravessar a cidade — e o melhor par do nosso cappuccino Fryda.</p>
+      <div class="preco">R$ 15 <small>/ fatia</small></div>
+      <a class="btn red" href="https://wa.me/message/BZHB7FBA2ZPFO1">Reservar a minha</a>
+    </div>
+  </div>
+</section>
+
+<section id="cardapio">
+  <div class="wrap">
+    <div class="rule"><span>☕</span></div>
+    <h2 class="sec-title">Os queridinhos da casa</h2>
+    <p class="sec-sub">O que mais sai do balcão — pra acompanhar um café passado com calma ou levar pra viagem.</p>
+    <div class="grid">
+      <div class="card">
+        <div class="thumb">☕</div>
+        <div class="body">
+          <span class="tag fav">★ FAVORITO</span>
+          <h3>Cappuccino Fryda</h3>
+          <p>Com raspas de chocolate belga + canela. O nosso cartão de visita.</p>
+          <div class="preco">R$ 13</div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="thumb">🫖</div>
+        <div class="body">
+          <span class="tag fav">★ FAVORITO</span>
+          <h3>Chai Tea Latte</h3>
+          <p>Bebida indiana com leite e especiarias orientais. Quente ou gelado.</p>
+          <div class="preco">R$ 12</div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="thumb">🍫</div>
+        <div class="body">
+          <span class="tag fav">★ FAVORITO</span>
+          <h3>Brownie com Sorvete</h3>
+          <p>ESPETACULAR! Quentinho, com a cobertura que preferir + bola de creme.</p>
+          <div class="preco">R$ 19</div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="thumb">🧇</div>
+        <div class="body">
+          <h3>Waffle com Manteiga e Mel</h3>
+          <p>Dourado na hora, manteiga derretendo e mel por cima.</p>
+          <div class="preco">R$ 18</div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="thumb">🍰</div>
+        <div class="body">
+          <h3>Bolo Red Velvet</h3>
+          <p>O queridinho do cardápio, com segredinho na cobertura de cream cheese.</p>
+          <div class="preco">R$ 14</div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="thumb">🍛</div>
+        <div class="body">
+          <h3>Almocinho do dia</h3>
+          <p>Strogonoff, nhoque ou risoto — feito hoje, servido generoso.</p>
+          <div class="preco">R$ 27–35</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="vegan" id="veganos">
+  <div class="wrap">
+    <div class="rule"><span>🌱</span></div>
+    <h2 class="sec-title">Opções veganas &amp; leves</h2>
+    <p class="sec-sub">Toda bebida da casa pode ser feita com leite vegetal — e tem prato de verdade pra quem não come nada de origem animal.</p>
+    <div class="grid">
+      <div class="card">
+        <div class="thumb">🥥</div>
+        <div class="body">
+          <span class="tag veg">VEGANO</span>
+          <h3>Bowl de Açaí com Frutas</h3>
+          <p>Açaí cremoso, frutas da época e granola. Peça sem mel que fica 100% vegano.</p>
+          <div class="preco">R$ 18</div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="thumb">🍚</div>
+        <div class="body">
+          <span class="tag veg">VEGANO*</span>
+          <h3>Risoto Zucchini</h3>
+          <p>Abobrinha, limão e castanhas, no caldo natural de legumes. *Consulte a versão vegana do dia.</p>
+          <div class="preco">R$ 35</div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="thumb">🥛</div>
+        <div class="body">
+          <span class="tag veg">LEITE VEGETAL</span>
+          <h3>Seu café, do seu jeito</h3>
+          <p>Cappuccinos, lattes, mochas e chai com leite vegetal ou zero lactose.</p>
+          <div class="preco">+ R$ 3,50</div>
+        </div>
+      </div>
+    </div>
+    <p class="nota">Sem glúten? O waffle de queijo (massa de polvilho) é a pedida. Fale com a gente no balcão sobre restrições — a cozinha resolve. 💛</p>
+  </div>
+</section>
+
+<section id="visite">
+  <div class="wrap">
+    <div class="rule"><span>📍</span></div>
+    <h2 class="sec-title">Vem tomar um café</h2>
+    <p class="sec-sub">No coração do Centro de Taubaté, com estacionamento por perto e mesa pra trabalhar, conversar ou ficar à toa.</p>
+    <div class="visit-grid">
+      <div class="visit-card">
+        <div class="ico">📍</div>
+        <h3>Endereço</h3>
+        <p>Rua Dr. Pedro Costa, 531<br>Centro · Taubaté/SP<br>CEP 12010-160</p>
+      </div>
+      <div class="visit-card">
+        <div class="ico">⏰</div>
+        <h3>Horários</h3>
+        <p>Segunda a sexta · 09h às 19h<br>Sábados e feriados · 09h às 18h</p>
+      </div>
+      <div class="visit-card">
+        <div class="ico">🛵</div>
+        <h3>Delivery &amp; Encomendas</h3>
+        <p>Delivery via iFood<br>Bolos e encomendas pelo WhatsApp</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section style="padding-top:0">
+  <div class="cta-final">
+    <h2>Bateu a vontade?</h2>
+    <p>Chama no WhatsApp pra pedir, encomendar um bolo ou reservar a famosa torta de frango.</p>
+    <a class="btn" href="https://wa.me/message/BZHB7FBA2ZPFO1">Chamar o Fryda no WhatsApp</a>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="brand">
+      <span><h1 style="font-size:1.3rem;letter-spacing:.18em">FRYDA<span class="script" style="font-size:1.1rem;color:var(--vermelho)"> café</span></h1></span>
+    </div>
+    <p class="social"><a href="https://instagram.com/frydacafe">@frydacafe</a> · /frydacafe</p>
+    <p>Rua Dr. Pedro Costa, 531 — Centro, Taubaté/SP · © 2026 Fryda Café</p>
+  </div>
+</footer>
+
+</body>
+</html>
