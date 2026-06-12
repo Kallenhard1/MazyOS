@@ -3,7 +3,7 @@
 > Memória central do negócio. O Claude lê esse arquivo antes de cada resposta.
 > Preenchido pelo `/instalar` — você pode editar a qualquer momento.
 
-**Nome:**
+**Nome:** MarioLucash
 **Negócio:** Criação de sites e automação para negócios locais
 **O que faz:** Entrega presença digital completa — site profissional, Google Meu Negócio otimizado e automação de atendimento via WhatsApp — para pequenos negócios de serviço
 **Perfil:** Empreendedor solo, operação enxuta rodando sobre o MazyOS, sem verba de marketing no momento

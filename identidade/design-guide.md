@@ -49,11 +49,16 @@
 
 ## Logo
 
-- **Arquivo:** *(ex: identidade/logo.png ou identidade/logo.svg)*
-- **Versão pra fundo escuro:** *(se tiver — ex: identidade/logo-branco.png)*
+- **Arquivo:** identidade/logo.jpg (símbolo branco sobre círculo preto, 160×160 — funciona bem em fundo escuro; em fundo claro usar o círculo preto como está)
+- **Versão pra fundo escuro:** o próprio logo.jpg já é branco-sobre-preto
 - **Onde usar:** slide final do carrossel (CTA), header de propostas, slides de apresentação
 - **Tamanho sugerido:** largura entre 120-200px nos HTMLs
 
 ---
 
 ## Observações adicionais
+
+- Paleta e tipografia ainda não definidas (Mario tem algumas cores em
+  mente, mas optou por começar do zero). Enquanto isso, as skills
+  visuais devem partir do contraste preto/branco do logo e perguntar
+  antes de assumir cor de destaque.

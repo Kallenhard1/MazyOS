@@ -113,3 +113,68 @@ Quando o usuário pedir skill nova:
 4. Se a skill precisar de arquivos de apoio (templates, exemplos),
    criar dentro da pasta da skill
 5. Seguir o fluxo da skill-creator nativa do Claude Code
+
+---
+
+# MarioLucash — perfil Freelancer
+
+> Bloco adicionado pelo `/instalar` em 12/06/2026. Perfil: **freelancer** —
+> vende tempo e talento pra clientes terceiros. O sistema gira em torno
+> de captar, entregar e cobrar.
+
+## O que é esse workspace
+
+Operação freelancer do MarioLucash: venda de sites e automação pra
+negócios locais. Aqui ficam prospecção, propostas, clientes, entregas e
+o marketing próprio.
+
+**Estrutura de pastas:**
+- `_memoria/` — quem sou, como falo, foco atual
+- `identidade/` — marca aplicada nas entregas (logo em `identidade/logo.jpg`)
+- `clientes/` — uma subpasta por cliente, autossuficiente
+- `propostas/` — propostas em rascunho ou enviadas (antes de fechar)
+- `marketing/` — conteúdo próprio + `plano-de-acao.md` (plano-mestre de vendas)
+- `saidas/` — emails, documentos pontuais
+- `dados/` — arquivos a analisar (ex: `prospects.csv`)
+
+## Quem sou
+
+Sou Mario Lucas (MarioLucash), freelancer de desenvolvimento web e
+automação. Trabalho com negócios locais de serviço entregando presença
+digital completa: site, Google Meu Negócio e atendimento automático no
+WhatsApp.
+
+## Meu serviço
+
+- Sites e landing pages (pacotes Essencial / Profissional / Completo)
+- Automação de atendimento e agendamento via WhatsApp
+- Manutenção mensal recorrente (hospedagem + ajustes)
+- Futuro upsell: RivalFlow (CRM social + coach de IA), só pra cliente fidelizado
+
+## Clientes ativos
+
+Nenhum ainda — fase zero. Prioridade: fechar o primeiro contrato
+(ver `marketing/plano-de-acao.md` e `_memoria/estrategia.md`).
+
+## Como trabalho
+
+Prospecção ativa no Google Maps → diagnóstico gratuito de 1 página →
+mockup antes da venda pros melhores prospects → proposta em 3 pacotes →
+50% de entrada → entrega em 7 dias → depoimento + case.
+
+## Regras do sistema
+
+- Cliente novo → criar pasta `clientes/<Nome>/` com `briefing.md`
+- Proposta enviada antes de fechar → `propostas/<Nome>.md`; fechou →
+  move pra `clientes/<Nome>/proposta.md`
+- Material visual: consultar `identidade/design-guide.md`; paleta ainda
+  não definida — perguntar antes de assumir cor de destaque
+
+## Ferramentas conectadas
+
+- [ ] Notion
+- [ ] Gmail
+- [ ] Google Calendar
+- [ ] Stripe / cobrança
+
+*(Marcar conforme for instalando os MCPs)*
