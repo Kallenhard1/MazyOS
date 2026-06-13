@@ -4,380 +4,516 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Fryda Café — Coffee Shop in Taubaté, Brazil</title>
+<meta name="description" content="A coffee shop and comfort kitchen in downtown Taubaté. Belgian-chocolate cappuccino, the famous chicken pie, generous cakes and the daily lunch.">
+<link rel="icon" type="image/svg+xml" href="./favicon.svg">
+<link rel="apple-touch-icon" href="./favicon.svg">
+<meta name="theme-color" content="#3A1410">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700;800&family=Great+Vibes&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,800;1,500;1,600&family=Great+Vibes&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
   :root{
-    --caramelo:#E3C590;
-    --caramelo-claro:#EED9B0;
-    --creme:#F8EFDC;
-    --preto:#221A14;
-    --vermelho:#B93A2B;
-    --laranja:#D96B2B;
-    --verde:#45703B;
+    --cream:#F6EEDD;
+    --cream-2:#FBF7EE;
+    --maroon:#3A1410;
+    --maroon-2:#4B1C15;
+    --ink:#2A1712;
+    --red:#BE4332;
+    --red-d:#A4392A;
+    --orange:#D96B2B;
+    --green:#5E7A45;
+    --line:rgba(42,23,18,.14);
   }
   *{margin:0;padding:0;box-sizing:border-box}
-  body{font-family:'Jost',sans-serif;background:var(--caramelo);color:var(--preto)}
-  h1,h2,h3{font-family:'Playfair Display',serif}
+  html{scroll-behavior:smooth}
+  body{font-family:'Jost',sans-serif;background:var(--cream);color:var(--ink);line-height:1.6}
+  h1,h2,h3,h4{font-family:'Playfair Display',serif;line-height:1.1}
   .script{font-family:'Great Vibes',cursive;font-weight:400}
-  .wrap{max-width:1100px;margin:0 auto;padding:0 24px}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 28px}
+  img{display:block;max-width:100%}
+  a{color:inherit}
 
-  nav{position:sticky;top:0;z-index:10;background:rgba(227,197,144,.95);backdrop-filter:blur(6px);border-bottom:1px solid rgba(34,26,20,.15)}
-  .nav-in{display:flex;align-items:center;justify-content:space-between;padding:14px 24px;max-width:1100px;margin:0 auto}
-  .brand{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--preto)}
-  .brand h1{font-size:1.5rem;letter-spacing:.18em;font-weight:700;line-height:1}
-  .brand .script{font-size:1.25rem;color:var(--vermelho);margin-left:-2px}
-  .nav-links{display:flex;gap:28px;align-items:center}
-  .nav-links a{color:var(--preto);text-decoration:none;font-weight:500;font-size:.95rem;letter-spacing:.04em}
-  .nav-links a:hover{color:var(--vermelho)}
-  .btn{display:inline-block;background:var(--preto);color:var(--creme);padding:12px 26px;border-radius:999px;text-decoration:none;font-weight:500;letter-spacing:.04em;transition:.2s}
-  .btn:hover{background:var(--vermelho);color:#fff}
-  .btn.red{background:var(--vermelho);color:#fff}
-  .btn.red:hover{background:var(--preto)}
-  .btn.ghost{background:transparent;border:2px solid var(--preto);color:var(--preto)}
-  .btn.ghost:hover{background:var(--preto);color:var(--creme)}
-  .nav-links .btn{padding:9px 20px;font-size:.9rem}
+  .pill{display:inline-flex;align-items:center;gap:6px;background:var(--cream-2);border:1px solid var(--line);
+    padding:7px 16px;border-radius:999px;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;font-weight:400;color:rgba(42,23,18,.7)}
+  .pill b{font-weight:600;color:var(--ink)}
+  .pill.on-dark{background:rgba(255,255,255,.07);border-color:rgba(255,255,255,.18);color:rgba(246,238,221,.75)}
+  .pill.on-dark b{color:#fff}
 
-  header{padding:72px 0 64px;position:relative;overflow:hidden}
-  .hero{display:grid;grid-template-columns:1.15fr .85fr;gap:48px;align-items:center}
-  .kicker{display:inline-flex;align-items:center;gap:8px;background:var(--creme);border:1px solid rgba(34,26,20,.2);padding:6px 16px;border-radius:999px;font-size:.85rem;font-weight:500;letter-spacing:.06em;margin-bottom:22px}
-  .kicker .dot{width:8px;height:8px;border-radius:50%;background:var(--verde)}
-  header h2{font-size:clamp(2.4rem,5vw,3.6rem);line-height:1.08;font-weight:800;margin-bottom:18px}
-  header h2 em{font-style:normal;color:var(--vermelho)}
-  header p.lead{font-size:1.15rem;font-weight:300;max-width:34rem;margin-bottom:30px;line-height:1.6}
-  .cta-row{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:26px}
-  .hours{font-size:.92rem;color:rgba(34,26,20,.75)}
-  .hours strong{font-weight:600;color:var(--preto)}
+  .btn{display:inline-flex;align-items:center;gap:9px;background:var(--red);color:#fff;padding:14px 28px;border-radius:999px;
+    text-decoration:none;font-weight:500;letter-spacing:.03em;font-size:.95rem;transition:.22s;border:none;cursor:pointer}
+  .btn:hover{background:var(--ink);color:var(--cream)}
+  .btn.dark{background:var(--ink);color:var(--cream)}
+  .btn.dark:hover{background:var(--red)}
+  .btn.ghost{background:transparent;border:1.5px solid var(--ink);color:var(--ink)}
+  .btn.ghost:hover{background:var(--ink);color:var(--cream)}
+  .btn.light{background:var(--cream);color:var(--ink)}
+  .btn.light:hover{background:var(--red);color:#fff}
 
-  .hero-art{position:relative;display:flex;justify-content:center}
-  .hero-card{position:relative;overflow:hidden;background:var(--creme);border-radius:24px;padding:40px 32px;box-shadow:0 24px 60px rgba(34,26,20,.18);text-align:center;width:min(360px,100%);min-height:440px;border:1px solid rgba(34,26,20,.08);display:flex;align-items:center;justify-content:center}
-  .hero-card .hero-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
-  .hero-card .hero-overlay{position:absolute;inset:0;background:rgba(34,26,20,.2);z-index:1}
-  .hero-card .hero-content{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center}
-  .logo-circle{width:230px;height:230px;border-radius:50%;background:var(--creme);display:flex;flex-direction:column;align-items:center;justify-content:center;box-shadow:0 18px 44px rgba(34,26,20,.4),0 0 0 6px rgba(248,239,220,.35)}
-  .logo-circle .logo-big{margin:0 0 4px}
-  .logo-circle h3{font-size:1.6rem;letter-spacing:.2em;font-weight:700;color:var(--preto)}
-  .logo-circle .script{display:block;font-size:1.45rem;color:var(--vermelho);margin-top:-8px}
-  .hero-card p{margin-top:22px;font-size:.95rem;color:var(--creme);line-height:1.55;text-shadow:0 1px 8px rgba(34,26,20,.7)}
+  nav{position:sticky;top:0;z-index:40;background:rgba(246,238,221,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+  .nav-in{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:20px;padding:16px 28px;max-width:1180px;margin:0 auto}
+  .nav-left,.nav-right{display:flex;align-items:center;gap:26px}
+  .nav-right{justify-content:flex-end}
+  .nav-in a.lnk{text-decoration:none;font-weight:500;font-size:.92rem;letter-spacing:.02em;color:var(--ink);white-space:nowrap}
+  .nav-in a.lnk:hover{color:var(--red)}
+  .brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink);justify-self:center}
+  .brand .logo{width:38px;height:38px}
+  .brand .name{font-family:'Playfair Display',serif;font-size:1.45rem;font-weight:700;letter-spacing:.04em;line-height:1}
+  .brand .name .script{font-size:1.05rem;color:var(--red);margin-left:2px}
+  .nav-burger{display:none;background:none;border:none;font-size:1.5rem;cursor:pointer;color:var(--ink)}
 
-  /* Floating WhatsApp */
-  .wa-float{position:fixed;bottom:22px;right:22px;z-index:60;width:60px;height:60px;border-radius:50%;background:#25D366;display:flex;align-items:center;justify-content:center;box-shadow:0 12px 28px rgba(34,26,20,.35);transition:.2s}
-  .wa-float:hover{transform:scale(1.1)}
+  header{position:relative}
+  .hero-img-wrap{position:relative;min-height:clamp(540px,82vh,780px);display:flex;align-items:center;justify-content:center;
+    text-align:center;overflow:hidden;background:var(--maroon)}
+  .hero-img-wrap .hero-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 38%;z-index:0}
+  .hero-scrim{position:absolute;inset:0;z-index:1;
+    background:
+      radial-gradient(60% 45% at 50% 52%,rgba(42,16,12,.50) 0%,rgba(42,16,12,0) 75%),
+      linear-gradient(180deg,rgba(42,16,12,.58) 0%,rgba(42,16,12,.42) 36%,rgba(42,16,12,.50) 60%,rgba(42,16,12,.82) 100%)}
+  .hero-inner{position:relative;z-index:2;max-width:900px;padding:40px 28px;color:var(--cream)}
+  .hero-inner h1{font-size:clamp(2.6rem,6.4vw,5rem);font-weight:600;margin:24px 0 0;color:#fff;text-shadow:0 2px 24px rgba(0,0,0,.35)}
+  .hero-inner h1 em{font-style:italic;color:#F1C97A}
+  .hero-cta-circle{display:inline-flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;
+    width:118px;height:118px;border-radius:50%;background:var(--red);color:#fff;text-decoration:none;margin:32px 0 0;
+    font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;text-align:center;font-weight:500;transition:.22s;box-shadow:0 16px 40px rgba(0,0,0,.4)}
+  .hero-cta-circle:hover{background:var(--ink);transform:translateY(-3px)}
+  .hero-cta-circle .arr{font-size:1.3rem;line-height:1}
+  .hero-stamp{position:absolute;top:104px;right:40px;z-index:3;width:120px;height:120px;border-radius:50%;background:var(--red);color:#fff;
+    display:flex;align-items:center;justify-content:center;text-align:center;font-size:.74rem;font-weight:600;letter-spacing:.06em;
+    line-height:1.35;padding:14px;transform:rotate(8deg);box-shadow:0 14px 30px rgba(0,0,0,.35)}
+
+  section{padding:90px 0}
+  .eyebrow{display:flex;justify-content:center;margin-bottom:18px}
+  .sec-h{font-size:clamp(1.9rem,4vw,3rem);font-weight:600}
+  .center{text-align:center}
+  .lead{font-weight:300;color:rgba(42,23,18,.78);max-width:40rem}
+
+  .about-top{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:14px;margin-bottom:30px}
+  .about-grid{display:grid;grid-template-columns:1.25fr .75fr;gap:54px;align-items:center}
+  .about-grid h2{font-size:clamp(1.9rem,3.6vw,2.7rem);font-weight:600;margin-bottom:26px}
+  .about-cta{display:flex;align-items:center;gap:22px;flex-wrap:wrap}
+  .avatars{display:flex;align-items:center}
+  .avatars span{width:38px;height:38px;border-radius:50%;border:2px solid var(--cream);margin-left:-12px;background-size:cover;background-position:center}
+  .avatars span:first-child{margin-left:0}
+  .proof small{display:block;font-size:.8rem;color:rgba(42,23,18,.6)}
+  .proof strong{font-weight:600;font-size:.95rem}
+  .about-photo{position:relative;border-radius:20px;overflow:hidden;aspect-ratio:4/5;box-shadow:0 24px 56px rgba(42,23,18,.2)}
+  .about-photo img{width:100%;height:100%;object-fit:cover}
+
+  .menu{background:var(--cream)}
+  .menu-head{margin-bottom:36px;max-width:560px}
+  .menu-head h2{font-size:clamp(1.9rem,3.6vw,2.7rem);font-weight:600;margin-top:14px}
+  .menu-grid{display:grid;grid-template-columns:.92fr 1.08fr;gap:30px;align-items:stretch}
+  .feature-card{background:var(--cream-2);border:1px solid var(--line);border-radius:20px;padding:22px 22px 26px;display:flex;flex-direction:column}
+  .feature-card .feature-banner{width:100%;flex:1;min-height:230px;object-fit:cover;object-position:center 58%;border-radius:14px;margin-bottom:18px;box-shadow:0 12px 28px rgba(42,23,18,.18)}
+  .feature-tag{align-self:flex-start;background:var(--red);color:#fff;font-size:.7rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:5px 12px;border-radius:999px;margin-bottom:12px}
+  .feature-card h3{font-size:1.5rem;font-weight:700;margin-bottom:8px}
+  .feature-card .sub{font-size:.92rem;font-weight:300;color:rgba(42,23,18,.72);line-height:1.6;margin-bottom:20px}
+  .feature-foot{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-top:auto}
+  .feature-foot .preco{font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:700;color:var(--red)}
+  .feature-foot .preco small{font-size:.85rem;font-family:'Jost',sans-serif;font-weight:300;color:rgba(42,23,18,.6)}
+  .menu-note{margin-top:26px;font-size:.88rem;font-weight:300;color:rgba(42,23,18,.7);text-align:center}
+  .menu-note a{color:var(--red);font-weight:600;text-decoration:none}
+  .menu-note a:hover{text-decoration:underline}
+  .cat-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+  .cat{background:var(--cream-2);border:1px solid var(--line);border-radius:18px;padding:24px 22px}
+  .cat .ico{font-size:1.4rem;margin-bottom:12px}
+  .cat .cat-thumb{width:56px;height:56px;border-radius:14px;object-fit:cover;margin-bottom:12px;box-shadow:0 6px 16px rgba(42,23,18,.2)}
+  .cat.dark .cat-thumb{box-shadow:0 6px 16px rgba(0,0,0,.35)}
+  .cat h4{font-size:1.1rem;font-weight:700;margin-bottom:4px}
+  .cat p.d{font-size:.83rem;font-weight:300;color:rgba(42,23,18,.65);margin-bottom:14px;min-height:2.6em}
+  .cat ul{list-style:none}
+  .cat ul li{font-size:.84rem;padding:5px 0;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;gap:10px}
+  .cat ul li:last-child{border-bottom:none}
+  .cat ul li .pr{font-weight:600;color:var(--red);white-space:nowrap}
+  .cat.dark{background:var(--maroon);border-color:var(--maroon);color:var(--cream)}
+  .cat.dark p.d{color:rgba(246,238,221,.7)}
+  .cat.dark ul li{border-color:rgba(255,255,255,.14)}
+  .cat.dark ul li .pr{color:var(--orange)}
+
+  .order-grid{display:grid;grid-template-columns:1fr 1fr;gap:54px;align-items:center}
+  .order-grid h2{font-size:clamp(1.9rem,3.6vw,2.7rem);font-weight:600;margin:14px 0 28px}
+  .collage{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:auto auto;gap:14px}
+  .collage img{width:100%;height:100%;object-fit:cover;border-radius:16px;box-shadow:0 16px 40px rgba(42,23,18,.16)}
+  .collage .tall{grid-row:span 2;aspect-ratio:3/5}
+  .collage .wide{aspect-ratio:4/3}
+
+  .gallery{background:var(--maroon);color:var(--cream);overflow:hidden}
+  .gallery .pill{margin:0 auto}
+  .gallery h2{color:#fff}
+  .gallery .strip{display:flex;gap:22px;justify-content:center;flex-wrap:wrap;margin-top:50px}
+  .polaroid{background:var(--cream-2);padding:10px 10px 0;border-radius:10px;box-shadow:0 20px 44px rgba(0,0,0,.4);width:178px;transition:.25s}
+  .polaroid:nth-child(odd){transform:rotate(-4deg)}
+  .polaroid:nth-child(even){transform:rotate(4deg)}
+  .polaroid:hover{transform:rotate(0) translateY(-6px);z-index:2}
+  .polaroid img{width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:5px}
+  .polaroid span{display:block;text-align:center;font-family:'Playfair Display',serif;font-style:italic;color:var(--ink);font-size:.95rem;padding:12px 4px 14px}
+
+  .tst-grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:50px;align-items:center}
+  .tst-grid h2{font-size:clamp(1.9rem,3.6vw,2.7rem);font-weight:600}
+  .tst-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  .tst{background:var(--cream-2);border:1px solid var(--line);border-radius:18px;padding:24px 22px;display:flex;flex-direction:column;gap:16px}
+  .tst.dark{background:var(--maroon);border-color:var(--maroon);color:var(--cream)}
+  .tst p.q{font-size:.92rem;font-weight:300;line-height:1.65;flex:1}
+  .tst .who{font-weight:600;font-size:.92rem}
+  .tst .who small{display:block;font-weight:300;font-size:.78rem;color:rgba(42,23,18,.6)}
+  .tst.dark .who small{color:rgba(246,238,221,.65)}
+  .tst .stars{color:var(--orange);font-size:.85rem;letter-spacing:2px}
+
+  footer{background:var(--maroon);color:var(--cream);padding:70px 0 36px}
+  .foot-top{display:grid;grid-template-columns:1.1fr 1fr;gap:48px;align-items:center;padding-bottom:40px;border-bottom:1px solid rgba(255,255,255,.14)}
+  .foot-logo{width:64px;height:64px;display:block;margin-bottom:14px}
+  .foot-word{font-family:'Playfair Display',serif;font-size:clamp(3rem,8vw,5.5rem);font-weight:800;line-height:.9;letter-spacing:.01em}
+  .foot-word .dot{color:var(--red)}
+  .foot-word .script{display:block;font-size:.32em;color:var(--orange);letter-spacing:.04em;margin-top:6px}
+  .news h4{font-size:1.4rem;font-weight:600;margin-bottom:8px}
+  .news p{font-size:.88rem;font-weight:300;color:rgba(246,238,221,.7);margin-bottom:18px}
+  .news-form{display:flex;gap:10px;flex-wrap:wrap}
+  .news-form input{flex:1;min-width:180px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.2);border-radius:999px;padding:14px 20px;color:#fff;font-family:inherit;font-size:.9rem}
+  .news-form input::placeholder{color:rgba(246,238,221,.55)}
+  .foot-mid{display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:40px;padding:40px 0}
+  .foot-mid h5{font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(246,238,221,.55);margin-bottom:16px;font-family:'Jost',sans-serif;font-weight:500}
+  .foot-mid a,.foot-mid p{display:block;text-decoration:none;color:rgba(246,238,221,.9);font-size:.92rem;font-weight:300;padding:5px 0}
+  .foot-mid a:hover{color:#fff}
+  .foot-links ol{list-style:none;counter-reset:f;columns:2;column-gap:30px}
+  .foot-links ol li{counter-increment:f;padding:5px 0}
+  .foot-links ol li a::before{content:counter(f)". ";color:rgba(246,238,221,.45)}
+  .socials{display:flex;gap:12px;margin-top:6px}
+  .socials a{width:42px;height:42px;border-radius:50%;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.18);display:flex;align-items:center;justify-content:center;transition:.2s}
+  .socials a:hover{background:var(--red);border-color:var(--red)}
+  .socials svg{width:19px;height:19px;fill:var(--cream)}
+  .foot-bot{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;padding-top:26px;border-top:1px solid rgba(255,255,255,.14);font-size:.82rem;color:rgba(246,238,221,.6);font-weight:300}
+
+  .wa-float{position:fixed;bottom:24px;right:24px;z-index:60;width:60px;height:60px;border-radius:50%;background:#25D366;display:flex;align-items:center;justify-content:center;box-shadow:0 12px 28px rgba(42,23,18,.35);transition:.2s}
+  .wa-float:hover{transform:scale(1.08)}
   .wa-float svg{width:32px;height:32px;fill:#fff}
-  .stamp{position:absolute;top:-16px;right:4px;background:var(--vermelho);color:#fff;border-radius:50%;width:108px;height:108px;display:flex;align-items:center;justify-content:center;text-align:center;font-size:.72rem;font-weight:600;letter-spacing:.08em;transform:rotate(10deg);line-height:1.3;padding:10px;box-shadow:0 10px 24px rgba(34,26,20,.25)}
+  .mock-note{background:var(--maroon);color:var(--orange);text-align:center;font-size:.74rem;letter-spacing:.1em;padding:8px;text-transform:uppercase}
 
-  section{padding:72px 0}
-  .sec-title{text-align:center;margin-bottom:14px;font-size:clamp(1.8rem,3.5vw,2.5rem);font-weight:700;letter-spacing:.06em}
-  .sec-sub{text-align:center;font-weight:300;max-width:38rem;margin:0 auto 48px;line-height:1.6;color:rgba(34,26,20,.8)}
-  .rule{display:flex;align-items:center;gap:14px;justify-content:center;margin-bottom:10px}
-  .rule::before,.rule::after{content:"";height:2px;width:60px;background:var(--preto);opacity:.5}
-  .rule span{font-size:1.3rem}
-
-  .spec{background:var(--preto);color:var(--creme)}
-  .spec-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:56px;align-items:center}
-  .spec .photo{aspect-ratio:1/1;border-radius:24px;background:
-      radial-gradient(circle at 30% 25%,#F0D9A8 0 18%,transparent 19%),
-      radial-gradient(circle at 72% 70%,#C98A3B 0 24%,transparent 25%),
-      linear-gradient(140deg,#E3C590,#C98A3B);display:flex;align-items:center;justify-content:center;font-size:6rem;box-shadow:0 24px 60px rgba(0,0,0,.4)}
-  .spec h2{color:var(--creme)}
-  .spec .badge{display:inline-block;background:var(--vermelho);color:#fff;font-size:.78rem;font-weight:600;letter-spacing:.14em;padding:7px 16px;border-radius:999px;margin-bottom:18px}
-  .spec h2.title{font-size:clamp(1.9rem,4vw,2.8rem);text-align:left;margin-bottom:16px;line-height:1.15}
-  .spec p{font-weight:300;line-height:1.7;color:rgba(248,239,220,.85);margin-bottom:26px;max-width:30rem}
-  .spec .preco{font-family:'Playfair Display',serif;font-size:2rem;font-weight:700;color:var(--caramelo);margin-bottom:26px}
-  .spec .preco small{font-size:1rem;font-family:'Jost',sans-serif;font-weight:300;color:rgba(248,239,220,.7)}
-
-  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
-  .card{background:var(--creme);border-radius:20px;overflow:hidden;border:1px solid rgba(34,26,20,.1);box-shadow:0 10px 30px rgba(34,26,20,.08);transition:.2s}
-  .card:hover{transform:translateY(-4px);box-shadow:0 18px 40px rgba(34,26,20,.15)}
-  .card .thumb{height:150px;display:flex;align-items:center;justify-content:center;font-size:3.4rem;background:linear-gradient(140deg,var(--caramelo-claro),var(--caramelo))}
-  .card .body{padding:20px 22px 24px}
-  .card h3{font-size:1.15rem;font-weight:700;margin-bottom:6px}
-  .card p{font-size:.9rem;font-weight:300;line-height:1.5;color:rgba(34,26,20,.75);margin-bottom:14px;min-height:2.7em}
-  .card .preco{font-family:'Playfair Display',serif;font-weight:700;font-size:1.2rem;color:var(--vermelho)}
-  .tag{display:inline-block;font-size:.7rem;font-weight:600;letter-spacing:.1em;padding:4px 10px;border-radius:999px;margin-bottom:10px}
-  .tag.fav{background:var(--vermelho);color:#fff}
-  .tag.veg{background:var(--verde);color:#fff}
-
-  .vegan{background:var(--creme)}
-  .vegan .card{background:#fff}
-  .vegan .nota{text-align:center;margin-top:30px;font-size:.9rem;color:rgba(34,26,20,.65);font-weight:300}
-
-  /* About / press quote */
-  .about{background:var(--creme)}
-  .quote-card{background:#fff;border-radius:24px;border:1px solid rgba(34,26,20,.1);padding:48px 44px;max-width:50rem;margin:0 auto;box-shadow:0 14px 40px rgba(34,26,20,.1)}
-  .quote-card .meta{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:22px}
-  .pill{font-size:.75rem;font-weight:600;letter-spacing:.1em;padding:6px 14px;border-radius:999px;background:var(--caramelo);color:var(--preto)}
-  .pill.green{background:var(--verde);color:#fff}
-  .quote-card blockquote{font-family:'Playfair Display',serif;font-size:1.25rem;line-height:1.6;font-weight:500}
-  .quote-card cite{display:block;margin-top:18px;font-family:'Jost',sans-serif;font-style:normal;font-size:.85rem;color:rgba(34,26,20,.6);letter-spacing:.06em}
-
-  .visit-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;text-align:center}
-  .visit-card{background:var(--creme);border-radius:20px;padding:34px 26px;border:1px solid rgba(34,26,20,.1)}
-  .visit-card .ico{font-size:2rem;margin-bottom:12px}
-  .visit-card h3{font-size:1.1rem;margin-bottom:10px;letter-spacing:.04em}
-  .visit-card p{font-weight:300;font-size:.95rem;line-height:1.6;color:rgba(34,26,20,.8)}
-
-  .cta-final{background:var(--vermelho);color:#fff;text-align:center;border-radius:28px;padding:64px 32px;margin:0 24px}
-  .cta-final h2{font-size:clamp(1.8rem,4vw,2.6rem);margin-bottom:14px}
-  .cta-final p{font-weight:300;margin-bottom:30px;opacity:.92}
-  .cta-final .btn{background:#fff;color:var(--vermelho);font-weight:600}
-  .cta-final .btn:hover{background:var(--preto);color:#fff}
-
-  footer{padding:48px 0 36px;text-align:center}
-  footer .brand{justify-content:center;margin-bottom:14px}
-  footer p{font-size:.85rem;font-weight:300;color:rgba(34,26,20,.65)}
-  footer .social{margin:10px 0 18px;font-weight:500}
-  footer .social a{color:var(--preto);text-decoration:none}
-  footer .social a:hover{color:var(--vermelho)}
-  .mock-note{background:var(--preto);color:var(--caramelo);text-align:center;font-size:.78rem;letter-spacing:.08em;padding:8px}
-
-  @media(max-width:860px){
-    .hero,.spec-grid{grid-template-columns:1fr}
-    .grid,.visit-grid{grid-template-columns:1fr 1fr}
-    .nav-links a:not(.btn){display:none}
+  @media(max-width:980px){
+    .about-grid,.menu-grid,.order-grid,.tst-grid,.foot-top{grid-template-columns:1fr;gap:40px}
+    .tst-cards{grid-template-columns:1fr}
+    .foot-mid{grid-template-columns:1fr 1fr}
+    .order-grid .collage{order:-1}
   }
-  @media(max-width:560px){
-    .grid,.visit-grid{grid-template-columns:1fr}
+  @media(max-width:760px){
+    .nav-in{grid-template-columns:auto 1fr auto}
+    .nav-left{display:none}
+    .nav-right .lnk{display:none}
+    .nav-burger{display:block}
+    .cat-grid{grid-template-columns:1fr}
+    .hero-stamp{right:16px;width:96px;height:96px;font-size:.66rem}
+    .foot-mid{grid-template-columns:1fr}
+    section{padding:66px 0}
   }
 </style>
 </head>
 <body>
 
-<div class="mock-note">MOCKUP · website proposal — MarioLucash · illustrative content, English version</div>
+<div class="mock-note">Mockup · website proposal — MarioLucash · sample data, subject to adjustment</div>
 
 <nav>
   <div class="nav-in">
+    <div class="nav-left">
+      <a class="lnk" href="#about">About</a>
+      <a class="lnk" href="#menu">Menu</a>
+      <a class="lnk" href="#gallery">Gallery</a>
+    </div>
     <a class="brand" href="#">
-      <svg width="44" height="44" viewBox="0 0 100 100" aria-hidden="true">
-        <path d="M22 62 Q14 38 30 28 Q42 20 50 22 Q58 20 70 28 Q86 38 78 62 Q74 48 68 42 Q60 34 50 34 Q40 34 32 42 Q26 48 22 62Z" fill="#221A14"/>
+      <svg class="logo" viewBox="0 0 100 100" aria-hidden="true">
+        <path d="M22 62 Q14 38 30 28 Q42 20 50 22 Q58 20 70 28 Q86 38 78 62 Q74 48 68 42 Q60 34 50 34 Q40 34 32 42 Q26 48 22 62Z" fill="#2A1712"/>
         <circle cx="50" cy="24" r="9" fill="#B93A2B"/>
         <circle cx="36" cy="28" r="7" fill="#D96B2B"/>
         <circle cx="64" cy="28" r="7" fill="#D96B2B"/>
-        <path d="M27 24 Q33 18 38 22Z M73 24 Q67 18 62 22Z" fill="#45703B"/>
-        <path d="M34 56 Q42 50 48 55 M52 55 Q58 50 66 56" stroke="#221A14" stroke-width="3" fill="none" stroke-linecap="round"/>
-        <path d="M36 64 Q40 67 44 64 M56 64 Q60 67 64 64" stroke="#221A14" stroke-width="2.4" fill="none" stroke-linecap="round"/>
+        <path d="M27 24 Q33 18 38 22Z M73 24 Q67 18 62 22Z" fill="#5E7A45"/>
+        <path d="M34 56 Q42 50 48 55 M52 55 Q58 50 66 56" stroke="#2A1712" stroke-width="3" fill="none" stroke-linecap="round"/>
+        <path d="M36 64 Q40 67 44 64 M56 64 Q60 67 64 64" stroke="#2A1712" stroke-width="2.4" fill="none" stroke-linecap="round"/>
       </svg>
-      <span><h1>FRYDA<span class="script"> café</span></h1></span>
+      <span class="name">Fryda<span class="script"> café</span></span>
     </a>
-    <div class="nav-links">
-      <a href="#menu">Menu</a>
-      <a href="#specialty">Chicken Pie</a>
-      <a href="#vegan">Vegan</a>
-      <a href="#visit">Find Us</a>
-      <a class="btn red" href="https://wa.me/message/BZHB7FBA2ZPFO1">Order on WhatsApp</a>
+    <div class="nav-right">
+      <a class="lnk" href="#visit">Find Us</a>
+      <a class="lnk" href="https://www.instagram.com/frydacafe/" target="_blank" rel="noopener">Instagram</a>
+      <a class="btn dark" href="https://www.ifood.com.br/delivery/taubate-sp/fryda-cafe-centro/653e8b79-c35f-4094-9ea2-a7fb308f0cef" target="_blank" rel="noopener">Order on iFood</a>
     </div>
+    <button class="nav-burger" aria-label="Menu" onclick="document.querySelectorAll('.nav-left,.nav-right .lnk').forEach(e=>e.style.display=e.style.display==='flex'||e.style.display==='inline'?'':'flex')">☰</button>
   </div>
 </nav>
 
 <header>
-  <div class="wrap hero">
-    <div>
-      <span class="kicker"><span class="dot"></span> Coffee Shop · Taubaté, Brazil · R$20–40</span>
-      <h2>Slow-brewed coffee,<br><em>a famous chicken pie</em><br>and a place to stay a while.</h2>
-      <p class="lead">A coffee shop and comfort kitchen in downtown Taubaté — specialty coffees, chai lattes, generously portioned cakes and a menu made to pair with a good espresso. Plant-based milk available on every drink.</p>
-      <div class="cta-row">
-        <a class="btn red" href="https://wa.me/message/BZHB7FBA2ZPFO1">Order on WhatsApp</a>
-        <a class="btn ghost" href="#menu">Browse the menu</a>
-        <a class="btn ghost" href="./cardapio-fryda.pdf" download="Fryda-Cafe-Menu.pdf">⤓ Download menu (PDF)</a>
-      </div>
-      <p class="hours"><strong>Mon–Fri</strong> 9am–7pm · <strong>Sat &amp; holidays</strong> 9am–6pm · Delivery via iFood</p>
-    </div>
-    <div class="hero-art">
-      <div class="hero-card">
-        <img class="hero-bg" src="./fryda-hero.jpg" alt="A cup of cappuccino with chocolate shavings on top, next to a slice of cake" onerror="this.remove()">
-        <div class="hero-overlay"></div>
-        <div class="hero-content">
-          <div class="logo-circle">
-            <svg class="logo-big" width="100" height="100" viewBox="0 0 100 100" aria-hidden="true">
-              <path d="M22 62 Q14 38 30 28 Q42 20 50 22 Q58 20 70 28 Q86 38 78 62 Q74 48 68 42 Q60 34 50 34 Q40 34 32 42 Q26 48 22 62Z" fill="#221A14"/>
-              <circle cx="50" cy="24" r="9" fill="#B93A2B"/>
-              <circle cx="36" cy="28" r="7" fill="#D96B2B"/>
-              <circle cx="64" cy="28" r="7" fill="#D96B2B"/>
-              <path d="M27 24 Q33 18 38 22Z M73 24 Q67 18 62 22Z" fill="#45703B"/>
-              <path d="M34 56 Q42 50 48 55 M52 55 Q58 50 66 56" stroke="#221A14" stroke-width="3" fill="none" stroke-linecap="round"/>
-              <path d="M36 64 Q40 67 44 64 M56 64 Q60 67 64 64" stroke="#221A14" stroke-width="2.4" fill="none" stroke-linecap="round"/>
-            </svg>
-            <h3>FRYDA</h3>
-            <span class="script">café</span>
-          </div>
-          <p>Downtown Taubaté, São Paulo.<br>Coffee, warmth and real food.</p>
-        </div>
-      </div>
-      <div class="stamp">THE FAMOUS<br>CHICKEN<br>PIE ★</div>
+  <div class="hero-img-wrap">
+    <img class="hero-bg" src="./cafe-novo-2.jpg" alt="Fryda Café interior with the Frida Kahlo gallery wall" onerror="this.style.display='none'">
+    <div class="hero-scrim"></div>
+    <div class="hero-stamp">THE FAMOUS<br>CHICKEN<br>PIE ★</div>
+    <div class="hero-inner">
+      <span class="pill on-dark">Made with <b>love</b>, served with <b>joy</b></span>
+      <h1>Experience the<br><em>language</em> of coffee</h1>
+      <a class="hero-cta-circle" href="https://wa.me/message/BZHB7FBA2ZPFO1">
+        <span class="arr">↓</span> Order<br>now
+      </a>
     </div>
   </div>
 </header>
 
-<section class="about" id="about" style="padding:64px 0">
+<!-- ===== About ===== -->
+<section id="about">
   <div class="wrap">
-    <div class="quote-card">
-      <div class="meta">
-        <span class="pill">FRYDA CAFÉ MENU · UPDATED 2026</span>
-        <span class="pill">PRICE RANGE R$20–40</span>
-        <span class="pill green">COFFEE SHOP</span>
-      </div>
-      <blockquote>
-        “Fryda Café offers cappuccinos, chai lattes and specialty coffees with plant-based milk alternatives. The menu features rich, generously portioned cakes — red velvet, carrot and chocolate — Nutella brownies and tortas, plus savory options like risotos and a notable chicken pie. Generous servings, traditional and specialty items that pair well with their coffee selections.”
-      </blockquote>
-      <cite>— As featured on the Fryda Café menu listing</cite>
+    <div class="about-top">
+      <span class="pill">Know <b>Fryda</b></span>
+      <span style="font-size:.92rem;color:rgba(42,23,18,.7)">Where <b style="color:var(--ink)">tradition</b> meets great coffee</span>
     </div>
-  </div>
-</section>
-
-<section class="spec" id="specialty">
-  <div class="wrap spec-grid">
-    <div class="photo">🥧</div>
-    <div>
-      <span class="badge">HOUSE SPECIALTY</span>
-      <h2 class="title">The Chicken Pie<br><span class="script" style="font-size:.85em;color:var(--caramelo)">by Tia Branca</span></h2>
-      <p>THE FAMOUS one. Crumbly crust, creamy chicken filling with catupiry cheese and corn. People cross the city for a slice — best enjoyed next to our Cappuccino Fryda with Belgian chocolate shavings.</p>
-      <div class="preco">R$ 15 <small>/ slice</small></div>
-      <a class="btn red" href="https://wa.me/message/BZHB7FBA2ZPFO1">Save me a slice</a>
-    </div>
-  </div>
-</section>
-
-<section id="menu">
-  <div class="wrap">
-    <div class="rule"><span>☕</span></div>
-    <h2 class="sec-title">Popular picks</h2>
-    <p class="sec-sub">The counter favorites — for a slow coffee at the table or a quick treat to go.</p>
-    <div class="grid">
-      <div class="card">
-        <div class="thumb">🫖</div>
-        <div class="body">
-          <span class="tag fav">★ POPULAR</span>
-          <h3>Chai Latte</h3>
-          <p>Indian-spiced tea with creamy milk. Served hot or iced.</p>
-          <div class="preco">R$ 12</div>
+    <div class="about-grid">
+      <div>
+        <h2>Tradition &amp; warmth to create<br>moments worth remembering</h2>
+        <p class="lead" style="margin-bottom:30px">A coffee shop and comfort kitchen in downtown Taubaté, Brazil. Belgian-chocolate cappuccino, generous cakes, the famous chicken pie and the daily lunch — all made in-house, slowly and with care.</p>
+        <div class="about-cta">
+          <a class="btn" href="#menu">Read our story</a>
+          <div class="proof" style="display:flex;align-items:center;gap:12px">
+            <div class="avatars">
+              <span style="background-image:url('./cappuccino-fryda.jpg')"></span>
+              <span style="background-image:url('./brownie-com-sorvete.jpg')"></span>
+              <span style="background-image:url('./chai-latte.jpg')"></span>
+            </div>
+            <div>
+              <strong>Happy guests</strong>
+              <small>Thousands of coffees served with love</small>
+            </div>
+          </div>
         </div>
       </div>
-      <div class="card">
-        <div class="thumb">☕</div>
-        <div class="body">
-          <span class="tag fav">★ POPULAR</span>
-          <h3>Cappuccino Fryda</h3>
-          <p>Belgian chocolate shavings + cinnamon. Our signature cup.</p>
-          <div class="preco">R$ 13</div>
-        </div>
-      </div>
-      <div class="card">
-        <div class="thumb">🍫</div>
-        <div class="body">
-          <span class="tag fav">★ POPULAR</span>
-          <h3>Brownie with Ice Cream</h3>
-          <p>Warm Nutella brownie topped with a scoop of vanilla.</p>
-          <div class="preco">R$ 19</div>
-        </div>
-      </div>
-      <div class="card">
-        <div class="thumb">🧇</div>
-        <div class="body">
-          <span class="tag fav">★ POPULAR</span>
-          <h3>Waffle with Butter &amp; Honey</h3>
-          <p>Golden, fresh off the iron, butter melting under honey.</p>
-          <div class="preco">R$ 18</div>
-        </div>
-      </div>
-      <div class="card">
-        <div class="thumb">🍌</div>
-        <div class="body">
-          <span class="tag fav">★ POPULAR</span>
-          <h3>Banana Fit Cake</h3>
-          <p>The lighter favorite — banana, oats and no guilt at all.</p>
-          <div class="preco">R$ 12</div>
-        </div>
-      </div>
-      <div class="card">
-        <div class="thumb">🍰</div>
-        <div class="body">
-          <h3>Generous cakes</h3>
-          <p>Red velvet, carrot and Belgian chocolate — richly portioned slices.</p>
-          <div class="preco">R$ 12–14</div>
-        </div>
+      <div class="about-photo">
+        <img src="./cappuccino-fryda.jpg" alt="Fryda cappuccino" onerror="this.parentNode.style.background='linear-gradient(140deg,#E3C590,#C98A3B)'">
       </div>
     </div>
   </div>
 </section>
 
-<section class="vegan" id="vegan" style="background:var(--creme)">
+<!-- ===== Menu ===== -->
+<section class="menu" id="menu">
   <div class="wrap">
-    <div class="rule"><span>🌱</span></div>
-    <h2 class="sec-title">Vegan &amp; plant-based</h2>
-    <p class="sec-sub">Every drink on the menu can be customized with plant-based milk — and there are real-food options for fully plant-based diets.</p>
-    <div class="grid">
-      <div class="card">
-        <div class="thumb">🥥</div>
-        <div class="body">
-          <span class="tag veg">VEGAN</span>
-          <h3>Açaí Fruit Bowl</h3>
-          <p>Creamy açaí, seasonal fruit and granola. Ask for it without honey — fully vegan.</p>
-          <div class="preco">R$ 18</div>
-        </div>
-      </div>
-      <div class="card">
-        <div class="thumb">🍚</div>
-        <div class="body">
-          <span class="tag veg">VEGAN*</span>
-          <h3>Zucchini Risotto</h3>
-          <p>Zucchini, lemon and nuts in natural vegetable broth. *Ask about today's vegan version.</p>
-          <div class="preco">R$ 35</div>
-        </div>
-      </div>
-      <div class="card">
-        <div class="thumb">🥛</div>
-        <div class="body">
-          <span class="tag veg">PLANT-BASED MILK</span>
-          <h3>Your coffee, your way</h3>
-          <p>Cappuccinos, lattes, mochas and chai with plant-based or lactose-free milk.</p>
-          <div class="preco">+ R$ 3.50</div>
-        </div>
-      </div>
+    <div class="menu-head">
+      <span class="pill">Discover <b>the menu</b></span>
+      <h2>Your next favorite awaits</h2>
     </div>
-    <p class="nota">Gluten-free? Try the cheese waffle — cassava-starch batter, naturally gluten-free. Tell us about any restriction; the kitchen will sort it out. 💛</p>
+    <div class="menu-grid">
+      <div class="feature-card">
+        <img class="feature-banner" src="./famosa-torta-de-frango-1.jpg" alt="A slice of Tia Branca's famous chicken pie on a Fryda plate" onerror="this.style.display='none'">
+        <span class="feature-tag">★ House specialty</span>
+        <h3>The famous Chicken Pie</h3>
+        <p class="sub">Tia Branca's recipe · melt-in-your-mouth crust, creamy chicken filling with catupiry cheese and corn. The reason people drive across town.</p>
+        <div class="feature-foot">
+          <div class="preco">R$ 15 <small>/ slice</small></div>
+          <a class="btn" href="https://wa.me/message/BZHB7FBA2ZPFO1">Reserve mine</a>
+        </div>
+      </div>
+      <div class="cat-grid">
+          <div class="cat">
+            <img class="cat-thumb" src="./cafes-e-mochas-3.jpg" alt="Cappuccino with latte art" onerror="this.style.display='none'">
+            <h4>Coffee &amp; Mochas</h4>
+            <p class="d">Espressos, cappuccinos and creamy mochas, just the way you like them.</p>
+            <ul>
+              <li>Fryda Cappuccino <span class="pr">R$ 13</span></li>
+              <li>Mari's Mocha <span class="pr">R$ 16</span></li>
+              <li>Chai Tea Latte <span class="pr">R$ 12</span></li>
+            </ul>
+          </div>
+          <div class="cat">
+            <img class="cat-thumb" src="./doces-da-casa-3.jpg" alt="Slice of red velvet cake" onerror="this.style.display='none'">
+            <h4>House sweets</h4>
+            <p class="d">Cakes, brownies and cookies baked daily to sweeten the day.</p>
+            <ul>
+              <li>Brownie &amp; ice cream <span class="pr">R$ 19</span></li>
+              <li>Red Velvet cake <span class="pr">R$ 14</span></li>
+              <li>Cookies <span class="pr">R$ 10</span></li>
+            </ul>
+          </div>
+          <div class="cat dark">
+            <img class="cat-thumb" src="./nhoque.jpg" alt="House gnocchi" onerror="this.style.display='none'">
+            <h4>Daily lunch</h4>
+            <p class="d">Dishes of the day, cooked fresh and served generously.</p>
+            <ul>
+              <li>Beef Stroganoff <span class="pr">R$ 29</span></li>
+              <li>House Gnocchi <span class="pr">R$ 28</span></li>
+              <li>Zucchini Risotto <span class="pr">R$ 35</span></li>
+            </ul>
+          </div>
+          <div class="cat">
+            <img class="cat-thumb" src="./cafes-e-mochas-2.jpg" alt="Iced coffee with orange juice" onerror="this.style.display='none'">
+            <h4>Cold drinks</h4>
+            <p class="d">Frappés, juices and ice-cold sodas for the warm days.</p>
+            <ul>
+              <li>Ninho &amp; Nutella Frappé <span class="pr">R$ 20</span></li>
+              <li>Frafryda <span class="pr">R$ 19</span></li>
+              <li>Italian Soda <span class="pr">R$ 14</span></li>
+            </ul>
+          </div>
+      </div>
+      <p class="menu-note">
+        Every drink can be made with <b>plant-based or lactose-free milk</b> · The cheese waffle is <b>gluten-free</b>.
+        <a href="./cardapio-fryda.pdf" download="Fryda-Cafe-Menu.pdf">⤓ Download full menu (PDF)</a>
+      </p>
+    </div>
   </div>
 </section>
 
-<section id="visit">
+<!-- ===== Order ===== -->
+<section id="order">
   <div class="wrap">
-    <div class="rule"><span>📍</span></div>
-    <h2 class="sec-title">Come have a coffee</h2>
-    <p class="sec-sub">In the heart of downtown Taubaté — parking nearby and tables for working, talking, or doing absolutely nothing.</p>
-    <div class="visit-grid">
-      <div class="visit-card">
+    <div class="order-grid">
+      <div>
+        <span class="pill">Order <b>yours</b></span>
+        <h2>Reserve the famous pie<br>or order your cake</h2>
+        <p class="lead" style="margin-bottom:30px">Birthdays, an afternoon coffee with friends, or a treat just for you. Cakes, pies and custom orders come fresh from our kitchen — just message us on WhatsApp.</p>
+        <div style="display:flex;gap:12px;flex-wrap:wrap">
+          <a class="btn" href="https://wa.me/message/BZHB7FBA2ZPFO1">Order on WhatsApp</a>
+          <a class="btn ghost" href="https://www.instagram.com/frydacafe/" target="_blank" rel="noopener">See on Instagram</a>
+        </div>
+      </div>
+      <div class="collage">
+        <img class="tall" src="./tortas.jpg" alt="Tia Branca's chicken pie" onerror="this.style.background='linear-gradient(140deg,#E3C590,#C98A3B)'">
+        <img class="wide" src="./bolo-chocolate.jpg" alt="Chocolate cake" onerror="this.style.background='linear-gradient(140deg,#E3C590,#C98A3B)'">
+        <img class="wide" src="./nhoque.jpg" alt="House gnocchi" onerror="this.style.background='linear-gradient(140deg,#E3C590,#C98A3B)'">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Gallery ===== -->
+<section class="gallery" id="gallery">
+  <div class="wrap center">
+    <div class="eyebrow"><span class="pill on-dark">A feast <b>for the eyes</b></span></div>
+    <h2 class="sec-h">Taste the vibe through our gallery</h2>
+    <div class="strip">
+      <div class="polaroid"><img src="./cappuccino-fryda.jpg" alt="Fryda cappuccino" onerror="this.style.background='linear-gradient(140deg,#E3C590,#C98A3B)'"><span>Fryda Cappuccino</span></div>
+      <div class="polaroid"><img src="./brownie-com-sorvete.jpg" alt="Brownie with ice cream" onerror="this.style.background='linear-gradient(140deg,#E3C590,#C98A3B)'"><span>Brownie &amp; ice cream</span></div>
+      <div class="polaroid"><img src="./wafflw-com-manteiga-e-mel.jpg" alt="Waffle with butter and honey" onerror="this.style.background='linear-gradient(140deg,#E3C590,#C98A3B)'"><span>Waffle &amp; honey</span></div>
+      <div class="polaroid"><img src="./chai-latte.jpg" alt="Chai latte" onerror="this.style.background='linear-gradient(140deg,#E3C590,#C98A3B)'"><span>Chai Latte</span></div>
+      <div class="polaroid"><img src="./tortas.jpg" alt="Chicken pie" onerror="this.style.background='linear-gradient(140deg,#E3C590,#C98A3B)'"><span>Chicken pie</span></div>
+    </div>
+    <a class="btn light" href="https://www.instagram.com/frydacafe/" target="_blank" rel="noopener" style="margin-top:44px">Follow @frydacafe on Instagram</a>
+  </div>
+</section>
+
+<!-- ===== Testimonials ===== -->
+<section id="testimonials">
+  <div class="wrap">
+    <div class="tst-grid">
+      <div>
+        <span class="pill">Loved <b>by guests</b></span>
+        <h2 style="margin-top:18px">Where every visit becomes<br>a great memory</h2>
+      </div>
+      <div class="tst-cards">
+        <div class="tst">
+          <div class="stars">★★★★★</div>
+          <p class="q">"The Belgian-chocolate cappuccino is the best in town. I'm here every week now."</p>
+          <div class="who">Daniela M.<small>Taubaté, Brazil</small></div>
+        </div>
+        <div class="tst dark">
+          <div class="stars">★★★★★</div>
+          <p class="q">"Tia Branca's chicken pie is addictive. I drive across town just for it."</p>
+          <div class="who">Rafael S.<small>Tremembé, Brazil</small></div>
+        </div>
+        <div class="tst">
+          <div class="stars">★★★★★</div>
+          <p class="q">"Warm service and a cozy spot to work. My favorite café, no contest."</p>
+          <div class="who">Camila A.<small>Taubaté, Brazil</small></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Visit ===== -->
+<section id="visit" style="padding-top:0">
+  <div class="wrap">
+    <div class="eyebrow center"><span class="pill">Come <b>for a coffee</b></span></div>
+    <h2 class="sec-h center">In the heart of downtown Taubaté</h2>
+    <p class="lead center" style="margin:14px auto 48px">A table to work, chat or simply linger — with parking nearby and the smell of fresh coffee in the air.</p>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:18px" class="cat-grid">
+      <div class="cat" style="text-align:center">
         <div class="ico">📍</div>
-        <h3>Address</h3>
-        <p>Rua Dr. Pedro Costa, 531<br>Centro · Taubaté/SP · Brazil<br>ZIP 12010-160</p>
+        <h4>Address</h4>
+        <p class="d" style="min-height:auto">Rua Dr. Pedro Costa, 531<br>Centro · Taubaté/SP · Brazil<br>ZIP 12010-160</p>
       </div>
-      <div class="visit-card">
+      <div class="cat" style="text-align:center">
         <div class="ico">⏰</div>
-        <h3>Hours</h3>
-        <p>Monday–Friday · 9am to 7pm<br>Saturdays &amp; holidays · 9am to 6pm</p>
+        <h4>Hours</h4>
+        <p class="d" style="min-height:auto">Mon–Fri · 9am to 7pm<br>Sat &amp; holidays · 9am to 6pm</p>
       </div>
-      <div class="visit-card">
+      <div class="cat" style="text-align:center">
         <div class="ico">🛵</div>
-        <h3>Delivery &amp; Orders</h3>
-        <p>Delivery via iFood<br>Cakes &amp; custom orders on WhatsApp</p>
+        <h4>Delivery &amp; Orders</h4>
+        <p class="d" style="min-height:auto">Delivery via iFood<br>Custom orders on WhatsApp</p>
       </div>
     </div>
   </div>
 </section>
 
-<section style="padding-top:0">
-  <div class="cta-final">
-    <h2>Craving it already?</h2>
-    <p>Message us on WhatsApp to order, book a cake, or save a slice of the famous chicken pie.</p>
-    <a class="btn" href="https://wa.me/message/BZHB7FBA2ZPFO1">Message Fryda on WhatsApp</a>
-  </div>
-</section>
-
+<!-- ===== Footer ===== -->
 <footer>
   <div class="wrap">
-    <div class="brand">
-      <span><h1 style="font-size:1.3rem;letter-spacing:.18em">FRYDA<span class="script" style="font-size:1.1rem;color:var(--vermelho)"> café</span></h1></span>
+    <div class="foot-top">
+      <div>
+        <svg class="foot-logo" viewBox="0 0 100 100" aria-label="Fryda Café logo">
+          <circle cx="50" cy="50" r="50" fill="rgba(255,255,255,.06)"/>
+          <g transform="translate(0,6)">
+            <path d="M22 62 Q14 38 30 28 Q42 20 50 22 Q58 20 70 28 Q86 38 78 62 Q74 48 68 42 Q60 34 50 34 Q40 34 32 42 Q26 48 22 62Z" fill="#F6EEDD"/>
+            <circle cx="50" cy="24" r="9" fill="#B93A2B"/>
+            <circle cx="36" cy="28" r="7" fill="#D96B2B"/>
+            <circle cx="64" cy="28" r="7" fill="#D96B2B"/>
+            <path d="M27 24 Q33 18 38 22Z M73 24 Q67 18 62 22Z" fill="#5E7A45"/>
+            <path d="M34 56 Q42 50 48 55 M52 55 Q58 50 66 56" stroke="#F6EEDD" stroke-width="3" fill="none" stroke-linecap="round"/>
+            <path d="M36 64 Q40 67 44 64 M56 64 Q60 67 64 64" stroke="#F6EEDD" stroke-width="2.4" fill="none" stroke-linecap="round"/>
+          </g>
+        </svg>
+        <div class="foot-word">FRYDA<span class="dot">.</span><span class="script">café</span></div>
+      </div>
+      <div class="news">
+        <h4>Fresh news, straight to your inbox</h4>
+        <p>Cake of the day, daily lunch and offers — follow along so you never miss out.</p>
+        <form class="news-form" onsubmit="return false">
+          <input type="email" placeholder="Your best email" aria-label="Email">
+          <button class="btn" type="submit">Subscribe</button>
+        </form>
+      </div>
     </div>
-    <p class="social"><a href="https://instagram.com/frydacafe">@frydacafe</a> · /frydacafe</p>
-    <p>Rua Dr. Pedro Costa, 531 — Centro, Taubaté/SP, Brazil · © 2026 Fryda Café</p>
+    <div class="foot-mid">
+      <div>
+        <h5>Fryda Café</h5>
+        <p>Rua Dr. Pedro Costa, 531<br>Centro · Taubaté/SP · Brazil</p>
+        <p>Mon–Fri 9am–7pm · Sat 9am–6pm</p>
+        <div class="socials">
+          <a href="https://www.instagram.com/frydacafe/" target="_blank" rel="noopener" aria-label="Instagram">
+            <svg viewBox="0 0 24 24"><path d="M12 2.2c3.2 0 3.6 0 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.42.36 1.06.41 2.23.06 1.27.07 1.65.07 4.85s0 3.58-.07 4.85c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.42.16-1.06.36-2.23.41-1.27.06-1.65.07-4.85.07s-3.58 0-4.85-.07c-1.17-.05-1.8-.25-2.23-.41a3.7 3.7 0 0 1-1.38-.9 3.7 3.7 0 0 1-.9-1.38c-.16-.42-.36-1.06-.41-2.23C2.21 15.58 2.2 15.2 2.2 12s0-3.58.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.16 1.06-.36 2.23-.41C8.42 2.21 8.8 2.2 12 2.2zm0 1.8c-3.15 0-3.5.01-4.74.07-.9.04-1.38.19-1.71.32-.43.17-.74.37-1.06.69-.32.32-.52.63-.69 1.06-.13.33-.28.81-.32 1.71C3.21 8.5 3.2 8.85 3.2 12s.01 3.5.07 4.74c.04.9.19 1.38.32 1.71.17.43.37.74.69 1.06.32.32.63.52 1.06.69.33.13.81.28 1.71.32 1.24.06 1.59.07 4.74.07s3.5-.01 4.74-.07c.9-.04 1.38-.19 1.71-.32.43-.17.74-.37 1.06-.69.32-.32.52-.63.69-1.06.13-.33.28-.81.32-1.71.06-1.24.07-1.59.07-4.74s-.01-3.5-.07-4.74c-.04-.9-.19-1.38-.32-1.71a2.85 2.85 0 0 0-.69-1.06 2.85 2.85 0 0 0-1.06-.69c-.33-.13-.81-.28-1.71-.32C15.5 4.01 15.15 4 12 4zm0 3.06A4.94 4.94 0 1 1 12 16.94 4.94 4.94 0 0 1 12 7.06zm0 8.14A3.2 3.2 0 1 0 12 8.8a3.2 3.2 0 0 0 0 6.4zm6.3-8.34a1.15 1.15 0 1 1-2.3 0 1.15 1.15 0 0 1 2.3 0z"/></svg>
+          </a>
+          <a href="https://www.facebook.com/frydacafe" target="_blank" rel="noopener" aria-label="Facebook">
+            <svg viewBox="0 0 24 24"><path d="M13.5 21v-8h2.7l.4-3.1h-3.1V7.9c0-.9.25-1.5 1.55-1.5h1.65V3.6c-.8-.1-1.6-.15-2.4-.15-2.4 0-4.05 1.46-4.05 4.15v2.3H7.5V13h2.75v8h3.25z"/></svg>
+          </a>
+          <a href="https://wa.me/message/BZHB7FBA2ZPFO1" target="_blank" rel="noopener" aria-label="WhatsApp">
+            <svg viewBox="0 0 32 32"><path d="M16.04 4c-6.6 0-11.96 5.36-11.96 11.96 0 2.11.55 4.16 1.6 5.97L4 28l6.25-1.63a11.9 11.9 0 0 0 5.79 1.47c6.6 0 11.96-5.36 11.96-11.96S22.64 4 16.04 4zm5.43 14.42c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.39-1.47-.88-.79-1.48-1.76-1.65-2.06-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51l-.57-.01c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.49s1.07 2.89 1.22 3.09c.15.2 2.11 3.22 5.1 4.51.71.31 1.27.49 1.7.63.72.23 1.37.2 1.88.12.57-.09 1.76-.72 2.01-1.41.25-.69.25-1.29.17-1.41-.07-.12-.27-.2-.57-.35z"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="foot-mid-col">
+        <h5>Navigation</h5>
+        <a href="#about">About</a>
+        <a href="#menu">Menu</a>
+        <a href="#order">Orders</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#visit">Find us</a>
+      </div>
+      <div class="foot-links">
+        <h5>Order now</h5>
+        <ol>
+          <li><a href="https://wa.me/message/BZHB7FBA2ZPFO1" target="_blank" rel="noopener">WhatsApp</a></li>
+          <li><a href="https://www.ifood.com.br/delivery/taubate-sp/fryda-cafe-centro/653e8b79-c35f-4094-9ea2-a7fb308f0cef" target="_blank" rel="noopener">iFood</a></li>
+          <li><a href="https://www.instagram.com/frydacafe/" target="_blank" rel="noopener">Instagram</a></li>
+          <li><a href="./cardapio-fryda.pdf" download>Menu PDF</a></li>
+        </ol>
+      </div>
+    </div>
+    <div class="foot-bot">
+      <span>© 2026 Fryda Café · Centro, Taubaté/SP, Brazil</span>
+      <span>Site by MarioLucash · <a href="https://www.instagram.com/frydacafe/" target="_blank" rel="noopener" style="color:var(--orange)">@frydacafe</a></span>
+    </div>
   </div>
 </footer>
 
