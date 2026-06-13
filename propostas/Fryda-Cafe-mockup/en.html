@@ -26,7 +26,7 @@
   }
   *{margin:0;padding:0;box-sizing:border-box}
   html{scroll-behavior:smooth}
-  body{font-family:'Jost',sans-serif;background:var(--cream);color:var(--ink);line-height:1.6}
+  body{font-family:'Jost',sans-serif;background:var(--cream);color:var(--ink);line-height:1.6;overflow-x:clip}
   h1,h2,h3,h4{font-family:'Playfair Display',serif;line-height:1.1}
   .script{font-family:'Great Vibes',cursive;font-weight:400}
   .wrap{max-width:1180px;margin:0 auto;padding:0 28px}
@@ -141,12 +141,22 @@
   .gallery .pill{margin:0 auto}
   .gallery h2{color:#fff}
   .gallery .strip{display:flex;gap:22px;justify-content:center;flex-wrap:wrap;margin-top:50px}
-  .polaroid{background:var(--cream-2);padding:10px 10px 0;border-radius:10px;box-shadow:0 20px 44px rgba(0,0,0,.4);width:178px;transition:.25s}
-  .polaroid:nth-child(odd){transform:rotate(-4deg)}
-  .polaroid:nth-child(even){transform:rotate(4deg)}
-  .polaroid:hover{transform:rotate(0) translateY(-6px);z-index:2}
-  .polaroid img{width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:5px}
-  .polaroid span{display:block;text-align:center;font-family:'Playfair Display',serif;font-style:italic;color:var(--ink);font-size:.95rem;padding:12px 4px 14px}
+  .ig-card{display:block;width:248px;background:var(--cream-2);border-radius:16px;overflow:hidden;text-decoration:none;color:var(--ink);box-shadow:0 18px 42px rgba(0,0,0,.38);transition:.22s}
+  .ig-card:hover{transform:translateY(-6px);box-shadow:0 26px 54px rgba(0,0,0,.5)}
+  .ig-top{display:flex;align-items:center;gap:9px;padding:11px 13px}
+  .ig-ava{width:30px;height:30px;border-radius:50%;border:2px solid var(--orange);background:var(--cream);flex:0 0 auto}
+  .ig-handle{font-weight:600;font-size:.84rem;line-height:1.1}
+  .ig-handle small{display:block;font-weight:300;font-size:.66rem;color:rgba(42,23,18,.55)}
+  .ig-ig{margin-left:auto;width:19px;height:19px;opacity:.85}
+  .ig-photo{aspect-ratio:1/1;overflow:hidden;background:linear-gradient(140deg,#E3C590,#C98A3B)}
+  .ig-photo img{width:100%;height:100%;object-fit:cover;transition:.3s}
+  .ig-card:hover .ig-photo img{transform:scale(1.04)}
+  .ig-actions{display:flex;align-items:center;gap:14px;padding:11px 13px 2px}
+  .ig-actions svg{width:22px;height:22px;stroke:var(--ink);fill:none;stroke-width:1.8}
+  .ig-actions .heart{fill:var(--red);stroke:var(--red)}
+  .ig-actions .seemore{margin-left:auto;font-size:.72rem;font-weight:500;color:var(--red);text-transform:uppercase;letter-spacing:.04em}
+  .ig-cap{padding:6px 13px 14px;font-size:.8rem;line-height:1.45;color:rgba(42,23,18,.85)}
+  .ig-cap b{font-weight:600;color:var(--ink)}
 
   .tst-grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:50px;align-items:center}
   .tst-grid h2{font-size:clamp(1.9rem,3.6vw,2.7rem);font-weight:600}
@@ -188,8 +198,33 @@
   .wa-float svg{width:32px;height:32px;fill:#fff}
   .mock-note{background:var(--maroon);color:var(--orange);text-align:center;font-size:.74rem;letter-spacing:.1em;padding:8px;text-transform:uppercase}
 
+  /* ===== Owners / team ===== */
+  .team-row{display:grid;grid-template-columns:.8fr 1.2fr;gap:50px;align-items:center;margin-top:54px}
+  .team-row.flip{grid-template-columns:1.2fr .8fr}
+  .team-row.flip .team-photo{order:2}
+  .team-photo{position:relative;border-radius:20px;overflow:hidden;aspect-ratio:4/5;box-shadow:0 24px 56px rgba(42,23,18,.2)}
+  .team-photo img{width:100%;height:100%;object-fit:cover}
+  .role-badge{display:inline-block;background:var(--red);color:#fff;font-size:.7rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:5px 13px;border-radius:999px;margin-bottom:14px}
+  .role-badge.green{background:var(--green)}
+  .team-body h3{font-size:clamp(1.6rem,3vw,2.2rem);font-weight:700;margin-bottom:4px}
+  .team-body .who-sub{font-size:.95rem;color:rgba(42,23,18,.6);margin-bottom:18px}
+  .team-body p{font-weight:300;line-height:1.75;color:rgba(42,23,18,.82);margin-bottom:13px}
+  .team-body p:last-child{margin-bottom:0}
+
+  /* ===== Map ===== */
+  .map-embed{margin-top:42px;border-radius:20px;overflow:hidden;border:1px solid var(--line);box-shadow:0 18px 44px rgba(42,23,18,.14);line-height:0}
+  .map-embed iframe{width:100%;height:380px;border:0;display:block}
+
+  /* ===== Menu note ===== */
+  .menu-head .menu-sub{font-size:.9rem;font-weight:300;color:rgba(42,23,18,.72);margin-top:14px;line-height:1.6}
+  .menu-head .menu-sub b{font-weight:600;color:var(--ink)}
+  .menu-head .pdf-btn{margin-top:20px}
+
   @media(max-width:980px){
     .about-grid,.menu-grid,.order-grid,.tst-grid,.foot-top{grid-template-columns:1fr;gap:40px}
+    .team-row,.team-row.flip{grid-template-columns:1fr;gap:26px;margin-top:40px}
+    .team-row.flip .team-photo{order:0}
+    .team-photo{aspect-ratio:16/10}
     .tst-cards{grid-template-columns:1fr}
     .foot-mid{grid-template-columns:1fr 1fr}
     .order-grid .collage{order:-1}
@@ -203,6 +238,13 @@
     .hero-stamp{right:16px;width:96px;height:96px;font-size:.66rem}
     .foot-mid{grid-template-columns:1fr}
     section{padding:66px 0}
+    /* gallery becomes a swipeable carousel */
+    .gallery .strip{flex-wrap:nowrap;overflow-x:auto;justify-content:flex-start;
+      scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;
+      margin:40px -28px 0;padding:6px 28px 18px;scrollbar-width:none}
+    .gallery .strip::-webkit-scrollbar{display:none}
+    .ig-card{flex:0 0 78%;scroll-snap-align:center}
+    .map-embed iframe{height:300px}
   }
 </style>
 </head>
@@ -265,7 +307,7 @@
         <h2>Tradition &amp; warmth to create<br>moments worth remembering</h2>
         <p class="lead" style="margin-bottom:30px">A coffee shop and comfort kitchen in downtown Taubaté, Brazil. Belgian-chocolate cappuccino, generous cakes, the famous chicken pie and the daily lunch — all made in-house, slowly and with care.</p>
         <div class="about-cta">
-          <a class="btn" href="#menu">Read our story</a>
+          <a class="btn" href="#history">Read our story</a>
           <div class="proof" style="display:flex;align-items:center;gap:12px">
             <div class="avatars">
               <span style="background-image:url('./cappuccino-fryda.jpg')"></span>
@@ -286,12 +328,53 @@
   </div>
 </section>
 
+<!-- ===== Our story / Owners ===== -->
+<section id="history">
+  <div class="wrap">
+    <div class="eyebrow center"><span class="pill">The people <b>behind Fryda</b></span></div>
+    <h2 class="sec-h center">The story behind the counter</h2>
+    <p class="lead center" style="margin:14px auto 0">Fryda was born from the wish for a warm little corner in downtown Taubaté — where coffee is brewed slowly, food is made with care and everyone is welcomed like family. Behind it, two women.</p>
+
+    <div class="team-row">
+      <div class="team-photo">
+        <img src="./maria-dona.jpg" alt="Maria, owner of Fryda Café" onerror="this.parentNode.style.background='linear-gradient(140deg,#E3C590,#C98A3B)'">
+      </div>
+      <div class="team-body">
+        <span class="role-badge">Owner</span>
+        <h3>Maria</h3>
+        <p class="who-sub">The most emblematic figure of the house ❤️</p>
+        <p>Maria is the definition of strength, optimism, high spirits and good conversation. She believes in Fryda more than anyone — she traded her well-earned retirement to be here, welcoming everyone with love, every single day.</p>
+        <p>With a smile and a simple "Hi, have you been here before? Make yourself at home," she turned countless guests into Frydalovers (and Marialovers). As she likes to say, there are many "Amoras" out there — and she cares for each one as if they were her own blood.</p>
+        <p>Maria teaches us, every day, that you need strength, grit and drive — always. All our admiration and honor for working with you. ❤️</p>
+      </div>
+    </div>
+
+    <div class="team-row flip">
+      <div class="team-photo">
+        <img src="./renata-chef.jpg" alt="Renata, co-owner and head chef of Fryda Café" onerror="this.parentNode.style.background='linear-gradient(140deg,#E3C590,#C98A3B)'">
+      </div>
+      <div class="team-body">
+        <span class="role-badge green">Owner &amp; Head chef</span>
+        <h3>Renata</h3>
+        <p class="who-sub">The hand behind our kitchen</p>
+        <p>Owner of Fryda and the chef of the house, Renata signs everything that comes out of the kitchen: the risottos in natural broth, the melt-in-your-mouth gnocchi and the daily lunch — all made fresh, with technique and the same warmth that drives Fryda.</p>
+        <p>She also looks after every detail of the menu, so that each dish tastes like real, homemade food — the kind that makes you want to come back.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ===== Menu ===== -->
 <section class="menu" id="menu">
   <div class="wrap">
     <div class="menu-head">
       <span class="pill">Discover <b>the menu</b></span>
       <h2>Your next favorite awaits</h2>
+      <p class="menu-sub">Every drink can be made with <b>plant-based or lactose-free milk</b> · the cheese waffle is <b>gluten-free</b>.</p>
+      <a class="btn dark pdf-btn" href="./cardapio-fryda.pdf" download="Fryda-Cafe-Menu.pdf">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m0 0l-4-4m4 4l4-4M5 21h14"/></svg>
+        Download full menu (PDF)
+      </a>
     </div>
     <div class="menu-grid">
       <div class="feature-card">
@@ -301,7 +384,7 @@
         <p class="sub">Tia Branca's recipe · melt-in-your-mouth crust, creamy chicken filling with catupiry cheese and corn. The reason people drive across town.</p>
         <div class="feature-foot">
           <div class="preco">R$ 15 <small>/ slice</small></div>
-          <a class="btn" href="https://wa.me/message/BZHB7FBA2ZPFO1">Reserve mine</a>
+          <a class="btn" href="https://wa.me/message/BZHB7FBA2ZPFO1?text=Hi%2C%20Fryda%21%20%F0%9F%A5%A7%20I%27d%20like%20to%20reserve%20the%20famous%20Tia%20Branca%20chicken%20pie.%20Can%20you%20help%3F">Reserve mine</a>
         </div>
       </div>
       <div class="cat-grid">
@@ -346,10 +429,6 @@
             </ul>
           </div>
       </div>
-      <p class="menu-note">
-        Every drink can be made with <b>plant-based or lactose-free milk</b> · The cheese waffle is <b>gluten-free</b>.
-        <a href="./cardapio-fryda.pdf" download="Fryda-Cafe-Menu.pdf">⤓ Download full menu (PDF)</a>
-      </p>
     </div>
   </div>
 </section>
@@ -363,7 +442,7 @@
         <h2>Reserve the famous pie<br>or order your cake</h2>
         <p class="lead" style="margin-bottom:30px">Birthdays, an afternoon coffee with friends, or a treat just for you. Cakes, pies and custom orders come fresh from our kitchen — just message us on WhatsApp.</p>
         <div style="display:flex;gap:12px;flex-wrap:wrap">
-          <a class="btn" href="https://wa.me/message/BZHB7FBA2ZPFO1">Order on WhatsApp</a>
+          <a class="btn" href="https://wa.me/message/BZHB7FBA2ZPFO1?text=Hi%2C%20Fryda%21%20%F0%9F%8E%82%20I%27d%20like%20to%20order%20a%20cake.%20Could%20you%20share%20the%20flavors%20and%20timing%3F">Order a cake</a>
           <a class="btn ghost" href="https://www.instagram.com/frydacafe/" target="_blank" rel="noopener">See on Instagram</a>
         </div>
       </div>
@@ -382,11 +461,62 @@
     <div class="eyebrow"><span class="pill on-dark">A feast <b>for the eyes</b></span></div>
     <h2 class="sec-h">Taste the vibe through our gallery</h2>
     <div class="strip">
-      <div class="polaroid"><img src="./cappuccino-fryda.jpg" alt="Fryda cappuccino" onerror="this.style.background='linear-gradient(140deg,#E3C590,#C98A3B)'"><span>Fryda Cappuccino</span></div>
-      <div class="polaroid"><img src="./brownie-com-sorvete.jpg" alt="Brownie with ice cream" onerror="this.style.background='linear-gradient(140deg,#E3C590,#C98A3B)'"><span>Brownie &amp; ice cream</span></div>
-      <div class="polaroid"><img src="./wafflw-com-manteiga-e-mel.jpg" alt="Waffle with butter and honey" onerror="this.style.background='linear-gradient(140deg,#E3C590,#C98A3B)'"><span>Waffle &amp; honey</span></div>
-      <div class="polaroid"><img src="./chai-latte.jpg" alt="Chai latte" onerror="this.style.background='linear-gradient(140deg,#E3C590,#C98A3B)'"><span>Chai Latte</span></div>
-      <div class="polaroid"><img src="./tortas.jpg" alt="Chicken pie" onerror="this.style.background='linear-gradient(140deg,#E3C590,#C98A3B)'"><span>Chicken pie</span></div>
+      <a class="ig-card" href="https://www.instagram.com/p/DWEnSyPAHs3/?img_index=1" target="_blank" rel="noopener">
+        <div class="ig-top"><img class="ig-ava" src="./favicon.svg" alt=""><span class="ig-handle">frydacafe<small>Fryda Café</small></span>
+          <svg class="ig-ig" viewBox="0 0 24 24" fill="#2A1712"><path d="M12 2.2c3.2 0 3.6 0 4.85.07 1.17.05 1.97.24 2.43.41.61.24 1.05.52 1.5.98.46.45.74.89.98 1.5.17.46.36 1.26.41 2.43.06 1.27.07 1.65.07 4.85s0 3.58-.07 4.85c-.05 1.17-.24 1.97-.41 2.43-.24.61-.52 1.05-.98 1.5-.45.46-.89.74-1.5.98-.46.17-1.26.36-2.43.41-1.27.06-1.65.07-4.85.07s-3.58 0-4.85-.07c-1.17-.05-1.97-.24-2.43-.41a4 4 0 0 1-1.5-.98 4 4 0 0 1-.98-1.5c-.17-.46-.36-1.26-.41-2.43C2.21 15.58 2.2 15.2 2.2 12s0-3.58.07-4.85c.05-1.17.24-1.97.41-2.43.24-.61.52-1.05.98-1.5.45-.46.89-.74 1.5-.98.46-.17 1.26-.36 2.43-.41C8.42 2.21 8.8 2.2 12 2.2zm0 4.86A4.94 4.94 0 1 0 16.94 12 4.94 4.94 0 0 0 12 7.06zm0 8.14A3.2 3.2 0 1 1 15.2 12 3.2 3.2 0 0 1 12 15.2zm6.3-8.34a1.15 1.15 0 1 1-1.15-1.15 1.15 1.15 0 0 1 1.15 1.15z"/></svg>
+        </div>
+        <div class="ig-photo"><img src="./cappuccino-fryda.jpg" alt="Fryda cappuccino" onerror="this.style.display='none'"></div>
+        <div class="ig-actions"><svg class="heart" viewBox="0 0 24 24"><path d="M12 21s-7.5-4.6-9.7-9C.9 8.6 2.4 5.5 5.5 5.1c1.9-.2 3.5.9 4.5 2.3 1-1.4 2.6-2.5 4.5-2.3 3.1.4 4.6 3.5 3.2 6.9C19.5 16.4 12 21 12 21z"/></svg><svg viewBox="0 0 24 24" stroke-linejoin="round"><path d="M21 11.5a8.5 8.5 0 0 1-12.5 7.5L3 21l2-5.5A8.5 8.5 0 1 1 21 11.5z"/></svg><span class="seemore">view post →</span></div>
+        <div class="ig-cap"><b>frydacafe</b> Fryda cappuccino with Belgian chocolate ☕</div>
+      </a>
+      <a class="ig-card" href="https://www.instagram.com/p/DWEnSyPAHs3/?img_index=2" target="_blank" rel="noopener">
+        <div class="ig-top"><img class="ig-ava" src="./favicon.svg" alt=""><span class="ig-handle">frydacafe<small>Fryda Café</small></span>
+          <svg class="ig-ig" viewBox="0 0 24 24" fill="#2A1712"><path d="M12 2.2c3.2 0 3.6 0 4.85.07 1.17.05 1.97.24 2.43.41.61.24 1.05.52 1.5.98.46.45.74.89.98 1.5.17.46.36 1.26.41 2.43.06 1.27.07 1.65.07 4.85s0 3.58-.07 4.85c-.05 1.17-.24 1.97-.41 2.43-.24.61-.52 1.05-.98 1.5-.45.46-.89.74-1.5.98-.46.17-1.26.36-2.43.41-1.27.06-1.65.07-4.85.07s-3.58 0-4.85-.07c-1.17-.05-1.97-.24-2.43-.41a4 4 0 0 1-1.5-.98 4 4 0 0 1-.98-1.5c-.17-.46-.36-1.26-.41-2.43C2.21 15.58 2.2 15.2 2.2 12s0-3.58.07-4.85c.05-1.17.24-1.97.41-2.43.24-.61.52-1.05.98-1.5.45-.46.89-.74 1.5-.98.46-.17 1.26-.36 2.43-.41C8.42 2.21 8.8 2.2 12 2.2zm0 4.86A4.94 4.94 0 1 0 16.94 12 4.94 4.94 0 0 0 12 7.06zm0 8.14A3.2 3.2 0 1 1 15.2 12 3.2 3.2 0 0 1 12 15.2zm6.3-8.34a1.15 1.15 0 1 1-1.15-1.15 1.15 1.15 0 0 1 1.15 1.15z"/></svg>
+        </div>
+        <div class="ig-photo"><img src="./famosa-torta-de-frango-1.jpg" alt="Tia Branca's chicken pie" onerror="this.style.display='none'"></div>
+        <div class="ig-actions"><svg class="heart" viewBox="0 0 24 24"><path d="M12 21s-7.5-4.6-9.7-9C.9 8.6 2.4 5.5 5.5 5.1c1.9-.2 3.5.9 4.5 2.3 1-1.4 2.6-2.5 4.5-2.3 3.1.4 4.6 3.5 3.2 6.9C19.5 16.4 12 21 12 21z"/></svg><svg viewBox="0 0 24 24" stroke-linejoin="round"><path d="M21 11.5a8.5 8.5 0 0 1-12.5 7.5L3 21l2-5.5A8.5 8.5 0 1 1 21 11.5z"/></svg><span class="seemore">view post →</span></div>
+        <div class="ig-cap"><b>frydacafe</b> Tia Branca's famous chicken pie 🥧</div>
+      </a>
+      <a class="ig-card" href="https://www.instagram.com/p/DWEnSyPAHs3/?img_index=3" target="_blank" rel="noopener">
+        <div class="ig-top"><img class="ig-ava" src="./favicon.svg" alt=""><span class="ig-handle">frydacafe<small>Fryda Café</small></span>
+          <svg class="ig-ig" viewBox="0 0 24 24" fill="#2A1712"><path d="M12 2.2c3.2 0 3.6 0 4.85.07 1.17.05 1.97.24 2.43.41.61.24 1.05.52 1.5.98.46.45.74.89.98 1.5.17.46.36 1.26.41 2.43.06 1.27.07 1.65.07 4.85s0 3.58-.07 4.85c-.05 1.17-.24 1.97-.41 2.43-.24.61-.52 1.05-.98 1.5-.45.46-.89.74-1.5.98-.46.17-1.26.36-2.43.41-1.27.06-1.65.07-4.85.07s-3.58 0-4.85-.07c-1.17-.05-1.97-.24-2.43-.41a4 4 0 0 1-1.5-.98 4 4 0 0 1-.98-1.5c-.17-.46-.36-1.26-.41-2.43C2.21 15.58 2.2 15.2 2.2 12s0-3.58.07-4.85c.05-1.17.24-1.97.41-2.43.24-.61.52-1.05.98-1.5.45-.46.89-.74 1.5-.98.46-.17 1.26-.36 2.43-.41C8.42 2.21 8.8 2.2 12 2.2zm0 4.86A4.94 4.94 0 1 0 16.94 12 4.94 4.94 0 0 0 12 7.06zm0 8.14A3.2 3.2 0 1 1 15.2 12 3.2 3.2 0 0 1 12 15.2zm6.3-8.34a1.15 1.15 0 1 1-1.15-1.15 1.15 1.15 0 0 1 1.15 1.15z"/></svg>
+        </div>
+        <div class="ig-photo"><img src="./doces-da-casa-3.jpg" alt="Red velvet cake" onerror="this.style.display='none'"></div>
+        <div class="ig-actions"><svg class="heart" viewBox="0 0 24 24"><path d="M12 21s-7.5-4.6-9.7-9C.9 8.6 2.4 5.5 5.5 5.1c1.9-.2 3.5.9 4.5 2.3 1-1.4 2.6-2.5 4.5-2.3 3.1.4 4.6 3.5 3.2 6.9C19.5 16.4 12 21 12 21z"/></svg><svg viewBox="0 0 24 24" stroke-linejoin="round"><path d="M21 11.5a8.5 8.5 0 0 1-12.5 7.5L3 21l2-5.5A8.5 8.5 0 1 1 21 11.5z"/></svg><span class="seemore">view post →</span></div>
+        <div class="ig-cap"><b>frydacafe</b> Red velvet with cream cheese 🍰</div>
+      </a>
+      <a class="ig-card" href="https://www.instagram.com/p/DWEnSyPAHs3/?img_index=4" target="_blank" rel="noopener">
+        <div class="ig-top"><img class="ig-ava" src="./favicon.svg" alt=""><span class="ig-handle">frydacafe<small>Fryda Café</small></span>
+          <svg class="ig-ig" viewBox="0 0 24 24" fill="#2A1712"><path d="M12 2.2c3.2 0 3.6 0 4.85.07 1.17.05 1.97.24 2.43.41.61.24 1.05.52 1.5.98.46.45.74.89.98 1.5.17.46.36 1.26.41 2.43.06 1.27.07 1.65.07 4.85s0 3.58-.07 4.85c-.05 1.17-.24 1.97-.41 2.43-.24.61-.52 1.05-.98 1.5-.45.46-.89.74-1.5.98-.46.17-1.26.36-2.43.41-1.27.06-1.65.07-4.85.07s-3.58 0-4.85-.07c-1.17-.05-1.97-.24-2.43-.41a4 4 0 0 1-1.5-.98 4 4 0 0 1-.98-1.5c-.17-.46-.36-1.26-.41-2.43C2.21 15.58 2.2 15.2 2.2 12s0-3.58.07-4.85c.05-1.17.24-1.97.41-2.43.24-.61.52-1.05.98-1.5.45-.46.89-.74 1.5-.98.46-.17 1.26-.36 2.43-.41C8.42 2.21 8.8 2.2 12 2.2zm0 4.86A4.94 4.94 0 1 0 16.94 12 4.94 4.94 0 0 0 12 7.06zm0 8.14A3.2 3.2 0 1 1 15.2 12 3.2 3.2 0 0 1 12 15.2zm6.3-8.34a1.15 1.15 0 1 1-1.15-1.15 1.15 1.15 0 0 1 1.15 1.15z"/></svg>
+        </div>
+        <div class="ig-photo"><img src="./wafflw-com-manteiga-e-mel.jpg" alt="Waffle with butter and honey" onerror="this.style.display='none'"></div>
+        <div class="ig-actions"><svg class="heart" viewBox="0 0 24 24"><path d="M12 21s-7.5-4.6-9.7-9C.9 8.6 2.4 5.5 5.5 5.1c1.9-.2 3.5.9 4.5 2.3 1-1.4 2.6-2.5 4.5-2.3 3.1.4 4.6 3.5 3.2 6.9C19.5 16.4 12 21 12 21z"/></svg><svg viewBox="0 0 24 24" stroke-linejoin="round"><path d="M21 11.5a8.5 8.5 0 0 1-12.5 7.5L3 21l2-5.5A8.5 8.5 0 1 1 21 11.5z"/></svg><span class="seemore">view post →</span></div>
+        <div class="ig-cap"><b>frydacafe</b> Warm waffle with butter and honey</div>
+      </a>
+      <a class="ig-card" href="https://www.instagram.com/p/DWEnSyPAHs3/?img_index=5" target="_blank" rel="noopener">
+        <div class="ig-top"><img class="ig-ava" src="./favicon.svg" alt=""><span class="ig-handle">frydacafe<small>Fryda Café</small></span>
+          <svg class="ig-ig" viewBox="0 0 24 24" fill="#2A1712"><path d="M12 2.2c3.2 0 3.6 0 4.85.07 1.17.05 1.97.24 2.43.41.61.24 1.05.52 1.5.98.46.45.74.89.98 1.5.17.46.36 1.26.41 2.43.06 1.27.07 1.65.07 4.85s0 3.58-.07 4.85c-.05 1.17-.24 1.97-.41 2.43-.24.61-.52 1.05-.98 1.5-.45.46-.89.74-1.5.98-.46.17-1.26.36-2.43.41-1.27.06-1.65.07-4.85.07s-3.58 0-4.85-.07c-1.17-.05-1.97-.24-2.43-.41a4 4 0 0 1-1.5-.98 4 4 0 0 1-.98-1.5c-.17-.46-.36-1.26-.41-2.43C2.21 15.58 2.2 15.2 2.2 12s0-3.58.07-4.85c.05-1.17.24-1.97.41-2.43.24-.61.52-1.05.98-1.5.45-.46.89-.74 1.5-.98.46-.17 1.26-.36 2.43-.41C8.42 2.21 8.8 2.2 12 2.2zm0 4.86A4.94 4.94 0 1 0 16.94 12 4.94 4.94 0 0 0 12 7.06zm0 8.14A3.2 3.2 0 1 1 15.2 12 3.2 3.2 0 0 1 12 15.2zm6.3-8.34a1.15 1.15 0 1 1-1.15-1.15 1.15 1.15 0 0 1 1.15 1.15z"/></svg>
+        </div>
+        <div class="ig-photo"><img src="./cafes-e-mochas-2.jpg" alt="Iced coffee with orange" onerror="this.style.display='none'"></div>
+        <div class="ig-actions"><svg class="heart" viewBox="0 0 24 24"><path d="M12 21s-7.5-4.6-9.7-9C.9 8.6 2.4 5.5 5.5 5.1c1.9-.2 3.5.9 4.5 2.3 1-1.4 2.6-2.5 4.5-2.3 3.1.4 4.6 3.5 3.2 6.9C19.5 16.4 12 21 12 21z"/></svg><svg viewBox="0 0 24 24" stroke-linejoin="round"><path d="M21 11.5a8.5 8.5 0 0 1-12.5 7.5L3 21l2-5.5A8.5 8.5 0 1 1 21 11.5z"/></svg><span class="seemore">view post →</span></div>
+        <div class="ig-cap"><b>frydacafe</b> Iced coffee with orange for warm days 🧡</div>
+      </a>
+      <a class="ig-card" href="https://www.instagram.com/p/DWEnSyPAHs3/?img_index=6" target="_blank" rel="noopener">
+        <div class="ig-top"><img class="ig-ava" src="./favicon.svg" alt=""><span class="ig-handle">frydacafe<small>Fryda Café</small></span>
+          <svg class="ig-ig" viewBox="0 0 24 24" fill="#2A1712"><path d="M12 2.2c3.2 0 3.6 0 4.85.07 1.17.05 1.97.24 2.43.41.61.24 1.05.52 1.5.98.46.45.74.89.98 1.5.17.46.36 1.26.41 2.43.06 1.27.07 1.65.07 4.85s0 3.58-.07 4.85c-.05 1.17-.24 1.97-.41 2.43-.24.61-.52 1.05-.98 1.5-.45.46-.89.74-1.5.98-.46.17-1.26.36-2.43.41-1.27.06-1.65.07-4.85.07s-3.58 0-4.85-.07c-1.17-.05-1.97-.24-2.43-.41a4 4 0 0 1-1.5-.98 4 4 0 0 1-.98-1.5c-.17-.46-.36-1.26-.41-2.43C2.21 15.58 2.2 15.2 2.2 12s0-3.58.07-4.85c.05-1.17.24-1.97.41-2.43.24-.61.52-1.05.98-1.5.45-.46.89-.74 1.5-.98.46-.17 1.26-.36 2.43-.41C8.42 2.21 8.8 2.2 12 2.2zm0 4.86A4.94 4.94 0 1 0 16.94 12 4.94 4.94 0 0 0 12 7.06zm0 8.14A3.2 3.2 0 1 1 15.2 12 3.2 3.2 0 0 1 12 15.2zm6.3-8.34a1.15 1.15 0 1 1-1.15-1.15 1.15 1.15 0 0 1 1.15 1.15z"/></svg>
+        </div>
+        <div class="ig-photo"><img src="./brownie-com-sorvete.jpg" alt="Brownie with ice cream" onerror="this.style.display='none'"></div>
+        <div class="ig-actions"><svg class="heart" viewBox="0 0 24 24"><path d="M12 21s-7.5-4.6-9.7-9C.9 8.6 2.4 5.5 5.5 5.1c1.9-.2 3.5.9 4.5 2.3 1-1.4 2.6-2.5 4.5-2.3 3.1.4 4.6 3.5 3.2 6.9C19.5 16.4 12 21 12 21z"/></svg><svg viewBox="0 0 24 24" stroke-linejoin="round"><path d="M21 11.5a8.5 8.5 0 0 1-12.5 7.5L3 21l2-5.5A8.5 8.5 0 1 1 21 11.5z"/></svg><span class="seemore">view post →</span></div>
+        <div class="ig-cap"><b>frydacafe</b> Brownie with ice cream, still warm 🍫</div>
+      </a>
+      <a class="ig-card" href="https://www.instagram.com/p/DWEnSyPAHs3/?img_index=7" target="_blank" rel="noopener">
+        <div class="ig-top"><img class="ig-ava" src="./favicon.svg" alt=""><span class="ig-handle">frydacafe<small>Fryda Café</small></span>
+          <svg class="ig-ig" viewBox="0 0 24 24" fill="#2A1712"><path d="M12 2.2c3.2 0 3.6 0 4.85.07 1.17.05 1.97.24 2.43.41.61.24 1.05.52 1.5.98.46.45.74.89.98 1.5.17.46.36 1.26.41 2.43.06 1.27.07 1.65.07 4.85s0 3.58-.07 4.85c-.05 1.17-.24 1.97-.41 2.43-.24.61-.52 1.05-.98 1.5-.45.46-.89.74-1.5.98-.46.17-1.26.36-2.43.41-1.27.06-1.65.07-4.85.07s-3.58 0-4.85-.07c-1.17-.05-1.97-.24-2.43-.41a4 4 0 0 1-1.5-.98 4 4 0 0 1-.98-1.5c-.17-.46-.36-1.26-.41-2.43C2.21 15.58 2.2 15.2 2.2 12s0-3.58.07-4.85c.05-1.17.24-1.97.41-2.43.24-.61.52-1.05.98-1.5.45-.46.89-.74 1.5-.98.46-.17 1.26-.36 2.43-.41C8.42 2.21 8.8 2.2 12 2.2zm0 4.86A4.94 4.94 0 1 0 16.94 12 4.94 4.94 0 0 0 12 7.06zm0 8.14A3.2 3.2 0 1 1 15.2 12 3.2 3.2 0 0 1 12 15.2zm6.3-8.34a1.15 1.15 0 1 1-1.15-1.15 1.15 1.15 0 0 1 1.15 1.15z"/></svg>
+        </div>
+        <div class="ig-photo"><img src="./chai-latte.jpg" alt="Chai tea latte" onerror="this.style.display='none'"></div>
+        <div class="ig-actions"><svg class="heart" viewBox="0 0 24 24"><path d="M12 21s-7.5-4.6-9.7-9C.9 8.6 2.4 5.5 5.5 5.1c1.9-.2 3.5.9 4.5 2.3 1-1.4 2.6-2.5 4.5-2.3 3.1.4 4.6 3.5 3.2 6.9C19.5 16.4 12 21 12 21z"/></svg><svg viewBox="0 0 24 24" stroke-linejoin="round"><path d="M21 11.5a8.5 8.5 0 0 1-12.5 7.5L3 21l2-5.5A8.5 8.5 0 1 1 21 11.5z"/></svg><span class="seemore">view post →</span></div>
+        <div class="ig-cap"><b>frydacafe</b> Chai tea latte with spices 🍵</div>
+      </a>
     </div>
     <a class="btn light" href="https://www.instagram.com/frydacafe/" target="_blank" rel="noopener" style="margin-top:44px">Follow @frydacafe on Instagram</a>
   </div>
@@ -443,6 +573,12 @@
         <h4>Delivery &amp; Orders</h4>
         <p class="d" style="min-height:auto">Delivery via iFood<br>Custom orders on WhatsApp</p>
       </div>
+    </div>
+    <div class="map-embed">
+      <iframe
+        src="https://www.google.com/maps?q=Rua%20Dr.%20Pedro%20Costa%2C%20531%2C%20Centro%2C%20Taubat%C3%A9%20-%20SP%2C%2012010-160&output=embed"
+        loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+        title="Map — Fryda Café, Rua Dr. Pedro Costa 531, Centro, Taubaté/SP, Brazil"></iframe>
     </div>
   </div>
 </section>
