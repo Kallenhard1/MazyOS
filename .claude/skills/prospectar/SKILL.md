@@ -73,13 +73,29 @@ Mostrar o resumo do funil. Lembrar dos comandos do dia a dia:
 - `crm.py status "<nome>" abordado --canal whatsapp --nota "..."`
 - `crm.py followups` (quem cobrar hoje) · `crm.py board` (kanban)
 
+### Passo 5 — Espelhar no Notion (board visual)
+A fonte de verdade é o `crm/pipeline.csv`; o Notion é board de leitura.
+Sincronizar via MCP:
+- Base: **Prospecção — MarioLucash**
+  - data_source_id: `2b3cc55d-f52a-473a-a751-10014632e7bd`
+  - URL: https://app.notion.com/p/2ae35c0bfb2a4828b592e534a4b2cbaf
+- Ler `crm/pipeline.csv`. Para cada lead, casar pelo nome (Empresa) com o
+  que já existe no Notion (`notion-search` na data source):
+  - **não existe** → `notion-create-pages` (parent = data_source_id)
+  - **existe e mudou** → `notion-update-page` (status, follow-up, notas…)
+- Propriedades: Empresa, Status, Tipo, Setor, Cidade, Telefone, Email,
+  Site, Score, `date:Follow-up:start`, Canal, Notas.
+- **Não duplicar:** sempre conferir os existentes antes de criar.
+- Disparar só quando o usuário pedir ("atualiza o Notion") ou ao fim de um
+  `/prospectar`, confirmando antes.
+
 ## Ao terminar
 
 - Resumir o que rodou: nº de leads, quentes, abordagens/diagnósticos
   gerados, estado do funil.
-- Oferecer: espelhar o funil no **Notion** (via MCP) pra board visual;
-  e, pros leads quentes que viraram conversa, criar a proposta com a skill
-  do template (`propostas/Fryda-Cafe-mockup/gerar_pdf.py` como base).
+- Espelhar o funil no **Notion** (Passo 5) e oferecer: pros leads quentes
+  que viraram conversa, criar a proposta com o template
+  (`propostas/Fryda-Cafe-mockup/gerar_pdf.py` como base).
 - Se algo no fluxo mudou de forma duradoura (nova fonte, novo critério de
   score), seguir a regra de "Manter contexto atualizado" do `CLAUDE.md`.
 
