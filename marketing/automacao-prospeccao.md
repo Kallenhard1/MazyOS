@@ -106,6 +106,11 @@ pipeline serve os dois; muda só a fonte de lead e alguns pesos do score.
 - **Dependências:** nenhuma além de Python 3 (usa só a biblioteca padrão).
 
 ### Etapa 2 — Sourcing (coleta de leads) ✅ (implementado)
+- **GRÁTIS via OpenStreetMap** (`scripts/buscar_leads_osm.py`): busca por
+  categoria + cidade na Overpass API, sem chave nem billing. Diz se o
+  negócio tem site cadastrado. Cobertura menor que o Google, mas ilimitada
+  e de graça — a melhor opção pra começar sem verba. Plano de busca em
+  `dados/buscas-osm.csv` (categoria, tipo).
 - **B2C local + B2B via Google Places** (`scripts/buscar_leads_places.py`):
   busca por consulta ("cafeteria em Taubaté", "contabilidade em Taubaté")
   e já traz se a empresa tem site, telefone, nota e nº de avaliações.

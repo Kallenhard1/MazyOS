@@ -30,13 +30,17 @@ Humano decide o que abordar e aperta enviar; o resto é automático.
 
 ### Passo 0 — Sourcing (só se não houver lista)
 Perguntar a fonte e o alvo (cidade/setor). Então:
-- **B2C local + B2B com ponto físico (Google Places):** precisa de
-  `GOOGLE_MAPS_API_KEY`. Montar/usar um plano de busca CSV
-  (`consulta,tipo,setor`, ver `dados/buscas-exemplo.csv`) e rodar:
+- **GRÁTIS, sem chave (OpenStreetMap):** melhor opção pra começar sem verba.
+  `python scripts/buscar_leads_osm.py --cidade "Taubaté" --buscas dados/buscas-osm.csv`
+  (ou `--categorias cafe,padaria,restaurante`). Cobertura menor que o Google,
+  mas ilimitada e de graça.
+- **B2C local + B2B com ponto físico (Google Places):** mais cobertura, mas
+  precisa de `GOOGLE_MAPS_API_KEY`. Plano de busca CSV (`consulta,tipo,setor`,
+  ver `dados/buscas-exemplo.csv`):
   `python scripts/buscar_leads_places.py --buscas dados/buscas.csv`
 - **B2B em escala (CNPJ aberto):** precisa do dump da Receita baixado.
   `python scripts/filtrar_cnpj.py --dir ./cnpj --cnae <cods> --uf <UF>`
-- Ambos gravam em `dados/prospects.csv` (formato do qualificador).
+- Todos gravam em `dados/prospects.csv` (formato do qualificador).
 
 Se o usuário já tem a lista, pular pro Passo 1.
 
