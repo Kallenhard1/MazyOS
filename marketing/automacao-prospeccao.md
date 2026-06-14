@@ -105,15 +105,32 @@ pipeline serve os dois; muda só a fonte de lead e alguns pesos do score.
   em `dados/prospects-qualificados.md`.
 - **Dependências:** nenhuma além de Python 3 (usa só a biblioteca padrão).
 
-### Etapa 2 — Sourcing (coleta de leads) ⏳ (planejado)
-- **B2B:** importar dados abertos de CNPJ filtrando por CNAE + município +
-  porte + situação ativa → enche o `prospects.csv` com empresas
-  segmentadas. Marcar `tipo=b2b`.
-- **B2C local:** Google Places API por categoria + cidade (free tier),
-  puxando nome, telefone, se tem site, nota e nº de avaliações.
-  Marcar `tipo=b2c`.
-- **Saída:** ambos despejam no mesmo `dados/prospects.csv`, que a Etapa 1
-  consome.
+### Etapa 2 — Sourcing (coleta de leads) ✅ (implementado)
+- **B2C local + B2B via Google Places** (`scripts/buscar_leads_places.py`):
+  busca por consulta ("cafeteria em Taubaté", "contabilidade em Taubaté")
+  e já traz se a empresa tem site, telefone, nota e nº de avaliações.
+  Plano de busca em CSV (`dados/buscas-exemplo.csv`: consulta, tipo, setor).
+  Precisa de chave da Places API em `GOOGLE_MAPS_API_KEY` (free tier).
+- **B2B em escala via CNPJ aberto** (`scripts/filtrar_cnpj.py`): filtra os
+  CSVs públicos da Receita por CNAE + UF + município + situação ativa, junta
+  a razão social e despeja no formato do qualificador. Roda em 2 passagens
+  (baixo uso de memória). Baixar em https://dadosabertos.rfb.gov.br/CNPJ/.
+  Diferença-chave: o CNPJ acha até empresa sem nenhuma presença online
+  (que o Places nem lista) — ideal pro B2B industrial.
+- **Saída:** ambos gravam no mesmo formato; encadeia direto na Etapa 1.
+
+  Fluxo completo:
+  ```
+  # B2C local + B2B com ponto físico (precisa da chave Places)
+  export GOOGLE_MAPS_API_KEY="..."
+  python scripts/buscar_leads_places.py --buscas dados/buscas-exemplo.csv
+
+  # B2B em escala por setor (precisa baixar o dump da Receita)
+  python scripts/filtrar_cnpj.py --dir ./cnpj --cnae 6920,6201 --uf SP
+
+  # qualifica e ranqueia (Etapa 1)
+  python scripts/qualificar_leads.py dados/prospects.csv
+  ```
 
 ### Etapa 3 — Diagnóstico + outreach ⏳ (planejado)
 - Pra cada lead **quente**, gerar o 1-página de diagnóstico (reaproveita o
