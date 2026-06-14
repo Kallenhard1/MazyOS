@@ -88,6 +88,51 @@ manutenção industrial, equipamentos), empresas com 25+ anos e site de 2010.
 
 ---
 
+## Roadmap das 4 etapas
+
+Foco de cliente definido: **B2C local + B2B** — misturar negócios locais
+(venda rápida, gera caixa) com B2B (ticket alto, LTV maior). O mesmo
+pipeline serve os dois; muda só a fonte de lead e alguns pesos do score.
+
+### Etapa 1 — Qualificador de leads ✅ (implementado)
+- **Arquivo:** `scripts/qualificar_leads.py`
+- **Entrada:** `dados/prospects.csv` (lista bruta de qualquer fonte)
+- **O que faz:** checa a saúde do site de cada empresa (existe? responde?
+  HTTPS? mobile? está velho?), cruza com sinais de "vale a pena" (nota,
+  nº de avaliações, B2B) e gera um **score de oportunidade 0–100** +
+  classificação quente/morno/frio + os motivos.
+- **Saída:** `dados/prospects-qualificados.csv` (ranqueado) e um resumo
+  em `dados/prospects-qualificados.md`.
+- **Dependências:** nenhuma além de Python 3 (usa só a biblioteca padrão).
+
+### Etapa 2 — Sourcing (coleta de leads) ⏳ (planejado)
+- **B2B:** importar dados abertos de CNPJ filtrando por CNAE + município +
+  porte + situação ativa → enche o `prospects.csv` com empresas
+  segmentadas. Marcar `tipo=b2b`.
+- **B2C local:** Google Places API por categoria + cidade (free tier),
+  puxando nome, telefone, se tem site, nota e nº de avaliações.
+  Marcar `tipo=b2c`.
+- **Saída:** ambos despejam no mesmo `dados/prospects.csv`, que a Etapa 1
+  consome.
+
+### Etapa 3 — Diagnóstico + outreach ⏳ (planejado)
+- Pra cada lead **quente**, gerar o 1-página de diagnóstico (reaproveita o
+  `gerar_pdf.py` do template de proposta) e uma mensagem de abordagem
+  personalizada (e-mail ou WhatsApp), calibrada por `tipo`:
+  - B2C: foco em "apareça no Google / cliente no WhatsApp"
+  - B2B: foco em "comprador te pesquisa antes de cotar / LinkedIn + site"
+- Criar os **rascunhos no Gmail** (MCP já conectado) pro Mario revisar e
+  enviar. Nada sai sem revisão humana.
+
+### Etapa 4 — CRM de prospecção ⏳ (planejado)
+- Pipeline com status (novo → abordado → conversa → proposta → fechado) e
+  lembretes de follow-up.
+- Duas opções: base no **Notion** (MCP conectado) ou **dogfood do
+  RivalFlow** (usar o próprio produto como CRM — vira case de venda).
+
+
+---
+
 ## Cuidados (LGPD + ToS)
 - Cold outreach B2B segmentado e relevante é aceitável; **spam em massa não**.
 - Volume moderado + personalização real > disparo genérico em escala.
