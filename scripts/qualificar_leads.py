@@ -52,6 +52,7 @@ ALIASES = {
     "cidade": "cidade", "municipio": "cidade",
     "telefone": "telefone", "fone": "telefone", "whatsapp": "telefone",
     "site": "site", "website": "site", "url": "site",
+    "email": "email", "e-mail": "email", "correio": "email",
     "nota": "nota", "rating": "nota", "avaliacao": "nota",
     "avaliacoes": "avaliacoes", "reviews": "avaliacoes",
     "num_avaliacoes": "avaliacoes", "n_avaliacoes": "avaliacoes",
@@ -198,7 +199,7 @@ def ler_csv(path):
 
 def escrever_csv(path, leads):
     cols = ["score", "classificacao", "nome", "tipo", "setor", "cidade",
-            "telefone", "site", "site_status", "https", "mobile",
+            "telefone", "email", "site", "site_status", "https", "mobile",
             "ano_site", "nota", "avaliacoes", "motivos"]
     with open(path, "w", newline="", encoding="utf-8") as f:
         w = csv.DictWriter(f, fieldnames=cols, extrasaction="ignore")

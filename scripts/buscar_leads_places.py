@@ -39,7 +39,7 @@ from pathlib import Path
 TEXT_SEARCH = "https://maps.googleapis.com/maps/api/place/textsearch/json"
 DETAILS = "https://maps.googleapis.com/maps/api/place/details/json"
 DETAIL_FIELDS = "name,website,formatted_phone_number,rating,user_ratings_total,formatted_address"
-COLS = ["nome", "tipo", "setor", "cidade", "telefone", "site",
+COLS = ["nome", "tipo", "setor", "cidade", "telefone", "email", "site",
         "nota", "avaliacoes", "instagram", "linkedin"]
 
 
@@ -144,6 +144,7 @@ def main():
                 "cidade": cidade_da_consulta(consulta,
                                              d.get("formatted_address", "")),
                 "telefone": d.get("formatted_phone_number", ""),
+                "email": "",
                 "site": d.get("website", ""),
                 "nota": d.get("rating", ""),
                 "avaliacoes": d.get("user_ratings_total", ""),

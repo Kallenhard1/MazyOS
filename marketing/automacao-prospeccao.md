@@ -132,14 +132,21 @@ pipeline serve os dois; muda só a fonte de lead e alguns pesos do score.
   python scripts/qualificar_leads.py dados/prospects.csv
   ```
 
-### Etapa 3 — Diagnóstico + outreach ⏳ (planejado)
-- Pra cada lead **quente**, gerar o 1-página de diagnóstico (reaproveita o
-  `gerar_pdf.py` do template de proposta) e uma mensagem de abordagem
-  personalizada (e-mail ou WhatsApp), calibrada por `tipo`:
-  - B2C: foco em "apareça no Google / cliente no WhatsApp"
-  - B2B: foco em "comprador te pesquisa antes de cotar / LinkedIn + site"
-- Criar os **rascunhos no Gmail** (MCP já conectado) pro Mario revisar e
-  enviar. Nada sai sem revisão humana.
+### Etapa 3 — Diagnóstico + outreach ✅ (implementado)
+- **Mensagens** (`scripts/gerar_abordagem.py`): pra cada lead quente gera
+  WhatsApp + e-mail personalizados, calibrados por `tipo` e pelos achados
+  reais do qualificador. Só mostra problemas digitais ao cliente (nunca os
+  motivos internos de score). Saída:
+  - `saidas/abordagens/abordagens.md` — revisar e copiar/colar (WhatsApp)
+  - `saidas/abordagens/emails.csv` — `to,subject,body` (ponte pro Gmail)
+- **Diagnóstico 1-página** (`scripts/gerar_diagnostico.py` +
+  `templates/diagnostico/`): PDF branded MarioLucash por lead quente, com
+  score, achados e solução. Reaproveita o WeasyPrint. Saída em
+  `saidas/diagnosticos/`.
+- **Rascunhos no Gmail:** pedir ao Claude "cria os rascunhos do emails.csv"
+  → ele lê o CSV e cria os drafts via MCP do Gmail. Nada é enviado: o Mario
+  revisa e dispara. (CNPJ traz e-mail; Places não — pra leads sem e-mail,
+  usar a mensagem de WhatsApp.)
 
 ### Etapa 4 — CRM de prospecção ⏳ (planejado)
 - Pipeline com status (novo → abordado → conversa → proposta → fechado) e

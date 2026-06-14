@@ -38,7 +38,7 @@ import glob
 import sys
 from pathlib import Path
 
-COLS = ["nome", "tipo", "setor", "cidade", "telefone", "site",
+COLS = ["nome", "tipo", "setor", "cidade", "telefone", "email", "site",
         "nota", "avaliacoes", "instagram", "linkedin"]
 PORTE = {"01": "Microempresa", "03": "Pequeno porte", "05": "Demais"}
 
@@ -159,7 +159,7 @@ def main():
             w.writerow({
                 "nome": nome, "tipo": args.tipo, "setor": m["setor"],
                 "cidade": f"{m['cidade']}/{m['uf']}" if m["cidade"] else m["uf"],
-                "telefone": m["telefone"], "site": "",
+                "telefone": m["telefone"], "email": m["email"], "site": "",
                 "nota": "", "avaliacoes": "",
                 "instagram": "", "linkedin": "",
             })
