@@ -172,7 +172,8 @@ mockup antes da venda pros melhores prospects → proposta em 3 pacotes →
 
 ## Ferramentas conectadas
 
-- [ ] Notion
+- [x] Notion — base "Prospecção — MarioLucash" (funil de prospecção)
+      https://app.notion.com/p/2ae35c0bfb2a4828b592e534a4b2cbaf
 - [ ] Gmail
 - [ ] Google Calendar
 - [ ] Stripe / cobrança
