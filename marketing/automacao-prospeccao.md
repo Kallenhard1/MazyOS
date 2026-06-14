@@ -148,11 +148,47 @@ pipeline serve os dois; muda só a fonte de lead e alguns pesos do score.
   revisa e dispara. (CNPJ traz e-mail; Places não — pra leads sem e-mail,
   usar a mensagem de WhatsApp.)
 
-### Etapa 4 — CRM de prospecção ⏳ (planejado)
-- Pipeline com status (novo → abordado → conversa → proposta → fechado) e
-  lembretes de follow-up.
-- Duas opções: base no **Notion** (MCP conectado) ou **dogfood do
-  RivalFlow** (usar o próprio produto como CRM — vira case de venda).
+### Etapa 4 — CRM de prospecção ✅ (implementado)
+- **CRM local versionado** (`scripts/crm.py`): funil em `crm/pipeline.csv`
+  com estágios novo → abordado → conversa → proposta → fechado/perdido,
+  follow-up automático por estágio e board kanban em `crm/board.md`.
+  Zero dependência; integra direto com o qualificador.
+  - `crm.py importar <qualificados.csv> --classe quente`
+  - `crm.py status "<nome>" abordado --canal whatsapp --nota "..."`
+  - `crm.py followups [--ate +3d]` · `crm.py board` · `crm.py list`
+- **Opção visual (Notion):** dá pra espelhar o funil num board do Notion
+  via MCP (pedir ao Claude "joga o funil no Notion"). Bom pra ter UI e
+  lembretes nativos.
+- **Opção estratégica (RivalFlow):** dogfood — usar o CRM do próprio
+  produto pra gerir a prospecção. Vira case de venda ("rodo meu negócio
+  nele"). Fica pra quando o RivalFlow estiver no ar pro uso diário.
+
+---
+
+## Pipeline completo (as 4 etapas encadeadas)
+
+```bash
+# 2) sourcing — escolha a fonte
+export GOOGLE_MAPS_API_KEY="..."
+python scripts/buscar_leads_places.py --buscas dados/buscas-exemplo.csv  # B2C+B2B
+python scripts/filtrar_cnpj.py --dir ./cnpj --cnae 6920 --uf SP          # B2B escala
+
+# 1) qualifica e ranqueia
+python scripts/qualificar_leads.py dados/prospects.csv
+
+# 3) abordagem + diagnóstico dos quentes
+python scripts/gerar_abordagem.py
+python scripts/gerar_diagnostico.py
+#    -> "Claude, cria os rascunhos do emails.csv"  (Gmail via MCP)
+
+# 4) CRM — funil e follow-up
+python scripts/crm.py importar dados/prospects-qualificados.csv
+python scripts/crm.py board
+python scripts/crm.py followups
+```
+
+Da lista crua ao acompanhamento do fechamento, com humano só onde importa:
+a decisão de abordar e o envio.
 
 
 ---

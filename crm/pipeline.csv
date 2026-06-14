@@ -1,0 +1,9 @@
+id,nome,tipo,setor,cidade,telefone,email,site,score,classificacao,status,ultimo_contato,proximo_followup,canal,notas
+contabilidade-prisma-taubate,Contabilidade Prisma,b2b,Contabilidade,Taubaté,1235556666,,,75,quente,abordado,2026-06-14,2026-06-17,whatsapp,[14/06] mandei diagnostico no zap
+fryda-cafe-taubate,Fryda Café,b2c,Cafeteria,Taubaté,12999990000,,,70,quente,conversa,2026-06-14,2026-06-16,,"[14/06] respondeu, quer ver proposta"
+padaria-trigo-de-ouro-taubate,Padaria Trigo de Ouro,b2c,Padaria,Taubaté,12988887777,,,70,quente,novo,,,,
+techparts-componentes-campinas,TechParts Componentes,b2b,Distribuidora eletrônicos,Campinas,1932221111,,,67,quente,proposta,2026-06-14,2026-06-16,,
+mecanicapro-industrial-jacarei,MecânicaPro Industrial,b2b,Manutenção industrial,Jacareí,1234445555,,https://mecanicapro.ind.br,65,quente,novo,,,,
+clinica-odontosorriso-taubate,Clínica OdontoSorriso,b2c,Odontologia,Taubaté,12977776666,,http://odontosorriso.com.br,60,quente,novo,,,,
+distribuidora-vale-suprimentos-sao-jose-dos-campos,Distribuidora Vale Suprimentos,b2b,Atacado materiais,São José dos Campos,1233332222,,,60,quente,novo,,,,
+pet-shop-amigo-fiel-taubate,Pet Shop Amigo Fiel,b2c,Pet shop,Taubaté,12944443333,,https://amigofielpet.com.br,60,quente,novo,,,,
