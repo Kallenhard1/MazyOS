@@ -1,0 +1,22 @@
+<div style="margin-top:14px">
+  <span class="pill quente">🔥 {{ resumo.counts.quente }} quentes</span>
+  <span class="pill morno">🟡 {{ resumo.counts.morno }} mornos</span>
+  <span class="pill">⚪ {{ resumo.counts.frio }} frios</span>
+  <span class="muted">· {{ resumo.total }} no total</span>
+  {% if resumo.top %}
+  <table style="margin-top:12px">
+    <thead><tr><th>Score</th><th>Empresa</th><th>Tipo</th><th>Cidade</th><th>Por quê</th></tr></thead>
+    <tbody>
+      {% for l in resumo.top %}
+      <tr>
+        <td><strong>{{ l.score }}</strong></td>
+        <td>{{ l.nome }}</td>
+        <td>{{ l.tipo }}</td>
+        <td>{{ l.cidade }}</td>
+        <td class="muted">{{ l.motivos }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% endif %}
+</div>

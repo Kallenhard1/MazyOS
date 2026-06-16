@@ -1,0 +1,15 @@
+{% if not grupos %}
+  <p class="muted">Nenhum arquivo gerado ainda. Rode o sourcing acima.</p>
+{% else %}
+  {% for g in grupos %}
+  <h3 style="margin:10px 0 6px">{{ g.label }}/</h3>
+  <ul style="margin:0 0 12px; padding-left:18px">
+    {% for it in g.itens %}
+    <li>
+      <a href="{{ url_for('arquivo', rel=it.rel) }}" target="_blank">{{ it.nome }}</a>
+      <span class="muted">· {{ it.tam }} · {{ it.mod }}</span>
+    </li>
+    {% endfor %}
+  </ul>
+  {% endfor %}
+{% endif %}

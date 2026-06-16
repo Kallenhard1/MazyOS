@@ -1,0 +1,16 @@
+{% if r.erro %}
+  <div class="log erro">{{ r.erro }}</div>
+{% else %}
+  <div class="ok">
+    <strong>Lote gerado ✓</strong> — {{ r.total }} leads ({{ r.com_email }} com e-mail · {{ r.sem_email }} sem).
+    <ul style="margin:10px 0 0">
+      <li>📧 E-mails: <a href="{{ url_for('arquivo', rel=r.lote_csv) }}" target="_blank">{{ r.lote_csv }}</a></li>
+      {% if r.wpp_md %}<li>💬 WhatsApp: <a href="{{ url_for('arquivo', rel=r.wpp_md) }}" target="_blank">{{ r.wpp_md }}</a></li>{% endif %}
+    </ul>
+    <p style="margin:12px 0 0">
+      <strong>Próximo passo:</strong> peça ao Claude
+      <em>"cria os rascunhos do {{ r.lote_csv }} no Gmail"</em> — ele cria um rascunho
+      por linha via MCP pra você revisar e enviar. Nada sai automaticamente.
+    </p>
+  </div>
+{% endif %}

@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+{% block titulo %}Envio em massa{% endblock %}
+{% block conteudo %}
+<h1>📧 Envio em massa</h1>
+<p class="sub">Seleciona os leads, escreve o e-mail com variáveis e gera o lote. <strong>Nada é enviado aqui</strong> — o lote vira rascunho no Gmail (passo final via Claude). Leads sem e-mail viram mensagem de WhatsApp.</p>
+
+<div class="aviso">⚠️ Cold outreach com responsabilidade: volume moderado + personalização (LGPD/ToS). O fluxo gera rascunho pra você revisar antes de disparar.</div>
+
+<form id="envio-form">
+  <div class="card">
+    <h3>1. Mensagem (use {nome}, {setor}, {cidade}, {telefone})</h3>
+    <label>Assunto</label>
+    <input type="text" name="assunto" value="{{ assunto_padrao }}">
+    <label>Corpo</label>
+    <textarea name="corpo" rows="9">{{ corpo_padrao }}</textarea>
+  </div>
+
+  <div class="card">
+    <h3>2. Selecionar leads <span class="muted" id="contador"></span></h3>
+    <input type="text" id="filtro" placeholder="filtrar por nome, setor, cidade, status…" onkeyup="filtrarLeads()">
+    <div class="scroll-leads" style="margin-top:10px">
+      <table>
+        <thead>
+          <tr>
+            <th><input type="checkbox" id="marca-todos" onclick="marcarTodos(this)"></th>
+            <th>Empresa</th><th>Tipo</th><th>Setor</th><th>Cidade</th><th>E-mail</th><th>Score</th><th>Status</th>
+          </tr>
+        </thead>
+        <tbody id="corpo-leads">
+          {% for l in leads %}
+          <tr class="linha-lead">
+            <td><input type="checkbox" name="ids" value="{{ l.id }}" class="chk" onchange="atualizarContador()"></td>
+            <td>{{ l.nome }}</td>
+            <td>{{ l.tipo }}</td>
+            <td>{{ l.setor }}</td>
+            <td>{{ l.cidade }}</td>
+            <td>{% if l.email %}{{ l.email }}{% else %}<span class="muted">—</span>{% endif %}</td>
+            <td>{{ l.score }}</td>
+            <td>{{ l.status }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    <p class="muted" style="margin-top:8px">{{ leads|length }} leads no funil. Quem não tem e-mail entra no arquivo de WhatsApp.</p>
+  </div>
+
+  <div class="card">
+    <h3>3. Revisar e gerar</h3>
+    <button type="button" class="secundario"
+            hx-post="{{ url_for('envio_preview') }}" hx-include="#envio-form" hx-target="#preview">
+      Pré-visualizar (3 primeiros)
+    </button>
+    <button type="button"
+            hx-post="{{ url_for('envio_gerar') }}" hx-include="#envio-form" hx-target="#resultado-lote"
+            hx-confirm="Gerar o lote com os leads selecionados? (não envia nada, só prepara)">
+      Gerar lote
+    </button>
+    <div id="preview" style="margin-top:14px"></div>
+    <div id="resultado-lote" style="margin-top:14px"></div>
+  </div>
+</form>
+
+<script>
+function marcarTodos(cb){
+  document.querySelectorAll('#corpo-leads .linha-lead:not([hidden]) .chk').forEach(c=>c.checked=cb.checked);
+  atualizarContador();
+}
+function atualizarContador(){
+  const n = document.querySelectorAll('#corpo-leads .chk:checked').length;
+  document.getElementById('contador').textContent = n ? '· ' + n + ' selecionado(s)' : '';
+}
+function filtrarLeads(){
+  const q = document.getElementById('filtro').value.toLowerCase();
+  document.querySelectorAll('#corpo-leads .linha-lead').forEach(tr=>{
+    tr.hidden = q && !tr.textContent.toLowerCase().includes(q);
+  });
+}
+</script>
+{% endblock %}

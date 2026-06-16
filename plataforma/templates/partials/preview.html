@@ -1,0 +1,12 @@
+{% if not previews %}
+  <p class="muted">Marque ao menos um lead pra pré-visualizar.</p>
+{% else %}
+  <p class="muted">Mostrando {{ previews|length }} de {{ n }} selecionado(s):</p>
+  {% for p in previews %}
+  <div class="preview-email">
+    <div class="de">Para: {{ p.email or ('(sem e-mail → WhatsApp ' + p.telefone + ')') }}</div>
+    <div class="assunto">{{ p.assunto }}</div>
+    <div class="corpo">{{ p.corpo }}</div>
+  </div>
+  {% endfor %}
+{% endif %}
