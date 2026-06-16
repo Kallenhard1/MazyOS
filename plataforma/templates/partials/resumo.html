@@ -1,22 +1,37 @@
 <div style="margin-top:14px">
-  <span class="pill quente">🔥 {{ resumo.counts.quente }} quentes</span>
-  <span class="pill morno">🟡 {{ resumo.counts.morno }} mornos</span>
-  <span class="pill">⚪ {{ resumo.counts.frio }} frios</span>
-  <span class="muted">· {{ resumo.total }} no total</span>
-  {% if resumo.top %}
-  <table style="margin-top:12px">
-    <thead><tr><th>Score</th><th>Empresa</th><th>Tipo</th><th>Cidade</th><th>Por quê</th></tr></thead>
-    <tbody>
-      {% for l in resumo.top %}
-      <tr>
-        <td><strong>{{ l.score }}</strong></td>
-        <td>{{ l.nome }}</td>
-        <td>{{ l.tipo }}</td>
-        <td>{{ l.cidade }}</td>
-        <td class="muted">{{ l.motivos }}</td>
-      </tr>
-      {% endfor %}
-    </tbody>
-  </table>
+  <div style="display:flex; gap:8px; align-items:center; flex-wrap:wrap; margin-bottom:10px">
+    <button class="filtro-btn qf-btn ativo" data-classe="" onclick="filtrarQualif(this)">Todos <span class="muted">{{ resumo.total }}</span></button>
+    <button class="filtro-btn qf-btn" data-classe="quente" onclick="filtrarQualif(this)">🔥 Quentes {{ resumo.counts.quente }}</button>
+    <button class="filtro-btn qf-btn" data-classe="morno" onclick="filtrarQualif(this)">🟡 Mornos {{ resumo.counts.morno }}</button>
+    <button class="filtro-btn qf-btn" data-classe="frio" onclick="filtrarQualif(this)">⚪ Frios {{ resumo.counts.frio }}</button>
+  </div>
+
+  {% if resumo.linhas %}
+  <div style="overflow:auto; max-height:55vh; border:1px solid var(--linha); border-radius:8px">
+    <table>
+      <thead>
+        <tr>
+          <th style="position:sticky;top:0;background:#fff">Score</th>
+          <th style="position:sticky;top:0;background:#fff">Empresa</th>
+          <th style="position:sticky;top:0;background:#fff">Tipo</th>
+          <th style="position:sticky;top:0;background:#fff">Cidade</th>
+          <th style="position:sticky;top:0;background:#fff">WhatsApp</th>
+          <th style="position:sticky;top:0;background:#fff">Por quê</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for l in resumo.linhas %}
+        <tr class="qf-row" data-classe="{{ l.classificacao }}">
+          <td><strong>{{ l.score }}</strong></td>
+          <td>{{ l.nome }}</td>
+          <td>{{ l.tipo }}</td>
+          <td>{{ l.cidade }}</td>
+          <td>{% if l.wa %}<a class="wa-link" href="{{ l.wa }}" target="_blank">💬 abrir</a>{% else %}<span class="muted">—</span>{% endif %}</td>
+          <td class="muted">{{ l.motivos }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
   {% endif %}
 </div>

@@ -96,15 +96,18 @@ Plano aprovado — construindo 3.0 + 3.1.
 
 Pedidos do Mario, fora do escopo da 3.x atual — planejar quando chegar a hora:
 
-1. **Branch padronizada por cliente.** Criar um **template limpo da branch
-   atual** que sirva de base. Ao clicar em "Trabalhar proposta", abrir um
-   **modal com form** que cria uma **branch nova padronizada** do cliente a
-   partir desse template (em vez de só criar a pasta `clientes/<id>/`).
-2. **Kanban drag-and-drop.** Tornar o funil interativo — arrastar cards entre
-   os estágios (hoje é o select "mover / editar").
-3. **Filtro por label na visão de leads.** Usar as labels **quente / morno /
-   frio** (as mesmas da etapa "Qualificar e ranquear" da Prospecção) como
-   **filtro** pra ver todos os leads atuais.
-4. **Terminal do Claude Code = espelho do terminal local.** O terminal
-   continua sendo o local atual, exatamente como é — a plataforma só o
-   espelha (mantém o handoff já decidido; nada de terminal reimplementado).
+1. ✅ **Branch padronizada por cliente.** "Trabalhar proposta" abre um **modal
+   com form** (branch + observação) que cria a pasta `clientes/<id>/`
+   padronizada e gera o comando `git checkout -b cliente/<slug>` pra copiar —
+   **handoff**, a app não toca no git. _Feito 15/06/2026._
+2. ✅ **Kanban drag-and-drop.** Arrastar cards entre os estágios (chama o mesmo
+   `/funil/atualizar`). O select "mover / editar" segue pra quando precisar de
+   nota/follow-up. _Feito 15/06/2026._
+3. ✅ **Filtro por label na visão de leads.** Botões quente / morno / frio /
+   todos no topo do funil filtram os cards (client-side, sobrevive aos
+   re-renders). _Feito 15/06/2026._
+4. ✅ **Terminal → Handoff.** Tentamos um painel-espelho (tail de log via `tee`),
+   mas o Mario preferiu o **handoff** puro: a plataforma gera o prompt/comando e
+   ele roda no terminal local do Claude Code, que fica exatamente como é. O
+   espelho foi **removido**; o handoff do mockup já vive na etapa 3.3 (botão
+   "copiar prompt") e o handoff do git no modal (item 1). _Decidido 15/06/2026._

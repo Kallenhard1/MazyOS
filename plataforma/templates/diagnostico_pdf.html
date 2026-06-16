@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+<meta charset="utf-8">
+<style>
+  @page { size: A4; margin: 1.6cm 1.8cm; }
+  body { font-family: Helvetica, Arial, sans-serif; color: #2b2b2b; font-size: 10pt; line-height: 1.5; background-color: #FAFAF8; }
+  .top { width: 100%; border-bottom: 2px solid #1a1a1a; margin-bottom: 16px; }
+  .top td { padding-bottom: 8px; }
+  .brand { font-size: 13pt; font-weight: bold; color: #1a1a1a; }
+  .tag { color: #6b6b6b; font-size: 8pt; letter-spacing: 1px; }
+  .eyebrow { color: #6b6b6b; font-size: 8pt; letter-spacing: 1px; margin-bottom: 4px; text-transform: uppercase; }
+  h1 { font-size: 22pt; color: #1a1a1a; margin: 0 0 8px; }
+  .intro { color: #6b6b6b; margin: 0 0 16px; }
+  .score { background: #f5f4f2; padding: 12px 14px; margin-bottom: 18px; }
+  .score .n { font-size: 24pt; font-weight: bold; color: #C8862A; }
+  .sec { font-size: 13pt; font-weight: bold; color: #1a1a1a; margin: 0 0 8px; }
+  table.ach { width: 100%; border-collapse: collapse; margin-bottom: 18px; }
+  table.ach td { padding: 7px 4px; border-bottom: 1px solid #e4e4e4; vertical-align: top; font-size: 9.5pt; }
+  td.mark { width: 24px; }
+  td.mark div { background: #1a1a1a; color: #ffffff; width: 18px; height: 18px; text-align: center; font-size: 9pt; font-weight: bold; }
+  .sol { background: #1a1a1a; color: #ffffff; padding: 14px 16px; margin-bottom: 18px; }
+  .sol h3 { margin: 0 0 6px; font-size: 12pt; color: #ffffff; }
+  .sol p { margin: 0; color: #eeeeee; font-size: 9.5pt; }
+  .cta { font-size: 11pt; font-weight: bold; color: #C8862A; margin-bottom: 4px; }
+  .contato { color: #6b6b6b; font-size: 9pt; }
+</style>
+</head>
+<body>
+  <table class="top">
+    <tr>
+      <td><span class="brand">MarioLucash</span> &nbsp;<span class="tag">SITES &amp; AUTOMAÇÃO</span></td>
+      <td align="right"><span class="tag">{{ data }}</span></td>
+    </tr>
+  </table>
+
+  <div class="eyebrow">Diagnóstico de presença digital</div>
+  <h1>{{ nome }}</h1>
+  <p class="intro">{{ setor }}{% if cidade %} · {{ cidade }}{% endif %} — um raio-x de 1 página do que hoje manda cliente pro concorrente, e como resolver.</p>
+
+  <div class="score"><span class="n">{{ score }}</span> <span style="color:#6b6b6b">/100 de oportunidade</span></div>
+
+  <div class="sec">O que eu encontrei</div>
+  <table class="ach">
+    {% for a in achados %}
+    <tr><td class="mark"><div>{{ loop.index }}</div></td><td>{{ a }}</td></tr>
+    {% endfor %}
+  </table>
+
+  <div class="sol">
+    <h3>A solução</h3>
+    <p>{{ solucao }}</p>
+  </div>
+
+  <div class="cta">Bora colocar o {{ nome }} na frente?</div>
+  <div class="contato">Mario Lucas · mariolucasdasilvabarbosa@gmail.com · Instagram @mariolucash</div>
+</body>
+</html>

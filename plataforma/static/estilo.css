@@ -7,7 +7,8 @@
   --cinza-claro: #e6e6e6;
   --linha: #d9d9d9;
   --branco: #ffffff;
-  --quente: #111;     /* sem cor de destaque ainda — usamos peso/borda */
+  --accent: #C8862A;        /* âmbar — acento da marca, pontual (CTA/detalhe) */
+  --accent-hover: #A86E1F;
   --raio: 10px;
 }
 
@@ -16,7 +17,7 @@ body {
   margin: 0;
   font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
   color: var(--preto);
-  background: #f4f4f4;
+  background: #fafaf8;
   display: flex;
   min-height: 100vh;
 }
@@ -151,6 +152,8 @@ tbody tr:hover { background: #fafafa; }
 .lead-topo { display: flex; justify-content: space-between; gap: 8px; align-items: center; }
 .lead-topo strong { font-size: .84rem; line-height: 1.2; }
 .lead-nota { font-size: .74rem; color: #444; background: #f6f6f6; border-radius: 6px; padding: 4px 6px; margin-top: 5px; }
+.wa-link { display: inline-block; margin-top: 5px; font-size: .76rem; text-decoration: none; color: var(--accent); border: 1px solid var(--accent); border-radius: 6px; padding: 3px 9px; }
+.wa-link:hover { background: var(--accent); color: #fff; }
 .mover { margin-top: 7px; }
 .mover summary { cursor: pointer; font-size: .74rem; color: var(--cinza); list-style: none; }
 .mover summary:hover { color: #0d0d0d; }
@@ -158,3 +161,16 @@ tbody tr:hover { background: #fafafa; }
 .mover label { margin: 6px 0 2px; font-size: .72rem; }
 .mover input, .mover select { padding: 6px 8px; font-size: .8rem; }
 .mover button { margin-top: 8px; padding: 7px 14px; font-size: .8rem; width: 100%; }
+.lead-card[draggable=true] { cursor: grab; }
+.lead-card.arrastando { opacity: .4; }
+.coluna-corpo.drop-alvo { outline: 2px dashed #0d0d0d; outline-offset: -4px; background: #e2e2e2; }
+.filtro-btn { margin: 0; padding: 6px 14px; font-size: .8rem; background: #fff; color: #0d0d0d; border: 1px solid var(--linha); }
+.filtro-btn:hover { background: #f0f0f0; }
+.filtro-btn.ativo { background: #0d0d0d; color: #fff; border-color: #0d0d0d; }
+
+/* ---------- Modal ---------- */
+.modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,.5); display: flex; align-items: center; justify-content: center; z-index: 50; padding: 20px; }
+.modal-overlay[hidden] { display: none; }
+.modal-box { background: #fff; border-radius: var(--raio); padding: 24px 26px; width: 460px; max-width: 100%; position: relative; box-shadow: 0 12px 40px rgba(0,0,0,.3); }
+.modal-x { position: absolute; top: 10px; right: 12px; background: none; color: #888; font-size: 22px; line-height: 1; padding: 4px 8px; margin: 0; }
+.modal-x:hover { background: #f0f0f0; color: #111; }

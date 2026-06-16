@@ -31,6 +31,17 @@
         <ul style="margin:6px 0 0">{% for a in res.achados %}<li style="font-size:.84rem">{{ a }}</li>{% endfor %}</ul>
         <a class="muted" href="{{ url_for('arquivo', rel='clientes/' + estado.id + '/pesquisa.md') }}" target="_blank" style="font-size:.78rem">pesquisa.md</a>
       </div>
+      <form hx-post="{{ url_for('lead_diagnostico', slug=estado.id) }}" hx-target="#etapas" hx-swap="innerHTML" style="margin-top:10px">
+        <button type="submit">📄 {{ 'Regerar' if res.diag_engine else 'Gerar' }} diagnóstico (PDF)</button>
+      </form>
+      {% if res.diag_engine and res.diag_engine != 'falhou' %}
+      <div class="ok" style="margin-top:10px">
+        Diagnóstico gerado ✓ — <a href="{{ url_for('arquivo', rel='clientes/' + estado.id + '/diagnostico.pdf') }}" target="_blank">baixar PDF</a>
+        <span class="muted" style="font-size:.74rem">(engine: {{ res.diag_engine }})</span>
+      </div>
+      {% elif res.diag_engine == 'falhou' %}
+      <div class="aviso" style="margin-top:10px">Não consegui gerar o PDF nesta máquina. Veja o log.</div>
+      {% endif %}
       {% endif %}
 
       {# ---- Ação manual: Coleta ---- #}

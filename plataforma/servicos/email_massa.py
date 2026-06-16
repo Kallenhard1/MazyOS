@@ -8,6 +8,8 @@ import csv
 from datetime import datetime
 from pathlib import Path
 
+from servicos import zap
+
 ROOT = Path(__file__).resolve().parents[2]
 PIPELINE = ROOT / "crm" / "pipeline.csv"
 ENVIO_DIR = ROOT / "saidas" / "envio"
@@ -57,7 +59,9 @@ def preencher(lead, assunto_tpl, corpo_tpl, wpp_tpl):
         return {**base, "canal": "email", "email": lead["email"].strip(),
                 "assunto": aplicar_vars(assunto_tpl, lead),
                 "corpo": aplicar_vars(corpo_tpl, lead)}
-    return {**base, "canal": "whatsapp", "msg": aplicar_vars(wpp_tpl, lead)}
+    msg = aplicar_vars(wpp_tpl, lead)
+    return {**base, "canal": "whatsapp", "msg": msg,
+            "wa": zap.link(base["telefone"], msg)}
 
 
 def montar_previews(ids, assunto_tpl, corpo_tpl, wpp_tpl, limite=3):
@@ -96,8 +100,10 @@ def gerar_lote(ids, assunto_tpl, corpo_tpl, wpp_tpl):
         wpp = ENVIO_DIR / f"whatsapp-{ts}.md"
         linhas = [f"# WhatsApp — {len(zaps)} leads sem e-mail", ""]
         for p in zaps:
-            linhas += [f"## {p['nome']}  ·  {p['telefone'] or 'sem telefone'}",
-                       "", "```", p["msg"], "```", ""]
+            linhas += [f"## {p['nome']}  ·  {p['telefone'] or 'sem telefone'}", ""]
+            if p.get("wa"):
+                linhas += [f"[💬 Abrir no WhatsApp (mensagem pronta)]({p['wa']})", ""]
+            linhas += ["```", p["msg"], "```", ""]
         wpp.write_text("\n".join(linhas), encoding="utf-8")
         resumo["wpp_md"] = wpp.relative_to(ROOT).as_posix()
 

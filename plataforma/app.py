@@ -7,25 +7,39 @@ e dados/. Esta app só orquestra os scripts e mostra o que eles geram.
 from datetime import date
 from pathlib import Path
 
-from flask import (Flask, abort, make_response, redirect, render_template,
+from flask import (Flask, abort, redirect, render_template,
                    request, send_file, url_for)
 
 from servicos import arquivos as arq
 from servicos import email_massa as mail
 from servicos import funil as fun
+from servicos import instagram as insta
 from servicos import lead as leadsvc
+from servicos import pdf
 from servicos import prospeccao as prosp
 
 ROOT = Path(__file__).resolve().parent.parent
 app = Flask(__name__)
 
 # diretórios que a rota de download pode servir (sandbox contra path traversal)
-DIRS_PERMITIDOS = [(ROOT / d).resolve() for d in ("dados", "saidas", "crm", "clientes")]
+DIRS_PERMITIDOS = [(ROOT / d).resolve() for d in ("dados", "saidas", "crm", "clientes", "marketing")]
 
 
 @app.get("/")
 def home():
-    return redirect(url_for("prospeccao"))
+    return redirect(url_for("hoje"))
+
+
+@app.get("/hoje")
+def hoje():
+    grupos, contagens = fun.por_estagio()
+    return render_template(
+        "hoje.html", ativa="hoje",
+        hoje_data=date.today().strftime("%d/%m/%Y"),
+        pendentes=fun.followups(),
+        novos=grupos["novo"][:12],
+        contagens=contagens, total=sum(contagens.values()),
+        estagios=fun.ESTAGIOS, rotulos=fun.ROTULOS)
 
 
 # ---------------- Prospecção ----------------
@@ -137,12 +151,15 @@ def funil_notion():
 
 @app.post("/funil/trabalhar")
 def funil_trabalhar():
-    estado, _ = leadsvc.criar_workspace(request.form.get("id", ""))
+    estado, criado = leadsvc.criar_workspace(
+        request.form.get("id", ""), request.form.get("obs", ""))
     if not estado:
         abort(404)
-    resp = make_response("")
-    resp.headers["HX-Redirect"] = url_for("lead_ver", slug=estado["id"])
-    return resp
+    branch = (request.form.get("branch", "").strip()
+              or f"cliente/{estado['id']}")
+    return render_template(
+        "partials/trabalhar.html", estado=estado, criado=criado, branch=branch,
+        lead_url=url_for("lead_ver", slug=estado["id"]))
 
 
 # ---------------- Lead → Proposta (Fase 3) ----------------
@@ -222,6 +239,17 @@ def lead_enviar(slug):
     return _etapas(slug, leadsvc.ler_estado(slug))
 
 
+@app.post("/lead/<slug>/diagnostico")
+def lead_diagnostico(slug):
+    d = leadsvc.dados_diagnostico(slug)
+    if d is None:
+        abort(404)
+    html = render_template("diagnostico_pdf.html", **d)
+    ok, engine = pdf.gerar(html, leadsvc.diagnostico_pdf_path(slug))
+    leadsvc.registrar_diagnostico(slug, engine if ok else "falhou")
+    return _etapas(slug, leadsvc.ler_estado(slug))
+
+
 @app.post("/lead/<slug>/notas")
 def lead_notas(slug):
     if leadsvc.salvar_notas(slug, request.form.get("texto", "")) is None:
@@ -253,6 +281,26 @@ def leitor():
 @app.get("/leitor/tabela")
 def leitor_tabela():
     return render_template("partials/tabela_csv.html", dados=arq.ler_csv(request.args.get("rel", "")))
+
+
+# ---------------- Instagram (marketing próprio) ----------------
+@app.get("/instagram")
+def instagram():
+    return render_template("instagram.html", ativa="instagram",
+                           itens=insta.fila_para_tela(),
+                           conteudo=insta.listar_conteudo())
+
+
+@app.post("/instagram/add")
+def instagram_add():
+    return render_template("partials/instagram_fila.html",
+                           itens=insta.add_tema(request.form.get("tema", "")))
+
+
+@app.post("/instagram/remover")
+def instagram_remover():
+    return render_template("partials/instagram_fila.html",
+                           itens=insta.remover(request.form.get("id", "")))
 
 
 # ---------------- Download de arquivos (sandbox) ----------------

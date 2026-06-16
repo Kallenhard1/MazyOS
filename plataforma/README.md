@@ -47,7 +47,10 @@ Painel MarioLucash → http://127.0.0.1:5000  (Ctrl+C pra parar)
 ## Telas (MVP 1)
 
 - **🔍 Prospecção** — roda sourcing (OSM), qualificação e abordagem pelos
-  botões; mostra o resumo (quentes/mornos) e lista os arquivos gerados.
+  botões. O "Qualificar e ranquear" lista **todos os leads** numa tabela
+  rolável com **filtro por label** (🔥 quentes / 🟡 mornos / ⚪ frios) e um
+  **link wa.me de 1 clique** por lead (abre o WhatsApp com a abordagem pronta).
+  Embaixo, os arquivos gerados.
 - **📧 Envio em massa** — seleciona leads do funil e escreve **dois templates
   separados** (e-mail e WhatsApp) com variáveis (`{nome}`, `{setor}`,
   `{cidade}`, `{telefone}`), pré-visualiza por canal e **gera o lote**. Não
@@ -61,13 +64,18 @@ Painel MarioLucash → http://127.0.0.1:5000  (Ctrl+C pra parar)
   tela de Prospecção.
 - **📊 Funil / Leads** (MVP 2) — kanban dos 6 estágios
   (novo→abordado→conversa→proposta→fechado/perdido) alimentado por
-  `crm/pipeline.csv`. Mover um lead chama o `crm.py` (carimba contato + nota +
-  follow-up automático). Painel de follow-ups do dia (atrasados com ⚠️) e botão
+  `crm/pipeline.csv`. **Arraste os cards** entre colunas pra mover de estágio
+  (chama o `crm.py`: carimba contato + follow-up); o select "mover / editar"
+  segue pra nota/follow-up. **Filtro por label** (🔥 quentes / 🟡 mornos /
+  ⚪ frios). Cada card tem **link wa.me de 1 clique** (abre o WhatsApp com a
+  mensagem pronta). Painel de follow-ups do dia (atrasados com ⚠️) e botão
   "Espelhar no Notion" (handoff: a sync é feita pelo Claude via MCP).
 
-- **🎯 Lead → Proposta** (Fase 3, em construção) — "Trabalhar proposta" num
-  card do funil cria `clientes/<id>/` (briefing.md + estado.json + notas.md) e
-  abre a tela do lead com as 5 etapas (pesquisa → coleta → mockup → proposta →
+- **🎯 Lead → Proposta** (Fase 3) — **"Trabalhar proposta"** num card abre um
+  **modal** (branch + observação) que cria `clientes/<id>/` padronizado
+  (briefing.md + estado.json + notas.md) e gera o comando
+  `git checkout -b cliente/<slug>` pra copiar (handoff — a app não toca no git).
+  A tela do lead tem as 5 etapas (pesquisa → coleta → mockup → proposta →
   validação) em accordion, cada uma com status e nota. **Já entregue: 3.0**
   (templates e-mail/WhatsApp separados) **+ 3.1** (workspace + estado) **+ 3.2**
   (pesquisa automática do site atual reusando o checador + coleta manual:
@@ -77,11 +85,19 @@ Painel MarioLucash → http://127.0.0.1:5000  (Ctrl+C pra parar)
   proposta: diagnóstico vindo da pesquisa + preços editáveis dos 3 pacotes →
   `proposta.html` branded A4) **+ 3.5** (validação: checklist das etapas + botão
   "Mandar e-mail" que monta o envio com a proposta anexa em `saidas/envio/` →
-  rascunho no Gmail via Claude/MCP). **Fase 3 completa.**
-  PDF: o weasyprint precisa do runtime GTK (não instalado), então por ora o PDF
-  sai pelo navegador — abra a `proposta.html` e use Ctrl+P → Salvar como PDF.
+  rascunho no Gmail via Claude/MCP). **Fase 3 completa.** Na etapa Pesquisa há
+  ainda um botão **📄 Gerar diagnóstico (PDF)** — o 1-página branded por lead.
+  PDF: `servicos/pdf.py` tenta o **weasyprint** (precisa do runtime GTK, não
+  instalado) e cai pro **xhtml2pdf** (puro Python) — então o **diagnóstico já
+  sai em PDF de verdade**. A `proposta.html` usa flexbox (que o xhtml2pdf não
+  renderiza bem), então o PDF dela ainda sai pelo navegador (Ctrl+P).
 
-Instagram (backlog) segue na sidebar como próximo depois da Fase 3.
+- **📸 Instagram** — fila do teu marketing próprio (prova social, meta 2/semana).
+  Adiciona temas, e cada um vira um **prompt pronto** pra copiar e rodar no
+  Claude Code (`/carrossel` ou `/publicar-tema`). A seção "Conteúdo gerado"
+  mostra os PNGs criados pelas skills em `marketing/conteudo/`. Publicar é
+  handoff: `/aprovar-post` (Meta Graph API). Mesma filosofia do resto — a
+  plataforma organiza e entrega o prompt; o Claude Code cria e publica.
 
 ## Como funciona por baixo
 

@@ -65,4 +65,14 @@
      hx-get="{{ url_for('prospeccao_arquivos') }}" hx-trigger="every 20s" hx-swap="innerHTML">
   {% include "partials/arquivos.html" %}
 </div>
+
+<script>
+function filtrarQualif(btn){
+  const q = btn.dataset.classe;
+  btn.parentElement.querySelectorAll('.qf-btn').forEach(x=>x.classList.toggle('ativo', x===btn));
+  document.querySelectorAll('#log-qualif .qf-row').forEach(tr=>{
+    tr.hidden = q && tr.dataset.classe !== q;
+  });
+}
+</script>
 {% endblock %}

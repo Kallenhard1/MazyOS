@@ -16,16 +16,18 @@ Prospecção → Leads → Funil (Quente/Morno/Frio) → Selecionar lead p/ prop
 
 Escopo pedido: "CRM e MVP simples por agora". Telas separadas numa sidebar.
 
-**Backlog (fora do escopo atual, registrado em 15/06/2026):** uma tela de
-**criação de posts do Instagram** pro marketing próprio, reusando as skills
-`/publicar-tema` e `/aprovar-post`. Entra depois do CRM/proposta estar de pé.
+✅ **Instagram (feito 15/06/2026):** tela de fila de temas no painel que entrega
+prompt pronto pra rodar `/carrossel`/`/publicar-tema` no Claude Code (handoff) e
+mostra o conteúdo gerado em `marketing/conteudo/`. Publicar = `/aprovar-post`.
 
 **Próximas fases pedidas (15/06/2026, anotado em docs/FASE-3.md §5):**
 1. Branch padronizada por cliente — template limpo da branch atual; "Trabalhar
    proposta" abre **modal com form** que cria uma **branch nova** padronizada.
 2. Kanban **drag-and-drop**.
 3. Filtro por label **quente/morno/frio** na visão de leads.
-4. Terminal do Claude Code = **espelho do terminal local** (mantém o handoff).
+4. ✅ Terminal: testado um painel-espelho (tail de log) mas o Mario preferiu o
+   **handoff** puro — plataforma gera prompt/comando, ele roda no terminal local
+   (que fica como é). Espelho removido em 15/06/2026. Itens 1–4 do §5 feitos.
 
 **Why:** centraliza a operação freelancer (fase zero, fechar 1º cliente) e remove o atrito de pular entre scripts/arquivos soltos.
 **How to apply:** ao planejar, partir das 2 telas prioritárias; reusar `scripts/` (qualificar, abordagem, crm.py) como backend e o `pipeline.csv` como fonte de verdade. Ver [[CONTEXTO-PROSPECCAO]] em docs/. Cold email respeita LGPD/ToS (volume moderado + personalização).

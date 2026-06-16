@@ -3,15 +3,16 @@
   {% for e in estagios %}
   <div class="coluna">
     <div class="coluna-topo">{{ rotulos[e] }} <span class="cont">{{ contagens[e] }}</span></div>
-    <div class="coluna-corpo">
+    <div class="coluna-corpo" data-status="{{ e }}">
       {% for l in grupos[e] %}
-      <div class="lead-card">
+      <div class="lead-card" draggable="true" data-id="{{ l.id }}" data-classe="{{ l.classificacao }}">
         <div class="lead-topo">
           <strong>{{ l.nome }}</strong>
           <span class="pill">{{ l.score }}</span>
         </div>
         <div class="muted" style="font-size:.76rem">{{ l.tipo }} · {{ l.setor }} · {{ l.cidade }}</div>
         <div class="muted" style="font-size:.76rem">{{ l.telefone or l.email or '—' }}</div>
+        {% if l.wa %}<a class="wa-link" href="{{ l.wa }}" target="_blank">💬 Abrir no WhatsApp</a>{% endif %}
         {% if l.proximo_followup %}<div class="muted" style="font-size:.74rem">⏰ {{ l.proximo_followup }}</div>{% endif %}
         {% if l.notas %}<div class="lead-nota">{{ l.notas }}</div>{% endif %}
         <details class="mover">
@@ -29,10 +30,8 @@
             <button type="submit">Salvar</button>
           </form>
         </details>
-        <form hx-post="{{ url_for('funil_trabalhar') }}" hx-include="this" style="margin-top:4px">
-          <input type="hidden" name="id" value="{{ l.id }}">
-          <button type="submit" class="secundario" style="width:100%; padding:6px; font-size:.74rem; margin:0">🎯 Trabalhar proposta</button>
-        </form>
+        <button type="button" class="secundario" style="width:100%; padding:6px; font-size:.74rem; margin:4px 0 0"
+                onclick="abrirTrabalhar('{{ l.id }}', '{{ l.nome|replace("'", "\\'") }}')">🎯 Trabalhar proposta</button>
       </div>
       {% else %}
       <p class="muted" style="font-size:.78rem; padding:6px">vazio</p>

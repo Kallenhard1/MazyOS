@@ -69,7 +69,10 @@ def gerar_abordagem(classe="morno", limite=0):
 
 
 def resumo_qualificados():
-    """Conta classes e pega o top 5 do prospects-qualificados.csv (já ordenado)."""
+    """Lê o prospects-qualificados.csv (já ordenado por score): contagens por
+    classe + TODAS as linhas, cada uma com o link wa.me pronto."""
+    from servicos import email_massa as _mail
+    from servicos import zap
     f = DADOS / "prospects-qualificados.csv"
     if not f.exists():
         return None
@@ -80,7 +83,9 @@ def resumo_qualificados():
         c = (r.get("classificacao") or "").lower()
         if c in counts:
             counts[c] += 1
-    return {"total": len(rows), "counts": counts, "top": rows[:5]}
+        r["wa"] = zap.link(r.get("telefone", ""),
+                           _mail.aplicar_vars(_mail.WHATSAPP_PADRAO, r))
+    return {"total": len(rows), "counts": counts, "linhas": rows}
 
 
 def listar_arquivos():

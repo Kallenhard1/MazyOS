@@ -37,9 +37,13 @@ def carregar():
 
 def por_estagio():
     """Retorna (grupos, contagens). Grupos: estágio -> leads ordenados por score."""
+    from servicos import email_massa as _mail
+    from servicos import zap
     leads = carregar()
     grupos = {e: [] for e in ESTAGIOS}
     for l in leads:
+        l["wa"] = zap.link(l.get("telefone", ""),
+                           _mail.aplicar_vars(_mail.WHATSAPP_PADRAO, l))
         grupos.get(l.get("status") or "novo", grupos["novo"]).append(l)
     for e in ESTAGIOS:
         grupos[e].sort(key=lambda l: _int(l.get("score")), reverse=True)

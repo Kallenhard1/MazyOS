@@ -64,9 +64,10 @@ def _salvar_estado(slug, estado):
         json.dumps(estado, ensure_ascii=False, indent=2), encoding="utf-8")
 
 
-def criar_workspace(lead_id):
-    """Cria clientes/<id>/ com briefing.md + estado.json. Idempotente: se já
-    existe, só devolve o estado atual. Retorna (estado, criado_agora)."""
+def criar_workspace(lead_id, obs=""):
+    """Cria clientes/<id>/ padronizado (briefing.md + estado.json + notas.md).
+    Idempotente: se já existe, só devolve o estado atual. `obs` (opcional) entra
+    no topo do notas.md. Retorna (estado, criado_agora)."""
     lead = achar_lead(lead_id)
     if not lead:
         return None, False
@@ -86,9 +87,11 @@ def criar_workspace(lead_id):
     }
     _salvar_estado(slug, estado)
     (pasta / "briefing.md").write_text(_briefing_md(lead), encoding="utf-8")
+    obs_bloco = (f"\n## Observação inicial\n\n{obs.strip()}\n" if obs.strip() else "")
     (pasta / "notas.md").write_text(
         f"# Notas de coleta — {lead.get('nome','')}\n\n"
-        "> Cole aqui textos, links e a dor do cliente. Imagens/logo em assets/.\n",
+        "> Cole aqui textos, links e a dor do cliente. Imagens/logo em assets/.\n"
+        + obs_bloco,
         encoding="utf-8")
     return estado, True
 
@@ -360,6 +363,56 @@ def _prompt_mockup(lead, slug, notas, achados, assets):
         f"Itere comigo até ficar bom. Quando terminar, me avise pra eu seguir "
         f"pra proposta."
     )
+
+
+# ---------------- 3.2b — Diagnóstico em PDF ----------------
+_SOLUCAO = {
+    "sem_site": "Um site profissional e rápido + perfil no Google Meu Negócio, "
+                "pra vocês aparecerem exatamente quando alguém procura o que "
+                "vocês fazem. É a base de tudo.",
+    "quebrado": "Um site novo, leve e que funciona de verdade no celular, com o "
+                "que o cliente precisa à mão e botão de contato direto.",
+    "fraco": "Modernizar o site (HTTPS, mobile, visual atual) e ligar ele ao "
+             "Google e ao WhatsApp, pra cada visita virar contato.",
+}
+
+
+def dados_diagnostico(slug):
+    """Contexto do diagnóstico a partir do resultado da Pesquisa. None se a
+    pesquisa ainda não rodou."""
+    lead = achar_lead(slug)
+    estado = ler_estado(slug)
+    if not lead or not estado:
+        return None
+    res = estado["etapas"]["pesquisa"].get("resultado")
+    if not res:
+        return None
+    status = res.get("site_status", "")
+    if status == "sem_site":
+        sol = _SOLUCAO["sem_site"]
+    elif status == "nao_responde" or status.startswith("erro_http"):
+        sol = _SOLUCAO["quebrado"]
+    else:
+        sol = _SOLUCAO["fraco"]
+    return {
+        "nome": lead.get("nome", ""), "setor": lead.get("setor", ""),
+        "cidade": lead.get("cidade", ""), "score": lead.get("score", ""),
+        "achados": res.get("achados", []), "solucao": sol,
+        "data": date.today().strftime("%d/%m/%Y"),
+    }
+
+
+def registrar_diagnostico(slug, engine):
+    estado = ler_estado(slug)
+    if not estado or not estado["etapas"]["pesquisa"].get("resultado"):
+        return None
+    estado["etapas"]["pesquisa"]["resultado"]["diag_engine"] = engine
+    _salvar_estado(slug, estado)
+    return estado
+
+
+def diagnostico_pdf_path(slug):
+    return _pasta(slug) / "diagnostico.pdf"
 
 
 # ---------------- 3.2 — Coleta (manual) ----------------
