@@ -233,6 +233,33 @@ def cmd_list(args):
               f"{l['nome']} — {l.get('cidade','')}")
 
 
+def cmd_editar(args):
+    """Edita os dados de um lead (nome, telefone, e-mail, site...). Só altera
+    os campos passados; id/score/status/estágio ficam intactos."""
+    leads = carregar(args.arquivo)
+    achados = achar(leads, args.busca)
+    if not achados:
+        sys.exit(f"Nenhum lead casa com '{args.busca}'.")
+    if len(achados) > 1:
+        print("Vários leads casam — seja específico (use o id):")
+        for l in achados:
+            print(f"  {l['id']}  ({l['nome']})")
+        return
+    l = achados[0]
+    campos = {"nome": args.nome, "tipo": args.tipo, "setor": args.setor,
+              "cidade": args.cidade, "telefone": args.telefone,
+              "email": args.email, "site": args.site}
+    mudou = [k for k, v in campos.items()
+             if v is not None and v != l.get(k, "")]
+    for k in mudou:
+        l[k] = campos[k]
+    if not mudou:
+        print("Nada alterado.")
+        return
+    salvar(args.arquivo, leads)
+    print(f"{l['nome']} atualizado ({', '.join(mudou)}).")
+
+
 def main():
     ap = argparse.ArgumentParser(description="CRM de prospecção MazyOS")
     ap.add_argument("--arquivo", default=ARQUIVO_PADRAO, help="CSV do funil")
@@ -260,6 +287,12 @@ def main():
     p = sub.add_parser("list", help="lista o funil")
     p.add_argument("--status", default="")
     p.set_defaults(func=cmd_list)
+
+    p = sub.add_parser("editar", help="edita dados de um lead (nome, telefone…)")
+    p.add_argument("busca")
+    for c in ("nome", "tipo", "setor", "cidade", "telefone", "email", "site"):
+        p.add_argument(f"--{c}", default=None)
+    p.set_defaults(func=cmd_editar)
 
     args = ap.parse_args()
     args.func(args)

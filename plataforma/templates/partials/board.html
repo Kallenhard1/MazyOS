@@ -16,7 +16,7 @@
         {% if l.proximo_followup %}<div class="muted" style="font-size:.74rem">⏰ {{ l.proximo_followup }}</div>{% endif %}
         {% if l.notas %}<div class="lead-nota">{{ l.notas }}</div>{% endif %}
         <details class="mover">
-          <summary>mover / editar</summary>
+          <summary>mover de estágio</summary>
           <form hx-post="{{ url_for('funil_atualizar') }}" hx-include="this" hx-target="#board" hx-swap="innerHTML">
             <input type="hidden" name="id" value="{{ l.id }}">
             <label>Estágio</label>
@@ -28,6 +28,29 @@
             <label>Follow-up (opcional)</label>
             <input type="text" name="followup" placeholder="+3d ou AAAA-MM-DD">
             <button type="submit">Salvar</button>
+          </form>
+        </details>
+        <details class="mover">
+          <summary>✏️ editar dados</summary>
+          <form hx-post="{{ url_for('funil_editar') }}" hx-include="this" hx-target="#board" hx-swap="innerHTML">
+            <input type="hidden" name="id" value="{{ l.id }}">
+            <label>Empresa</label>
+            <input type="text" name="nome" value="{{ l.nome }}">
+            <label>Telefone / WhatsApp</label>
+            <input type="text" name="telefone" value="{{ l.telefone }}" placeholder="ex: 12 99999-0000">
+            <label>E-mail</label>
+            <input type="text" name="email" value="{{ l.email }}">
+            <label>Site</label>
+            <input type="text" name="site" value="{{ l.site }}">
+            <label>Setor</label>
+            <input type="text" name="setor" value="{{ l.setor }}">
+            <label>Cidade</label>
+            <input type="text" name="cidade" value="{{ l.cidade }}">
+            <label>Tipo</label>
+            <select name="tipo">
+              {% for t in ['b2c', 'b2b'] %}<option value="{{ t }}" {{ 'selected' if t==l.tipo }}>{{ t }}</option>{% endfor %}
+            </select>
+            <button type="submit">Salvar dados</button>
           </form>
         </details>
         <button type="button" class="secundario" style="width:100%; padding:6px; font-size:.74rem; margin:4px 0 0"

@@ -91,6 +91,30 @@ def mudar_status(lead_id, novo, nota="", followup=""):
         return False, f"Falha: {e}"
 
 
+EDITAVEIS = ["nome", "tipo", "setor", "cidade", "telefone", "email", "site"]
+
+
+def editar_lead(lead_id, campos):
+    """Edita dados de um lead via crm.py editar (id/score/estágio intactos).
+    Só envia os campos editáveis presentes. Retorna (ok, saida)."""
+    lead_id = (lead_id or "").strip()
+    if not lead_id:
+        return False, "Lead sem id."
+    args = [sys.executable, "scripts/crm.py", "--arquivo", str(PIPELINE),
+            "editar", lead_id]
+    for k in EDITAVEIS:
+        if k in campos:
+            args += [f"--{k}", (campos.get(k) or "").strip()]
+    env = dict(os.environ, PYTHONIOENCODING="utf-8")
+    try:
+        p = subprocess.run(args, cwd=ROOT, env=env, capture_output=True,
+                           text=True, encoding="utf-8", errors="replace", timeout=60)
+        out = (p.stdout or "").strip() + (("\n" + p.stderr.strip()) if p.stderr.strip() else "")
+        return p.returncode == 0, out.strip()
+    except Exception as e:  # noqa: BLE001
+        return False, f"Falha: {e}"
+
+
 def validar_followup(s):
     """Aceita vazio, +Nd/+Nw ou AAAA-MM-DD. Devolve a string válida ou ''."""
     s = (s or "").strip()

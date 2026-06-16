@@ -141,6 +141,13 @@ def funil_atualizar():
                            **_board_ctx(msg=saida if ok else "⚠️ " + saida))
 
 
+@app.post("/funil/editar")
+def funil_editar():
+    ok, saida = fun.editar_lead(request.form.get("id", ""), request.form)
+    return render_template("partials/board.html",
+                           **_board_ctx(msg=saida if ok else "⚠️ " + saida))
+
+
 @app.get("/funil/notion")
 def funil_notion():
     return ('<div class="aviso" style="margin-top:10px">A sincronização com o '
