@@ -1,0 +1,39 @@
+{% if msg %}<div class="ok" style="margin-bottom:14px">{{ msg }}</div>{% endif %}
+<div class="kanban">
+  {% for e in estagios %}
+  <div class="coluna">
+    <div class="coluna-topo">{{ rotulos[e] }} <span class="cont">{{ contagens[e] }}</span></div>
+    <div class="coluna-corpo">
+      {% for l in grupos[e] %}
+      <div class="lead-card">
+        <div class="lead-topo">
+          <strong>{{ l.nome }}</strong>
+          <span class="pill">{{ l.score }}</span>
+        </div>
+        <div class="muted" style="font-size:.76rem">{{ l.tipo }} · {{ l.setor }} · {{ l.cidade }}</div>
+        <div class="muted" style="font-size:.76rem">{{ l.telefone or l.email or '—' }}</div>
+        {% if l.proximo_followup %}<div class="muted" style="font-size:.74rem">⏰ {{ l.proximo_followup }}</div>{% endif %}
+        {% if l.notas %}<div class="lead-nota">{{ l.notas }}</div>{% endif %}
+        <details class="mover">
+          <summary>mover / editar</summary>
+          <form hx-post="{{ url_for('funil_atualizar') }}" hx-include="this" hx-target="#board" hx-swap="innerHTML">
+            <input type="hidden" name="id" value="{{ l.id }}">
+            <label>Estágio</label>
+            <select name="status">
+              {% for s in estagios %}<option value="{{ s }}" {{ 'selected' if s==l.status }}>{{ s }}</option>{% endfor %}
+            </select>
+            <label>Nota (opcional)</label>
+            <input type="text" name="nota" placeholder="ex: respondeu no zap">
+            <label>Follow-up (opcional)</label>
+            <input type="text" name="followup" placeholder="+3d ou AAAA-MM-DD">
+            <button type="submit">Salvar</button>
+          </form>
+        </details>
+      </div>
+      {% else %}
+      <p class="muted" style="font-size:.78rem; padding:6px">vazio</p>
+      {% endfor %}
+    </div>
+  </div>
+  {% endfor %}
+</div>

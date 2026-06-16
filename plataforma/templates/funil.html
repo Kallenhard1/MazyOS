@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block titulo %}Funil{% endblock %}
+{% block conteudo %}
+<h1>📊 Funil / Leads</h1>
+<p class="sub">Kanban do funil, alimentado por <code>crm/pipeline.csv</code>. Mover um lead chama o <code>crm.py</code> (carimba contato e follow-up automático). O CSV continua a fonte de verdade.</p>
+
+<div class="card">
+  <div style="display:flex; align-items:center; gap:12px; flex-wrap:wrap">
+    <h3 style="margin:0">⏰ Follow-ups</h3>
+    <span class="muted">{{ pendentes|length }} pendente(s) até hoje</span>
+    <button class="secundario" style="margin:0 0 0 auto; padding:7px 14px"
+            hx-get="{{ url_for('funil_notion') }}" hx-target="#notion-tip">Espelhar no Notion</button>
+  </div>
+  <div id="notion-tip"></div>
+  {% if pendentes %}
+  <table style="margin-top:12px">
+    <thead><tr><th>Data</th><th>Empresa</th><th>Estágio</th><th>Contato</th><th>Nota</th></tr></thead>
+    <tbody>
+      {% for l in pendentes %}
+      <tr>
+        <td>{{ l.proximo_followup }}{% if l._atrasado %} <strong>⚠️</strong>{% endif %}</td>
+        <td>{{ l.nome }}</td>
+        <td>{{ l.status }}</td>
+        <td class="muted">{{ l.telefone or l.email or '—' }}</td>
+        <td class="muted">{{ l.notas or '—' }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% else %}
+  <p class="muted" style="margin-top:10px">Nenhum follow-up pendente. 🎉</p>
+  {% endif %}
+</div>
+
+<div id="board">
+  {% include "partials/board.html" %}
+</div>
+{% endblock %}

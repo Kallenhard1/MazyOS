@@ -9,7 +9,9 @@ from pathlib import Path
 from flask import (Flask, abort, redirect, render_template, request,
                    send_file, url_for)
 
+from servicos import arquivos as arq
 from servicos import email_massa as mail
+from servicos import funil as fun
 from servicos import prospeccao as prosp
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -96,6 +98,56 @@ def envio_gerar():
     resumo = mail.gerar_lote(
         ids, request.form.get("assunto", ""), request.form.get("corpo", ""))
     return render_template("partials/lote.html", r=resumo)
+
+
+# ---------------- Funil / Kanban ----------------
+def _board_ctx(msg=None):
+    grupos, contagens = fun.por_estagio()
+    return {"estagios": fun.ESTAGIOS, "rotulos": fun.ROTULOS,
+            "grupos": grupos, "contagens": contagens, "msg": msg}
+
+
+@app.get("/funil")
+def funil():
+    return render_template("funil.html", ativa="funil",
+                           pendentes=fun.followups(), **_board_ctx())
+
+
+@app.post("/funil/atualizar")
+def funil_atualizar():
+    ok, saida = fun.mudar_status(
+        request.form.get("id", ""),
+        request.form.get("status", ""),
+        request.form.get("nota", ""),
+        fun.validar_followup(request.form.get("followup", "")),
+    )
+    return render_template("partials/board.html",
+                           **_board_ctx(msg=saida if ok else "⚠️ " + saida))
+
+
+@app.get("/funil/notion")
+def funil_notion():
+    return ('<div class="aviso" style="margin-top:10px">A sincronização com o '
+            'Notion é feita pelo Claude via MCP (a app não acessa o Notion '
+            'direto). Peça no chat: <em>"atualiza o Notion"</em> — ele lê o '
+            'pipeline.csv, casa por nome e cria/atualiza os cards sem duplicar.</div>')
+
+
+# ---------------- Leitor de CSV ----------------
+@app.get("/leitor")
+def leitor():
+    rel = request.args.get("rel", "")
+    return render_template(
+        "leitor.html", ativa="leitor",
+        csvs=arq.listar_csvs(),
+        dados=arq.ler_csv(rel) if rel else None,
+        rel=rel,
+    )
+
+
+@app.get("/leitor/tabela")
+def leitor_tabela():
+    return render_template("partials/tabela_csv.html", dados=arq.ler_csv(request.args.get("rel", "")))
 
 
 # ---------------- Download de arquivos (sandbox) ----------------

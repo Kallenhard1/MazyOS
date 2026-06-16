@@ -7,6 +7,7 @@
     {% for it in g.itens %}
     <li>
       <a href="{{ url_for('arquivo', rel=it.rel) }}" target="_blank">{{ it.nome }}</a>
+      {% if it.nome.endswith('.csv') %}<a class="muted" href="{{ url_for('leitor', rel=it.rel) }}">· ver tabela</a>{% endif %}
       <span class="muted">· {{ it.tam }} · {{ it.mod }}</span>
     </li>
     {% endfor %}

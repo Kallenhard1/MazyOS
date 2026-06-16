@@ -1,0 +1,45 @@
+{% if dados is none %}
+  <div class="card"><div class="log erro">Arquivo inválido ou fora dos diretórios permitidos.</div></div>
+{% else %}
+<div class="card">
+  <div style="display:flex; align-items:center; gap:12px; flex-wrap:wrap">
+    <h3 style="margin:0">{{ dados.nome }}</h3>
+    <span class="muted">{{ dados.total }} linha(s) · {{ dados.headers|length }} coluna(s)</span>
+    <a class="muted" href="{{ url_for('arquivo', rel=dados.rel) }}" target="_blank" style="margin-left:auto">baixar ⤓</a>
+  </div>
+
+  {% if dados.headers %}
+  <input type="text" placeholder="filtrar linhas…" onkeyup="filtrarCsv(this)" style="margin:12px 0 0">
+  {% if dados.truncado %}<div class="aviso">Mostrando as primeiras {{ dados.linhas|length }} de {{ dados.total }} linhas.</div>{% endif %}
+  <div style="overflow:auto; max-height:65vh; margin-top:12px; border:1px solid var(--linha); border-radius:8px">
+    <table>
+      <thead>
+        <tr>
+          <th style="position:sticky; top:0; background:#fff">#</th>
+          {% for h in dados.headers %}<th style="position:sticky; top:0; background:#fff">{{ h }}</th>{% endfor %}
+        </tr>
+      </thead>
+      <tbody class="corpo-csv">
+        {% for linha in dados.linhas %}
+        <tr class="linha-csv">
+          <td class="muted">{{ loop.index }}</td>
+          {% for celula in linha %}<td>{{ celula }}</td>{% endfor %}
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  {% else %}
+    <p class="muted">Arquivo vazio.</p>
+  {% endif %}
+</div>
+
+<script>
+function filtrarCsv(inp){
+  const q = inp.value.toLowerCase();
+  inp.closest('.card').querySelectorAll('.linha-csv').forEach(tr=>{
+    tr.hidden = q && !tr.textContent.toLowerCase().includes(q);
+  });
+}
+</script>
+{% endif %}

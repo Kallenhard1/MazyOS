@@ -13,7 +13,8 @@
     <nav class="nav">
       <a href="{{ url_for('prospeccao') }}" class="{{ 'ativo' if ativa=='prospeccao' }}">🔍 Prospecção</a>
       <a href="{{ url_for('envio') }}" class="{{ 'ativo' if ativa=='envio' }}">📧 Envio em massa</a>
-      <a class="futuro">📊 Funil / Leads <span class="tag">MVP 2</span></a>
+      <a href="{{ url_for('leitor') }}" class="{{ 'ativo' if ativa=='leitor' }}">📄 Leitor CSV</a>
+      <a href="{{ url_for('funil') }}" class="{{ 'ativo' if ativa=='funil' }}">📊 Funil / Leads</a>
       <a class="futuro">🎯 Lead → Proposta <span class="tag">Fase 3</span></a>
       <a class="futuro">📸 Instagram <span class="tag">backlog</span></a>
     </nav>

@@ -54,7 +54,17 @@ Painel MarioLucash → http://127.0.0.1:5000  (Ctrl+C pra parar)
   no Gmail quando você pede ao Claude *"cria os rascunhos do lote"*. Leads sem
   e-mail viram `saidas/envio/whatsapp-*.md` pra copiar.
 
-Funil kanban (MVP 2) e Lead→Proposta (Fase 3) estão na sidebar como próximos.
+- **📄 Leitor CSV** — abre qualquer `.csv` de `dados/`, `saidas/` ou `crm/`
+  como tabela dentro do painel (filtro por linha, cabeçalho fixo, link de
+  download). Só leitura. Atalho "ver tabela" também aparece nos arquivos da
+  tela de Prospecção.
+- **📊 Funil / Leads** (MVP 2) — kanban dos 6 estágios
+  (novo→abordado→conversa→proposta→fechado/perdido) alimentado por
+  `crm/pipeline.csv`. Mover um lead chama o `crm.py` (carimba contato + nota +
+  follow-up automático). Painel de follow-ups do dia (atrasados com ⚠️) e botão
+  "Espelhar no Notion" (handoff: a sync é feita pelo Claude via MCP).
+
+Lead→Proposta (Fase 3) e Instagram (backlog) seguem na sidebar como próximos.
 
 ## Como funciona por baixo
 
