@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block titulo %}{{ estado.nome }}{% endblock %}
+{% block conteudo %}
+<p class="muted"><a href="{{ url_for('lead_index') }}">← Lead → Proposta</a></p>
+<h1>🎯 {{ estado.nome }}</h1>
+<p class="sub">
+  Workspace em <code>clientes/{{ estado.id }}/</code> ·
+  <a href="{{ url_for('arquivo', rel='clientes/' + estado.id + '/briefing.md') }}" target="_blank">briefing.md</a> ·
+  <a href="{{ url_for('arquivo', rel='clientes/' + estado.id + '/notas.md') }}" target="_blank">notas.md</a>
+</p>
+
+<div id="etapas">
+  {% include "partials/etapas.html" %}
+</div>
+
+<script>
+function copiarPrompt(id, btn){
+  const ta = document.getElementById(id);
+  navigator.clipboard.writeText(ta.value).then(()=>{
+    const t = btn.textContent; btn.textContent = '✓ Copiado!';
+    setTimeout(()=>btn.textContent = t, 1500);
+  });
+}
+</script>
+{% endblock %}

@@ -29,6 +29,10 @@
             <button type="submit">Salvar</button>
           </form>
         </details>
+        <form hx-post="{{ url_for('funil_trabalhar') }}" hx-include="this" style="margin-top:4px">
+          <input type="hidden" name="id" value="{{ l.id }}">
+          <button type="submit" class="secundario" style="width:100%; padding:6px; font-size:.74rem; margin:0">🎯 Trabalhar proposta</button>
+        </form>
       </div>
       {% else %}
       <p class="muted" style="font-size:.78rem; padding:6px">vazio</p>

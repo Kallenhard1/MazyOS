@@ -8,11 +8,22 @@
 
 <form id="envio-form">
   <div class="card">
-    <h3>1. Mensagem (use {nome}, {setor}, {cidade}, {telefone})</h3>
-    <label>Assunto</label>
-    <input type="text" name="assunto" value="{{ assunto_padrao }}">
-    <label>Corpo</label>
-    <textarea name="corpo" rows="9">{{ corpo_padrao }}</textarea>
+    <h3>1. Mensagem <span class="muted">— variáveis: {nome}, {setor}, {cidade}, {telefone}</span></h3>
+    <p class="muted">Dois templates separados: quem tem e-mail recebe o de <strong>e-mail</strong>; quem não tem entra no de <strong>WhatsApp</strong>.</p>
+    <div class="linha" style="align-items:flex-start">
+      <div>
+        <h4 style="margin:8px 0 0">📧 E-mail</h4>
+        <label>Assunto</label>
+        <input type="text" name="assunto" value="{{ email_assunto }}">
+        <label>Corpo</label>
+        <textarea name="corpo" rows="10">{{ email_corpo }}</textarea>
+      </div>
+      <div>
+        <h4 style="margin:8px 0 0">💬 WhatsApp</h4>
+        <label>Mensagem (curta, sem assunto)</label>
+        <textarea name="whatsapp" rows="13">{{ whatsapp }}</textarea>
+      </div>
+    </div>
   </div>
 
   <div class="card">

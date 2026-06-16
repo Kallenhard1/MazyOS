@@ -4,9 +4,14 @@
   <p class="muted">Mostrando {{ previews|length }} de {{ n }} selecionado(s):</p>
   {% for p in previews %}
   <div class="preview-email">
-    <div class="de">Para: {{ p.email or ('(sem e-mail → WhatsApp ' + p.telefone + ')') }}</div>
-    <div class="assunto">{{ p.assunto }}</div>
-    <div class="corpo">{{ p.corpo }}</div>
+    {% if p.canal == 'email' %}
+      <div class="de">📧 E-mail · Para: {{ p.email }}</div>
+      <div class="assunto">{{ p.assunto }}</div>
+      <div class="corpo">{{ p.corpo }}</div>
+    {% else %}
+      <div class="de">💬 WhatsApp · {{ p.nome }} ({{ p.telefone or 'sem telefone' }})</div>
+      <div class="corpo">{{ p.msg }}</div>
+    {% endif %}
   </div>
   {% endfor %}
 {% endif %}

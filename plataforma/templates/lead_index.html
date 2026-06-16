@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block titulo %}Lead → Proposta{% endblock %}
+{% block conteudo %}
+<h1>🎯 Lead → Proposta</h1>
+<p class="sub">Workspace por lead pra levar do funil até a proposta. Cada lead vira uma pasta <code>clientes/&lt;id&gt;/</code> com briefing e o estado das etapas.</p>
+
+<div class="card">
+  <h3>Em andamento</h3>
+  {% if not workspaces %}
+    <p class="muted">Nenhum lead em trabalho ainda. Vá ao <a href="{{ url_for('funil') }}">Funil</a> e clique em <strong>🎯 Trabalhar proposta</strong> num card.</p>
+  {% else %}
+    <table>
+      <thead><tr><th>Lead</th><th>Progresso</th><th></th></tr></thead>
+      <tbody>
+        {% for w in workspaces %}
+        <tr>
+          <td><strong>{{ w.nome }}</strong> <span class="muted">{{ w.id }}</span></td>
+          <td>{{ w.ok }}/{{ w.total }} etapas</td>
+          <td><a class="btn" style="margin:0; padding:6px 14px" href="{{ url_for('lead_ver', slug=w.id) }}">abrir</a></td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% endif %}
+</div>
+{% endblock %}

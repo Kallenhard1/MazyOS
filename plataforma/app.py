@@ -4,21 +4,23 @@ Rodar:  python plataforma/app.py   →   http://127.0.0.1:5000
 Single-user, local, sem login. A fonte de verdade continua em crm/pipeline.csv
 e dados/. Esta app só orquestra os scripts e mostra o que eles geram.
 """
+from datetime import date
 from pathlib import Path
 
-from flask import (Flask, abort, redirect, render_template, request,
-                   send_file, url_for)
+from flask import (Flask, abort, make_response, redirect, render_template,
+                   request, send_file, url_for)
 
 from servicos import arquivos as arq
 from servicos import email_massa as mail
 from servicos import funil as fun
+from servicos import lead as leadsvc
 from servicos import prospeccao as prosp
 
 ROOT = Path(__file__).resolve().parent.parent
 app = Flask(__name__)
 
 # diretórios que a rota de download pode servir (sandbox contra path traversal)
-DIRS_PERMITIDOS = [(ROOT / d).resolve() for d in ("dados", "saidas", "crm")]
+DIRS_PERMITIDOS = [(ROOT / d).resolve() for d in ("dados", "saidas", "crm", "clientes")]
 
 
 @app.get("/")
@@ -76,27 +78,27 @@ def envio():
     return render_template(
         "envio.html", ativa="envio",
         leads=mail.carregar_leads(),
-        assunto_padrao=mail.ASSUNTO_PADRAO,
-        corpo_padrao=mail.CORPO_PADRAO,
+        email_assunto=mail.EMAIL_ASSUNTO_PADRAO,
+        email_corpo=mail.EMAIL_CORPO_PADRAO,
+        whatsapp=mail.WHATSAPP_PADRAO,
     )
+
+
+def _tpls():
+    return (request.form.get("assunto", ""), request.form.get("corpo", ""),
+            request.form.get("whatsapp", ""))
 
 
 @app.post("/envio/preview")
 def envio_preview():
     ids = request.form.getlist("ids")
-    assunto = request.form.get("assunto", "")
-    corpo = request.form.get("corpo", "")
-    por_id = {l.get("id"): l for l in mail.carregar_leads()}
-    sel = [por_id[i] for i in ids if i in por_id][:3]
-    previews = [mail.preencher(l, assunto, corpo) for l in sel]
+    previews = mail.montar_previews(ids, *_tpls())
     return render_template("partials/preview.html", previews=previews, n=len(ids))
 
 
 @app.post("/envio/gerar")
 def envio_gerar():
-    ids = request.form.getlist("ids")
-    resumo = mail.gerar_lote(
-        ids, request.form.get("assunto", ""), request.form.get("corpo", ""))
+    resumo = mail.gerar_lote(request.form.getlist("ids"), *_tpls())
     return render_template("partials/lote.html", r=resumo)
 
 
@@ -131,6 +133,109 @@ def funil_notion():
             'Notion é feita pelo Claude via MCP (a app não acessa o Notion '
             'direto). Peça no chat: <em>"atualiza o Notion"</em> — ele lê o '
             'pipeline.csv, casa por nome e cria/atualiza os cards sem duplicar.</div>')
+
+
+@app.post("/funil/trabalhar")
+def funil_trabalhar():
+    estado, _ = leadsvc.criar_workspace(request.form.get("id", ""))
+    if not estado:
+        abort(404)
+    resp = make_response("")
+    resp.headers["HX-Redirect"] = url_for("lead_ver", slug=estado["id"])
+    return resp
+
+
+# ---------------- Lead → Proposta (Fase 3) ----------------
+@app.get("/lead")
+def lead_index():
+    return render_template("lead_index.html", ativa="lead",
+                           workspaces=leadsvc.listar_workspaces())
+
+
+def _lead_ctx(slug, estado):
+    """Contexto compartilhado pelas telas/partials do lead."""
+    return {"estado": estado, "etapas_meta": leadsvc.ETAPAS,
+            "notas": leadsvc.ler_notas(slug), "assets": leadsvc.listar_assets(slug),
+            "site": leadsvc.listar_site(slug),
+            "prop": leadsvc.arquivos_proposta(slug),
+            "dprop": leadsvc.dados_proposta(slug)}
+
+
+def _etapas(slug, estado):
+    return render_template("partials/etapas.html", **_lead_ctx(slug, estado))
+
+
+@app.get("/lead/<slug>")
+def lead_ver(slug):
+    estado = leadsvc.ler_estado(slug)
+    if not estado:
+        abort(404)
+    return render_template("lead.html", ativa="lead", **_lead_ctx(slug, estado))
+
+
+@app.post("/lead/<slug>/etapa/<etapa>")
+def lead_etapa(slug, etapa):
+    estado = leadsvc.atualizar_etapa(
+        slug, etapa, request.form.get("status"), request.form.get("nota", ""))
+    if not estado:
+        abort(404)
+    return _etapas(slug, estado)
+
+
+@app.post("/lead/<slug>/pesquisa")
+def lead_pesquisa(slug):
+    estado = leadsvc.rodar_pesquisa(slug)
+    if not estado:
+        abort(404)
+    return _etapas(slug, estado)
+
+
+@app.post("/lead/<slug>/mockup")
+def lead_mockup(slug):
+    estado = leadsvc.gerar_prompt_mockup(slug)
+    if not estado:
+        abort(404)
+    return _etapas(slug, estado)
+
+
+@app.post("/lead/<slug>/proposta")
+def lead_proposta(slug):
+    if leadsvc.salvar_config_proposta(slug, request.form) is None:
+        abort(404)
+    lead = leadsvc.achar_lead(slug)
+    d = leadsvc.dados_proposta(slug)
+    html = render_template(
+        "proposta_base.html", nome=lead.get("nome", ""),
+        setor=lead.get("setor", ""), cidade=lead.get("cidade", ""),
+        data=date.today().strftime("%d/%m/%Y"), **d)
+    res = leadsvc.escrever_proposta(slug, html)
+    if not res:
+        abort(404)
+    return _etapas(slug, res["estado"])
+
+
+@app.post("/lead/<slug>/enviar")
+def lead_enviar(slug):
+    resumo = leadsvc.montar_envio_proposta(slug)
+    if resumo is None:
+        abort(404)
+    return _etapas(slug, leadsvc.ler_estado(slug))
+
+
+@app.post("/lead/<slug>/notas")
+def lead_notas(slug):
+    if leadsvc.salvar_notas(slug, request.form.get("texto", "")) is None:
+        abort(404)
+    return _etapas(slug, leadsvc.ler_estado(slug))
+
+
+@app.post("/lead/<slug>/asset")
+def lead_asset(slug):
+    leadsvc.salvar_asset(slug, request.files.get("arquivo"))
+    estado = leadsvc.ler_estado(slug)
+    if not estado:
+        abort(404)
+    return _etapas(slug, estado)
 
 
 # ---------------- Leitor de CSV ----------------

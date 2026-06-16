@@ -15,7 +15,7 @@
       <a href="{{ url_for('envio') }}" class="{{ 'ativo' if ativa=='envio' }}">📧 Envio em massa</a>
       <a href="{{ url_for('leitor') }}" class="{{ 'ativo' if ativa=='leitor' }}">📄 Leitor CSV</a>
       <a href="{{ url_for('funil') }}" class="{{ 'ativo' if ativa=='funil' }}">📊 Funil / Leads</a>
-      <a class="futuro">🎯 Lead → Proposta <span class="tag">Fase 3</span></a>
+      <a href="{{ url_for('lead_index') }}" class="{{ 'ativo' if ativa=='lead' }}">🎯 Lead → Proposta</a>
       <a class="futuro">📸 Instagram <span class="tag">backlog</span></a>
     </nav>
   </aside>

@@ -20,5 +20,12 @@ Escopo pedido: "CRM e MVP simples por agora". Telas separadas numa sidebar.
 **criação de posts do Instagram** pro marketing próprio, reusando as skills
 `/publicar-tema` e `/aprovar-post`. Entra depois do CRM/proposta estar de pé.
 
+**Próximas fases pedidas (15/06/2026, anotado em docs/FASE-3.md §5):**
+1. Branch padronizada por cliente — template limpo da branch atual; "Trabalhar
+   proposta" abre **modal com form** que cria uma **branch nova** padronizada.
+2. Kanban **drag-and-drop**.
+3. Filtro por label **quente/morno/frio** na visão de leads.
+4. Terminal do Claude Code = **espelho do terminal local** (mantém o handoff).
+
 **Why:** centraliza a operação freelancer (fase zero, fechar 1º cliente) e remove o atrito de pular entre scripts/arquivos soltos.
 **How to apply:** ao planejar, partir das 2 telas prioritárias; reusar `scripts/` (qualificar, abordagem, crm.py) como backend e o `pipeline.csv` como fonte de verdade. Ver [[CONTEXTO-PROSPECCAO]] em docs/. Cold email respeita LGPD/ToS (volume moderado + personalização).
