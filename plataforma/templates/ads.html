@@ -1,0 +1,110 @@
+{% extends "base.html" %}
+{% block titulo %}Anúncios{% endblock %}
+{% block conteudo %}
+<h1>📣 Anúncios</h1>
+<p class="sub">Montar campanha de Google Ads e ler o relatório semanal, por alvo. A plataforma monta o briefing e entrega o prompt pronto. Quem gera os CSVs e escreve o relatório é o Claude Code (<code>/anuncio-google</code>, <code>/relatorio-ads</code>).</p>
+
+<div class="card">
+  <form method="get" action="{{ url_for('ads') }}" style="display:flex; gap:10px; align-items:flex-end; flex-wrap:wrap">
+    <div style="flex:1; min-width:180px">
+      <label>Alvo</label>
+      <select name="alvo" onchange="this.form.submit()">
+        {% for a in alvos %}
+        <option value="{{ a.id }}" {{ 'selected' if a.id == alvo }}>{{ a.nome }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <span class="muted" style="font-size:.78rem">
+      saídas em <code>{{ 'marketing/campanhas/' if alvo == 'proprio' else 'clientes/' + alvo + '/campanhas/' }}</code>
+    </span>
+  </form>
+</div>
+
+<h2>Montar campanha</h2>
+<div class="card">
+  {% if base_seo %}
+  <p class="aviso" style="font-size:.82rem; margin-top:0">✓ Tem pesquisa SEO pronta pra esse alvo ({{ base_seo|join(', ') }}). O prompt vai usar como base.</p>
+  {% else %}
+  <p class="muted" style="font-size:.82rem; margin-top:0">Sem pesquisa SEO pra esse alvo ainda. Dá pra rodar o passo 6 em <a href="{{ url_for('seo', alvo=alvo) }}">🔎 SEO &amp; GMB</a> primeiro pra alimentar a campanha — ou seguir só com o briefing abaixo.</p>
+  {% endif %}
+  <form hx-post="{{ url_for('ads_campanha') }}" hx-target="#camp-saida" hx-swap="innerHTML">
+    <input type="hidden" name="alvo" value="{{ alvo }}">
+    <label>Objetivo</label>
+    <select name="objetivo">
+      {% for o in objetivos %}<option value="{{ o.id }}">{{ o.nome }}</option>{% endfor %}
+    </select>
+    <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:8px">
+      <div style="flex:1; min-width:150px">
+        <label>Orçamento diário</label>
+        <input type="text" name="orcamento" placeholder="ex: R$ 30/dia">
+      </div>
+      <div style="flex:1; min-width:150px">
+        <label>Região</label>
+        <input type="text" name="regiao" placeholder="ex: Taubaté e região, 15 km">
+      </div>
+    </div>
+    <label style="margin-top:8px">Observações (diferenciais, promoções, horário)</label>
+    <textarea name="obs" rows="3" placeholder="ex: café da manhã até 11h, torta de frango premiada, estacionamento próprio"></textarea>
+    <button type="submit" style="margin-top:10px">Gerar prompt da campanha</button>
+  </form>
+  <div id="camp-saida"></div>
+</div>
+
+<div class="card">
+  <h3>Campanhas geradas</h3>
+  {% if not campanhas %}
+  <p class="muted" style="font-size:.82rem">Nada gerado ainda. Copie o prompt acima, rode no Claude Code, e os CSVs aparecem aqui.</p>
+  {% else %}
+  {% for c in campanhas %}
+  <div style="border-bottom:1px solid var(--linha, #eee); padding:10px 0">
+    <strong style="font-size:.88rem">{{ c.nome }}</strong>
+    <div class="muted" style="font-size:.78rem; margin-top:4px">
+      {% for f in c.csvs %}<a href="{{ url_for('arquivo', rel=f) }}" target="_blank">{{ f.split('/')[-1] }}</a>{% if not loop.last %} · {% endif %}{% endfor %}
+    </div>
+  </div>
+  {% endfor %}
+  {% endif %}
+</div>
+
+<h2>Relatório semanal</h2>
+<div class="card">
+  <p class="muted" style="font-size:.82rem; margin-top:0">Marque os exports da semana (de <code>dados/</code>) e gere o prompt do <code>/relatorio-ads</code>.</p>
+  <form hx-post="{{ url_for('ads_relatorio') }}" hx-target="#rel-saida" hx-swap="innerHTML">
+    <input type="hidden" name="alvo" value="{{ alvo }}">
+    {% if exports.ads %}
+    <p class="muted" style="font-size:.74rem; margin:6px 0">Exports detectados:</p>
+    {% for e in exports.ads %}
+    <label style="display:block; font-weight:normal; font-size:.82rem"><input type="checkbox" name="rels" value="{{ e.rel }}" checked> {{ e.nome }} <span class="muted">({{ e.mod }})</span></label>
+    {% endfor %}
+    {% endif %}
+    <details style="margin-top:8px">
+      <summary class="muted" style="font-size:.78rem; cursor:pointer">Outros CSVs de dados/</summary>
+      {% for e in exports.todos %}
+      <label style="display:block; font-weight:normal; font-size:.8rem"><input type="checkbox" name="rels" value="{{ e.rel }}"> {{ e.rel }}</label>
+      {% endfor %}
+    </details>
+    <button type="submit" style="margin-top:10px">Gerar prompt do relatório</button>
+  </form>
+  <div id="rel-saida"></div>
+</div>
+
+<div class="card">
+  <h3>Relatórios gerados</h3>
+  {% if not relatorios %}
+  <p class="muted" style="font-size:.82rem">Nenhum relatório ainda. Eles aparecem aqui depois que a skill salvar em <code>campanhas/relatorios/</code>.</p>
+  {% else %}
+  {% for r in relatorios %}
+  <div style="padding:6px 0"><a href="{{ url_for('arquivo', rel=r.rel) }}" target="_blank">📄 {{ r.nome }}</a> <span class="muted" style="font-size:.76rem">{{ r.mod }}</span></div>
+  {% endfor %}
+  {% endif %}
+</div>
+
+<script>
+function copiarAds(btn){
+  navigator.clipboard.writeText(btn.dataset.prompt).then(()=>{
+    const t = btn.textContent; btn.textContent = '✓ Copiado!';
+    setTimeout(()=>btn.textContent = t, 1400);
+  });
+}
+</script>
+{% endblock %}

@@ -10,6 +10,7 @@ from pathlib import Path
 from flask import (Flask, abort, redirect, render_template,
                    request, send_file, url_for)
 
+from servicos import ads as adssvc
 from servicos import arquivos as arq
 from servicos import conteudo as cont
 from servicos import email_massa as mail
@@ -349,6 +350,36 @@ def seo_avaliacoes():
     prompt = seosvc.prompt_avaliacoes(request.form.get("alvo", "proprio"),
                                       request.form.get("reviews", ""))
     return render_template("partials/seo_avaliacoes.html", prompt=prompt)
+
+
+# ---------------- Anúncios (Fase 6) ----------------
+@app.get("/ads")
+def ads():
+    alvo = request.args.get("alvo", "proprio")
+    return render_template("ads.html", ativa="ads", alvo=alvo,
+                           alvos=cont.listar_alvos(),
+                           objetivos=adssvc.OBJETIVOS,
+                           base_seo=adssvc.seo_base(alvo),
+                           campanhas=adssvc.listar_campanhas(alvo),
+                           exports=adssvc.exports_disponiveis(),
+                           relatorios=adssvc.listar_relatorios(alvo))
+
+
+@app.post("/ads/campanha")
+def ads_campanha():
+    prompt = adssvc.prompt_campanha(
+        request.form.get("alvo", "proprio"), request.form.get("objetivo", ""),
+        request.form.get("orcamento", ""), request.form.get("regiao", ""),
+        request.form.get("obs", ""))
+    return render_template("partials/ads_prompt.html", prompt=prompt)
+
+
+@app.post("/ads/relatorio")
+def ads_relatorio():
+    prompt = adssvc.prompt_relatorio(request.form.get("alvo", "proprio"),
+                                     request.form.getlist("rels"))
+    return render_template("partials/ads_prompt.html", prompt=prompt,
+                           vazio="Marque pelo menos um export acima.")
 
 
 # ---------------- Download de arquivos (sandbox) ----------------

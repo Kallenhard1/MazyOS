@@ -17,8 +17,8 @@ padrão define como a tela funciona.
 
 | Padrão | Quando | Como a tela faz | Exemplos |
 |---|---|---|---|
-| **A. Roda direto** | A lógica é determinística (Python puro, sem LLM) | Botão → `subprocess` chama o script → mostra resultado/arquivo | qualificar, crm, sourcing, abordagem, diagnóstico, relatório de ads, análise de dados |
-| **B. Handoff pro Claude Code** | Precisa do agente/LLM pra criar conteúdo contextual | A tela monta o contexto e gera um **prompt pronto** pra colar no Claude Code (botão copiar); acompanha a pasta de saída | carrossel, publicar-tema, seo, responder-avaliações, email avulso, aprovar-post |
+| **A. Roda direto** | A lógica é determinística (Python puro, sem LLM) | Botão → `subprocess` chama o script → mostra resultado/arquivo | qualificar, crm, sourcing, abordagem, diagnóstico |
+| **B. Handoff pro Claude Code** | Precisa do agente/LLM pra criar conteúdo contextual | A tela monta o contexto e gera um **prompt pronto** pra colar no Claude Code (botão copiar); acompanha a pasta de saída | carrossel, publicar-tema, seo, responder-avaliações, anúncio-google, relatório de ads, análise de dados, email avulso, aprovar-post |
 | **C. Sistema/meta** | É sobre o próprio workspace | Vira botão de ação ou tela de config | abrir, salvar, atualizar, instalar, novo-projeto, mapear-rotinas |
 
 > O padrão B já existe e funciona na tela **📸 Instagram** (a fila gera o
@@ -41,8 +41,8 @@ Status: ✅ pronto na plataforma · 🟡 parcial (parte feita ou só handoff) ·
 | `/aprovar-post` | Publica blog + Instagram + Facebook | Handoff "aprovar e publicar" na fila | ✍️ Conteúdo & Redes | B | ✅ |
 | `/seo` | Fluxo SEO/GEO/Ads em 8 passos | Painel de SEO por alvo (8 etapas) | 🔎 SEO & GMB | B | ✅ |
 | `/responder-avaliacoes` | Respostas humanas pras reviews do Google | Caixa de avaliações + resposta sugerida | 🔎 SEO & GMB | B | ✅ |
-| `/anuncio-google` | Campanha completa em CSV pro Ads Editor | Montador de campanha (briefing → CSV) | 📣 Anúncios | A/B | 🔵 |
-| `/relatorio-ads` | Relatório semanal de Google + Meta Ads | Tela de relatório (sobe export → resumo) | 📣 Anúncios | A | 🔵 |
+| `/anuncio-google` | Campanha completa em CSV pro Ads Editor | Montador de campanha (briefing → CSV) | 📣 Anúncios | B | ✅ |
+| `/relatorio-ads` | Relatório semanal de Google + Meta Ads | Tela de relatório (seleciona export → resumo) | 📣 Anúncios | B | ✅ |
 | `/analisar-dados` | CSV/XLSX/PDF → resumo executivo | Análise de arquivo (além de só ler) | 📈 Análise | A/B | 🟡 |
 | `/abrir` | Carrega o contexto do negócio | Dashboard "Hoje" (visão da operação) | ⚙️ Sistema | C | 🟡 |
 | `/salvar` | Commit + push no GitHub | Botão "Salvar trabalho" (backup) | ⚙️ Sistema | C | 🔵 |
@@ -79,10 +79,10 @@ JÁ NA PLATAFORMA
   📄 Leitor CSV           ✅   abre qualquer .csv como tabela
   ✍️  Conteúdo & Redes    ✅   fila (próprio + cliente) c/ status + handoff (Fase 4)
   🔎 SEO & GMB            ✅   fluxo /seo de 8 passos por alvo + avaliações (Fase 5)
+  📣 Anúncios             ✅   montar campanha (CSV) + relatório semanal (Fase 6)
   🏠 Hoje                 🟡   dashboard inicial
 
 A CONSTRUIR (este mapa)
-  📣 Anúncios             🔵   montar campanha + relatório semanal
   📈 Análise              🔵   /analisar-dados (resumo executivo)
   ⚙️  Sistema & Config    🔵   salvar, atualizar, chaves, contato, identidade
 ```
@@ -109,12 +109,16 @@ on-page, conteúdo, ads, monitoramento, GEO). Virou um **painel por alvo**
   Google e gerar o prompt de resposta sugerida (handoff), no tom da marca.
 - Liga no diagnóstico que a prospecção já faz (GMB ausente = oportunidade).
 
-### 📣 Anúncios 🔵
-- **Montar campanha (`/anuncio-google`):** briefing (ou puxa da pesquisa SEO)
-  → gera o CSV pronto pro Google Ads Editor, com link de download.
-- **Relatório semanal (`/relatorio-ads`):** sobe os exports de Google + Meta
-  → roda direto (padrão A) e mostra o resumo com alertas e recomendações.
-  Encaixa no ciclo "fechou cliente → roda Ads → mede" do plano de ação.
+### 📣 Anúncios ✅ (Fase 6)
+Tela por alvo em `servicos/ads.py` + `templates/ads.html`, padrão B (handoff):
+- **Montar campanha (`/anuncio-google`):** briefing (objetivo, orçamento,
+  região, observações); se houver pesquisa SEO do alvo (`06-google-ads.md` /
+  `01-pesquisa-demanda.md`), o prompt usa como base. Acompanha os CSVs gerados
+  em `marketing/campanhas/google-ads-<data>/` (ou `clientes/<id>/campanhas/`).
+- **Relatório semanal (`/relatorio-ads`):** seleciona os exports de Google +
+  Meta em `dados/` (detecta os que parecem export de Ads) → monta o prompt
+  pronto. Lista os relatórios gerados em `campanhas/relatorios/`. Encaixa no
+  ciclo "fechou cliente → roda Ads → mede" do plano de ação.
 
 ### 📈 Análise 🔵
 - **Resumo executivo (`/analisar-dados`):** sobe CSV/XLSX/PDF → resumo com os
@@ -146,8 +150,8 @@ Estende o roadmap do `PLATAFORMA-MVP.md` (Fases MVP 1, MVP 2 e 3 já entregues).
 - [x] `servicos/seo.py` + tela 🔎 (8 passos por alvo, status por arquivo de saída)
 - [x] Submódulo de avaliações (`/responder-avaliacoes`)
 
-**Fase 6 — Anúncios**
-- [ ] `servicos/ads.py` + tela 📣 (montar campanha CSV + relatório semanal)
+**Fase 6 — Anúncios** ✅ entregue
+- [x] `servicos/ads.py` + tela 📣 (montar campanha CSV + relatório semanal, por alvo)
 
 **Fase 7 — Análise & Sistema**
 - [ ] `servicos/analise.py` (resumo executivo) na tela 📈
