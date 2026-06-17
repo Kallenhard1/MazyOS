@@ -8,6 +8,8 @@ e `dados/`. Veja o plano completo em [`docs/PLATAFORMA-MVP.md`](../docs/PLATAFOR
 
 ### Pré-requisitos
 - **Python 3** instalado (`python --version` — testado no 3.13).
+- **Node.js** instalado (`node --version`) — usado pra gerar os PDFs via
+  Playwright/Chromium, o mesmo motor das skills.
 - Estar na **raiz do projeto** (`MazyOS/`). Os scripts são chamados a partir
   daí, então rode sempre de lá — não de dentro de `plataforma/`.
 
@@ -18,10 +20,13 @@ python -m venv .venv
 .venv\Scripts\activate        # Windows (PowerShell/CMD)
 # source .venv/bin/activate   # Git Bash / Linux / macOS
 
-# 2. instalar a única dependência nova
+# 2. dependência Python do painel
 pip install flask
 
-# 3. subir o painel (a partir da raiz MazyOS/)
+# 3. motor de PDF (uma vez) — dentro de plataforma/
+cd plataforma && npm install && npx playwright install chromium && cd ..
+
+# 4. subir o painel (a partir da raiz MazyOS/)
 python plataforma/app.py
 ```
 
@@ -87,10 +92,12 @@ Painel MarioLucash → http://127.0.0.1:5000  (Ctrl+C pra parar)
   "Mandar e-mail" que monta o envio com a proposta anexa em `saidas/envio/` →
   rascunho no Gmail via Claude/MCP). **Fase 3 completa.** Na etapa Pesquisa há
   ainda um botão **📄 Gerar diagnóstico (PDF)** — o 1-página branded por lead.
-  PDF: `servicos/pdf.py` tenta o **weasyprint** (precisa do runtime GTK, não
-  instalado) e cai pro **xhtml2pdf** (puro Python) — então o **diagnóstico já
-  sai em PDF de verdade**. A `proposta.html` usa flexbox (que o xhtml2pdf não
-  renderiza bem), então o PDF dela ainda sai pelo navegador (Ctrl+P).
+  PDF: `servicos/pdf.py` usa o **Playwright/Chromium** — o mesmo motor das
+  skills (`/carrossel`, proposta, apresentação). Renderiza o HTML real
+  (flexbox, grid, web fonts, fundos), então **diagnóstico e proposta saem em
+  PDF de verdade** direto pela plataforma, sem precisar do Ctrl+P. Se o Node
+  não estiver disponível, cai pro **xhtml2pdf** (puro Python) como último
+  recurso.
 
 - **📸 Instagram** — fila do teu marketing próprio (prova social, meta 2/semana).
   Adiciona temas, e cada um vira um **prompt pronto** pra copiar e rodar no

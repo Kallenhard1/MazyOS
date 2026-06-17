@@ -9,6 +9,7 @@
 **Perfil:** Empreendedor solo, operação enxuta rodando sobre o MazyOS, sem verba de marketing no momento
 **Atende clientes:** Negócios locais de serviço com ticket alto por cliente (clínicas, advogados, prestadores técnicos) — nicho de partida a definir na semana 1 do plano
 **Equipe:** Solo (fundador + Claude/MazyOS)
+**Contato (usar sempre em proposta, apresentação e material de cliente):** WhatsApp (12) 98159-2576 · e-mail mariolucasdasilvabarbosa@gmail.com · Instagram @mariolucash
 **Ferramentas:** Claude Code + MazyOS, Netlify/Vercel (hospedagem free tier), Google Meu Negócio, WhatsApp Business
 **Principais entregas:** Landing pages e sites institucionais (3 pacotes: Essencial / Profissional / Completo), automação de WhatsApp, manutenção mensal recorrente
 

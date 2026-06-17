@@ -169,6 +169,12 @@ mockup antes da venda pros melhores prospects → proposta em 3 pacotes →
   move pra `clientes/<Nome>/proposta.md`
 - Material visual: consultar `identidade/design-guide.md`; paleta ainda
   não definida — perguntar antes de assumir cor de destaque
+- Proposta/apresentação comercial: usar SEMPRE o template visual da
+  apresentação (`propostas/Fryda-Apresentacao-MarioLucash/apresentacao.html`)
+  como referência — capa escura com logo do cliente + logo MarioLucash
+  ("Apresentado por"), headline forte, logo da MarioLucash nos headers,
+  assinatura no CTA, sem travessão. Gerar o PDF via Playwright (`gerar-pdf.js`),
+  não WeasyPrint.
 
 ## Ferramentas conectadas
 

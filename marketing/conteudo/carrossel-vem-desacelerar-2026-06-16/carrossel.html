@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Fryda — Vem desacelerar</title>
+<style>
+  @font-face{font-family:'Playfair';src:url('fonts/PlayfairDisplay-600.ttf');font-weight:600;font-style:normal}
+  @font-face{font-family:'Playfair';src:url('fonts/PlayfairDisplay-700.ttf');font-weight:700}
+  @font-face{font-family:'Playfair';src:url('fonts/PlayfairDisplay-800.ttf');font-weight:800}
+  @font-face{font-family:'PlayfairIt';src:url('fonts/PlayfairDisplay-600.ttf');font-weight:600;font-style:italic}
+  @font-face{font-family:'Jost';src:url('fonts/Jost-300.ttf');font-weight:300}
+  @font-face{font-family:'Jost';src:url('fonts/Jost-400.ttf');font-weight:400}
+  @font-face{font-family:'Jost';src:url('fonts/Jost-500.ttf');font-weight:500}
+  @font-face{font-family:'Jost';src:url('fonts/Jost-600.ttf');font-weight:600}
+  @font-face{font-family:'Vibes';src:url('fonts/GreatVibes.ttf')}
+
+  :root{
+    --cream:#F6EEDD;
+    --cream-2:#FBF7EE;
+    --maroon:#3A1410;
+    --ink:#2A1712;
+    --red:#BE4332;
+    --orange:#D96B2B;
+    --green:#5E7A45;
+    --line:rgba(42,23,18,.16);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Jost',sans-serif;background:#555}
+
+  .slide{
+    width:1080px;height:1350px;position:relative;overflow:hidden;
+    background:var(--cream);color:var(--ink);
+    display:flex;flex-direction:column;
+    margin:0 auto 40px;
+  }
+
+  /* ---- header comum (logo + counter) ---- */
+  .top{position:absolute;top:54px;left:70px;right:70px;display:flex;align-items:center;justify-content:space-between;z-index:5}
+  .brand{display:flex;align-items:center;gap:12px}
+  .brand .logo{width:50px;height:50px;border-radius:50%;object-fit:cover}
+  .brand .nm{font-family:'Playfair';font-weight:700;font-size:30px;letter-spacing:.02em;line-height:1}
+  .brand .nm span{font-family:'Vibes';font-weight:400;font-size:24px;margin-left:3px}
+  .counter{font-family:'Jost';font-weight:500;font-size:18px;letter-spacing:.18em;color:rgba(42,23,18,.55)}
+
+  /* tom escuro: inverter cores do header */
+  .slide.dark{background:var(--maroon);color:var(--cream)}
+  .slide.dark .brand .nm{color:#fff}
+  .slide.dark .brand .nm span{color:var(--orange)}
+  .slide.dark .counter{color:rgba(246,238,221,.6)}
+  .slide.onphoto .brand .nm{color:#fff}
+  .slide.onphoto .brand .nm span{color:#fff}
+  .slide.onphoto .counter{color:rgba(255,255,255,.8)}
+
+  .eyebrow{font-family:'Jost';font-weight:600;font-size:19px;text-transform:uppercase;letter-spacing:.26em;color:var(--red)}
+  .slide.dark .eyebrow{color:var(--orange)}
+  .slide.onphoto .eyebrow{color:#F1C97A}
+  .rule{width:74px;height:3px;background:var(--red);border:none;margin:30px 0}
+  .slide.dark .rule{background:var(--orange)}
+  .tag{display:inline-block;background:var(--red);color:#fff;font-family:'Jost';font-weight:600;font-size:17px;
+    text-transform:uppercase;letter-spacing:.14em;padding:9px 20px;border-radius:999px}
+
+  h1{font-family:'Playfair';font-weight:800;font-size:104px;line-height:1.0;letter-spacing:-.01em}
+  h1 em{font-family:'PlayfairIt';font-style:italic;color:#F1C97A}
+  h2{font-family:'Playfair';font-weight:700;font-size:74px;line-height:1.06}
+  .body{font-family:'Jost';font-weight:300;font-size:33px;line-height:1.55;color:rgba(42,23,18,.82)}
+  .slide.dark .body{color:rgba(246,238,221,.85)}
+
+  /* ===== CAPA (foto) ===== */
+  .cover{justify-content:flex-end}
+  .cover .bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 42%;z-index:0}
+  .cover .scrim{position:absolute;inset:0;z-index:1;
+    background:linear-gradient(180deg,rgba(42,16,12,.45) 0%,rgba(42,16,12,.30) 38%,rgba(42,16,12,.74) 100%)}
+  .cover .c{position:relative;z-index:3;padding:0 80px 110px;color:#fff}
+  .cover .c h1{color:#fff;text-shadow:0 2px 26px rgba(0,0,0,.35);margin:22px 0 26px}
+  .cover .c .sub{font-family:'Jost';font-weight:300;font-size:34px;line-height:1.45;color:rgba(255,255,255,.92);max-width:760px}
+  .cover .arrow{position:absolute;bottom:64px;right:80px;z-index:3;width:96px;height:96px;border-radius:50%;
+    background:var(--red);color:#fff;display:flex;align-items:center;justify-content:center;font-size:46px;
+    box-shadow:0 16px 40px rgba(0,0,0,.4)}
+
+  /* ===== SOLO (foto metade + texto) ===== */
+  .solo{flex-direction:row}
+  .solo .ph{width:46%;height:100%;object-fit:cover}
+  .solo .txt{width:54%;padding:0 78px;display:flex;flex-direction:column;justify-content:center}
+  .solo .tag{align-self:flex-start;margin-bottom:30px}
+  .solo h2{margin-bottom:6px}
+
+  /* ===== CITAÇÃO ===== */
+  .quote{justify-content:center;align-items:flex-start;padding:0 90px;position:relative}
+  .quote.dark .qmark{color:rgba(216,107,43,.28)}
+  .qmark{font-family:'Playfair';font-weight:800;font-size:360px;line-height:.6;color:rgba(190,67,50,.16);
+    position:absolute;top:230px;left:70px;z-index:0}
+  .quote .qt{position:relative;z-index:2;font-family:'Playfair';font-weight:700;font-size:78px;line-height:1.12;max-width:880px}
+  .quote .qt em{font-family:'PlayfairIt';font-style:italic}
+  .quote .attr{position:relative;z-index:2;font-family:'Jost';font-weight:300;font-size:31px;line-height:1.5;margin-top:40px;max-width:820px}
+  .quote.dark .attr{color:rgba(246,238,221,.82)}
+  .quote .pic{position:absolute;right:0;bottom:0;width:340px;height:430px;object-fit:cover;object-position:center 30%;
+    border-top-left-radius:18px;z-index:1;box-shadow:-18px -18px 50px rgba(0,0,0,.35)}
+
+  /* ===== DUO (texto cima + 2 fotos) ===== */
+  .duo{padding:170px 80px 80px;justify-content:flex-start}
+  .duo .tag{align-self:flex-start;margin-bottom:26px}
+  .duo h2{max-width:880px;margin-bottom:14px}
+  .duo .body{max-width:830px}
+  .duo .pair{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:auto;padding-top:50px}
+  .duo .pair img{width:100%;height:430px;object-fit:cover;border-radius:18px;box-shadow:0 18px 40px rgba(42,23,18,.22)}
+
+  /* ===== CTA FINAL ===== */
+  .cta{background:var(--maroon);color:var(--cream);align-items:center;justify-content:center;text-align:center;padding:0 90px}
+  .cta .logo{width:128px;height:128px;border-radius:50%;object-fit:cover;margin-bottom:40px;box-shadow:0 18px 44px rgba(0,0,0,.4)}
+  .cta h2{color:#fff;font-size:80px;margin-bottom:30px}
+  .cta .info{font-family:'Jost';font-weight:300;font-size:34px;line-height:1.7;color:rgba(246,238,221,.9)}
+  .cta .info b{font-weight:500;color:#fff}
+  .cta .handle{display:inline-block;margin-top:42px;background:var(--red);color:#fff;font-family:'Jost';font-weight:500;
+    font-size:30px;letter-spacing:.04em;padding:18px 44px;border-radius:999px}
+  .cta .deco{font-family:'Vibes';font-size:50px;color:var(--orange);margin-bottom:10px}
+</style>
+</head>
+<body>
+
+<!-- ===== SLIDE 1 — CAPA ===== -->
+<div class="slide cover onphoto">
+  <img class="bg" src="fotos/cafe-novo-2.jpg">
+  <div class="scrim"></div>
+  <div class="top">
+    <div class="brand"><img class="logo" src="fotos/logo.jpg"><div class="nm">Fryda<span>café</span></div></div>
+    <div class="counter">01 / 07</div>
+  </div>
+  <div class="c">
+    <div class="eyebrow">Fryda Café · Centro de Taubaté</div>
+    <h1>Vem <em>desacelerar</em><br>no Fryda</h1>
+    <div class="sub">Cafeteria e cozinha afetiva. Feito com carinho, servido com afeto.</div>
+  </div>
+  <div class="arrow">→</div>
+</div>
+
+<!-- ===== SLIDE 2 — SOLO (cappuccino) ===== -->
+<div class="slide solo">
+  <img class="ph" src="fotos/cappuccino-fryda.jpg">
+  <div class="top" style="left:auto;right:70px;width:54%;justify-content:flex-end">
+    <div class="counter">02 / 07</div>
+  </div>
+  <div class="txt">
+    <span class="tag">Comece pelo café</span>
+    <h2>O café que<br>abraça</h2>
+    <hr class="rule">
+    <div class="body">Cappuccino Fryda com chocolate belga, tirado com calma. Senta, respira, fica à vontade. Aqui ninguém tem pressa.</div>
+  </div>
+</div>
+
+<!-- ===== SLIDE 3 — SOLO (torta) — foto à direita ===== -->
+<div class="slide solo dark">
+  <div class="txt" style="padding-left:80px">
+    <span class="tag">★ Especialidade da casa</span>
+    <h2 style="color:#fff;font-size:60px">E tem a famosa<br>torta de frango<br>te esperando</h2>
+    <hr class="rule">
+    <div class="body">A da Tia Branca: massa que desmancha, recheio cremoso de frango com catupiry. É o motivo de muita gente atravessar a cidade.</div>
+  </div>
+  <img class="ph" src="fotos/famosa-torta-de-frango-1.jpg">
+  <div class="top">
+    <div class="brand"><img class="logo" src="fotos/logo.jpg"><div class="nm">Fryda<span>café</span></div></div>
+    <div class="counter">03 / 07</div>
+  </div>
+</div>
+
+<!-- ===== SLIDE 4 — CITAÇÃO (Maria) ===== -->
+<div class="slide quote">
+  <div class="top">
+    <div class="brand"><img class="logo" src="fotos/logo.jpg"><div class="nm">Fryda<span>café</span></div></div>
+    <div class="counter">04 / 07</div>
+  </div>
+  <div class="qmark">&ldquo;</div>
+  <div class="qt">Oi, vocês já vieram<br>aqui? <em>Fiquem à<br>vontade.</em></div>
+  <div class="attr">É assim que a <b style="color:var(--ink);font-weight:500">Maria</b> recebe todo mundo. Não demora pra você virar Frydalover.</div>
+  <img class="pic" src="fotos/maria-dona.jpg">
+</div>
+
+<!-- ===== SLIDE 5 — DUO (doces + almocinho) ===== -->
+<div class="slide duo">
+  <div class="top">
+    <div class="brand"><img class="logo" src="fotos/logo.jpg"><div class="nm">Fryda<span>café</span></div></div>
+    <div class="counter">05 / 07</div>
+  </div>
+  <span class="tag">Da nossa cozinha</span>
+  <h2>Comida de verdade,<br>feita na hora</h2>
+  <hr class="rule">
+  <div class="body">Bolos generosos, o almocinho do dia feito pela Renata, doces fresquinhos. Daqueles que dão vontade de voltar.</div>
+  <div class="pair">
+    <img src="fotos/doces-da-casa-3.jpg">
+    <img src="fotos/nhoque.jpg">
+  </div>
+</div>
+
+<!-- ===== SLIDE 6 — CITAÇÃO (creme, sem foto) ===== -->
+<div class="slide quote">
+  <div class="top">
+    <div class="brand"><img class="logo" src="fotos/logo.jpg"><div class="nm">Fryda<span>café</span></div></div>
+    <div class="counter">06 / 07</div>
+  </div>
+  <div class="qmark">&ldquo;</div>
+  <div class="qt" style="max-width:900px">Café bom é o que faz<br>a gente querer ficar<br><em>mais um pouco.</em></div>
+  <div class="attr">O Fryda é esse cantinho onde todo mundo é recebido como em casa.</div>
+</div>
+
+<!-- ===== SLIDE 7 — CTA FINAL ===== -->
+<div class="slide cta">
+  <div class="top">
+    <div class="brand"><div class="nm">Fryda<span>café</span></div></div>
+    <div class="counter">07 / 07</div>
+  </div>
+  <img class="logo" src="fotos/logo.jpg">
+  <div class="deco">com carinho</div>
+  <h2>Vem tomar um café<br>com a gente ❤</h2>
+  <div class="info"><b>📍 Centro de Taubaté</b><br>Reserva no WhatsApp (12) 3432-8445 · também no iFood</div>
+  <div class="handle">@frydacafe</div>
+</div>
+
+</body>
+</html>

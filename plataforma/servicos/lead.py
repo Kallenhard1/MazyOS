@@ -244,14 +244,15 @@ def escrever_proposta(slug, html):
 
 
 def _tentar_pdf(html, pdf_path):
-    try:
-        from weasyprint import HTML
-        HTML(string=html).write_pdf(str(pdf_path))
-        return True, "PDF gerado."
-    except Exception:  # noqa: BLE001
-        return False, ("PDF automático indisponível nesta máquina (weasyprint "
-                       "precisa do runtime GTK). Abra a proposta.html e use "
-                       "Ctrl+P → Salvar como PDF.")
+    from servicos import pdf as _pdf
+    pdf_path = Path(pdf_path)
+    ok, engine = _pdf.gerar(html, pdf_path, base_url=str(pdf_path.parent))
+    if ok:
+        return True, f"PDF gerado ({engine})."
+    return False, ("PDF automático indisponível: instale o Node e rode "
+                   "`npm install` em plataforma/ (e `npx playwright install "
+                   "chromium`). Enquanto isso, abra a proposta.html e use "
+                   "Ctrl+P → Salvar como PDF.")
 
 
 def arquivos_proposta(slug):

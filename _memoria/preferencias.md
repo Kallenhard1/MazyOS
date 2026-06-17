@@ -21,6 +21,8 @@ nunca "caro cliente".
 - Jargão de guru/corporativês: "alavancar", "sinergia"
 - Associações a horóscopo ("isso é tão libriano")
 - Misticismo de coach: "energia negativa", "ar carregado"
+- Travessão (—) no meio de frase: tem cara de texto de IA. Usar ponto, vírgula ou reescrever a frase. Vale pra carrossel, legenda, proposta e qualquer material.
+- Jargão técnico em material de cliente (ex: "SSL"): trocar por linguagem simples ("segurança do site"). O cliente não entende sigla técnica; falar do benefício, não do termo.
 
 ## Estilo geral
 
