@@ -36,9 +36,9 @@ Status: ✅ pronto na plataforma · 🟡 parcial (parte feita ou só handoff) ·
 | `/prospectar` | Pipeline de prospecção ponta a ponta | Tela de prospecção | 🔍 Prospecção | A | ✅ |
 | `/novo-projeto` | Cria pasta isolada por cliente | Workspace do lead (`clientes/<id>/`) | 🎯 Lead→Proposta | C | ✅ |
 | `/email-profissional` | Rascunha e-mail a partir de contexto | Templates do envio + rascunhador avulso | 📧 Envio / ✍️ Conteúdo | A/B | 🟡 |
-| `/carrossel` | Carrosséis 1080×1350 na identidade | Gerar carrossel (prompt + acompanha PNGs) | ✍️ Conteúdo & Redes | B | 🟡 |
-| `/publicar-tema` | Tema → artigo + carrossel + 3 legendas | Esteira de conteúdo a partir de um tema | ✍️ Conteúdo & Redes | B | 🔵 |
-| `/aprovar-post` | Publica blog + Instagram + Facebook | Botão publicar na fila de conteúdo | ✍️ Conteúdo & Redes | B | 🟡 |
+| `/carrossel` | Carrosséis 1080×1350 na identidade | Gerar carrossel (prompt + acompanha PNGs) | ✍️ Conteúdo & Redes | B | ✅ |
+| `/publicar-tema` | Tema → artigo + carrossel + 3 legendas | Esteira de conteúdo a partir de um tema | ✍️ Conteúdo & Redes | B | ✅ |
+| `/aprovar-post` | Publica blog + Instagram + Facebook | Handoff "aprovar e publicar" na fila | ✍️ Conteúdo & Redes | B | ✅ |
 | `/seo` | Fluxo SEO/GEO/Ads em 8 passos | Painel de SEO por cliente (8 etapas) | 🔎 SEO & GMB | B | 🔵 |
 | `/responder-avaliacoes` | Respostas humanas pras reviews do Google | Caixa de avaliações + resposta sugerida | 🔎 SEO & GMB | B | 🔵 |
 | `/anuncio-google` | Campanha completa em CSV pro Ads Editor | Montador de campanha (briefing → CSV) | 📣 Anúncios | A/B | 🔵 |
@@ -77,11 +77,10 @@ JÁ NA PLATAFORMA
   📊 Funil / Leads        ✅   kanban + follow-up + Notion
   🎯 Lead → Proposta      ✅   pesquisa→coleta→mockup→proposta→validação
   📄 Leitor CSV           ✅   abre qualquer .csv como tabela
-  📸 Instagram            ✅   fila do marketing próprio (handoff)
+  ✍️  Conteúdo & Redes    ✅   fila (próprio + cliente) c/ status + handoff (Fase 4)
   🏠 Hoje                 🟡   dashboard inicial
 
 A CONSTRUIR (este mapa)
-  ✍️  Conteúdo & Redes    🔵   carrossel, publicar-tema, aprovar-post
   🔎 SEO & GMB            🔵   fluxo /seo de 8 passos + avaliações
   📣 Anúncios             🔵   montar campanha + relatório semanal
   📈 Análise              🔵   /analisar-dados (resumo executivo)

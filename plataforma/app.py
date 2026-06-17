@@ -11,9 +11,9 @@ from flask import (Flask, abort, redirect, render_template,
                    request, send_file, url_for)
 
 from servicos import arquivos as arq
+from servicos import conteudo as cont
 from servicos import email_massa as mail
 from servicos import funil as fun
-from servicos import instagram as insta
 from servicos import lead as leadsvc
 from servicos import pdf
 from servicos import prospeccao as prosp
@@ -290,24 +290,47 @@ def leitor_tabela():
     return render_template("partials/tabela_csv.html", dados=arq.ler_csv(request.args.get("rel", "")))
 
 
-# ---------------- Instagram (marketing próprio) ----------------
+# ---------------- Conteúdo & Redes (Fase 4) ----------------
+def _conteudo_fila(alvo):
+    return render_template("partials/conteudo_fila.html",
+                           grupos=cont.fila_da_tela(alvo), alvo=alvo,
+                           rotulos=cont.ROTULO_STATUS)
+
+
+@app.get("/conteudo")
+def conteudo():
+    alvo = request.args.get("alvo", "proprio")
+    return render_template("conteudo.html", ativa="conteudo", alvo=alvo,
+                           alvos=cont.listar_alvos(),
+                           grupos=cont.fila_da_tela(alvo),
+                           rotulos=cont.ROTULO_STATUS,
+                           conteudo=cont.listar_conteudo(alvo))
+
+
+@app.post("/conteudo/add")
+def conteudo_add():
+    alvo = cont.add_item(request.form.get("tema", ""),
+                         request.form.get("alvo", "proprio"),
+                         request.form.get("tipo", "carrossel"))
+    return _conteudo_fila(alvo)
+
+
+@app.post("/conteudo/remover")
+def conteudo_remover():
+    cont.remover(request.form.get("id", ""))
+    return _conteudo_fila(request.form.get("alvo", "proprio"))
+
+
+@app.post("/conteudo/status")
+def conteudo_status():
+    cont.mudar_status(request.form.get("id", ""), request.form.get("status", ""))
+    return _conteudo_fila(request.form.get("alvo", "proprio"))
+
+
+# atalho: a antiga tela Instagram vira "alvo = próprio" do módulo de conteúdo
 @app.get("/instagram")
 def instagram():
-    return render_template("instagram.html", ativa="instagram",
-                           itens=insta.fila_para_tela(),
-                           conteudo=insta.listar_conteudo())
-
-
-@app.post("/instagram/add")
-def instagram_add():
-    return render_template("partials/instagram_fila.html",
-                           itens=insta.add_tema(request.form.get("tema", "")))
-
-
-@app.post("/instagram/remover")
-def instagram_remover():
-    return render_template("partials/instagram_fila.html",
-                           itens=insta.remover(request.form.get("id", "")))
+    return redirect(url_for("conteudo", alvo="proprio"))
 
 
 # ---------------- Download de arquivos (sandbox) ----------------

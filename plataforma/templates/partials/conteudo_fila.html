@@ -1,0 +1,69 @@
+{% set total = grupos.rascunho|length + grupos.aprovado|length + grupos.publicado|length %}
+{% if total == 0 %}
+<p class="muted">Fila vazia pra esse alvo. Adicione um tema acima. Meta do plano: 2 posts/semana no próprio.</p>
+{% else %}
+<div class="conteudo-cols">
+  {% for s in ['rascunho', 'aprovado', 'publicado'] %}
+  <div class="conteudo-col">
+    <h3 style="font-size:.82rem; text-transform:uppercase; letter-spacing:.06em; color:var(--cinza, #6b6b6b)">
+      {{ rotulos[s] }} <span class="muted">({{ grupos[s]|length }})</span>
+    </h3>
+    {% for i in grupos[s] %}
+    <div class="card" style="padding:12px 14px; margin-bottom:10px">
+      <div style="display:flex; align-items:flex-start; gap:8px">
+        <div style="flex:1">
+          <strong style="font-size:.9rem">{{ i.tema }}</strong>
+          <span class="muted" style="font-size:.72rem; display:block">
+            {{ i.tipo }} · {{ i.criado }}{% if i.publicado_em %} · publicado {{ i.publicado_em }}{% endif %}
+          </span>
+        </div>
+        <button type="button" class="modal-x" style="position:static" title="remover"
+                hx-post="{{ url_for('conteudo_remover') }}"
+                hx-vals='{"id": "{{ i.id }}", "alvo": "{{ alvo }}"}'
+                hx-target="#fila" hx-swap="innerHTML" hx-confirm="Tirar da fila?">×</button>
+      </div>
+
+      <div style="display:flex; gap:6px; flex-wrap:wrap; margin-top:9px">
+        {% if i.tipo == 'esteira' %}
+        <button type="button" class="secundario" style="margin:0; padding:5px 10px; font-size:.74rem"
+                data-prompt="{{ i.p_completo }}" onclick="copiarConteudo(this)">📋 /publicar-tema</button>
+        {% else %}
+        <button type="button" class="secundario" style="margin:0; padding:5px 10px; font-size:.74rem"
+                data-prompt="{{ i.p_carrossel }}" onclick="copiarConteudo(this)">📋 Prompt do carrossel</button>
+        {% endif %}
+        {% if s == 'aprovado' %}
+        <button type="button" class="secundario" style="margin:0; padding:5px 10px; font-size:.74rem"
+                data-prompt="{{ i.p_publicar }}" onclick="copiarConteudo(this)">📋 /aprovar-post</button>
+        {% endif %}
+      </div>
+
+      <div style="display:flex; gap:6px; flex-wrap:wrap; margin-top:8px">
+        {% if s == 'rascunho' %}
+        <button type="button" style="margin:0; padding:5px 10px; font-size:.74rem"
+                hx-post="{{ url_for('conteudo_status') }}"
+                hx-vals='{"id": "{{ i.id }}", "status": "aprovado", "alvo": "{{ alvo }}"}'
+                hx-target="#fila" hx-swap="innerHTML">✓ Aprovar</button>
+        {% elif s == 'aprovado' %}
+        <button type="button" style="margin:0; padding:5px 10px; font-size:.74rem"
+                hx-post="{{ url_for('conteudo_status') }}"
+                hx-vals='{"id": "{{ i.id }}", "status": "publicado", "alvo": "{{ alvo }}"}'
+                hx-target="#fila" hx-swap="innerHTML">✓ Marcar publicado</button>
+        <button type="button" class="secundario" style="margin:0; padding:5px 10px; font-size:.74rem"
+                hx-post="{{ url_for('conteudo_status') }}"
+                hx-vals='{"id": "{{ i.id }}", "status": "rascunho", "alvo": "{{ alvo }}"}'
+                hx-target="#fila" hx-swap="innerHTML">↩ Voltar</button>
+        {% else %}
+        <button type="button" class="secundario" style="margin:0; padding:5px 10px; font-size:.74rem"
+                hx-post="{{ url_for('conteudo_status') }}"
+                hx-vals='{"id": "{{ i.id }}", "status": "aprovado", "alvo": "{{ alvo }}"}'
+                hx-target="#fila" hx-swap="innerHTML">↩ Reabrir</button>
+        {% endif %}
+      </div>
+    </div>
+    {% else %}
+    <p class="muted" style="font-size:.76rem">vazio</p>
+    {% endfor %}
+  </div>
+  {% endfor %}
+</div>
+{% endif %}

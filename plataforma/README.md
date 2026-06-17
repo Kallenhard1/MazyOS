@@ -99,12 +99,16 @@ Painel MarioLucash → http://127.0.0.1:5000  (Ctrl+C pra parar)
   não estiver disponível, cai pro **xhtml2pdf** (puro Python) como último
   recurso.
 
-- **📸 Instagram** — fila do teu marketing próprio (prova social, meta 2/semana).
-  Adiciona temas, e cada um vira um **prompt pronto** pra copiar e rodar no
-  Claude Code (`/carrossel` ou `/publicar-tema`). A seção "Conteúdo gerado"
-  mostra os PNGs criados pelas skills em `marketing/conteudo/`. Publicar é
-  handoff: `/aprovar-post` (Meta Graph API). Mesma filosofia do resto — a
-  plataforma organiza e entrega o prompt; o Claude Code cria e publica.
+- **✍️ Conteúdo & Redes** (Fase 4) — fila de conteúdo do marketing próprio
+  **e dos clientes** (seletor de alvo). Cada tema vira um item com **status**
+  (rascunho → aprovado → publicado) e um **prompt pronto** pra copiar e rodar
+  no Claude Code: `/carrossel` (peça única) ou `/publicar-tema` (esteira: blog +
+  carrossel + 3 legendas). Quando aprovado, aparece o prompt do `/aprovar-post`
+  (publica no Instagram + Facebook via Meta Graph API). A seção "Conteúdo
+  gerado" mostra as saídas das skills em `marketing/conteudo/` (próprio) ou
+  `clientes/<id>/conteudo/`. A antiga tela 📸 Instagram virou o atalho
+  "alvo = próprio" desse módulo. Mesma filosofia: a plataforma organiza e
+  entrega o prompt; o Claude Code cria e publica.
 
 ## Como funciona por baixo
 
