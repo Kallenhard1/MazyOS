@@ -173,8 +173,11 @@ mockup antes da venda pros melhores prospects → proposta em 3 pacotes →
   apresentação (`propostas/Fryda-Apresentacao-MarioLucash/apresentacao.html`)
   como referência — capa escura com logo do cliente + logo MarioLucash
   ("Apresentado por"), headline forte, logo da MarioLucash nos headers,
-  assinatura no CTA, sem travessão. Gerar o PDF via Playwright (`gerar-pdf.js`),
-  não WeasyPrint.
+  assinatura no CTA, sem travessão. Gerar o PDF: nas sessões na web (nuvem),
+  usar WeasyPrint via `gerar_pdf.py` (roda no ambiente; um SessionStart hook
+  garante o WeasyPrint instalado). Localmente, o Playwright (`gerar-pdf.js`)
+  dá a maior fidelidade. O `apresentacao.html` é a fonte de verdade; manter os
+  dois geradores em sincronia.
 
 ## Ferramentas conectadas
 

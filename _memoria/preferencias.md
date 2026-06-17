@@ -30,3 +30,10 @@ Combina: frase curta, papo reto, humor leve, explicar como quem conversa.
 Destoa: tom de palestrante, promessa inflada, formalidade de cartório.
 
 ## Preferências adicionais
+
+- **Registro pessoal (1:1 com gente próxima):** o Mario usa interjeições
+  alongadas ("Hummm", "Ahhh", "Simmm"), "kk/kkkk" pra rir, tratamento
+  carinhoso ("amor", "meu amor", "BB"), gíria leve ("pru homi") e emojis
+  pontuais (🩵, 👹). É caloroso, agradece fácil ("obrigado meu amor hehe").
+- Esse registro é só pra mensagem pessoal. Em **material de cliente**, manter
+  a leveza e o calor, mas sem apelido, sem "kkk" e sem emoji de intimidade.
