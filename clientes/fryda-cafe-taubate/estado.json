@@ -1,0 +1,39 @@
+{
+  "id": "fryda-cafe-taubate",
+  "nome": "Fryda Café",
+  "criado": "2026-06-16",
+  "etapas": {
+    "pesquisa": {
+      "status": "ok",
+      "nota": "não tem site (oportunidade máxima)",
+      "resultado": {
+        "site": "",
+        "site_status": "sem_site",
+        "https": "",
+        "mobile": "",
+        "ano_site": "",
+        "achados": [
+          "Não têm site — quem busca Cafeteria em Taubaté no Google encontra o concorrente, não vocês"
+        ],
+        "quando": "2026-06-16",
+        "diag_engine": "playwright"
+      }
+    },
+    "coleta": {
+      "status": "pendente",
+      "nota": "Ainda não foi feito nenhum contato (Lead)"
+    },
+    "mockup": {
+      "status": "pendente",
+      "nota": ""
+    },
+    "proposta": {
+      "status": "pendente",
+      "nota": ""
+    },
+    "validacao": {
+      "status": "pendente",
+      "nota": ""
+    }
+  }
+}
