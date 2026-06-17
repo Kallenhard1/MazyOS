@@ -157,6 +157,11 @@ Fluxo guiado, etapa a etapa, com a tela final de validação em dropdown:
   (`/publicar-tema` pra criar carrossel, `/aprovar-post` pra publicar via
   Meta Graph API). Entra depois do CRM/proposta estar de pé.
 
+> **Mapa completo das próximas features:** ver `docs/PLATAFORMA-FEATURES.md`,
+> que pega todas as skills e funções do MazyOS (conteúdo, SEO, anúncios,
+> análise, sistema) e mapeia cada uma como feature da plataforma, com os
+> padrões de integração (roda direto / handoff pro Claude Code / sistema).
+
 ---
 
 ## 6. Decisões — TRAVADAS (15/06/2026)
