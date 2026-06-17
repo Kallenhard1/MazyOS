@@ -11,6 +11,7 @@ from flask import (Flask, abort, redirect, render_template,
                    request, send_file, url_for)
 
 from servicos import ads as adssvc
+from servicos import analise as analsvc
 from servicos import arquivos as arq
 from servicos import conteudo as cont
 from servicos import email_massa as mail
@@ -19,6 +20,7 @@ from servicos import lead as leadsvc
 from servicos import pdf
 from servicos import prospeccao as prosp
 from servicos import seo as seosvc
+from servicos import sistema as sissvc
 
 ROOT = Path(__file__).resolve().parent.parent
 app = Flask(__name__)
@@ -380,6 +382,31 @@ def ads_relatorio():
                                      request.form.getlist("rels"))
     return render_template("partials/ads_prompt.html", prompt=prompt,
                            vazio="Marque pelo menos um export acima.")
+
+
+# ---------------- Análise (Fase 7) ----------------
+@app.get("/analise")
+def analise():
+    return render_template("analise.html", ativa="analise",
+                           arquivos=analsvc.arquivos_analisaveis(),
+                           analises=analsvc.listar_analises())
+
+
+@app.post("/analise/prompt")
+def analise_prompt():
+    prompt = analsvc.prompt_analise(request.form.get("rel", ""),
+                                    request.form.get("contexto", ""))
+    return render_template("partials/analise_prompt.html", prompt=prompt)
+
+
+# ---------------- Sistema & Config (Fase 7) ----------------
+@app.get("/config")
+def config():
+    return render_template("config.html", ativa="config",
+                           acoes=sissvc.ACOES,
+                           contato=sissvc.contato(),
+                           identidade=sissvc.identidade(),
+                           integracoes=sissvc.integracoes())
 
 
 # ---------------- Download de arquivos (sandbox) ----------------

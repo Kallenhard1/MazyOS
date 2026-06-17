@@ -1,0 +1,10 @@
+{% if prompt %}
+<div style="margin-top:12px">
+  <label class="muted" style="font-size:.78rem">Prompt pronto (cole no Claude Code):</label>
+  <pre style="white-space:pre-wrap; background:var(--fundo2, #f6f3ee); border:1px solid var(--linha, #eee); border-radius:6px; padding:10px; font-size:.78rem; margin:6px 0">{{ prompt }}</pre>
+  <button type="button" class="secundario" style="margin:0; padding:5px 10px; font-size:.74rem"
+          data-prompt="{{ prompt }}" onclick="copiarAnalise(this)">📋 Copiar prompt</button>
+</div>
+{% else %}
+<p class="muted" style="font-size:.78rem; margin-top:10px">Escolha um arquivo acima.</p>
+{% endif %}

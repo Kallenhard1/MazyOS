@@ -43,11 +43,11 @@ Status: ✅ pronto na plataforma · 🟡 parcial (parte feita ou só handoff) ·
 | `/responder-avaliacoes` | Respostas humanas pras reviews do Google | Caixa de avaliações + resposta sugerida | 🔎 SEO & GMB | B | ✅ |
 | `/anuncio-google` | Campanha completa em CSV pro Ads Editor | Montador de campanha (briefing → CSV) | 📣 Anúncios | B | ✅ |
 | `/relatorio-ads` | Relatório semanal de Google + Meta Ads | Tela de relatório (seleciona export → resumo) | 📣 Anúncios | B | ✅ |
-| `/analisar-dados` | CSV/XLSX/PDF → resumo executivo | Análise de arquivo (além de só ler) | 📈 Análise | A/B | 🟡 |
+| `/analisar-dados` | CSV/XLSX/PDF → resumo executivo | Análise de arquivo (além de só ler) | 📈 Análise | B | ✅ |
 | `/abrir` | Carrega o contexto do negócio | Dashboard "Hoje" (visão da operação) | ⚙️ Sistema | C | 🟡 |
-| `/salvar` | Commit + push no GitHub | Botão "Salvar trabalho" (backup) | ⚙️ Sistema | C | 🔵 |
-| `/atualizar` | Varre e atualiza a memória | Ação "Atualizar memória" na Config | ⚙️ Sistema | C | 🔵 |
-| `/mapear-rotinas` | Acha repetições e vira skill | Sugeridor de skills (uso recorrente) | ⚙️ Sistema | C | 🔵 |
+| `/salvar` | Commit + push no GitHub | Ação "Salvar trabalho" na Config | ⚙️ Sistema | C | ✅ |
+| `/atualizar` | Varre e atualiza a memória | Ação "Atualizar memória" na Config | ⚙️ Sistema | C | ✅ |
+| `/mapear-rotinas` | Acha repetições e vira skill | Ação "Sugerir rotinas" na Config | ⚙️ Sistema | C | ✅ |
 | `/instalar` | Setup inicial do negócio | Onboarding/Config (já está instalado) | ⚙️ Config | C | 🔵 |
 
 ### Funções (scripts/)
@@ -80,11 +80,12 @@ JÁ NA PLATAFORMA
   ✍️  Conteúdo & Redes    ✅   fila (próprio + cliente) c/ status + handoff (Fase 4)
   🔎 SEO & GMB            ✅   fluxo /seo de 8 passos por alvo + avaliações (Fase 5)
   📣 Anúncios             ✅   montar campanha (CSV) + relatório semanal (Fase 6)
+  📈 Análise              ✅   /analisar-dados (resumo executivo) (Fase 7)
+  ⚙️  Sistema & Config    ✅   salvar, atualizar, rotinas, contato, identidade (Fase 7)
   🏠 Hoje                 🟡   dashboard inicial
 
-A CONSTRUIR (este mapa)
-  📈 Análise              🔵   /analisar-dados (resumo executivo)
-  ⚙️  Sistema & Config    🔵   salvar, atualizar, chaves, contato, identidade
+MAPA COMPLETO — todos os módulos de pé. Restam refinos:
+  🏠 Hoje                 🟡   evoluir o dashboard inicial
 ```
 
 ### ✍️ Conteúdo & Redes 🔵
@@ -120,21 +121,23 @@ Tela por alvo em `servicos/ads.py` + `templates/ads.html`, padrão B (handoff):
   pronto. Lista os relatórios gerados em `campanhas/relatorios/`. Encaixa no
   ciclo "fechou cliente → roda Ads → mede" do plano de ação.
 
-### 📈 Análise 🔵
-- **Resumo executivo (`/analisar-dados`):** sobe CSV/XLSX/PDF → resumo com os
-  pontos principais. O Leitor CSV (✅) já mostra a tabela; isto adiciona a
-  camada de interpretação. Útil pra planilha de prospects, export de Ads, etc.
+### 📈 Análise ✅ (Fase 7)
+`servicos/analise.py` + `templates/analise.html`, padrão B (handoff):
+- **Resumo executivo (`/analisar-dados`):** escolhe um arquivo de `dados/` ou
+  `saidas/` (CSV/XLSX/PDF/TXT/JSON) + contexto opcional → monta o prompt pronto.
+  O Leitor CSV (✅) mostra a tabela crua; isto adiciona a leitura executiva.
+  Lista os resumos gerados em `saidas/analises/`.
 
-### ⚙️ Sistema & Config 🔵
-Onde moram as skills de núcleo, como ações e ajustes:
-- **Salvar trabalho (`/salvar`):** botão que faz commit + push (backup visível).
-- **Atualizar memória (`/atualizar`):** dispara a varredura que sincroniza
-  `_memoria/` e o `CLAUDE.md`.
-- **Config:** chaves (Google Places, Meta, Notion), contato padrão, identidade
-  visual (cores/fontes/logo) que as telas de conteúdo e proposta consomem.
-- **Rotinas (`/mapear-rotinas`):** sugere virar skill o que se repete muito.
-- `/abrir` e `/instalar` viram, respectivamente, o **dashboard "Hoje"** e o
-  **onboarding** (já rodado uma vez).
+### ⚙️ Sistema & Config ✅ (Fase 7)
+`servicos/sistema.py` + `templates/config.html`, padrão C. Lê das fontes de
+verdade e mostra; as ações de núcleo são handoff (rodam no Claude Code):
+- **Ações:** `/salvar` (commit+push), `/atualizar` (sincroniza memória),
+  `/mapear-rotinas` (sugere skills) — cada uma com o comando pra copiar.
+- **Contato padrão:** lido de `_memoria/empresa.md` (usado em proposta/material).
+- **Identidade visual:** paleta + logo lidos de `identidade/design-guide.md`.
+- **Integrações:** status do checklist `Ferramentas conectadas` do `CLAUDE.md`
+  (chaves entram via MCP/ambiente, não ficam na plataforma).
+- `/abrir` é o **dashboard "Hoje"**; `/instalar` foi o onboarding (já rodado).
 
 ---
 
@@ -153,13 +156,15 @@ Estende o roadmap do `PLATAFORMA-MVP.md` (Fases MVP 1, MVP 2 e 3 já entregues).
 **Fase 6 — Anúncios** ✅ entregue
 - [x] `servicos/ads.py` + tela 📣 (montar campanha CSV + relatório semanal, por alvo)
 
-**Fase 7 — Análise & Sistema**
-- [ ] `servicos/analise.py` (resumo executivo) na tela 📈
-- [ ] Tela ⚙️ Config (chaves, contato, identidade) + ações Salvar/Atualizar
+**Fase 7 — Análise & Sistema** ✅ entregue
+- [x] `servicos/analise.py` (resumo executivo) na tela 📈
+- [x] Tela ⚙️ Config (contato, identidade, integrações) + ações Salvar/Atualizar/Rotinas
 
-> Ordem pela utilidade na fase atual (fechar e atender os primeiros clientes):
+> **Mapa completo: todos os módulos do MazyOS têm lugar visual na plataforma.**
+> Ordem foi pela utilidade na fase atual (fechar e atender os primeiros clientes):
 > Conteúdo e SEO ajudam a entregar e a vender; Anúncios entram quando houver
-> verba; Análise e Sistema são suporte. Reordenar conforme a operação pedir.
+> verba; Análise e Sistema são suporte. O que resta é refino (ex: evoluir o
+> dashboard "Hoje").
 
 ---
 
