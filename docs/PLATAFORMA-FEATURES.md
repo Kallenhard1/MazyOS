@@ -39,8 +39,8 @@ Status: ✅ pronto na plataforma · 🟡 parcial (parte feita ou só handoff) ·
 | `/carrossel` | Carrosséis 1080×1350 na identidade | Gerar carrossel (prompt + acompanha PNGs) | ✍️ Conteúdo & Redes | B | ✅ |
 | `/publicar-tema` | Tema → artigo + carrossel + 3 legendas | Esteira de conteúdo a partir de um tema | ✍️ Conteúdo & Redes | B | ✅ |
 | `/aprovar-post` | Publica blog + Instagram + Facebook | Handoff "aprovar e publicar" na fila | ✍️ Conteúdo & Redes | B | ✅ |
-| `/seo` | Fluxo SEO/GEO/Ads em 8 passos | Painel de SEO por cliente (8 etapas) | 🔎 SEO & GMB | B | 🔵 |
-| `/responder-avaliacoes` | Respostas humanas pras reviews do Google | Caixa de avaliações + resposta sugerida | 🔎 SEO & GMB | B | 🔵 |
+| `/seo` | Fluxo SEO/GEO/Ads em 8 passos | Painel de SEO por alvo (8 etapas) | 🔎 SEO & GMB | B | ✅ |
+| `/responder-avaliacoes` | Respostas humanas pras reviews do Google | Caixa de avaliações + resposta sugerida | 🔎 SEO & GMB | B | ✅ |
 | `/anuncio-google` | Campanha completa em CSV pro Ads Editor | Montador de campanha (briefing → CSV) | 📣 Anúncios | A/B | 🔵 |
 | `/relatorio-ads` | Relatório semanal de Google + Meta Ads | Tela de relatório (sobe export → resumo) | 📣 Anúncios | A | 🔵 |
 | `/analisar-dados` | CSV/XLSX/PDF → resumo executivo | Análise de arquivo (além de só ler) | 📈 Análise | A/B | 🟡 |
@@ -78,10 +78,10 @@ JÁ NA PLATAFORMA
   🎯 Lead → Proposta      ✅   pesquisa→coleta→mockup→proposta→validação
   📄 Leitor CSV           ✅   abre qualquer .csv como tabela
   ✍️  Conteúdo & Redes    ✅   fila (próprio + cliente) c/ status + handoff (Fase 4)
+  🔎 SEO & GMB            ✅   fluxo /seo de 8 passos por alvo + avaliações (Fase 5)
   🏠 Hoje                 🟡   dashboard inicial
 
 A CONSTRUIR (este mapa)
-  🔎 SEO & GMB            🔵   fluxo /seo de 8 passos + avaliações
   📣 Anúncios             🔵   montar campanha + relatório semanal
   📈 Análise              🔵   /analisar-dados (resumo executivo)
   ⚙️  Sistema & Config    🔵   salvar, atualizar, chaves, contato, identidade
@@ -98,13 +98,15 @@ da tela Instagram (que já faz handoff). Features:
   botão que dispara o handoff do `/aprovar-post` (blog + IG + FB via Meta).
 - Reusa: `identidade/design-guide.md` (paleta âmbar/creme agora definida).
 
-### 🔎 SEO & GMB 🔵
+### 🔎 SEO & GMB ✅ (Fase 5)
 A skill `/seo` é o fluxo mais rico (8 passos: demanda, concorrência, GMB,
-on-page, conteúdo, ads, monitoramento, GEO). Vira um **painel por cliente**:
-- Cada um dos 8 passos como etapa com status e saída salva (igual ao accordion
-  do Lead→Proposta).
-- **Avaliações (`/responder-avaliacoes`):** lista as reviews coladas/importadas
-  do Google e gera a resposta sugerida (handoff), mantendo o tom da marca.
+on-page, conteúdo, ads, monitoramento, GEO). Virou um **painel por alvo**
+(próprio ou cliente) em `servicos/seo.py` + `templates/seo.html`:
+- Cada um dos 8 passos como card com prompt pronto (handoff `/seo passo N`) e
+  status derivado da existência do arquivo de saída — stateless, a plataforma
+  só lê `marketing/seo/` (próprio) ou `clientes/<id>/seo/` (cliente).
+- **Avaliações (`/responder-avaliacoes`):** caixa pra colar as reviews do
+  Google e gerar o prompt de resposta sugerida (handoff), no tom da marca.
 - Liga no diagnóstico que a prospecção já faz (GMB ausente = oportunidade).
 
 ### 📣 Anúncios 🔵
@@ -140,9 +142,9 @@ Estende o roadmap do `PLATAFORMA-MVP.md` (Fases MVP 1, MVP 2 e 3 já entregues).
 - [ ] `servicos/conteudo.py` + tela ✍️ (esteira `/publicar-tema`, carrossel,
       fila + aprovar). Reusa o padrão da tela Instagram.
 
-**Fase 5 — SEO & GMB**
-- [ ] `servicos/seo.py` + tela 🔎 (8 passos por cliente, estado por etapa)
-- [ ] Submódulo de avaliações (`/responder-avaliacoes`)
+**Fase 5 — SEO & GMB** ✅ entregue
+- [x] `servicos/seo.py` + tela 🔎 (8 passos por alvo, status por arquivo de saída)
+- [x] Submódulo de avaliações (`/responder-avaliacoes`)
 
 **Fase 6 — Anúncios**
 - [ ] `servicos/ads.py` + tela 📣 (montar campanha CSV + relatório semanal)

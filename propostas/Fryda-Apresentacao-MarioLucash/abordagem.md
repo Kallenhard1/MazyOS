@@ -9,11 +9,22 @@
 
 ## Instagram (DM curta)
 
+> Primeira mensagem é só pra abrir a porta. Sem venda, sem "posso te mandar?"
+> de cara. Puxa o elogio sincero e deixa a curiosidade fazer o convite.
+
 Oi, pessoal do Fryda! Aqui é o Mario (@mariolucash), tô sempre aí no café ☕
 
-Ando trabalhando com sites e presença digital pra negócios de Taubaté, e o Fryda é um que eu sempre penso. O Instagram de vocês é lindo, mas quem busca "cafeteria em Taubaté" no Google ainda não acha o Fryda. Acaba achando o concorrente.
+Precisava dizer: o feed de vocês tá lindo demais, virou referência aqui em Taubaté. Dá gosto de acompanhar.
 
-Já adiantei e montei uma prévia de como ficaria o site de vocês. Posso te mandar pra ver? É sem compromisso, só quero mostrar.
+Acabei fazendo uma coisinha de fim de semana pensando no Fryda e fiquei com vontade de mostrar pra vocês. Topam dar uma olhada qualquer hora? Sem compromisso nenhum, é só carinho pelo café mesmo ☕
+
+---
+
+### Se responderem com interesse (aí sim mostra)
+
+Que bom! 😄 Eu montei uma prévia de como ficaria um site do Fryda, com a cara de vocês. A ideia é simples: hoje quem busca "cafeteria em Taubaté" no Google ainda não acha o Fryda, acaba caindo no concorrente. O site resolve isso e dá um lugar pro cardápio fora do feed.
+
+Te mando a prévia agora pra ver?
 
 ---
 

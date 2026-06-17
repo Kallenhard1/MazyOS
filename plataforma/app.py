@@ -17,6 +17,7 @@ from servicos import funil as fun
 from servicos import lead as leadsvc
 from servicos import pdf
 from servicos import prospeccao as prosp
+from servicos import seo as seosvc
 
 ROOT = Path(__file__).resolve().parent.parent
 app = Flask(__name__)
@@ -331,6 +332,23 @@ def conteudo_status():
 @app.get("/instagram")
 def instagram():
     return redirect(url_for("conteudo", alvo="proprio"))
+
+
+# ---------------- SEO & GMB (Fase 5) ----------------
+@app.get("/seo")
+def seo():
+    alvo = request.args.get("alvo", "proprio")
+    return render_template("seo.html", ativa="seo", alvo=alvo,
+                           alvos=cont.listar_alvos(),
+                           etapas=seosvc.etapas(alvo),
+                           prog=seosvc.progresso(alvo))
+
+
+@app.post("/seo/avaliacoes")
+def seo_avaliacoes():
+    prompt = seosvc.prompt_avaliacoes(request.form.get("alvo", "proprio"),
+                                      request.form.get("reviews", ""))
+    return render_template("partials/seo_avaliacoes.html", prompt=prompt)
 
 
 # ---------------- Download de arquivos (sandbox) ----------------
