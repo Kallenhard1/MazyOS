@@ -13,6 +13,15 @@ PIPELINE = ROOT / "crm" / "pipeline.csv"
 CLIENTES = ROOT / "clientes"
 ENVIO = ROOT / "saidas" / "envio"
 
+# Layout canônico de clientes/<id>/ — cada cliente é autossuficiente e a
+# plataforma lê tudo daqui (nenhum conteúdo de cliente fica nas pastas raiz):
+#   assets/   imagens e logo do cliente        (este módulo)
+#   site/     mockup do site                    (este módulo)
+#   conteudo/ carrosséis e posts                (servicos/conteudo.py)
+#   seo/      saídas dos 8 passos de SEO         (servicos/seo.py)
+#   campanhas/ campanhas de Ads + relatorios/    (servicos/ads.py)
+SUBPASTAS_CLIENTE = ["assets", "site", "conteudo", "seo", "campanhas"]
+
 # As etapas do fluxo Lead → Proposta, na ordem. (chave, rótulo, descrição)
 ETAPAS = [
     ("pesquisa", "Pesquisa das plataformas atuais",
@@ -77,7 +86,11 @@ def criar_workspace(lead_id, obs=""):
 
     pasta = _pasta(slug)
     pasta.mkdir(parents=True, exist_ok=True)
-    (pasta / "assets").mkdir(exist_ok=True)
+    # layout canônico do cliente — as telas da plataforma leem destas subpastas
+    # (assets/site = lead.py · conteudo/seo/campanhas = módulos de Conteúdo, SEO
+    # e Anúncios). Cria todas pra todo cliente nascer pronto, sem precisar mover.
+    for sub in SUBPASTAS_CLIENTE:
+        (pasta / sub).mkdir(exist_ok=True)
 
     estado = {
         "id": slug,
@@ -352,10 +365,10 @@ def _prompt_mockup(lead, slug, notas, achados, assets):
         f"**Problemas digitais hoje (pesquisa):**\n{achados_txt}\n\n"
         f"**Imagens disponíveis em `clientes/{slug}/assets/`:**\n{assets_txt}\n\n"
         f"**Diretrizes:**\n"
-        f"- Marca monocromática (preto/branco), seguindo `identidade/design-guide.md`. "
-        f"Não inventar cor de destaque.\n"
+        f"- Seguir `identidade/design-guide.md` (preto/creme + acento âmbar pontual). "
+        f"Não inventar outra cor de destaque.\n"
         f"- Use de referência de estrutura/qualidade o mockup em "
-        f"`propostas/Fryda-Cafe-mockup/index.html` (hero, seções, CTA, WhatsApp "
+        f"`clientes/fryda-cafe-taubate/site/index.html` (hero, seções, CTA, WhatsApp "
         f"flutuante), adaptando ao segmento de {setor}.\n"
         f"- Página única, responsiva (mobile-first), rápida, sem dependências pesadas.\n"
         f"- Conteúdo real a partir das notas — nada de lorem ipsum. CTA claro "

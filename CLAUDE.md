@@ -130,12 +130,23 @@ o marketing próprio.
 
 **Estrutura de pastas:**
 - `_memoria/` — quem sou, como falo, foco atual
-- `identidade/` — marca aplicada nas entregas (logo em `identidade/logo.jpg`)
-- `clientes/` — uma subpasta por cliente, autossuficiente
-- `propostas/` — propostas em rascunho ou enviadas (antes de fechar)
-- `marketing/` — conteúdo próprio + `plano-de-acao.md` (plano-mestre de vendas)
+- `identidade/` — **marca do MarioLucash** (a minha): `design-guide.md` + `logo.jpg`.
+  Material visual de cliente nunca mora aqui — vai em `clientes/<id>/assets/`.
+- `clientes/` — uma subpasta por cliente, **autossuficiente** (layout canônico abaixo)
+- `propostas/` — propostas avulsas em rascunho (antes de virar workspace de cliente)
+- `marketing/` — conteúdo **próprio** (do MarioLucash) + `plano-de-acao.md`
 - `saidas/` — emails, documentos pontuais
 - `dados/` — arquivos a analisar (ex: `prospects.csv`)
+
+**Layout canônico de `clientes/<id>/`** (criado pelo `lead.py`; a plataforma lê
+tudo daqui, nada de cliente fica nas pastas raiz):
+- `briefing.md` · `estado.json` · `notas.md` · `pesquisa.md` — dados e estado do lead
+- `assets/` — imagens e logo do cliente
+- `site/` — mockup do site
+- `conteudo/` — carrosséis e posts (módulo Conteúdo)
+- `seo/` — saídas dos 8 passos (módulo SEO)
+- `campanhas/` — campanhas de Ads + `relatorios/` (módulo Anúncios)
+- `apresentacao/` · `proposta.html`/`.pdf` — apresentação comercial e proposta
 
 ## Quem sou
 
@@ -164,14 +175,15 @@ mockup antes da venda pros melhores prospects → proposta em 3 pacotes →
 
 ## Regras do sistema
 
-- Cliente novo → criar pasta `clientes/<Nome>/` com `briefing.md`
-- Proposta enviada antes de fechar → `propostas/<Nome>.md`; fechou →
-  move pra `clientes/<Nome>/proposta.md`
-- Material visual: consultar `identidade/design-guide.md`; paleta ainda
-  não definida — perguntar antes de assumir cor de destaque
-- Proposta/apresentação comercial: usar SEMPRE o template visual da
-  apresentação (`propostas/Fryda-Apresentacao-MarioLucash/apresentacao.html`)
-  como referência — capa escura com logo do cliente + logo MarioLucash
+- Cliente novo → criar workspace `clientes/<id>/` (o `lead.py` já monta o
+  layout canônico). Material do cliente vai nas subpastas dele, nunca na raiz.
+- Proposta avulsa em rascunho → `propostas/<Nome>.md`; virou cliente →
+  workspace em `clientes/<id>/` (proposta em `proposta.html`/`.pdf`)
+- Material visual: consultar `identidade/design-guide.md` (marca do MarioLucash,
+  paleta preto/creme + acento âmbar, fechada em 15/06/2026)
+- Proposta/apresentação comercial: usar SEMPRE o template visual da apresentação
+  (referência: `clientes/fryda-cafe-taubate/apresentacao/apresentacao.html`, a
+  primeira feita) como base — capa escura com logo do cliente + logo MarioLucash
   ("Apresentado por"), headline forte, logo da MarioLucash nos headers,
   assinatura no CTA, sem travessão. Gerar o PDF **sempre via Playwright**
   (`gerar-pdf.js`), que dá a maior fidelidade. O **WeasyPrint (`gerar_pdf.py`)

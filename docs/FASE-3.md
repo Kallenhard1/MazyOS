@@ -4,7 +4,7 @@
 > workflow guiado, até a proposta personalizada e o e-mail de envio. Documento
 > de plano — aprovar antes de construir. Continua do [MVP](PLATAFORMA-MVP.md);
 > backend reusa `scripts/`, `crm/pipeline.csv` e o motor de proposta em
-> `propostas/Fryda-Cafe-mockup/` (`proposta.html` + `gerar_pdf.py`, weasyprint).
+> `clientes/fryda-cafe-taubate/site/` (`proposta.html` + `gerar_pdf.py`, weasyprint).
 
 ---
 

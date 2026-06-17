@@ -118,10 +118,10 @@ Fluxo guiado, etapa a etapa, com a tela final de validação em dropdown:
 2. Coleta inicial automática (script + skill)
 3. Coleta aprofundada manual (textos, imagens, logo, dor) — upload/notas
 4. **Mockup do site:** abrir o terminal do Claude Code já no contexto do
-   lead (reusa o fluxo de mockup tipo `propostas/Fryda-Cafe-mockup/`)
+   lead (reusa o fluxo de mockup tipo `clientes/fryda-cafe-taubate/site/`)
 5. Iteração manual
 6. Gerar proposta personalizada a partir do template
-   (`propostas/Fryda-Cafe-mockup/proposta.html` + `gerar_pdf.py`) com a
+   (`clientes/fryda-cafe-taubate/site/proposta.html` + `gerar_pdf.py`) com a
    identidade escolhida e as infos coletadas
 7. **Tela de validação:** cada etapa num dropdown com status; botão
    "Mandar e-mail para o cliente" ou "Ajustar" por etapa

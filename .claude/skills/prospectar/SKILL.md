@@ -99,7 +99,7 @@ Sincronizar via MCP:
   gerados, estado do funil.
 - Espelhar o funil no **Notion** (Passo 5) e oferecer: pros leads quentes
   que viraram conversa, criar a proposta com o template
-  (`propostas/Fryda-Cafe-mockup/gerar_pdf.py` como base).
+  (`clientes/fryda-cafe-taubate/site/gerar_pdf.py` como base).
 - Se algo no fluxo mudou de forma duradoura (nova fonte, novo critério de
   score), seguir a regra de "Manter contexto atualizado" do `CLAUDE.md`.
 

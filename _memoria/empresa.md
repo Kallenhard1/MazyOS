@@ -31,7 +31,8 @@
   conforme o pacote fechado.
 - **Primeiro cliente em negociação:** Fryda Café (cafeteria no Centro de
   Taubaté; a cunhada é a chef). Pacote Presença Digital Completa, R$ 5.000.
-  Apresentação em `propostas/Fryda-Apresentacao-MarioLucash/`.
+  Workspace em `clientes/fryda-cafe-taubate/` (apresentação em `apresentacao/`,
+  mockup em `site/`, fotos em `assets/`).
 - **Automação de conteúdo (em construção):** gerar carrossel, stories e reels
   via Claude Code/MazyOS. Potencial de automatizar boa parte do trabalho de
   social media (a Luana é a primeira a validar, usando social pra captar nos

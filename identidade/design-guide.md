@@ -27,7 +27,7 @@
 - **Peso do título:** 700–800 · corpo 300–400 · botões/rótulos 500–600
 
 > As fontes já vivem no repo: `templates/diagnostico/fonts/` e
-> `propostas/Fryda-Cafe-mockup/fonts/` (Playfair Display + Jost + Great Vibes).
+> `clientes/fryda-cafe-taubate/site/fonts/` (Playfair Display + Jost + Great Vibes).
 
 ---
 
