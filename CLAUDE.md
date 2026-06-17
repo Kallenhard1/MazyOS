@@ -180,6 +180,22 @@ mockup antes da venda pros melhores prospects → proposta em 3 pacotes →
   instalado nesses casos. O `apresentacao.html` é a fonte de verdade; manter os
   dois geradores em sincronia.
 
+## Plataforma (painel visual)
+
+O `plataforma/` é a casca web (Flask) que dá rosto à operação: orquestra os
+`scripts/` e as skills sem reimplementar nada. O MazyOS sabe que ela existe e
+mantém ela em dia:
+
+- Fonte de verdade continua em `crm/`, `dados/`, `clientes/` e `marketing/`; a
+  plataforma só lê e dispara.
+- O que a plataforma conhece do MazyOS vem de `plataforma/manifest.json` (lista
+  de skills e funções), gerado por `scripts/gerar_manifest.py`.
+- **O `/salvar` sempre regenera o manifesto antes de comitar**, pra plataforma e
+  MazyOS nunca saírem de sincronia. Skill ou função nova deve virar feature em
+  `docs/PLATAFORMA-FEATURES.md`; o manifesto acusa o que ainda falta mapear.
+- Planos: `docs/PLATAFORMA-MVP.md` (o que foi entregue) e
+  `docs/PLATAFORMA-FEATURES.md` (mapa completo de features + fases 4–7).
+
 ## Ferramentas conectadas
 
 - [x] Notion — base "Prospecção — MarioLucash" (funil de prospecção)
