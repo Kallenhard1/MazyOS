@@ -42,6 +42,8 @@ FOLLOWUP_PADRAO = {"abordado": 3, "conversa": 2, "proposta": 4}
 COLS = ["id", "nome", "tipo", "setor", "cidade", "telefone", "email", "site",
         "score", "classificacao", "status", "ultimo_contato",
         "proximo_followup", "canal", "notas"]
+# campos de dados editáveis sem mexer em id/score/status
+EDITAVEIS = ["nome", "tipo", "setor", "cidade", "telefone", "email", "site"]
 ARQUIVO_PADRAO = "crm/pipeline.csv"
 HOJE = datetime.date.today()
 
@@ -98,6 +100,62 @@ def achar(leads, busca):
     return [l for l in leads if busca in (l.get("nome", "")).lower()]
 
 
+# ---------- lógica (reutilizável pelo CLI e pela plataforma) ----------
+def mudar_status_lead(arquivo, busca, novo_status, nota="", canal="", followup=""):
+    """Move um lead de estágio (carimba contato, follow-up, nota). Pura, sem
+    argparse/print: retorna (ok, mensagem). Usada pelo CLI e pela plataforma."""
+    hoje = datetime.date.today()
+    if novo_status not in ESTAGIOS:
+        return False, f"Estágio inválido. Use: {', '.join(ESTAGIOS)}"
+    leads = carregar(arquivo)
+    achados = achar(leads, busca)
+    if not achados:
+        return False, f"Nenhum lead casa com '{busca}'."
+    if len(achados) > 1:
+        ids = "\n".join(f"  {l['id']}  ({l['nome']})" for l in achados)
+        return False, "Vários leads casam — seja específico (use o id):\n" + ids
+    l = achados[0]
+    l["status"] = novo_status
+    l["ultimo_contato"] = hoje.isoformat()
+    if canal:
+        l["canal"] = canal
+    if nota:
+        carimbo = f"[{hoje:%d/%m}] {nota}"
+        l["notas"] = (l["notas"] + " | " + carimbo).strip(" |") if l["notas"] else carimbo
+    # follow-up: explícito, padrão do estágio, ou limpa se encerrou
+    if followup:
+        d = parse_data(followup, base=hoje)
+        l["proximo_followup"] = d.isoformat() if d else ""
+    elif novo_status in FOLLOWUP_PADRAO:
+        l["proximo_followup"] = (hoje + datetime.timedelta(
+            days=FOLLOWUP_PADRAO[novo_status])).isoformat()
+    elif novo_status in ("fechado", "perdido"):
+        l["proximo_followup"] = ""
+    salvar(arquivo, leads)
+    return True, f"{l['nome']} → {novo_status} (follow-up: {l['proximo_followup'] or '—'})"
+
+
+def editar_lead_dados(arquivo, busca, campos):
+    """Edita os dados de um lead (só os campos EDITAVEIS presentes e diferentes).
+    `campos`: dict campo->valor. Pura: retorna (ok, mensagem)."""
+    leads = carregar(arquivo)
+    achados = achar(leads, busca)
+    if not achados:
+        return False, f"Nenhum lead casa com '{busca}'."
+    if len(achados) > 1:
+        ids = "\n".join(f"  {l['id']}  ({l['nome']})" for l in achados)
+        return False, "Vários leads casam — seja específico (use o id):\n" + ids
+    l = achados[0]
+    mudou = [k for k in EDITAVEIS
+             if campos.get(k) is not None and campos[k] != l.get(k, "")]
+    if not mudou:
+        return True, "Nada alterado."
+    for k in mudou:
+        l[k] = campos[k]
+    salvar(arquivo, leads)
+    return True, f"{l['nome']} atualizado ({', '.join(mudou)})."
+
+
 # ---------- comandos ----------
 def cmd_importar(args):
     leads = carregar(args.arquivo)
@@ -127,37 +185,12 @@ def cmd_importar(args):
 
 
 def cmd_status(args):
-    leads = carregar(args.arquivo)
-    if args.novo_status not in ESTAGIOS:
-        sys.exit(f"Estágio inválido. Use: {', '.join(ESTAGIOS)}")
-    achados = achar(leads, args.busca)
-    if not achados:
-        sys.exit(f"Nenhum lead casa com '{args.busca}'.")
-    if len(achados) > 1:
-        print("Vários leads casam — seja específico (use o id):")
-        for l in achados:
-            print(f"  {l['id']}  ({l['nome']})")
-        return
-    l = achados[0]
-    l["status"] = args.novo_status
-    l["ultimo_contato"] = HOJE.isoformat()
-    if args.canal:
-        l["canal"] = args.canal
-    if args.nota:
-        carimbo = f"[{HOJE:%d/%m}] {args.nota}"
-        l["notas"] = (l["notas"] + " | " + carimbo).strip(" |") if l["notas"] else carimbo
-    # follow-up: explícito, padrão do estágio, ou limpa se encerrou
-    if args.followup:
-        d = parse_data(args.followup)
-        l["proximo_followup"] = d.isoformat() if d else ""
-    elif args.novo_status in FOLLOWUP_PADRAO:
-        l["proximo_followup"] = (HOJE + datetime.timedelta(
-            days=FOLLOWUP_PADRAO[args.novo_status])).isoformat()
-    elif args.novo_status in ("fechado", "perdido"):
-        l["proximo_followup"] = ""
-    salvar(args.arquivo, leads)
-    fu = l["proximo_followup"] or "—"
-    print(f"{l['nome']} → {args.novo_status} (follow-up: {fu})")
+    ok, msg = mudar_status_lead(args.arquivo, args.busca, args.novo_status,
+                                nota=args.nota, canal=args.canal,
+                                followup=args.followup)
+    print(msg)
+    if not ok:
+        sys.exit(1)
 
 
 def cmd_followups(args):
@@ -236,28 +269,11 @@ def cmd_list(args):
 def cmd_editar(args):
     """Edita os dados de um lead (nome, telefone, e-mail, site...). Só altera
     os campos passados; id/score/status/estágio ficam intactos."""
-    leads = carregar(args.arquivo)
-    achados = achar(leads, args.busca)
-    if not achados:
-        sys.exit(f"Nenhum lead casa com '{args.busca}'.")
-    if len(achados) > 1:
-        print("Vários leads casam — seja específico (use o id):")
-        for l in achados:
-            print(f"  {l['id']}  ({l['nome']})")
-        return
-    l = achados[0]
-    campos = {"nome": args.nome, "tipo": args.tipo, "setor": args.setor,
-              "cidade": args.cidade, "telefone": args.telefone,
-              "email": args.email, "site": args.site}
-    mudou = [k for k, v in campos.items()
-             if v is not None and v != l.get(k, "")]
-    for k in mudou:
-        l[k] = campos[k]
-    if not mudou:
-        print("Nada alterado.")
-        return
-    salvar(args.arquivo, leads)
-    print(f"{l['nome']} atualizado ({', '.join(mudou)}).")
+    campos = {k: getattr(args, k) for k in EDITAVEIS}
+    ok, msg = editar_lead_dados(args.arquivo, args.busca, campos)
+    print(msg)
+    if not ok:
+        sys.exit(1)
 
 
 def main():
@@ -290,7 +306,7 @@ def main():
 
     p = sub.add_parser("editar", help="edita dados de um lead (nome, telefone…)")
     p.add_argument("busca")
-    for c in ("nome", "tipo", "setor", "cidade", "telefone", "email", "site"):
+    for c in EDITAVEIS:
         p.add_argument(f"--{c}", default=None)
     p.set_defaults(func=cmd_editar)
 

@@ -12,7 +12,7 @@
 > Primeira mensagem é só pra abrir a porta. Sem venda, sem "posso te mandar?"
 > de cara. Puxa o elogio sincero e deixa a curiosidade fazer o convite.
 
-Oi, pessoal do Fryda! Aqui é o Mario (@mariolucash), tô sempre aí no café ☕
+Oi, pessoal do Fryda! Aqui é o Mario (@mariolucash), acompanho vocês pelo Insta faz tempo ☕
 
 Precisava dizer: o feed de vocês tá lindo demais, virou referência aqui em Taubaté. Dá gosto de acompanhar.
 

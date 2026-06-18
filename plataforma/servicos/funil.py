@@ -5,14 +5,25 @@ Pipeline.csv continua a fonte de verdade.
 """
 import csv
 import datetime
-import os
+import importlib.util
 import re
-import subprocess
-import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
 PIPELINE = ROOT / "crm" / "pipeline.csv"
+
+
+def _carregar_crm():
+    """Importa scripts/crm.py por caminho (evita colidir com a pasta de dados
+    crm/) pra reusar a lógica em processo, sem subir subprocess a cada edição."""
+    spec = importlib.util.spec_from_file_location(
+        "crm_logica", ROOT / "scripts" / "crm.py")
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    return mod
+
+
+_crm = _carregar_crm()
 ESTAGIOS = ["novo", "abordado", "conversa", "proposta", "fechado", "perdido"]
 ROTULOS = {
     "novo": "⚪ Novo", "abordado": "📨 Abordado", "conversa": "💬 Conversa",
@@ -71,48 +82,26 @@ def followups(ate=None):
 
 
 def mudar_status(lead_id, novo, nota="", followup=""):
-    """Chama crm.py status <id> <novo> [--nota] [--followup]. (ok, saida)."""
+    """Move o lead de estágio (mesma regra do crm.py, agora em processo). (ok, saida)."""
     if novo not in ESTAGIOS:
         return False, "Estágio inválido."
     if not (lead_id or "").strip():
         return False, "Lead sem id."
-    args = [sys.executable, "scripts/crm.py", "status", lead_id, novo]
-    if nota.strip():
-        args += ["--nota", nota.strip()]
-    if followup.strip():
-        args += ["--followup", followup.strip()]
-    env = dict(os.environ, PYTHONIOENCODING="utf-8")
-    try:
-        p = subprocess.run(args, cwd=ROOT, env=env, capture_output=True,
-                           text=True, encoding="utf-8", errors="replace", timeout=60)
-        out = (p.stdout or "").strip() + (("\n" + p.stderr.strip()) if p.stderr.strip() else "")
-        return p.returncode == 0, out.strip()
-    except Exception as e:  # noqa: BLE001
-        return False, f"Falha: {e}"
+    return _crm.mudar_status_lead(str(PIPELINE), lead_id.strip(), novo,
+                                  nota=nota.strip(), followup=followup.strip())
 
 
-EDITAVEIS = ["nome", "tipo", "setor", "cidade", "telefone", "email", "site"]
+EDITAVEIS = _crm.EDITAVEIS
 
 
 def editar_lead(lead_id, campos):
-    """Edita dados de um lead via crm.py editar (id/score/estágio intactos).
-    Só envia os campos editáveis presentes. Retorna (ok, saida)."""
+    """Edita dados de um lead (id/score/estágio intactos). Em processo, sem
+    subprocess. Só envia os campos editáveis presentes. Retorna (ok, saida)."""
     lead_id = (lead_id or "").strip()
     if not lead_id:
         return False, "Lead sem id."
-    args = [sys.executable, "scripts/crm.py", "--arquivo", str(PIPELINE),
-            "editar", lead_id]
-    for k in EDITAVEIS:
-        if k in campos:
-            args += [f"--{k}", (campos.get(k) or "").strip()]
-    env = dict(os.environ, PYTHONIOENCODING="utf-8")
-    try:
-        p = subprocess.run(args, cwd=ROOT, env=env, capture_output=True,
-                           text=True, encoding="utf-8", errors="replace", timeout=60)
-        out = (p.stdout or "").strip() + (("\n" + p.stderr.strip()) if p.stderr.strip() else "")
-        return p.returncode == 0, out.strip()
-    except Exception as e:  # noqa: BLE001
-        return False, f"Falha: {e}"
+    dados = {k: (campos.get(k) or "").strip() for k in EDITAVEIS if k in campos}
+    return _crm.editar_lead_dados(str(PIPELINE), lead_id, dados)
 
 
 def validar_followup(s):
