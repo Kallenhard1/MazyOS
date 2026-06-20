@@ -41,7 +41,7 @@ def hoje():
     return render_template(
         "hoje.html", ativa="hoje",
         hoje_data=date.today().strftime("%d/%m/%Y"),
-        pendentes=fun.followups(),
+        pendentes=fun.followups(), avisos=agsvc.vencidas(),
         novos=grupos["novo"][:12],
         contagens=contagens, total=sum(contagens.values()),
         estagios=fun.ESTAGIOS, rotulos=fun.ROTULOS)

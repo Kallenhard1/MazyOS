@@ -4,6 +4,16 @@
 <h1>🏠 Hoje <span class="muted" style="font-size:1rem; font-weight:400">· {{ hoje_data }}</span></h1>
 <p class="sub">Onde focar agora. Abra um WhatsApp, mande a abordagem, mova o card. {{ total }} leads no funil.</p>
 
+{% if avisos %}
+<a href="{{ url_for('agenda') }}" class="card" style="display:flex; align-items:center; gap:12px; text-decoration:none; color:inherit; border-left:3px solid #B93A2B; background:#fff7f5">
+  <span style="font-size:1.4rem">🔔</span>
+  <div>
+    <strong>{{ avisos|length }} tarefa{{ 's' if avisos|length > 1 else '' }} esperando confirmação</strong>
+    <span class="muted" style="display:block; font-size:.8rem">{{ avisos[0].titulo }}{% if avisos|length > 1 %} e mais {{ avisos|length - 1 }}{% endif %} · ir pra ⏰ Agenda e clicar Confirmar →</span>
+  </div>
+</a>
+{% endif %}
+
 <div class="card" style="display:flex; gap:8px; flex-wrap:wrap; align-items:center">
   {% for e in estagios %}
   <a href="{{ url_for('funil') }}" style="text-decoration:none; color:inherit">
