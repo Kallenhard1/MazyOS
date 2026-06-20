@@ -32,3 +32,6 @@ __pycache__/
 # Conteudo & Redes — fila de runtime (estado, nao versionar)
 marketing/*-fila.json
 marketing/conteudo/
+
+# Lotes de envio (runtime, nao versionar)
+saidas/envio/
