@@ -1,0 +1,1140 @@
+[
+ {
+  "properties": {
+   "Empresa": "M.Nunes",
+   "Status": "novo",
+   "Tipo": "b2b",
+   "Setor": "Contabilidade",
+   "Cidade": "Taubaté",
+   "Telefone": "+55 12 3246 9640",
+   "Score": 55.0
+  }
+ },
+ {
+  "properties": {
+   "Empresa": "Cantuario & Monteiro Advogados",
+   "Status": "novo",
+   "Tipo": "b2b",
+   "Setor": "Advocacia",
+   "Cidade": "Taubaté",
+   "Telefone": "+55 12 3413 5083",
+   "Score": 55.0
+  }
+ },
+ {
+  "properties": {
+   "Empresa": "Consultório Odontológico Caroline De Carlo",
+   "Status": "novo",
+   "Tipo": "b2c",
+   "Setor": "Odontologia",
+   "Cidade": "Taubaté",
+   "Telefone": "+55 12 3629 1127",
+   "Score": 50.0
+  }
+ },
+ {
+  "properties": {
+   "Empresa": "Dog & Cat",
+   "Status": "novo",
+   "Tipo": "b2c",
+   "Setor": "Pet shop",
+   "Cidade": "Taubaté",
+   "Telefone": "+55 12 3424 5093",
+   "Score": 50.0
+  }
+ },
+ {
+  "properties": {
+   "Empresa": "Bello Monte Pães e Delícias",
+   "Status": "novo",
+   "Tipo": "b2c",
+   "Setor": "Padaria",
+   "Cidade": "Taubaté",
+   "Telefone": "+55 12 99212 8685",
+   "Score": 50.0
+  }
+ },
+ {
+  "properties": {
+   "Empresa": "Casa de Ração Empório Real",
+   "Status": "novo",
+   "Tipo": "b2c",
+   "Setor": "Pet shop",
+   "Cidade": "Taubaté",
+   "Telefone": "+55 12 99240 7612",
+   "Score": 50.0
+  }
+ },
+ {
+  "properties": {
+   "Empresa": "Neves Rações",
+   "Status": "novo",
+   "Tipo": "b2c",
+   "Setor": "Pet shop",
+   "Cidade": "Taubaté",
+   "Telefone": "+55 12 3624 3714",
+   "Score": 50.0
+  }
+ },
+ {
+  "properties": {
+   "Empresa": "Divina Cabeleleiro Unissex",
+   "Status": "novo",
+   "Tipo": "b2c",
+   "Setor": "Salão de beleza",
+   "Cidade": "Taubaté",
+   "Telefone": "+55 12 98176 1987",
+   "Score": 50.0
+  }
+ },
+ {
+  "properties": {
+   "Empresa": "Arte & Estilo Salão de Beleza",
+   "Status": "novo",
+   "Tipo": "b2c",
+   "Setor": "Salão de beleza",
+   "Cidade": "Taubaté",
+   "Telefone": "+55 12 3622 7950",
+   "Score": 50.0
+  }
+ },
+ {
+  "properties": {
+   "Empresa": "Pizzaria e Esfiharia la Vecchia",
+   "Status": "novo",
+   "Tipo": "b2c",
+   "Setor": "Restaurante",
+   "Cidade": "Taubaté",
+   "Telefone": "+55 12 3674 1940",
+   "Score": 50.0
+  }
+ },
+ {
+  "properties": {
+   "Empresa": "Gold Hair SG",
+   "Status": "novo",
+   "Tipo": "b2c",
+   "Setor": "Salão de beleza",
+   "Cidade": "Taubaté",
+   "Telefone": "+55 12 996200272",
+   "Score": 50.0
+  }
+ },
+ {
+  "properties": {
+   "Empresa": "Panitália",
+   "Status": "novo",
+   "Tipo": "b2c",
+   "Setor": "Padaria",
+   "Cidade": "Taubaté",
+   "Telefone": "+55 (12) 3681-4433",
+   "Score": 50.0
+  }
+ },
+ {
+  "properties": {
+   "Empresa": "Belo cão petmovel",
+   "Status": "novo",
+   "Tipo": "b2c",
+   "Setor": "Pet shop",
+   "Cidade": "Taubaté",
+   "Telefone": "12996195866",
+   "Score": 50.0
+  }
+ },
+ {
+  "properties": {
+   "Empresa": "Seu peixe - empório",
+   "Status": "novo",
+   "Tipo": "b2c",
+   "Setor": "Restaurante",
+   "Cidade": "Taubaté",
+   "Telefone": "12996602547",
+   "Score": 50.0
+  }
+ },
+ {
+  "properties": {
+   "Empresa": "SD alimentos",
+   "Status": "novo",
+   "Tipo": "b2c",
+   "Setor": "Restaurante",
+   "Cidade": "Taubaté",
+   "Telefone": "12982476870;1232225644",
+   "Score": 50.0
+  }
+ },
+ {
+  "properties": {
+   "Empresa": "Fe gastronomia",
+   "Status": "novo",
+   "Tipo": "b2c",
+   "Setor": "Restaurante",
+   "Cidade": "Taubaté",
+   "Telefone": "012 99150-9089",
+   "Score": 50.0
+  }
+ },
+ {
+  "properties": {
+   "Empresa": "Studio Mulher - Treinamento Feminino",
+   "Status": "novo",
+   "Tipo": "b2c",
+   "Setor": "Academia",
+   "Cidade": "Taubaté",
+   "Telefone": "012 97850-2503",
+   "Score": 50.0
+  }
+ },
+ {
+  "properties": {
+   "Empresa": "Barril do Zé Bigode",
+   "Status": "novo",
+   "Tipo": "b2c",
+   "Setor": "Restaurante",
+   "Cidade": "Taubaté",
+   "Telefone": "+55 12 3413 5045",
+   "Score": 50.0
+  }
+ },
+ {
+  "properties": {
+   "Empresa": "O Manda Chuva",
+   "Status": "novo",
+   "Tipo": "b2c",
+   "Setor": "Restaurante",
+   "Cidade": "Taubaté",
+   "Telefone": "+55 12 3632 2479",
+   "Score": 50.0
+  }
+ },
+ {
+  "properties": {
+   "Empresa": "Churrascaria Nova Brescia",
+   "Status": "novo",
+   "Tipo": "b2c",
+   "Setor": "Restaurante",
+   "Cidade": "Taubaté",
+   "Telefone": "+55 12 3681 3358",
+   "Score": 50.0
+  }
+ },
+ {
+  "properties": {
+   "Empresa": "Mercato Della Colônia Agrícola Di Quiririm",
+   "Status": "novo",
+   "Tipo": "b2c",
+   "Setor": "Restaurante",
+   "Cidade": "Taubaté",
+   "Telefone": "+55 12 99642 8380",
+   "Score": 50.0
+  }
+ },
+ {
+  "properties": {
+   "Empresa": "Panificadora Reis",
+   "Status": "novo",
+   "Tipo": "b2c",
+   "Setor": "Padaria",
+   "Cidade": "Taubaté",
+   "Telefone": "+55 11 3424 3286",
+   "Score": 50.0
+  }
+ },
+ {
+  "properties": {
+   "Empresa": "Espaço Equilybrio",
+   "Status": "novo",
+   "Tipo": "b2c",
+   "Setor": "Academia",
+   "Cidade": "Taubaté",
+   "Telefone": "+55 12 3011 9075",
+   "Score": 50.0
+  }
+ },
+ {
+  "properties": {
+   "Empresa": "Ativa Zen",
+   "Status": "novo",
+   "Tipo": "b2c",
+   "Setor": "Academia",
+   "Cidade": "Taubaté",
+   "Telefone": "+55 12 3426 0080",
+   "Score": 50.0
+  }
+ },
+ {
+  "properties": {
+   "Empresa": "Jubá Barbearia",
+   "Status": "novo",
+   "Tipo": "b2c",
+   "Setor": "Salão de beleza",
+   "Cidade": "Taubaté",
+   "Telefone": "+55 12 99122 7193",
+   "Score": 50.0
+  }
+ },
+ {
+  "properties": {
+   "Empresa": "Aster Pizza",
+   "Status": "novo",
+   "Tipo": "b2c",
+   "Setor": "Restaurante",
+   "Cidade": "Taubaté",
+   "Telefone": "+55 12 3631 7248",
+   "Score": 50.0
+  }
+ },
+ {
+  "properties": {
+   "Empresa": "Restaurante Picanha e Truta",
+   "Status": "novo",
+   "Tipo": "b2c",
+   "Setor": "Restaurante",
+   "Cidade": "Taubaté",
+   "Telefone": "+55 12 3686 1402",
+   "Score": 50.0
+  }
+ },
+ {
+  "properties": {
+   "Empresa": "Esfiharia",
+   "Status": "novo",
+   "Tipo": "b2c",
+   "Setor": "Restaurante",
+   "Cidade": "Taubaté",
+   "Telefone": "+55 12 3411 6261",
+   "Score": 50.0
+  }
+ },
+ {
+  "properties": {
+   "Empresa": "Aguia Dourada Cabeleleiros",
+   "Status": "novo",
+   "Tipo": "b2c",
+   "Setor": "Salão de beleza",
+   "Cidade": "Taubaté",
+   "Telefone": "+55 12 3026 4298",
+   "Score": 50.0
+  }
+ },
+ {
+  "properties": {
+   "Empresa": "Pet Shop Areão",
+   "Status": "novo",
+   "Tipo": "b2c",
+   "Setor": "Pet shop",
+   "Cidade": "Taubaté",
+   "Telefone": "+55 12 3624 2109",
+   "Score": 50.0
+  }
+ },
+ {
+  "properties": {
+   "Empresa": "Pizzaria Pequena Pizza",
+   "Status": "novo",
+   "Tipo": "b2c",
+   "Setor": "Restaurante",
+   "Cidade": "Taubaté",
+   "Telefone": "+55 12 3602 2353",
+   "Score": 50.0
+  }
+ },
+ {
+  "properties": {
+   "Empresa": "Casa de Ração do Mineiro",
+   "Status": "novo",
+   "Tipo": "b2c",
+   "Setor": "Pet shop",
+   "Cidade": "Taubaté",
+   "Telefone": "+55 12 3622 6100",
+   "Score": 50.0
+  }
+ },
+ {
+  "properties": {
+   "Empresa": "Mercado e Padaria do Alemão",
+   "Status": "novo",
+   "Tipo": "b2c",
+   "Setor": "Padaria",
+   "Cidade": "Taubaté",
+   "Telefone": "+55 12 3608 1585",
+   "Score": 50.0
+  }
+ },
+ {
+  "properties": {
+   "Empresa": "Restaurante Cantinho da Roca",
+   "Status": "novo",
+   "Tipo": "b2c",
+   "Setor": "Restaurante",
+   "Cidade": "Taubaté",
+   "Telefone": "+55 12 3025 4530",
+   "Score": 50.0
+  }
+ },
+ {
+  "properties": {
+   "Empresa": "Restaurante Reis do Rango",
+   "Status": "novo",
+   "Tipo": "b2c",
+   "Setor": "Restaurante",
+   "Cidade": "Taubaté",
+   "Telefone": "+55 11 3629 5069",
+   "Score": 50.0
+  }
+ },
+ {
+  "properties": {
+   "Empresa": "O Sale's Pizzas e Espetos",
+   "Status": "novo",
+   "Tipo": "b2c",
+   "Setor": "Restaurante",
+   "Cidade": "Taubaté",
+   "Telefone": "+55 12 99126 5708",
+   "Score": 50.0
+  }
+ },
+ {
+  "properties": {
+   "Empresa": "Padaria Villa",
+   "Status": "novo",
+   "Tipo": "b2c",
+   "Setor": "Padaria",
+   "Cidade": "Taubaté",
+   "Telefone": "+55 12 3621 2855",
+   "Score": 50.0
+  }
+ },
+ {
+  "properties": {
+   "Empresa": "Pizzaria Conde",
+   "Status": "novo",
+   "Tipo": "b2c",
+   "Setor": "Restaurante",
+   "Cidade": "Taubaté",
+   "Telefone": "+55 12 3432 7222",
+   "Score": 50.0
+  }
+ },
+ {
+  "properties": {
+   "Empresa": "Califórnia Panificadora & Confeitaria",
+   "Status": "novo",
+   "Tipo": "b2c",
+   "Setor": "Padaria",
+   "Cidade": "Taubaté",
+   "Telefone": "+55 12 99673 5402",
+   "Score": 50.0
+  }
+ },
+ {
+  "properties": {
+   "Empresa": "Aldebarã Pizzaria e Esfiharia",
+   "Status": "novo",
+   "Tipo": "b2c",
+   "Setor": "Restaurante",
+   "Cidade": "Taubaté",
+   "Telefone": "+55 12 3432 4817",
+   "Score": 50.0
+  }
+ },
+ {
+  "properties": {
+   "Empresa": "Fish World",
+   "Status": "novo",
+   "Tipo": "b2c",
+   "Setor": "Pet shop",
+   "Cidade": "Taubaté",
+   "Telefone": "+55 12 3629 2173",
+   "Score": 50.0
+  }
+ },
+ {
+  "properties": {
+   "Empresa": "Delícias Caseiras",
+   "Status": "novo",
+   "Tipo": "b2c",
+   "Setor": "Restaurante",
+   "Cidade": "Taubaté",
+   "Telefone": "+55 12 99709-2346",
+   "Score": 50.0
+  }
+ },
+ {
+  "properties": {
+   "Empresa": "Agro Taubaté Rações",
+   "Status": "novo",
+   "Tipo": "b2c",
+   "Setor": "Pet shop",
+   "Cidade": "Taubaté",
+   "Telefone": "+55 12 3621-7110",
+   "Score": 50.0
+  }
+ },
+ {
+  "properties": {
+   "Empresa": "Padaria Leal Taubaté",
+   "Status": "novo",
+   "Tipo": "b2c",
+   "Setor": "Padaria",
+   "Cidade": "Taubaté",
+   "Telefone": "+55 12 3426-3400",
+   "Score": 50.0
+  }
+ },
+ {
+  "properties": {
+   "Empresa": "Alentejano",
+   "Status": "novo",
+   "Tipo": "b2c",
+   "Setor": "Restaurante",
+   "Cidade": "Taubaté",
+   "Telefone": "+55 12 3686-4576",
+   "Score": 50.0
+  }
+ },
+ {
+  "properties": {
+   "Empresa": "Panela de Ferro",
+   "Status": "novo",
+   "Tipo": "b2c",
+   "Setor": "Restaurante",
+   "Cidade": "Taubaté",
+   "Score": 45.0
+  }
+ },
+ {
+  "properties": {
+   "Empresa": "Le Bistro",
+   "Status": "novo",
+   "Tipo": "b2c",
+   "Setor": "Restaurante",
+   "Cidade": "Taubaté",
+   "Score": 45.0
+  }
+ },
+ {
+  "properties": {
+   "Empresa": "Cantina Pizzaria Brunello",
+   "Status": "novo",
+   "Tipo": "b2c",
+   "Setor": "Restaurante",
+   "Cidade": "Taubaté",
+   "Score": 45.0
+  }
+ },
+ {
+  "properties": {
+   "Empresa": "Panificadora Quiririm",
+   "Status": "novo",
+   "Tipo": "b2c",
+   "Setor": "Padaria",
+   "Cidade": "Taubaté",
+   "Score": 45.0
+  }
+ },
+ {
+  "properties": {
+   "Empresa": "Barbearia do Veloso",
+   "Status": "novo",
+   "Tipo": "b2c",
+   "Setor": "Salão de beleza",
+   "Cidade": "Taubaté",
+   "Score": 45.0
+  }
+ },
+ {
+  "properties": {
+   "Empresa": "Padaria da Praça",
+   "Status": "novo",
+   "Tipo": "b2c",
+   "Setor": "Padaria",
+   "Cidade": "Taubaté",
+   "Score": 45.0
+  }
+ },
+ {
+  "properties": {
+   "Empresa": "Divino Fogão",
+   "Status": "novo",
+   "Tipo": "b2c",
+   "Setor": "Restaurante",
+   "Cidade": "Taubaté",
+   "Score": 45.0
+  }
+ },
+ {
+  "properties": {
+   "Empresa": "Princesa de Taubaté",
+   "Status": "novo",
+   "Tipo": "b2c",
+   "Setor": "Padaria",
+   "Cidade": "Taubaté",
+   "Score": 45.0
+  }
+ },
+ {
+  "properties": {
+   "Empresa": "Academia Corpo de Mulher",
+   "Status": "novo",
+   "Tipo": "b2c",
+   "Setor": "Academia",
+   "Cidade": "Taubaté",
+   "Score": 45.0
+  }
+ },
+ {
+  "properties": {
+   "Empresa": "Pani Independência",
+   "Status": "novo",
+   "Tipo": "b2c",
+   "Setor": "Padaria",
+   "Cidade": "Taubaté",
+   "Score": 45.0
+  }
+ },
+ {
+  "properties": {
+   "Empresa": "PaniHouse",
+   "Status": "novo",
+   "Tipo": "b2c",
+   "Setor": "Padaria",
+   "Cidade": "Taubaté",
+   "Score": 45.0
+  }
+ },
+ {
+  "properties": {
+   "Empresa": "Padaria Baronesa",
+   "Status": "novo",
+   "Tipo": "b2c",
+   "Setor": "Padaria",
+   "Cidade": "Taubaté",
+   "Score": 45.0
+  }
+ },
+ {
+  "properties": {
+   "Empresa": "Padaria Pão Pão",
+   "Status": "novo",
+   "Tipo": "b2c",
+   "Setor": "Padaria",
+   "Cidade": "Taubaté",
+   "Score": 45.0
+  }
+ },
+ {
+  "properties": {
+   "Empresa": "Pani Sutani",
+   "Status": "novo",
+   "Tipo": "b2c",
+   "Setor": "Padaria",
+   "Cidade": "Taubaté",
+   "Score": 45.0
+  }
+ },
+ {
+  "properties": {
+   "Empresa": "Padaria Delícias do papai",
+   "Status": "novo",
+   "Tipo": "b2c",
+   "Setor": "Padaria",
+   "Cidade": "Taubaté",
+   "Score": 45.0
+  }
+ },
+ {
+  "properties": {
+   "Empresa": "Restaurante e Café da Praça",
+   "Status": "novo",
+   "Tipo": "b2c",
+   "Setor": "Restaurante",
+   "Cidade": "Taubaté",
+   "Score": 45.0
+  }
+ },
+ {
+  "properties": {
+   "Empresa": "Rappi 10",
+   "Status": "novo",
+   "Tipo": "b2c",
+   "Setor": "Restaurante",
+   "Cidade": "Taubaté",
+   "Score": 45.0
+  }
+ },
+ {
+  "properties": {
+   "Empresa": "Neti Cabeleireira",
+   "Status": "novo",
+   "Tipo": "b2c",
+   "Setor": "Salão de beleza",
+   "Cidade": "Taubaté",
+   "Score": 45.0
+  }
+ },
+ {
+  "properties": {
+   "Empresa": "Academia Fox",
+   "Status": "novo",
+   "Tipo": "b2c",
+   "Setor": "Academia",
+   "Cidade": "Taubaté",
+   "Score": 45.0
+  }
+ },
+ {
+  "properties": {
+   "Empresa": "Barbearia Dominus",
+   "Status": "novo",
+   "Tipo": "b2c",
+   "Setor": "Salão de beleza",
+   "Cidade": "Taubaté",
+   "Score": 45.0
+  }
+ },
+ {
+  "properties": {
+   "Empresa": "Bar do Prego",
+   "Status": "novo",
+   "Tipo": "b2c",
+   "Setor": "Restaurante",
+   "Cidade": "Taubaté",
+   "Score": 45.0
+  }
+ },
+ {
+  "properties": {
+   "Empresa": "Fritz - cervejaria artesanal",
+   "Status": "novo",
+   "Tipo": "b2c",
+   "Setor": "Restaurante",
+   "Cidade": "Taubaté",
+   "Score": 45.0
+  }
+ },
+ {
+  "properties": {
+   "Empresa": "Caseh Restaurante",
+   "Status": "novo",
+   "Tipo": "b2c",
+   "Setor": "Restaurante",
+   "Cidade": "Taubaté",
+   "Score": 45.0
+  }
+ },
+ {
+  "properties": {
+   "Empresa": "Dida Cabeleira",
+   "Status": "novo",
+   "Tipo": "b2c",
+   "Setor": "Salão de beleza",
+   "Cidade": "Taubaté",
+   "Score": 45.0
+  }
+ },
+ {
+  "properties": {
+   "Empresa": "Com Feito de Armor",
+   "Status": "novo",
+   "Tipo": "b2c",
+   "Setor": "Restaurante",
+   "Cidade": "Taubaté",
+   "Score": 45.0
+  }
+ },
+ {
+  "properties": {
+   "Empresa": "Pizzaria Vila Velha",
+   "Status": "novo",
+   "Tipo": "b2c",
+   "Setor": "Restaurante",
+   "Cidade": "Taubaté",
+   "Score": 45.0
+  }
+ },
+ {
+  "properties": {
+   "Empresa": "Cobasi",
+   "Status": "novo",
+   "Tipo": "b2c",
+   "Setor": "Pet shop",
+   "Cidade": "Taubaté",
+   "Score": 45.0
+  }
+ },
+ {
+  "properties": {
+   "Empresa": "Academia Smartfit",
+   "Status": "novo",
+   "Tipo": "b2c",
+   "Setor": "Academia",
+   "Cidade": "Taubaté",
+   "Score": 45.0
+  }
+ },
+ {
+  "properties": {
+   "Empresa": "Fitness Club",
+   "Status": "novo",
+   "Tipo": "b2c",
+   "Setor": "Academia",
+   "Cidade": "Taubaté",
+   "Score": 45.0
+  }
+ },
+ {
+  "properties": {
+   "Empresa": "Academia Greenfit",
+   "Status": "novo",
+   "Tipo": "b2c",
+   "Setor": "Academia",
+   "Cidade": "Taubaté",
+   "Score": 45.0
+  }
+ },
+ {
+  "properties": {
+   "Empresa": "Major pizzaria",
+   "Status": "novo",
+   "Tipo": "b2c",
+   "Setor": "Restaurante",
+   "Cidade": "Taubaté",
+   "Score": 45.0
+  }
+ },
+ {
+  "properties": {
+   "Empresa": "Academia Inova",
+   "Status": "novo",
+   "Tipo": "b2c",
+   "Setor": "Academia",
+   "Cidade": "Taubaté",
+   "Score": 45.0
+  }
+ },
+ {
+  "properties": {
+   "Empresa": "Raiz beergarden",
+   "Status": "novo",
+   "Tipo": "b2c",
+   "Setor": "Restaurante",
+   "Cidade": "Taubaté",
+   "Score": 45.0
+  }
+ },
+ {
+  "properties": {
+   "Empresa": "Maitá",
+   "Status": "novo",
+   "Tipo": "b2c",
+   "Setor": "Restaurante",
+   "Cidade": "Taubaté",
+   "Score": 45.0
+  }
+ },
+ {
+  "properties": {
+   "Empresa": "Palhoça",
+   "Status": "novo",
+   "Tipo": "b2c",
+   "Setor": "Restaurante",
+   "Cidade": "Taubaté",
+   "Score": 45.0
+  }
+ },
+ {
+  "properties": {
+   "Empresa": "Café com as comadres",
+   "Status": "novo",
+   "Tipo": "b2c",
+   "Setor": "Cafeteria",
+   "Cidade": "Taubaté",
+   "Score": 45.0
+  }
+ },
+ {
+  "properties": {
+   "Empresa": "KidZoom Cabeleireiro Infantil",
+   "Status": "novo",
+   "Tipo": "b2c",
+   "Setor": "Salão de beleza",
+   "Cidade": "Taubaté",
+   "Score": 45.0
+  }
+ },
+ {
+  "properties": {
+   "Empresa": "Honey Doces",
+   "Status": "novo",
+   "Tipo": "b2c",
+   "Setor": "Cafeteria",
+   "Cidade": "taubaté",
+   "Score": 45.0
+  }
+ },
+ {
+  "properties": {
+   "Empresa": "Salim",
+   "Status": "novo",
+   "Tipo": "b2c",
+   "Setor": "Restaurante",
+   "Cidade": "taubaté",
+   "Score": 45.0
+  }
+ },
+ {
+  "properties": {
+   "Empresa": "Hood Barbearia",
+   "Status": "novo",
+   "Tipo": "b2c",
+   "Setor": "Salão de beleza",
+   "Cidade": "Taubaté",
+   "Score": 45.0
+  }
+ },
+ {
+  "properties": {
+   "Empresa": "ViLaVi Café Bistro",
+   "Status": "novo",
+   "Tipo": "b2c",
+   "Setor": "Cafeteria",
+   "Cidade": "Taubaté",
+   "Score": 45.0
+  }
+ },
+ {
+  "properties": {
+   "Empresa": "Minuta",
+   "Status": "novo",
+   "Tipo": "b2c",
+   "Setor": "Restaurante",
+   "Cidade": "Taubaté",
+   "Score": 45.0
+  }
+ },
+ {
+  "properties": {
+   "Empresa": "Pizza por Metro",
+   "Status": "novo",
+   "Tipo": "b2c",
+   "Setor": "Restaurante",
+   "Cidade": "Taubaté",
+   "Score": 45.0
+  }
+ },
+ {
+  "properties": {
+   "Empresa": "Jabá do Riba",
+   "Status": "novo",
+   "Tipo": "b2c",
+   "Setor": "Restaurante",
+   "Cidade": "Taubaté",
+   "Score": 45.0
+  }
+ },
+ {
+  "properties": {
+   "Empresa": "Restaurante do Roberto",
+   "Status": "novo",
+   "Tipo": "b2c",
+   "Setor": "Restaurante",
+   "Cidade": "Taubaté",
+   "Score": 45.0
+  }
+ },
+ {
+  "properties": {
+   "Empresa": "Bom Prato de Taubaté",
+   "Status": "novo",
+   "Tipo": "b2c",
+   "Setor": "Restaurante",
+   "Cidade": "Taubaté",
+   "Score": 45.0
+  }
+ },
+ {
+  "properties": {
+   "Empresa": "Restaurante Frango Assado",
+   "Status": "novo",
+   "Tipo": "b2c",
+   "Setor": "Restaurante",
+   "Cidade": "Taubaté",
+   "Score": 45.0
+  }
+ },
+ {
+  "properties": {
+   "Empresa": "Panificadora Recanto dos Coqueirais",
+   "Status": "novo",
+   "Tipo": "b2c",
+   "Setor": "Padaria",
+   "Cidade": "Taubaté",
+   "Score": 45.0
+  }
+ },
+ {
+  "properties": {
+   "Empresa": "S-Pilates",
+   "Status": "novo",
+   "Tipo": "b2c",
+   "Setor": "Academia",
+   "Cidade": "Taubaté",
+   "Score": 45.0
+  }
+ },
+ {
+  "properties": {
+   "Empresa": "Pizza Nostra",
+   "Status": "novo",
+   "Tipo": "b2c",
+   "Setor": "Restaurante",
+   "Cidade": "Taubaté",
+   "Score": 45.0
+  }
+ },
+ {
+  "properties": {
+   "Empresa": "Restaurante Bica do Curió",
+   "Status": "novo",
+   "Tipo": "b2c",
+   "Setor": "Restaurante",
+   "Cidade": "Taubaté",
+   "Score": 45.0
+  }
+ },
+ {
+  "properties": {
+   "Empresa": "Bar e Restaurante do Roberto",
+   "Status": "novo",
+   "Tipo": "b2c",
+   "Setor": "Restaurante",
+   "Cidade": "Taubaté",
+   "Score": 45.0
+  }
+ },
+ {
+  "properties": {
+   "Empresa": "Norma da Casa",
+   "Status": "novo",
+   "Tipo": "b2c",
+   "Setor": "Restaurante",
+   "Cidade": "Taubaté",
+   "Score": 45.0
+  }
+ },
+ {
+  "properties": {
+   "Empresa": "Academia Drop Fit",
+   "Status": "novo",
+   "Tipo": "b2c",
+   "Setor": "Academia",
+   "Cidade": "Taubaté",
+   "Score": 45.0
+  }
+ },
+ {
+  "properties": {
+   "Empresa": "Padaria do Jarbas",
+   "Status": "novo",
+   "Tipo": "b2c",
+   "Setor": "Padaria",
+   "Cidade": "Taubaté",
+   "Score": 45.0
+  }
+ },
+ {
+  "properties": {
+   "Empresa": "Luciana Ribeiro Estética e Cosmetologia",
+   "Status": "novo",
+   "Tipo": "b2c",
+   "Setor": "Salão de beleza",
+   "Cidade": "Taubaté",
+   "Score": 45.0
+  }
+ },
+ {
+  "properties": {
+   "Empresa": "Babbo Giovanni",
+   "Status": "novo",
+   "Tipo": "b2c",
+   "Setor": "Restaurante",
+   "Cidade": "Taubaté",
+   "Score": 45.0
+  }
+ },
+ {
+  "properties": {
+   "Empresa": "Cantina Indiani",
+   "Status": "novo",
+   "Tipo": "b2c",
+   "Setor": "Restaurante",
+   "Cidade": "Taubaté",
+   "Score": 45.0
+  }
+ },
+ {
+  "properties": {
+   "Empresa": "Taqui",
+   "Status": "novo",
+   "Tipo": "b2c",
+   "Setor": "Academia",
+   "Cidade": "Taubaté",
+   "Score": 45.0
+  }
+ },
+ {
+  "properties": {
+   "Empresa": "Padaria Continental",
+   "Status": "novo",
+   "Tipo": "b2c",
+   "Setor": "Padaria",
+   "Cidade": "Taubaté",
+   "Score": 45.0
+  }
+ },
+ {
+  "properties": {
+   "Empresa": "Capellato Restaurante e Rotisserie",
+   "Status": "novo",
+   "Tipo": "b2c",
+   "Setor": "Restaurante",
+   "Cidade": "Taubaté",
+   "Score": 45.0
+  }
+ },
+ {
+  "properties": {
+   "Empresa": "Comercios",
+   "Status": "novo",
+   "Tipo": "b2c",
+   "Setor": "Cafeteria",
+   "Cidade": "Taubaté",
+   "Score": 45.0
+  }
+ },
+ {
+  "properties": {
+   "Empresa": "Toscana",
+   "Status": "novo",
+   "Tipo": "b2c",
+   "Setor": "Restaurante",
+   "Cidade": "Taubaté",
+   "Telefone": "+55 12 3622 5557",
+   "Site": "http://www.toscanataubate.com.br/",
+   "Score": 40.0
+  }
+ },
+ {
+  "properties": {
+   "Empresa": "Atus Odontologia",
+   "Status": "novo",
+   "Tipo": "b2c",
+   "Setor": "Odontologia",
+   "Cidade": "taubaté",
+   "Site": "https://atusodontologia.com",
+   "Score": 35.0
+  }
+ }
+]

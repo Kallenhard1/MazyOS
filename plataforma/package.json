@@ -1,0 +1,15 @@
+{
+  "name": "plataforma",
+  "version": "1.0.0",
+  "description": "Casca web local sobre os scripts de prospecção. Não reescreve nada — orquestra `scripts/` e mostra o que eles geram. Fonte de verdade segue em `crm/pipeline.csv` e `dados/`. Veja o plano completo em [`docs/PLATAFORMA-MVP.md`](../docs/PLATAFORMA-MVP.md).",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "playwright": "^1.61.0"
+  }
+}

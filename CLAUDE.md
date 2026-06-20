@@ -113,3 +113,107 @@ Quando o usuário pedir skill nova:
 4. Se a skill precisar de arquivos de apoio (templates, exemplos),
    criar dentro da pasta da skill
 5. Seguir o fluxo da skill-creator nativa do Claude Code
+
+---
+
+# MarioLucash — perfil Freelancer
+
+> Bloco adicionado pelo `/instalar` em 12/06/2026. Perfil: **freelancer** —
+> vende tempo e talento pra clientes terceiros. O sistema gira em torno
+> de captar, entregar e cobrar.
+
+## O que é esse workspace
+
+Operação freelancer do MarioLucash: venda de sites e automação pra
+negócios locais. Aqui ficam prospecção, propostas, clientes, entregas e
+o marketing próprio.
+
+**Estrutura de pastas:**
+- `_memoria/` — quem sou, como falo, foco atual
+- `identidade/` — **marca do MarioLucash** (a minha): `design-guide.md` + `logo.jpg`.
+  Material visual de cliente nunca mora aqui — vai em `clientes/<id>/assets/`.
+- `clientes/` — uma subpasta por cliente, **autossuficiente** (layout canônico abaixo)
+- `propostas/` — propostas avulsas em rascunho (antes de virar workspace de cliente)
+- `marketing/` — conteúdo **próprio** (do MarioLucash) + `plano-de-acao.md`
+- `saidas/` — emails, documentos pontuais
+- `dados/` — arquivos a analisar (ex: `prospects.csv`)
+
+**Layout canônico de `clientes/<id>/`** (criado pelo `lead.py`; a plataforma lê
+tudo daqui, nada de cliente fica nas pastas raiz):
+- `briefing.md` · `estado.json` · `notas.md` · `pesquisa.md` — dados e estado do lead
+- `assets/` — imagens e logo do cliente
+- `site/` — mockup do site
+- `conteudo/` — carrosséis e posts (módulo Conteúdo)
+- `seo/` — saídas dos 8 passos (módulo SEO)
+- `campanhas/` — campanhas de Ads + `relatorios/` (módulo Anúncios)
+- `apresentacao/` · `proposta.html`/`.pdf` — apresentação comercial e proposta
+
+## Quem sou
+
+Sou Mario Lucas (MarioLucash), freelancer de desenvolvimento web e
+automação. Trabalho com negócios locais de serviço entregando presença
+digital completa: site, Google Meu Negócio e atendimento automático no
+WhatsApp.
+
+## Meu serviço
+
+- Sites e landing pages (pacotes Essencial / Profissional / Completo)
+- Automação de atendimento e agendamento via WhatsApp
+- Manutenção mensal recorrente (hospedagem + ajustes)
+- Futuro upsell: RivalFlow (CRM social + coach de IA), só pra cliente fidelizado
+
+## Clientes ativos
+
+Nenhum ainda — fase zero. Prioridade: fechar o primeiro contrato
+(ver `marketing/plano-de-acao.md` e `_memoria/estrategia.md`).
+
+## Como trabalho
+
+Prospecção ativa no Google Maps → diagnóstico gratuito de 1 página →
+mockup antes da venda pros melhores prospects → proposta em 3 pacotes →
+50% de entrada → entrega em 7 dias → depoimento + case.
+
+## Regras do sistema
+
+- Cliente novo → criar workspace `clientes/<id>/` (o `lead.py` já monta o
+  layout canônico). Material do cliente vai nas subpastas dele, nunca na raiz.
+- Proposta avulsa em rascunho → `propostas/<Nome>.md`; virou cliente →
+  workspace em `clientes/<id>/` (proposta em `proposta.html`/`.pdf`)
+- Material visual: consultar `identidade/design-guide.md` (marca do MarioLucash,
+  paleta preto/creme + acento âmbar, fechada em 15/06/2026)
+- Proposta/apresentação comercial: usar SEMPRE o template visual da apresentação
+  (referência: `clientes/fryda-cafe-taubate/apresentacao/apresentacao.html`, a
+  primeira feita) como base — capa escura com logo do cliente + logo MarioLucash
+  ("Apresentado por"), headline forte, logo da MarioLucash nos headers,
+  assinatura no CTA, sem travessão. Gerar o PDF **sempre via Playwright**
+  (`gerar-pdf.js`), que dá a maior fidelidade. O **WeasyPrint (`gerar_pdf.py`)
+  é só o fallback**, pra quando não der pra usar o Playwright (ex: sessão na
+  nuvem onde o Chromium não baixa); um SessionStart hook garante o WeasyPrint
+  instalado nesses casos. O `apresentacao.html` é a fonte de verdade; manter os
+  dois geradores em sincronia.
+
+## Plataforma (painel visual)
+
+O `plataforma/` é a casca web (Flask) que dá rosto à operação: orquestra os
+`scripts/` e as skills sem reimplementar nada. O MazyOS sabe que ela existe e
+mantém ela em dia:
+
+- Fonte de verdade continua em `crm/`, `dados/`, `clientes/` e `marketing/`; a
+  plataforma só lê e dispara.
+- O que a plataforma conhece do MazyOS vem de `plataforma/manifest.json` (lista
+  de skills e funções), gerado por `scripts/gerar_manifest.py`.
+- **O `/salvar` sempre regenera o manifesto antes de comitar**, pra plataforma e
+  MazyOS nunca saírem de sincronia. Skill ou função nova deve virar feature em
+  `docs/PLATAFORMA-FEATURES.md`; o manifesto acusa o que ainda falta mapear.
+- Planos: `docs/PLATAFORMA-MVP.md` (o que foi entregue) e
+  `docs/PLATAFORMA-FEATURES.md` (mapa completo de features + fases 4–7).
+
+## Ferramentas conectadas
+
+- [x] Notion — base "Prospecção — MarioLucash" (funil de prospecção)
+      https://app.notion.com/p/2ae35c0bfb2a4828b592e534a4b2cbaf
+- [ ] Gmail
+- [ ] Google Calendar
+- [ ] Stripe / cobrança
+
+*(Marcar conforme for instalando os MCPs)*

@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Painel MarioLucash · {% block titulo %}{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='estilo.css') }}">
+  <script src="https://unpkg.com/htmx.org@2.0.3" crossorigin="anonymous"></script>
+</head>
+<body>
+  <aside class="sidebar">
+    <div class="marca">MarioLucash<small>painel da operação</small></div>
+    <nav class="nav">
+      <a href="{{ url_for('hoje') }}" class="{{ 'ativo' if ativa=='hoje' }}">🏠 Hoje</a>
+      <a href="{{ url_for('agenda') }}" class="{{ 'ativo' if ativa=='agenda' }}">⏰ Agenda</a>
+      <a href="{{ url_for('prospeccao') }}" class="{{ 'ativo' if ativa=='prospeccao' }}">🔍 Prospecção</a>
+      <a href="{{ url_for('envio') }}" class="{{ 'ativo' if ativa=='envio' }}">📧 Envio em massa</a>
+      <a href="{{ url_for('leitor') }}" class="{{ 'ativo' if ativa=='leitor' }}">📄 Leitor CSV</a>
+      <a href="{{ url_for('funil') }}" class="{{ 'ativo' if ativa=='funil' }}">📊 Funil / Leads</a>
+      <a href="{{ url_for('lead_index') }}" class="{{ 'ativo' if ativa=='lead' }}">🎯 Lead → Proposta</a>
+      <a href="{{ url_for('conteudo') }}" class="{{ 'ativo' if ativa=='conteudo' }}">✍️ Conteúdo &amp; Redes</a>
+      <a href="{{ url_for('seo') }}" class="{{ 'ativo' if ativa=='seo' }}">🔎 SEO &amp; GMB</a>
+      <a href="{{ url_for('ads') }}" class="{{ 'ativo' if ativa=='ads' }}">📣 Anúncios</a>
+      <a href="{{ url_for('analise') }}" class="{{ 'ativo' if ativa=='analise' }}">📈 Análise</a>
+      <a href="{{ url_for('config') }}" class="{{ 'ativo' if ativa=='config' }}">⚙️ Sistema &amp; Config</a>
+    </nav>
+  </aside>
+  <main class="conteudo">
+    {% block conteudo %}{% endblock %}
+  </main>
+</body>
+</html>

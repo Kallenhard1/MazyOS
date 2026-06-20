@@ -1,0 +1,23 @@
+{% if not itens %}
+<p class="muted">Fila vazia. Adicione um tema acima — a meta do plano é 2 posts/semana.</p>
+{% else %}
+{% for i in itens %}
+<div class="card" style="padding:14px 16px">
+  <div style="display:flex; align-items:flex-start; gap:10px">
+    <div style="flex:1">
+      <strong>{{ i.tema }}</strong>
+      <span class="muted" style="font-size:.74rem; display:block">adicionado {{ i.criado }}</span>
+    </div>
+    <button type="button" class="modal-x" style="position:static" title="remover"
+            hx-post="{{ url_for('instagram_remover') }}" hx-vals='{"id": "{{ i.id }}"}'
+            hx-target="#fila" hx-swap="innerHTML" hx-confirm="Tirar esse tema da fila?">×</button>
+  </div>
+  <div style="display:flex; gap:8px; flex-wrap:wrap; margin-top:10px">
+    <button type="button" class="secundario" style="margin:0; padding:6px 12px; font-size:.78rem"
+            data-prompt="{{ i.p_carrossel }}" onclick="copiarInsta(this)">📋 Prompt do carrossel</button>
+    <button type="button" class="secundario" style="margin:0; padding:6px 12px; font-size:.78rem"
+            data-prompt="{{ i.p_completo }}" onclick="copiarInsta(this)">📋 Conteúdo completo (/publicar-tema)</button>
+  </div>
+</div>
+{% endfor %}
+{% endif %}

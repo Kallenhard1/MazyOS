@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block titulo %}Leitor CSV{% endblock %}
+{% block conteudo %}
+<h1>📄 Leitor CSV</h1>
+<p class="sub">Lê os arquivos da operação como tabela, sem precisar baixar. Só leitura — pra editar, use os scripts/telas próprios.</p>
+
+<div class="linha" style="align-items:flex-start">
+  <div style="flex:0 0 260px">
+    <div class="card">
+      <h3>Arquivos</h3>
+      {% if not csvs %}
+        <p class="muted">Nenhum .csv encontrado ainda.</p>
+      {% else %}
+        <ul style="list-style:none; padding:0; margin:0">
+          {% for c in csvs %}
+          <li style="margin:2px 0">
+            <a href="#" hx-get="{{ url_for('leitor_tabela', rel=c.rel) }}"
+               hx-target="#tabela" hx-push-url="{{ url_for('leitor', rel=c.rel) }}"
+               style="display:block; padding:7px 9px; border-radius:7px; text-decoration:none; color:#0d0d0d; {{ 'background:#0d0d0d;color:#fff' if rel==c.rel }}">
+              {{ c.nome }}
+              <span class="muted" style="display:block; font-size:.72rem; {{ 'color:#bbb' if rel==c.rel }}">{{ c.pasta }}/ · {{ c.mod }}</span>
+            </a>
+          </li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    </div>
+  </div>
+
+  <div style="flex:1; min-width:0">
+    <div id="tabela">
+      {% if dados %}
+        {% include "partials/tabela_csv.html" %}
+      {% else %}
+        <div class="card"><p class="muted">Escolha um arquivo na lista pra visualizar.</p></div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+{% endblock %}

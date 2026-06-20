@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<style>
+@font-face { font-family:'Playfair'; src:url('fonts/PlayfairDisplay-800.ttf'); font-weight:800 }
+@font-face { font-family:'Playfair'; src:url('fonts/PlayfairDisplay-700.ttf'); font-weight:700 }
+@font-face { font-family:'Jost'; src:url('fonts/Jost-300.ttf'); font-weight:300 }
+@font-face { font-family:'Jost'; src:url('fonts/Jost-400.ttf'); font-weight:400 }
+@font-face { font-family:'Jost'; src:url('fonts/Jost-500.ttf'); font-weight:500 }
+@font-face { font-family:'Jost'; src:url('fonts/Jost-600.ttf'); font-weight:600 }
+
+@page { size:A4; margin:0 }
+:root{ --preto:#1a1a1a; --tinta:#2b2b2b; --cinza:#6b6b6b; --linha:#e4e4e4; --suave:#f5f4f2; --accent:#1a1a1a }
+*{ margin:0; padding:0; box-sizing:border-box }
+body{ font-family:'Jost',sans-serif; color:var(--tinta); font-size:10pt }
+.page{ width:210mm; min-height:297mm; padding:18mm 18mm 14mm; position:relative }
+
+/* Cabeçalho */
+.top{ display:flex; justify-content:space-between; align-items:center; border-bottom:2px solid var(--preto); padding-bottom:7mm; margin-bottom:9mm }
+.brand{ display:flex; align-items:center; gap:10px }
+.brand .knot{ width:34px; height:34px; background:var(--preto); border-radius:50%; display:flex; align-items:center; justify-content:center }
+.brand .knot svg{ width:22px; height:22px }
+.brand .who b{ font-family:'Playfair',serif; font-weight:700; font-size:12pt; color:var(--preto); display:block; letter-spacing:.02em }
+.brand .who span{ font-size:7.5pt; color:var(--cinza); letter-spacing:.06em; text-transform:uppercase }
+.top .tag{ font-size:7.5pt; letter-spacing:.16em; color:var(--cinza); text-transform:uppercase; text-align:right }
+
+/* Título */
+.eyebrow{ font-size:8pt; font-weight:600; letter-spacing:.16em; color:var(--cinza); text-transform:uppercase; margin-bottom:3mm }
+h1{ font-family:'Playfair',serif; font-weight:800; font-size:24pt; color:var(--preto); line-height:1.1; margin-bottom:4mm }
+.intro{ font-weight:300; color:var(--cinza); line-height:1.6; max-width:150mm; margin-bottom:9mm }
+
+/* Score */
+.scorebar{ display:flex; align-items:center; gap:7mm; background:var(--suave); border-radius:8px; padding:6mm 7mm; margin-bottom:9mm }
+.scorebar .num{ font-family:'Playfair',serif; font-weight:800; font-size:30pt; color:var(--preto); line-height:1 }
+.scorebar .num small{ font-family:'Jost',sans-serif; font-size:11pt; font-weight:300; color:var(--cinza) }
+.scorebar .lab b{ display:block; font-size:10pt; font-weight:600; color:var(--preto); margin-bottom:1mm }
+.scorebar .lab span{ font-size:8.5pt; font-weight:300; color:var(--cinza); line-height:1.45 }
+
+/* Achados */
+.sec-h{ font-family:'Playfair',serif; font-weight:700; font-size:13pt; color:var(--preto); margin-bottom:5mm }
+.achado{ display:flex; gap:5mm; padding:4mm 0; border-bottom:1px solid var(--linha) }
+.achado .mark{ width:18px; height:18px; min-width:18px; border-radius:50%; background:var(--preto); color:#fff; font-size:9pt; font-weight:600; display:flex; align-items:center; justify-content:center; margin-top:1mm }
+.achado p{ font-size:9.5pt; font-weight:400; line-height:1.5; color:var(--tinta) }
+
+/* Solução */
+.solucao{ margin-top:9mm; background:var(--preto); color:#fff; border-radius:8px; padding:7mm 8mm }
+.solucao h3{ font-family:'Playfair',serif; font-weight:700; font-size:13pt; margin-bottom:3mm }
+.solucao p{ font-weight:300; font-size:9.5pt; line-height:1.6; color:rgba(255,255,255,.85) }
+
+/* CTA / rodapé */
+.cta{ margin-top:auto; padding-top:9mm }
+.cta .call{ font-family:'Playfair',serif; font-weight:700; font-size:12pt; color:var(--preto); margin-bottom:2mm }
+.cta .contatos{ font-size:9pt; font-weight:400; color:var(--cinza) }
+.foot{ position:absolute; bottom:9mm; left:18mm; right:18mm; border-top:1px solid var(--linha); padding-top:4mm; font-size:7.5pt; color:#aaa; display:flex; justify-content:space-between }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="top">
+    <div class="brand">
+      <div class="knot">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.4">
+          <circle cx="12" cy="12" r="9"/><circle cx="9" cy="10" r="4.5"/>
+          <circle cx="15" cy="14" r="4.5"/><circle cx="14" cy="9" r="4"/>
+        </svg>
+      </div>
+      <div class="who"><b>MarioLucash</b><span>Sites &amp; Automação</span></div>
+    </div>
+    <div class="tag">Diagnóstico Digital<br>{{DATA}}</div>
+  </div>
+
+  <div class="eyebrow">Diagnóstico preparado para</div>
+  <h1>{{NOME}}</h1>
+  <p class="intro">{{SETOR}} · {{CIDADE}}. Uma olhada rápida e honesta na presença digital de vocês hoje — o que está funcionando, o que está deixando cliente na mesa e o que dá pra resolver.</p>
+
+  <div class="scorebar">
+    <div class="num">{{SCORE}}<small>/100</small></div>
+    <div class="lab">
+      <b>Índice de oportunidade: {{CLASSE}}</b>
+      <span>Quanto maior, mais há a ganhar arrumando a presença digital. Calculado a partir do site, da reputação e de como vocês aparecem (ou não) pra quem procura.</span>
+    </div>
+  </div>
+
+  <div class="sec-h">O que encontrei</div>
+  {{ACHADOS}}
+
+  <div class="solucao">
+    <h3>Como eu resolveria</h3>
+    <p>{{SOLUCAO}}</p>
+  </div>
+
+  <div class="cta">
+    <div class="call">Quer ver isso virando cliente novo?</div>
+    <div class="contatos">Chamo no detalhe e mostro um exemplo aplicado ao {{NOME}}.<br>
+    mariolucasdasilvabarbosa@gmail.com · WhatsApp · Instagram @mariolucash</div>
+  </div>
+
+  <div class="foot">
+    <span>Diagnóstico digital · MarioLucash</span>
+    <span>Sem compromisso</span>
+  </div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+{% block titulo %}Prospecção{% endblock %}
+{% block conteudo %}
+<h1>🔍 Prospecção</h1>
+<p class="sub">Roda o pipeline que já existe — sourcing, qualificação e abordagem — e mostra os arquivos gerados. Tudo local, nada é enviado.</p>
+
+<div class="card">
+  <h3>1. Sourcing — buscar leads no OpenStreetMap (grátis)</h3>
+  <form hx-post="{{ url_for('prospeccao_buscar') }}" hx-target="#log-sourcing" hx-disabled-elt="find button">
+    <div class="linha">
+      <div>
+        <label>Cidade</label>
+        <input type="text" name="cidade" placeholder="Taubaté" value="Taubaté">
+      </div>
+      <div>
+        <label>Categorias (separadas por vírgula)</label>
+        <input type="text" name="categorias" placeholder="cafe,padaria,restaurante" list="cats">
+        <datalist id="cats">
+          {% for c in categorias %}<option value="{{ c }}">{% endfor %}
+        </datalist>
+      </div>
+    </div>
+    <label style="margin-top:12px"><input type="checkbox" name="usar_plano"> usar o plano de busca pronto (dados/buscas-osm.csv — 9 categorias)</label>
+    <button type="submit">Buscar leads <span class="htmx-indicator spin">⏳ consultando OSM…</span></button>
+  </form>
+  <div id="log-sourcing"></div>
+</div>
+
+<div class="card">
+  <h3>2. Qualificar e ranquear</h3>
+  <p class="muted">Checa a saúde do site de cada lead e calcula o score de oportunidade (0–100).</p>
+  <form hx-post="{{ url_for('prospeccao_qualificar') }}" hx-target="#log-qualif" hx-disabled-elt="find button">
+    <button type="submit">Qualificar dados/prospects.csv <span class="htmx-indicator spin">⏳ checando sites…</span></button>
+  </form>
+  <div id="log-qualif">
+    {% if resumo %}{% include "partials/resumo.html" %}{% endif %}
+  </div>
+</div>
+
+<div class="card">
+  <h3>3. Gerar abordagem (WhatsApp + e-mail)</h3>
+  <form hx-post="{{ url_for('prospeccao_abordagem') }}" hx-target="#log-abord" hx-disabled-elt="find button">
+    <div class="linha">
+      <div>
+        <label>Classe</label>
+        <select name="classe">
+          <option value="quente">quente</option>
+          <option value="morno" selected>morno</option>
+          <option value="quente,morno">quente + morno</option>
+        </select>
+      </div>
+      <div>
+        <label>Limite (0 = todos)</label>
+        <input type="number" name="limite" value="30" min="0">
+      </div>
+    </div>
+    <button type="submit">Gerar abordagens <span class="htmx-indicator spin">⏳ gerando…</span></button>
+  </form>
+  <div id="log-abord"></div>
+  <p class="muted" style="margin-top:10px">As mensagens expõem só problemas digitais reais — nunca os motivos internos de score. Revisar antes de usar.</p>
+</div>
+
+<h2>Arquivos gerados</h2>
+<div class="card arquivos" id="painel-arquivos"
+     hx-get="{{ url_for('prospeccao_arquivos') }}" hx-trigger="every 20s" hx-swap="innerHTML">
+  {% include "partials/arquivos.html" %}
+</div>
+
+<script>
+function filtrarQualif(btn){
+  const q = btn.dataset.classe;
+  btn.parentElement.querySelectorAll('.qf-btn').forEach(x=>x.classList.toggle('ativo', x===btn));
+  document.querySelectorAll('#log-qualif .qf-row').forEach(tr=>{
+    tr.hidden = q && tr.dataset.classe !== q;
+  });
+}
+</script>
+{% endblock %}

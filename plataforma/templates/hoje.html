@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+{% block titulo %}Hoje{% endblock %}
+{% block conteudo %}
+<h1>🏠 Hoje <span class="muted" style="font-size:1rem; font-weight:400">· {{ hoje_data }}</span></h1>
+<p class="sub">Onde focar agora. Abra um WhatsApp, mande a abordagem, mova o card. {{ total }} leads no funil.</p>
+
+{% if avisos %}
+<a href="{{ url_for('agenda') }}" class="card" style="display:flex; align-items:center; gap:12px; text-decoration:none; color:inherit; border-left:3px solid #B93A2B; background:#fff7f5">
+  <span style="font-size:1.4rem">🔔</span>
+  <div>
+    <strong>{{ avisos|length }} tarefa{{ 's' if avisos|length > 1 else '' }} esperando confirmação</strong>
+    <span class="muted" style="display:block; font-size:.8rem">{{ avisos[0].titulo }}{% if avisos|length > 1 %} e mais {{ avisos|length - 1 }}{% endif %} · ir pra ⏰ Agenda e clicar Confirmar →</span>
+  </div>
+</a>
+{% endif %}
+
+<div class="card" style="display:flex; gap:8px; flex-wrap:wrap; align-items:center">
+  {% for e in estagios %}
+  <a href="{{ url_for('funil') }}" style="text-decoration:none; color:inherit">
+    <span class="pill" style="font-size:.82rem">{{ rotulos[e] }} <strong>{{ contagens[e] }}</strong></span>
+  </a>
+  {% endfor %}
+</div>
+
+<div class="linha" style="align-items:flex-start">
+  <div style="flex:1; min-width:320px">
+    <div class="card">
+      <div style="display:flex; align-items:center; gap:10px; margin-bottom:8px">
+        <h3 style="margin:0">⏰ Follow-ups</h3>
+        <span class="muted">{{ pendentes|length }} pra hoje</span>
+      </div>
+      {% if not pendentes %}
+      <p class="muted">Nada vencendo hoje. 🎉</p>
+      {% else %}
+      <table>
+        <thead><tr><th>Data</th><th>Empresa</th><th>Estágio</th><th>WhatsApp</th></tr></thead>
+        <tbody>
+          {% for l in pendentes %}
+          <tr>
+            <td>{{ l.proximo_followup }}{% if l._atrasado %} <strong>⚠️</strong>{% endif %}</td>
+            <td>{{ l.nome }}</td>
+            <td class="muted">{{ l.status }}</td>
+            <td>{% if l.wa %}<a class="wa-link" href="{{ l.wa }}" target="_blank">💬 abrir</a>{% else %}<span class="muted">—</span>{% endif %}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      {% endif %}
+    </div>
+  </div>
+
+  <div style="flex:1; min-width:320px">
+    <div class="card">
+      <div style="display:flex; align-items:center; gap:10px; margin-bottom:8px">
+        <h3 style="margin:0">🎯 Próximos a abordar</h3>
+        <span class="muted">top {{ novos|length }} sem contato</span>
+      </div>
+      {% if not novos %}
+      <p class="muted">Sem leads novos. Rode a <a href="{{ url_for('prospeccao') }}">Prospecção</a>.</p>
+      {% else %}
+      <table>
+        <thead><tr><th>Score</th><th>Empresa</th><th>Setor</th><th>WhatsApp</th></tr></thead>
+        <tbody>
+          {% for l in novos %}
+          <tr>
+            <td><strong>{{ l.score }}</strong></td>
+            <td>{{ l.nome }}</td>
+            <td class="muted">{{ l.setor }}</td>
+            <td>{% if l.wa %}<a class="wa-link" href="{{ l.wa }}" target="_blank">💬 abrir</a>{% else %}<span class="muted">—</span>{% endif %}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      <p class="muted" style="margin-top:8px"><a href="{{ url_for('funil') }}">ver o funil completo →</a></p>
+      {% endif %}
+    </div>
+  </div>
+</div>
+{% endblock %}

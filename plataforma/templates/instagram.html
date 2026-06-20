@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% block titulo %}Instagram{% endblock %}
+{% block conteudo %}
+<h1>📸 Instagram</h1>
+<p class="sub">Conteúdo do teu marketing próprio (prova social). A plataforma organiza a fila e te dá o prompt pronto — quem cria é o Claude Code via <code>/carrossel</code> e <code>/publicar-tema</code>, e quem publica é o <code>/aprovar-post</code>.</p>
+
+<div class="card">
+  <h3>Adicionar tema à fila</h3>
+  <form hx-post="{{ url_for('instagram_add') }}" hx-target="#fila" hx-swap="innerHTML" hx-on::after-request="this.reset()">
+    <label>Tema do post</label>
+    <input type="text" name="tema" placeholder="ex: 3 erros que fazem o cliente escolher o concorrente no Google">
+    <button type="submit">Adicionar</button>
+  </form>
+</div>
+
+<h2>Fila de temas</h2>
+<div id="fila">
+  {% include "partials/instagram_fila.html" %}
+</div>
+
+<h2>Conteúdo gerado</h2>
+<div class="card">
+  {% if not conteudo %}
+  <p class="muted">Nada gerado ainda. Copie um prompt acima, rode no Claude Code (<code>/carrossel</code>), e os PNGs aparecem em <code>marketing/conteudo/</code>.</p>
+  {% else %}
+  {% for c in conteudo %}
+  <div style="border-bottom:1px solid #eee; padding:12px 0">
+    <strong style="font-size:.9rem">{{ c.nome }}</strong>
+    {% if c.imgs %}
+    <div style="display:flex; gap:8px; flex-wrap:wrap; margin-top:8px">
+      {% for img in c.imgs %}
+      <a href="{{ url_for('arquivo', rel=img) }}" target="_blank">
+        <img src="{{ url_for('arquivo', rel=img) }}" alt="slide" style="width:90px; height:112px; object-fit:cover; border:1px solid var(--linha); border-radius:6px">
+      </a>
+      {% endfor %}
+    </div>
+    {% endif %}
+    {% if c.outros %}
+    <div class="muted" style="font-size:.78rem; margin-top:6px">
+      {% for o in c.outros %}<a href="{{ url_for('arquivo', rel=o) }}" target="_blank">{{ o.split('/')[-1] }}</a>{% if not loop.last %} · {% endif %}{% endfor %}
+    </div>
+    {% endif %}
+  </div>
+  {% endfor %}
+  <p class="muted" style="font-size:.8rem; margin-top:12px">Pra publicar: peça ao Claude <em>"/aprovar-post &lt;tema&gt;"</em> — ele posta no Instagram + Facebook via Meta Graph API.</p>
+  {% endif %}
+</div>
+
+<script>
+function copiarInsta(btn){
+  navigator.clipboard.writeText(btn.dataset.prompt).then(()=>{
+    const t = btn.textContent; btn.textContent = '✓ Copiado!';
+    setTimeout(()=>btn.textContent = t, 1400);
+  });
+}
+</script>
+{% endblock %}

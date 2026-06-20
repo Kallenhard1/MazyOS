@@ -1,0 +1,191 @@
+# Plataforma MarioLucash — Mapa de Features
+
+> Pega **todas as skills e funções do MazyOS** e mapeia cada uma como feature
+> da `plataforma/`. Objetivo: a plataforma virar a casca visual de toda a
+> operação, não só da prospecção. Complementa `docs/PLATAFORMA-MVP.md` (o que
+> já foi construído) e `docs/CONTEXTO-PROSPECCAO.md` (o motor de prospecção).
+>
+> Princípio que vale pra tudo: **reusar, não reescrever.** A plataforma
+> orquestra `scripts/` e as skills; nunca duplica a lógica.
+
+---
+
+## 1. Os três padrões de integração
+
+Cada item do MazyOS vira feature de um destes três jeitos. Saber qual é o
+padrão define como a tela funciona.
+
+| Padrão | Quando | Como a tela faz | Exemplos |
+|---|---|---|---|
+| **A. Roda direto** | A lógica é determinística (Python puro, sem LLM) | Botão → `subprocess` chama o script → mostra resultado/arquivo | qualificar, crm, sourcing, abordagem, diagnóstico |
+| **B. Handoff pro Claude Code** | Precisa do agente/LLM pra criar conteúdo contextual | A tela monta o contexto e gera um **prompt pronto** pra colar no Claude Code (botão copiar); acompanha a pasta de saída | carrossel, publicar-tema, seo, responder-avaliações, anúncio-google, relatório de ads, análise de dados, email avulso, aprovar-post |
+| **C. Sistema/meta** | É sobre o próprio workspace | Vira botão de ação ou tela de config | abrir, salvar, atualizar, instalar, novo-projeto, mapear-rotinas |
+
+> O padrão B já existe e funciona na tela **📸 Instagram** (a fila gera o
+> prompt do `/carrossel`). Todo módulo de conteúdo segue esse molde.
+
+---
+
+## 2. Inventário completo (skill/função → feature)
+
+Status: ✅ pronto na plataforma · 🟡 parcial (parte feita ou só handoff) · 🔵 novo
+
+### Skills
+| Skill | O que faz | Vira feature | Módulo | Padrão | Status |
+|---|---|---|---|---|---|
+| `/prospectar` | Pipeline de prospecção ponta a ponta | Tela de prospecção | 🔍 Prospecção | A | ✅ |
+| `/novo-projeto` | Cria pasta isolada por cliente | Workspace do lead (`clientes/<id>/`) | 🎯 Lead→Proposta | C | ✅ |
+| `/email-profissional` | Rascunha e-mail a partir de contexto | Templates do envio + rascunhador avulso | 📧 Envio / ✍️ Conteúdo | A/B | 🟡 |
+| `/carrossel` | Carrosséis 1080×1350 na identidade | Gerar carrossel (prompt + acompanha PNGs) | ✍️ Conteúdo & Redes | B | ✅ |
+| `/publicar-tema` | Tema → artigo + carrossel + 3 legendas | Esteira de conteúdo a partir de um tema | ✍️ Conteúdo & Redes | B | ✅ |
+| `/aprovar-post` | Publica blog + Instagram + Facebook | Handoff "aprovar e publicar" na fila | ✍️ Conteúdo & Redes | B | ✅ |
+| `/seo` | Fluxo SEO/GEO/Ads em 8 passos | Painel de SEO por alvo (8 etapas) | 🔎 SEO & GMB | B | ✅ |
+| `/responder-avaliacoes` | Respostas humanas pras reviews do Google | Caixa de avaliações + resposta sugerida | 🔎 SEO & GMB | B | ✅ |
+| `/anuncio-google` | Campanha completa em CSV pro Ads Editor | Montador de campanha (briefing → CSV) | 📣 Anúncios | B | ✅ |
+| `/relatorio-ads` | Relatório semanal de Google + Meta Ads | Tela de relatório (seleciona export → resumo) | 📣 Anúncios | B | ✅ |
+| `/analisar-dados` | CSV/XLSX/PDF → resumo executivo | Análise de arquivo (além de só ler) | 📈 Análise | B | ✅ |
+| `/abrir` | Carrega o contexto do negócio | Dashboard "Hoje" (visão da operação) | ⚙️ Sistema | C | 🟡 |
+| `/salvar` | Commit + push no GitHub | Ação "Salvar trabalho" na Config | ⚙️ Sistema | C | ✅ |
+| `/atualizar` | Varre e atualiza a memória | Ação "Atualizar memória" na Config | ⚙️ Sistema | C | ✅ |
+| `/mapear-rotinas` | Acha repetições e vira skill | Ação "Sugerir rotinas" na Config | ⚙️ Sistema | C | ✅ |
+| `/instalar` | Setup inicial do negócio | Onboarding/Config (já está instalado) | ⚙️ Config | C | 🔵 |
+
+### Funções (scripts/)
+| Função | O que faz | Vira feature | Status |
+|---|---|---|---|
+| `buscar_leads_osm.py` | Sourcing grátis (OpenStreetMap) | Prospecção · botão "Buscar (OSM)" | ✅ |
+| `buscar_leads_places.py` | Sourcing Google Places | Prospecção · fonte opcional (chave) | 🟡 |
+| `filtrar_cnpj.py` | Sourcing B2B via CNPJ aberto | Prospecção · fonte B2B | 🟡 |
+| `qualificar_leads.py` | Score 0–100 + classe | Prospecção · "Qualificar e ranquear" | ✅ |
+| `gerar_abordagem.py` | WhatsApp + e-mail por lead | Prospecção/Envio · abordagem | ✅ |
+| `gerar_diagnostico.py` | Diagnóstico PDF 1-página | Lead→Proposta · "Gerar diagnóstico" | ✅ |
+| `crm.py` | Funil (estágios + follow-up) | Funil · kanban e mover card | ✅ |
+| `campanha.py` | Campanha em lotes (WhatsApp só celular + roteiro de ligação dos fixos) | Envio · "Rodar campanha" (lote a lote, marca no funil) | 🔵 |
+| `gerar_manifest.py` | Manifesto que liga MazyOS↔plataforma | Bridge (rodado pelo `/salvar`) | ✅ |
+| `notion_payload.py` | Payload do funil pro Notion | Funil · "Espelhar no Notion" | 🟡 |
+| `propostas/**/gerar_pdf.py` (WeasyPrint) · `gerar-pdf.js` (Playwright) | Render de PDF (proposta, diagnóstico, apresentação) | Motor de PDF (`servicos/pdf.py`) | ✅ |
+
+---
+
+## 3. Mapa por módulo (sidebar completa)
+
+A sidebar cresce dos 6 itens atuais para os módulos abaixo. Cada módulo é
+**um serviço** em `plataforma/servicos/` + **uma tela** em `templates/`.
+
+```
+JÁ NA PLATAFORMA
+  🔍 Prospecção          ✅   sourcing, qualificar, abordagem
+  📧 Envio em massa       ✅   lote de e-mail/WhatsApp (rascunho)
+  📊 Funil / Leads        ✅   kanban + follow-up + Notion
+  🎯 Lead → Proposta      ✅   pesquisa→coleta→mockup→proposta→validação
+  📄 Leitor CSV           ✅   abre qualquer .csv como tabela
+  ✍️  Conteúdo & Redes    ✅   fila (próprio + cliente) c/ status + handoff (Fase 4)
+  🔎 SEO & GMB            ✅   fluxo /seo de 8 passos por alvo + avaliações (Fase 5)
+  📣 Anúncios             ✅   montar campanha (CSV) + relatório semanal (Fase 6)
+  📈 Análise              ✅   /analisar-dados (resumo executivo) (Fase 7)
+  ⚙️  Sistema & Config    ✅   salvar, atualizar, rotinas, contato, identidade (Fase 7)
+  ⏰ Agenda               ✅   scheduler de mensagens/eventos/comandos; vence→aviso→Confirmar
+  🏠 Hoje                 🟡   dashboard inicial
+
+MAPA COMPLETO — todos os módulos de pé. Restam refinos:
+  🏠 Hoje                 🟡   evoluir o dashboard inicial
+```
+
+### ✍️ Conteúdo & Redes 🔵
+Junta `/carrossel`, `/publicar-tema` e `/aprovar-post` num só lugar, no molde
+da tela Instagram (que já faz handoff). Features:
+- **Esteira de conteúdo:** digita um tema → gera o prompt do `/publicar-tema`
+  (artigo de blog + carrossel + 3 legendas amarradas) pra rodar no Claude Code.
+- **Carrossel avulso:** prompt do `/carrossel` (com ou sem foto IA), e
+  acompanha os PNGs em `marketing/conteudo/`.
+- **Fila + aprovar:** cada peça com status (rascunho → aprovado → publicado);
+  botão que dispara o handoff do `/aprovar-post` (blog + IG + FB via Meta).
+- Reusa: `identidade/design-guide.md` (paleta âmbar/creme agora definida).
+
+### 🔎 SEO & GMB ✅ (Fase 5)
+A skill `/seo` é o fluxo mais rico (8 passos: demanda, concorrência, GMB,
+on-page, conteúdo, ads, monitoramento, GEO). Virou um **painel por alvo**
+(próprio ou cliente) em `servicos/seo.py` + `templates/seo.html`:
+- Cada um dos 8 passos como card com prompt pronto (handoff `/seo passo N`) e
+  status derivado da existência do arquivo de saída — stateless, a plataforma
+  só lê `marketing/seo/` (próprio) ou `clientes/<id>/seo/` (cliente).
+- **Avaliações (`/responder-avaliacoes`):** caixa pra colar as reviews do
+  Google e gerar o prompt de resposta sugerida (handoff), no tom da marca.
+- Liga no diagnóstico que a prospecção já faz (GMB ausente = oportunidade).
+
+### 📣 Anúncios ✅ (Fase 6)
+Tela por alvo em `servicos/ads.py` + `templates/ads.html`, padrão B (handoff):
+- **Montar campanha (`/anuncio-google`):** briefing (objetivo, orçamento,
+  região, observações); se houver pesquisa SEO do alvo (`06-google-ads.md` /
+  `01-pesquisa-demanda.md`), o prompt usa como base. Acompanha os CSVs gerados
+  em `marketing/campanhas/google-ads-<data>/` (ou `clientes/<id>/campanhas/`).
+- **Relatório semanal (`/relatorio-ads`):** seleciona os exports de Google +
+  Meta em `dados/` (detecta os que parecem export de Ads) → monta o prompt
+  pronto. Lista os relatórios gerados em `campanhas/relatorios/`. Encaixa no
+  ciclo "fechou cliente → roda Ads → mede" do plano de ação.
+
+### 📈 Análise ✅ (Fase 7)
+`servicos/analise.py` + `templates/analise.html`, padrão B (handoff):
+- **Resumo executivo (`/analisar-dados`):** escolhe um arquivo de `dados/` ou
+  `saidas/` (CSV/XLSX/PDF/TXT/JSON) + contexto opcional → monta o prompt pronto.
+  O Leitor CSV (✅) mostra a tabela crua; isto adiciona a leitura executiva.
+  Lista os resumos gerados em `saidas/analises/`.
+
+### ⚙️ Sistema & Config ✅ (Fase 7)
+`servicos/sistema.py` + `templates/config.html`, padrão C. Lê das fontes de
+verdade e mostra; as ações de núcleo são handoff (rodam no Claude Code):
+- **Ações:** `/salvar` (commit+push), `/atualizar` (sincroniza memória),
+  `/mapear-rotinas` (sugere skills) — cada uma com o comando pra copiar.
+- **Contato padrão:** lido de `_memoria/empresa.md` (usado em proposta/material).
+- **Identidade visual:** paleta + logo lidos de `identidade/design-guide.md`.
+- **Integrações:** status do checklist `Ferramentas conectadas` do `CLAUDE.md`
+  (chaves entram via MCP/ambiente, não ficam na plataforma).
+- `/abrir` é o **dashboard "Hoje"**; `/instalar` foi o onboarding (já rodado).
+
+---
+
+## 4. Roadmap por fases
+
+Estende o roadmap do `PLATAFORMA-MVP.md` (Fases MVP 1, MVP 2 e 3 já entregues).
+
+**Fase 4 — Conteúdo & Redes** (maior retorno depois da prospecção)
+- [ ] `servicos/conteudo.py` + tela ✍️ (esteira `/publicar-tema`, carrossel,
+      fila + aprovar). Reusa o padrão da tela Instagram.
+
+**Fase 5 — SEO & GMB** ✅ entregue
+- [x] `servicos/seo.py` + tela 🔎 (8 passos por alvo, status por arquivo de saída)
+- [x] Submódulo de avaliações (`/responder-avaliacoes`)
+
+**Fase 6 — Anúncios** ✅ entregue
+- [x] `servicos/ads.py` + tela 📣 (montar campanha CSV + relatório semanal, por alvo)
+
+**Fase 7 — Análise & Sistema** ✅ entregue
+- [x] `servicos/analise.py` (resumo executivo) na tela 📈
+- [x] Tela ⚙️ Config (contato, identidade, integrações) + ações Salvar/Atualizar/Rotinas
+
+> **Mapa completo: todos os módulos do MazyOS têm lugar visual na plataforma.**
+> Ordem foi pela utilidade na fase atual (fechar e atender os primeiros clientes):
+> Conteúdo e SEO ajudam a entregar e a vender; Anúncios entram quando houver
+> verba; Análise e Sistema são suporte. O que resta é refino (ex: evoluir o
+> dashboard "Hoje").
+
+---
+
+## 5. Nota de arquitetura
+
+Cada feature nova segue o que já está montado:
+- **Backend:** um arquivo em `servicos/` que ou roda o script via `subprocess`
+  (padrão A) ou monta o prompt de handoff (padrão B). Nada de reimplementar
+  lógica que já vive em `scripts/` ou nas skills.
+- **Frontend:** uma tela em `templates/` herdando o `base.html` (sidebar +
+  `static/estilo.css`). HTML + HTMX, sem build.
+- **Verdade dos dados:** segue em `crm/pipeline.csv`, `dados/`, `clientes/<id>/`
+  e `marketing/`. A plataforma lê e dispara; não vira um banco paralelo.
+- **PDF:** sempre pelo `servicos/pdf.py` (Playwright; WeasyPrint de fallback),
+  o mesmo motor das skills.
+- **Envio:** nada sai sozinho. A plataforma gera rascunho/handoff; o humano
+  revisa e dispara (Gmail via MCP / Meta via `/aprovar-post`).
+
+Resultado: quando todos os módulos estiverem de pé, a `plataforma/` é o painel
+único da operação MarioLucash, e o terminal do Claude Code vira o motor que ela
+aciona — cada skill e cada função do MazyOS com um lugar visual pra acontecer.

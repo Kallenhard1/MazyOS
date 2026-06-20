@@ -1,0 +1,4 @@
+# saídas geradas pelos scripts (artefatos por run; não versionar)
+abordagens/
+diagnosticos/
+*.pdf

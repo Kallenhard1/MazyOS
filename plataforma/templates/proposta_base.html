@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+<meta charset="utf-8">
+<title>Proposta — {{ nome }}</title>
+<style>
+  @page { size: A4; margin: 18mm 16mm; }
+  * { box-sizing: border-box; }
+  body { font-family: Georgia, "Times New Roman", serif; color: #111; margin: 0; line-height: 1.55; }
+  .sans { font-family: system-ui, "Segoe UI", Arial, sans-serif; }
+  .wrap { max-width: 720px; margin: 0 auto; padding: 28px; }
+  h1 { font-size: 30px; margin: 0 0 4px; letter-spacing: -.5px; }
+  h2 { font-family: system-ui, "Segoe UI", Arial, sans-serif; font-size: 13px; text-transform: uppercase; letter-spacing: 2px; color: #666; border-bottom: 1px solid #111; padding-bottom: 6px; margin: 34px 0 16px; }
+  .capa { border: 2px solid #111; padding: 36px 30px; text-align: center; margin-bottom: 8px; }
+  .capa .marca { font-family: system-ui, sans-serif; font-weight: 800; letter-spacing: 1px; font-size: 13px; }
+  .capa .sub { color: #555; font-size: 14px; margin-top: 6px; }
+  .capa .data { color: #888; font-size: 12px; margin-top: 18px; font-family: system-ui, sans-serif; }
+  p { margin: 0 0 12px; }
+  .diag { white-space: pre-wrap; background: #f6f6f6; border-left: 3px solid #111; padding: 14px 16px; font-family: system-ui, sans-serif; font-size: 14px; }
+  .pacotes { display: flex; gap: 12px; margin-top: 8px; }
+  .pac { flex: 1; border: 1px solid #ccc; border-radius: 8px; padding: 16px 14px; }
+  .pac.destaque { border: 2px solid #111; }
+  .pac .nome { font-family: system-ui, sans-serif; font-weight: 700; font-size: 13px; text-transform: uppercase; letter-spacing: 1px; }
+  .pac .preco { font-size: 26px; margin: 6px 0 10px; }
+  .pac .preco small { font-size: 12px; color: #777; }
+  .pac ul { font-family: system-ui, sans-serif; font-size: 12.5px; padding-left: 16px; margin: 0; color: #333; }
+  .pac li { margin: 4px 0; }
+  .mensal { margin-top: 16px; border: 1px dashed #999; border-radius: 8px; padding: 12px 16px; font-family: system-ui, sans-serif; font-size: 13px; display: flex; justify-content: space-between; align-items: center; }
+  .passos { font-family: system-ui, sans-serif; font-size: 14px; }
+  .contato { margin-top: 30px; border-top: 1px solid #111; padding-top: 14px; font-family: system-ui, sans-serif; font-size: 13px; color: #333; }
+  .contato strong { color: #111; }
+  @media print { .pacotes { page-break-inside: avoid; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="capa">
+    <div class="marca">MARIOLUCASH · SITES & AUTOMAÇÃO</div>
+    <h1 style="margin-top:14px">Proposta para {{ nome }}</h1>
+    <div class="sub">{{ setor }}{% if cidade %} · {{ cidade }}{% endif %}</div>
+    <div class="data">{{ data }}</div>
+  </div>
+
+  <h2>O diagnóstico</h2>
+  <div class="diag">{{ diagnostico }}</div>
+
+  <h2>O que eu entrego</h2>
+  <div class="pacotes">
+    <div class="pac">
+      <div class="nome">Essencial</div>
+      <div class="preco">R$ {{ essencial }}<small>/único</small></div>
+      <ul>
+        <li>Landing page de 1 página</li>
+        <li>Google Meu Negócio otimizado</li>
+        <li>Botão de WhatsApp</li>
+        <li>Responsivo no celular</li>
+      </ul>
+    </div>
+    <div class="pac destaque">
+      <div class="nome">Profissional</div>
+      <div class="preco">R$ {{ profissional }}<small>/único</small></div>
+      <ul>
+        <li>Tudo do Essencial</li>
+        <li>Site de até 5 páginas</li>
+        <li>Formulário de contato</li>
+        <li>SEO básico (achar no Google)</li>
+      </ul>
+    </div>
+    <div class="pac">
+      <div class="nome">Completo</div>
+      <div class="preco">R$ {{ completo }}<small>/único</small></div>
+      <ul>
+        <li>Tudo do Profissional</li>
+        <li>Automação de WhatsApp</li>
+        <li>Agendamento online</li>
+      </ul>
+    </div>
+  </div>
+  <div class="mensal">
+    <span><strong>Manutenção mensal</strong> — hospedagem, ajustes e suporte</span>
+    <span style="font-size:18px">R$ {{ manutencao }}<small style="color:#777">/mês</small></span>
+  </div>
+
+  <h2>Como funciona</h2>
+  <ol class="passos">
+    <li>Você aprova o pacote — 50% de entrada pra começar.</li>
+    <li>Entrego em até 7 dias úteis.</li>
+    <li>Ajustamos juntos até ficar do seu jeito; os 50% restantes na entrega.</li>
+  </ol>
+
+  <div class="contato">
+    Bora conversar? <strong>Mario Lucas</strong><br>
+    mariolucasdasilvabarbosa@gmail.com · Instagram @mariolucash
+  </div>
+
+</div>
+</body>
+</html>

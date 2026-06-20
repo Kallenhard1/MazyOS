@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" role="img" aria-label="Fryda Café">
+  <circle cx="50" cy="50" r="50" fill="#F6EEDD"/>
+  <g transform="translate(0,6)">
+    <path d="M22 62 Q14 38 30 28 Q42 20 50 22 Q58 20 70 28 Q86 38 78 62 Q74 48 68 42 Q60 34 50 34 Q40 34 32 42 Q26 48 22 62Z" fill="#2A1712"/>
+    <circle cx="50" cy="24" r="9" fill="#B93A2B"/>
+    <circle cx="36" cy="28" r="7" fill="#D96B2B"/>
+    <circle cx="64" cy="28" r="7" fill="#D96B2B"/>
+    <path d="M27 24 Q33 18 38 22Z M73 24 Q67 18 62 22Z" fill="#5E7A45"/>
+    <path d="M34 56 Q42 50 48 55 M52 55 Q58 50 66 56" stroke="#2A1712" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <path d="M36 64 Q40 67 44 64 M56 64 Q60 67 64 64" stroke="#2A1712" stroke-width="2.4" fill="none" stroke-linecap="round"/>
+  </g>
+</svg>

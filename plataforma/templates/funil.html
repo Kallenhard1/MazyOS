@@ -1,0 +1,121 @@
+{% extends "base.html" %}
+{% block titulo %}Funil{% endblock %}
+{% block conteudo %}
+<h1>📊 Funil / Leads</h1>
+<p class="sub">Kanban do funil, alimentado por <code>crm/pipeline.csv</code>. Mover um lead chama o <code>crm.py</code> (carimba contato e follow-up automático). O CSV continua a fonte de verdade.</p>
+
+<div class="card">
+  <div style="display:flex; align-items:center; gap:12px; flex-wrap:wrap">
+    <h3 style="margin:0">⏰ Follow-ups</h3>
+    <span class="muted">{{ pendentes|length }} pendente(s) até hoje</span>
+    <button class="secundario" style="margin:0 0 0 auto; padding:7px 14px"
+            hx-get="{{ url_for('funil_notion') }}" hx-target="#notion-tip">Espelhar no Notion</button>
+  </div>
+  <div id="notion-tip"></div>
+  {% if pendentes %}
+  <table style="margin-top:12px">
+    <thead><tr><th>Data</th><th>Empresa</th><th>Estágio</th><th>Contato</th><th>Nota</th></tr></thead>
+    <tbody>
+      {% for l in pendentes %}
+      <tr>
+        <td>{{ l.proximo_followup }}{% if l._atrasado %} <strong>⚠️</strong>{% endif %}</td>
+        <td>{{ l.nome }}</td>
+        <td>{{ l.status }}</td>
+        <td class="muted">{{ l.telefone or l.email or '—' }}</td>
+        <td class="muted">{{ l.notas or '—' }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% else %}
+  <p class="muted" style="margin-top:10px">Nenhum follow-up pendente. 🎉</p>
+  {% endif %}
+</div>
+
+<div class="card" style="display:flex; align-items:center; gap:8px; flex-wrap:wrap; padding:12px 16px">
+  <span class="muted" style="font-size:.82rem">Filtrar por label:</span>
+  <button class="filtro-btn ativo" data-classe="">Todos</button>
+  <button class="filtro-btn" data-classe="quente">🔥 Quentes</button>
+  <button class="filtro-btn" data-classe="morno">🟡 Mornos</button>
+  <button class="filtro-btn" data-classe="frio">⚪ Frios</button>
+  <span class="muted" style="font-size:.76rem; margin-left:auto">arraste os cards entre as colunas pra mover de estágio</span>
+</div>
+
+<div id="board">
+  {% include "partials/board.html" %}
+</div>
+
+<div id="modal-trabalhar" class="modal-overlay" hidden onclick="if(event.target===this)fecharModal()">
+  <div class="modal-box">
+    <button type="button" class="modal-x" onclick="fecharModal()">×</button>
+    <h3 style="margin:0 0 4px">🎯 Trabalhar proposta</h3>
+    <p class="muted" style="margin:0 0 14px; font-size:.84rem"><span id="modal-empresa"></span> — cria a pasta padronizada do cliente e gera o comando da branch.</p>
+    <form hx-post="{{ url_for('funil_trabalhar') }}" hx-target="#modal-result" hx-swap="innerHTML">
+      <input type="hidden" name="id" id="modal-id">
+      <label>Branch do cliente</label>
+      <input type="text" name="branch" id="modal-branch">
+      <label>Observação inicial (opcional — vai pro notas.md)</label>
+      <textarea name="obs" rows="3" placeholder="ex: dona pediu foco em delivery"></textarea>
+      <button type="submit">Criar workspace</button>
+    </form>
+    <div id="modal-result"></div>
+  </div>
+</div>
+
+<script>
+function abrirTrabalhar(id, nome){
+  document.getElementById('modal-id').value = id;
+  document.getElementById('modal-branch').value = 'cliente/' + id;
+  document.getElementById('modal-empresa').textContent = nome;
+  document.getElementById('modal-result').innerHTML = '';
+  document.getElementById('modal-trabalhar').hidden = false;
+}
+function fecharModal(){ document.getElementById('modal-trabalhar').hidden = true; }
+function copiarTexto(id, btn){
+  navigator.clipboard.writeText(document.getElementById(id).textContent).then(()=>{
+    const t = btn.textContent; btn.textContent = '✓'; setTimeout(()=>btn.textContent = t, 1200);
+  });
+}
+
+let filtroClasse = '';
+function aplicarFiltro(){
+  document.querySelectorAll('#board .lead-card').forEach(c=>{
+    c.hidden = filtroClasse && c.dataset.classe !== filtroClasse;
+  });
+  document.querySelectorAll('#board .coluna-corpo').forEach(z=>{
+    const vazio = z.querySelector('.lead-card:not([hidden])');
+    let aviso = z.querySelector('.filtro-vazio');
+    if(!vazio && filtroClasse){ if(!aviso){ aviso=document.createElement('p'); aviso.className='muted filtro-vazio'; aviso.style.cssText='font-size:.76rem;padding:6px'; aviso.textContent='—'; z.appendChild(aviso);} }
+    else if(aviso){ aviso.remove(); }
+  });
+}
+document.querySelectorAll('.filtro-btn').forEach(b=>b.addEventListener('click', ()=>{
+  filtroClasse = b.dataset.classe;
+  document.querySelectorAll('.filtro-btn').forEach(x=>x.classList.toggle('ativo', x===b));
+  aplicarFiltro();
+}));
+
+// drag-and-drop (event delegation — sobrevive aos re-renders do board)
+document.addEventListener('dragstart', e=>{
+  const card = e.target.closest('.lead-card');
+  if(card){ e.dataTransfer.setData('text/plain', card.dataset.id); card.classList.add('arrastando'); }
+});
+document.addEventListener('dragend', e=>{
+  const card = e.target.closest('.lead-card'); if(card) card.classList.remove('arrastando');
+});
+document.addEventListener('dragover', e=>{
+  const z = e.target.closest('.coluna-corpo'); if(z){ e.preventDefault(); z.classList.add('drop-alvo'); }
+});
+document.addEventListener('dragleave', e=>{
+  const z = e.target.closest('.coluna-corpo'); if(z) z.classList.remove('drop-alvo');
+});
+document.addEventListener('drop', e=>{
+  const z = e.target.closest('.coluna-corpo'); if(!z) return;
+  e.preventDefault(); z.classList.remove('drop-alvo');
+  const id = e.dataTransfer.getData('text/plain'), status = z.dataset.status;
+  if(id && status) htmx.ajax('POST', '{{ url_for("funil_atualizar") }}',
+    {target:'#board', swap:'innerHTML', values:{id:id, status:status}});
+});
+document.body.addEventListener('htmx:afterSwap', e=>{ if(e.target.id==='board') aplicarFiltro(); });
+</script>
+{% endblock %}

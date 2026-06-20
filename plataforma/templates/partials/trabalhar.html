@@ -1,0 +1,12 @@
+<div class="ok" style="margin-top:14px">
+  {% if criado %}Workspace criado{% else %}Workspace já existia{% endif %} em
+  <code>clientes/{{ estado.id }}/</code> ✓
+
+  <p style="margin:12px 0 4px"><strong>Branch padronizada do cliente</strong> — rode no terminal (a plataforma não mexe no git):</p>
+  <div style="display:flex; gap:8px; align-items:center">
+    <code id="gitcmd" style="flex:1; background:#1c1c1c; color:#e8e8e8; padding:8px 10px; border-radius:6px; font-size:.82rem">git checkout -b {{ branch }}</code>
+    <button type="button" onclick="copiarTexto('gitcmd', this)" style="margin:0">📋</button>
+  </div>
+
+  <a class="btn" href="{{ lead_url }}" style="margin-top:14px; display:inline-block">abrir lead →</a>
+</div>

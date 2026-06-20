@@ -1,0 +1,160 @@
+{% set ok = estado.etapas.values()|selectattr('status','equalto','ok')|list|length %}
+<div class="card">
+  <div style="display:flex; align-items:center; gap:12px">
+    <h3 style="margin:0">Etapas</h3>
+    <span class="muted">{{ ok }}/{{ etapas_meta|length }} concluídas</span>
+  </div>
+</div>
+
+{% for chave, rotulo, desc in etapas_meta %}
+{% set et = estado.etapas[chave] %}
+<div class="card" style="border-left:4px solid {{ '#0d0d0d' if et.status=='ok' else '#d9d9d9' }}">
+  <details {{ 'open' if et.status!='ok' and loop.index==(ok+1) }}>
+    <summary style="cursor:pointer; list-style:none; display:flex; align-items:center; gap:10px">
+      <span style="font-size:1.1rem">{{ '✅' if et.status=='ok' else '⬜' }}</span>
+      <strong>{{ loop.index }}. {{ rotulo }}</strong>
+      {% if et.nota %}<span class="muted" style="font-size:.78rem">· {{ et.nota }}</span>{% endif %}
+    </summary>
+    <div style="padding:10px 0 0 30px">
+      <p class="muted" style="margin:0 0 10px">{{ desc }}</p>
+
+      {# ---- Ação automática: Pesquisa ---- #}
+      {% if chave == 'pesquisa' %}
+      <form hx-post="{{ url_for('lead_pesquisa', slug=estado.id) }}" hx-target="#etapas" hx-swap="innerHTML" hx-disabled-elt="find button">
+        <button type="submit" class="secundario">🔎 Checar site atual <span class="htmx-indicator spin">⏳ checando…</span></button>
+      </form>
+      {% set res = et.resultado %}
+      {% if res %}
+      <div class="card" style="margin-top:12px; background:#fafafa">
+        <div class="muted" style="font-size:.78rem">Site: {{ res.site or '— (sem site)' }} · status: <strong>{{ res.site_status }}</strong> · HTTPS: {{ res.https or '—' }} · mobile: {{ res.mobile or '—' }} · ano: {{ res.ano_site or '—' }} <span style="float:right">{{ res.quando }}</span></div>
+        <strong style="font-size:.85rem; display:block; margin-top:8px">Achados (problemas reais):</strong>
+        <ul style="margin:6px 0 0">{% for a in res.achados %}<li style="font-size:.84rem">{{ a }}</li>{% endfor %}</ul>
+        <a class="muted" href="{{ url_for('arquivo', rel='clientes/' + estado.id + '/pesquisa.md') }}" target="_blank" style="font-size:.78rem">pesquisa.md</a>
+      </div>
+      <form hx-post="{{ url_for('lead_diagnostico', slug=estado.id) }}" hx-target="#etapas" hx-swap="innerHTML" style="margin-top:10px">
+        <button type="submit">📄 {{ 'Regerar' if res.diag_engine else 'Gerar' }} diagnóstico (PDF)</button>
+      </form>
+      {% if res.diag_engine and res.diag_engine != 'falhou' %}
+      <div class="ok" style="margin-top:10px">
+        Diagnóstico gerado ✓ — <a href="{{ url_for('arquivo', rel='clientes/' + estado.id + '/diagnostico.pdf') }}" target="_blank">baixar PDF</a>
+        <span class="muted" style="font-size:.74rem">(engine: {{ res.diag_engine }})</span>
+      </div>
+      {% elif res.diag_engine == 'falhou' %}
+      <div class="aviso" style="margin-top:10px">Não consegui gerar o PDF nesta máquina. Veja o log.</div>
+      {% endif %}
+      {% endif %}
+
+      {# ---- Ação manual: Coleta ---- #}
+      {% elif chave == 'coleta' %}
+      <form hx-post="{{ url_for('lead_notas', slug=estado.id) }}" hx-target="#etapas" hx-swap="innerHTML">
+        <label>Notas (textos, links, a dor do cliente) — salvas em notas.md</label>
+        <textarea name="texto" rows="7">{{ notas }}</textarea>
+        <button type="submit">Salvar notas</button>
+      </form>
+      <form hx-post="{{ url_for('lead_asset', slug=estado.id) }}" hx-encoding="multipart/form-data" hx-target="#etapas" hx-swap="innerHTML" style="margin-top:12px">
+        <label>Anexar imagem / logo / arquivo → assets/</label>
+        <input type="file" name="arquivo">
+        <button type="submit" class="secundario">Enviar arquivo</button>
+      </form>
+      {% if assets %}
+      <p class="muted" style="margin:12px 0 4px; font-size:.8rem">Assets ({{ assets|length }}):</p>
+      <ul style="margin:0">
+        {% for a in assets %}<li style="font-size:.84rem"><a href="{{ url_for('arquivo', rel='clientes/' + estado.id + '/assets/' + a) }}" target="_blank">{{ a }}</a></li>{% endfor %}
+      </ul>
+      {% endif %}
+
+      {# ---- Handoff: Mockup do site ---- #}
+      {% elif chave == 'mockup' %}
+      <form hx-post="{{ url_for('lead_mockup', slug=estado.id) }}" hx-target="#etapas" hx-swap="innerHTML">
+        <button type="submit" class="secundario">🎨 {{ 'Regerar' if et.prompt else 'Gerar' }} prompt do mockup</button>
+        <span class="muted" style="font-size:.76rem">— monta o prompt a partir do briefing + notas + pesquisa</span>
+      </form>
+      {% if et.prompt %}
+      <p class="muted" style="margin:12px 0 4px; font-size:.8rem">Cole no terminal do Claude Code (ele cria o site em <code>clientes/{{ estado.id }}/site/</code>):</p>
+      <textarea id="prompt-{{ estado.id }}" rows="10" readonly style="font-family:ui-monospace,monospace; font-size:.78rem">{{ et.prompt }}</textarea>
+      <button type="button" onclick="copiarPrompt('prompt-{{ estado.id }}', this)">📋 Copiar prompt</button>
+      <a class="muted" href="{{ url_for('arquivo', rel='clientes/' + estado.id + '/prompt-mockup.md') }}" target="_blank" style="font-size:.78rem; margin-left:10px">prompt-mockup.md</a>
+      {% endif %}
+      <div style="margin-top:12px">
+        <strong style="font-size:.82rem">Pasta site/ ({{ site|length }} arquivo(s)):</strong>
+        {% if site %}
+        <ul style="margin:6px 0 0">
+          {% for f in site %}<li style="font-size:.84rem"><a href="{{ url_for('arquivo', rel='clientes/' + estado.id + '/site/' + f) }}" target="_blank">{{ f }}</a></li>{% endfor %}
+        </ul>
+        {% else %}
+        <p class="muted" style="font-size:.8rem; margin:4px 0 0">Vazia ainda — o Claude Code preenche ao rodar o prompt.</p>
+        {% endif %}
+      </div>
+
+      {# ---- Geração da proposta ---- #}
+      {% elif chave == 'proposta' %}
+      <form hx-post="{{ url_for('lead_proposta', slug=estado.id) }}" hx-target="#etapas" hx-swap="innerHTML">
+        <label>Diagnóstico (vem da pesquisa — edite à vontade)</label>
+        <textarea name="diagnostico" rows="5">{{ dprop.diagnostico }}</textarea>
+        <div class="linha" style="margin-top:8px">
+          <div><label>Essencial (R$)</label><input type="text" name="essencial" value="{{ dprop.essencial }}"></div>
+          <div><label>Profissional (R$)</label><input type="text" name="profissional" value="{{ dprop.profissional }}"></div>
+          <div><label>Completo (R$)</label><input type="text" name="completo" value="{{ dprop.completo }}"></div>
+          <div><label>Manutenção (R$/mês)</label><input type="text" name="manutencao" value="{{ dprop.manutencao }}"></div>
+        </div>
+        <button type="submit" class="secundario">📄 {{ 'Regerar' if prop.html else 'Gerar' }} proposta</button>
+      </form>
+      {% if prop.html %}
+      <div class="ok" style="margin-top:12px">
+        Proposta gerada ✓ —
+        <a href="{{ url_for('arquivo', rel='clientes/' + estado.id + '/proposta.html') }}" target="_blank">abrir proposta.html</a>
+        {% if prop.pdf %} · <a href="{{ url_for('arquivo', rel='clientes/' + estado.id + '/proposta.pdf') }}" target="_blank">baixar PDF</a>{% endif %}
+        <p class="muted" style="margin:8px 0 0; font-size:.8rem">Pra gerar o PDF: abra a proposta.html e use <strong>Ctrl+P → Salvar como PDF</strong> (o PDF automático precisa do runtime GTK do weasyprint, ainda não instalado nesta máquina).</p>
+      </div>
+      {% endif %}
+
+      {# ---- Validação + envio ---- #}
+      {% elif chave == 'validacao' %}
+      <p class="muted" style="font-size:.82rem; margin:0 0 8px">Confira as etapas e dispare o e-mail com a proposta anexa.</p>
+      <ul style="list-style:none; padding:0; margin:0 0 12px">
+        {% for ck, cr, cd in etapas_meta %}{% if ck != 'validacao' %}
+        <li style="font-size:.85rem; padding:3px 0">{{ '✅' if estado.etapas[ck].status=='ok' else '⬜' }} {{ cr }}</li>
+        {% endif %}{% endfor %}
+      </ul>
+      {% if not prop.html %}
+      <div class="aviso">Gere a proposta (etapa 4) antes de mandar o e-mail.</div>
+      {% else %}
+      <form hx-post="{{ url_for('lead_enviar', slug=estado.id) }}" hx-target="#etapas" hx-swap="innerHTML">
+        <button type="submit">✉️ Mandar e-mail para o cliente</button>
+        <span class="muted" style="font-size:.76rem">— monta o e-mail com a proposta anexa (não envia)</span>
+      </form>
+      {% endif %}
+      {% set env = et.envio %}
+      {% if env %}
+      <div class="ok" style="margin-top:12px">
+        {% if env.canal == 'email' %}Envio montado ✓ — e-mail para <strong>{{ env.email }}</strong> com anexo <code>{{ env.anexo }}</code>.{% else %}Sem e-mail — montei pro <strong>WhatsApp</strong> ({{ env.telefone or 'sem telefone' }}), proposta em <code>{{ env.anexo }}</code>.{% endif %}
+        <p style="margin:8px 0 0; font-size:.84rem"><strong>Próximo passo:</strong> peça ao Claude <em>"cria o rascunho do {{ env.arquivo }} no Gmail"</em> — ele cria o draft com a proposta anexa pra você revisar e enviar. Nada sai sozinho.</p>
+        <a class="muted" href="{{ url_for('arquivo', rel=env.arquivo) }}" target="_blank" style="font-size:.78rem">{{ env.arquivo }}</a>
+      </div>
+      {% endif %}
+
+      {% else %}
+      <p class="muted" style="font-size:.78rem; font-style:italic">Registre o status e notas manualmente.</p>
+      {% endif %}
+
+      {# ---- Status + nota (todas as etapas) ---- #}
+      <form hx-post="{{ url_for('lead_etapa', slug=estado.id, etapa=chave) }}" hx-include="this" hx-target="#etapas" hx-swap="innerHTML" style="margin-top:14px; border-top:1px solid #eee; padding-top:12px">
+        <div class="linha">
+          <div style="flex:0 0 150px">
+            <label>Status</label>
+            <select name="status">
+              <option value="pendente" {{ 'selected' if et.status=='pendente' }}>pendente</option>
+              <option value="ok" {{ 'selected' if et.status=='ok' }}>concluída</option>
+            </select>
+          </div>
+          <div>
+            <label>Nota</label>
+            <input type="text" name="nota" value="{{ et.nota }}" placeholder="ex: cliente mandou o logo">
+          </div>
+        </div>
+        <button type="submit" style="margin-top:10px">Salvar etapa</button>
+      </form>
+    </div>
+  </details>
+</div>
+{% endfor %}

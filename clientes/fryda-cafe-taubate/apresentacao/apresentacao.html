@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<style>
+@font-face { font-family:'Playfair'; src:url('fonts/PlayfairDisplay-800.ttf'); font-weight:800 }
+@font-face { font-family:'Playfair'; src:url('fonts/PlayfairDisplay-700.ttf'); font-weight:700 }
+@font-face { font-family:'Playfair'; src:url('fonts/PlayfairDisplay-600.ttf'); font-weight:600 }
+@font-face { font-family:'Jost'; src:url('fonts/Jost-300.ttf'); font-weight:300 }
+@font-face { font-family:'Jost'; src:url('fonts/Jost-400.ttf'); font-weight:400 }
+@font-face { font-family:'Jost'; src:url('fonts/Jost-500.ttf'); font-weight:500 }
+@font-face { font-family:'Jost'; src:url('fonts/Jost-600.ttf'); font-weight:600 }
+@font-face { font-family:'Script'; src:url('fonts/GreatVibes.ttf'); font-weight:400 }
+
+@page { size:A4; margin:0 }
+
+:root{
+  --preto:#221A14;
+  --creme:#F8EFDC;
+  --caramelo:#E3C590;
+  --vermelho:#B93A2B;
+  --laranja:#D96B2B;
+  --verde:#45703B;
+  --cinza-claro:#F4F1ED;
+  --cinza-borda:#E8E2D9;
+  --texto:#3a3028;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Jost',sans-serif;color:var(--texto);background:#fff;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+
+.page{width:210mm;min-height:297mm;position:relative;overflow:hidden;page-break-after:always}
+.page:last-child{page-break-after:auto}
+.pad{padding:14mm 16mm}
+.eyebrow{font-size:7.5pt;font-weight:600;letter-spacing:.18em;color:var(--vermelho);margin-bottom:5mm;text-transform:uppercase}
+.h2{font-family:'Playfair',serif;font-weight:700;font-size:22pt;line-height:1.1;margin-bottom:4mm;color:var(--preto)}
+.body{font-weight:300;font-size:10pt;line-height:1.6;color:#5a4f45}
+.accent{color:var(--vermelho)}
+
+/* ===== HEADER / FOOTER ===== */
+.page-header{display:flex;justify-content:space-between;align-items:center;padding:8mm 16mm 6mm;border-bottom:1px solid var(--cinza-borda)}
+.logo-row{display:flex;align-items:center;gap:7px}
+.logo-name{font-family:'Playfair',serif;font-weight:700;font-size:11pt;letter-spacing:.12em;color:var(--preto)}
+.logo-script{font-family:'Script',cursive;font-size:10pt;color:var(--vermelho);margin-left:1px}
+.page-right{display:flex;align-items:center;gap:6px;font-size:8pt;font-weight:500;letter-spacing:.08em;color:#999}
+.page-right img{width:16px;height:16px;border-radius:50%}
+.page-footer{position:absolute;bottom:8mm;left:16mm;right:16mm;display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--cinza-borda);padding-top:4mm}
+.page-footer span{font-size:7.5pt;color:#bbb;font-weight:300}
+
+/* ===== CAPA ===== */
+.cover{background:var(--preto);color:var(--creme)}
+.cover-inner{padding:14mm 16mm 12mm;min-height:297mm;display:flex;flex-direction:column}
+.cover-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:auto}
+.cover-brand{display:flex;align-items:center;gap:9px}
+.cover-brand-name{font-family:'Playfair',serif;font-weight:700;font-size:15pt;letter-spacing:.15em;color:var(--creme)}
+.cover-brand-script{font-family:'Script',cursive;font-size:13pt;color:var(--caramelo);margin-left:2px}
+.cover-author{display:flex;align-items:center;gap:8px}
+.cover-author img{width:30px;height:30px;border-radius:50%;border:1px solid rgba(248,239,220,.25)}
+.cover-author-txt{text-align:right}
+.cover-author-txt .l{font-size:6.5pt;font-weight:500;letter-spacing:.16em;color:rgba(248,239,220,.5);text-transform:uppercase}
+.cover-author-txt .n{font-size:9pt;font-weight:600;letter-spacing:.1em;color:var(--creme)}
+
+.cover-badge{display:inline-block;border:1px solid rgba(248,239,220,.25);color:rgba(248,239,220,.65);font-size:7.5pt;font-weight:500;letter-spacing:.18em;padding:4px 14px;border-radius:2px;margin-bottom:7mm;text-transform:uppercase}
+.cover-headline{font-family:'Playfair',serif;font-weight:800;font-size:37pt;line-height:1.02;color:var(--creme);margin-bottom:6mm}
+.cover-headline .accent{color:var(--caramelo)}
+.cover-lead{font-size:11pt;font-weight:300;line-height:1.65;color:rgba(248,239,220,.78);max-width:130mm;margin-bottom:auto}
+.cover-meta{display:flex;border-top:1px solid rgba(248,239,220,.15);padding-top:7mm;margin-top:12mm}
+.cover-meta-item{flex:1;padding-right:10mm}
+.cover-meta-label{font-size:7pt;font-weight:600;letter-spacing:.18em;color:rgba(248,239,220,.45);text-transform:uppercase;margin-bottom:3px}
+.cover-meta-value{font-size:10.5pt;font-weight:500;color:var(--creme)}
+
+/* ===== DIAGNÓSTICO cards ===== */
+.cards-2col{display:grid;grid-template-columns:1fr 1fr;gap:5mm;margin-top:7mm}
+.ncard{border:1px solid var(--cinza-borda);border-radius:6px;padding:6mm 7mm 7mm}
+.ncard-num{background:var(--vermelho);color:#fff;font-weight:700;font-size:9pt;border-radius:50%;width:22px;height:22px;display:flex;align-items:center;justify-content:center;margin-bottom:4mm}
+.ncard h3{font-weight:600;font-size:9.5pt;margin-bottom:3mm;color:var(--preto)}
+.ncard p{font-size:8.5pt;font-weight:300;line-height:1.55;color:#6a5d55}
+
+/* ===== PILARES ===== */
+.pilar{display:flex;gap:6mm;border:1px solid var(--cinza-borda);border-radius:6px;padding:6mm 7mm;margin-bottom:4.5mm}
+.pilar-icon{background:var(--cinza-claro);border-radius:6px;width:34px;height:34px;min-width:34px;display:flex;align-items:center;justify-content:center}
+.pilar-icon svg{width:18px;height:18px}
+.pilar-body{flex:1}
+.pilar-body-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:2mm}
+.pilar-tag{font-size:7pt;font-weight:600;letter-spacing:.12em;color:var(--vermelho);text-transform:uppercase;white-space:nowrap;background:rgba(185,58,43,.10);padding:3px 11px;border-radius:99px}
+.pilar h3{font-weight:600;font-size:10pt;margin-bottom:2mm;color:var(--preto)}
+.pilar p{font-size:8.5pt;font-weight:300;line-height:1.5;color:#6a5d55;margin-bottom:3mm}
+.pilar ul{padding-left:12px}
+.pilar ul li{font-size:8.5pt;font-weight:300;line-height:1.55;color:#6a5d55}
+
+/* ===== INVESTIMENTO ===== */
+.price-hero{background:var(--preto);color:var(--creme);border-radius:10px;padding:9mm 10mm;margin:6mm 0 5mm;display:flex;justify-content:space-between;align-items:center;gap:8mm}
+.price-hero-left{flex:1}
+.price-hero .ph-label{font-size:8pt;font-weight:600;letter-spacing:.14em;color:var(--caramelo);text-transform:uppercase;margin-bottom:3mm}
+.price-hero .ph-title{font-family:'Playfair',serif;font-weight:700;font-size:16pt;line-height:1.15;color:var(--creme);margin-bottom:2mm}
+.price-hero .ph-sub{font-size:8.5pt;font-weight:300;line-height:1.55;color:rgba(248,239,220,.7)}
+.price-hero-right{text-align:right;white-space:nowrap}
+.price-hero .ph-big{font-family:'Playfair',serif;font-weight:800;font-size:36pt;line-height:.95;color:#fff}
+.price-hero .ph-big small{font-family:'Jost',sans-serif;font-size:11pt;font-weight:300;color:rgba(248,239,220,.6)}
+
+.pay-grid{display:grid;grid-template-columns:1fr 1fr;gap:4mm;margin-bottom:5mm}
+.pay{border:1.5px solid var(--cinza-borda);border-radius:8px;padding:5mm 6mm;position:relative}
+.pay.rec{border-color:var(--vermelho)}
+.pay-badge{background:var(--vermelho);color:#fff;font-size:6.5pt;font-weight:600;letter-spacing:.1em;text-align:center;padding:3px 9px;border-radius:99px;position:absolute;top:-9px;left:6mm}
+.pay-label{font-size:7.5pt;font-weight:600;letter-spacing:.12em;color:var(--vermelho);text-transform:uppercase;margin-bottom:2mm}
+.pay-value{font-family:'Playfair',serif;font-weight:800;font-size:20pt;color:var(--preto);line-height:1}
+.pay-value small{font-family:'Jost',sans-serif;font-size:9pt;font-weight:300;color:#999}
+.pay-note{font-size:8pt;font-weight:300;color:#6a5d55;margin-top:2mm}
+
+.boost{background:rgba(217,107,43,.08);border:1px solid rgba(217,107,43,.30);border-radius:8px;padding:5mm 6mm;display:flex;gap:5mm;align-items:flex-start;margin-bottom:5mm}
+.boost-tag{background:var(--laranja);color:#fff;font-size:7pt;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:4px 11px;border-radius:99px;white-space:nowrap;margin-top:1mm}
+.boost-body h3{font-size:10pt;font-weight:600;color:var(--preto);margin-bottom:2mm}
+.boost-body p{font-size:8.5pt;font-weight:300;line-height:1.55;color:#6a5d55}
+.boost-body strong{font-weight:600;color:var(--laranja)}
+
+.checklist{display:grid;grid-template-columns:1fr 1fr;gap:2.5mm 8mm;background:var(--cinza-claro);border-radius:6px;padding:5mm 6mm}
+.check-item{display:flex;align-items:flex-start;gap:3mm;font-size:8.5pt;font-weight:300;line-height:1.4;color:#5a4f45}
+.check-item::before{content:'✓';color:var(--verde);font-weight:600;font-size:9pt;margin-top:1px;flex-shrink:0}
+
+/* ===== PLANOS MENSAIS ===== */
+.plan-grid{display:grid;grid-template-columns:1fr 1fr;gap:4mm;margin:6mm 0 5mm}
+.plan{border:1.5px solid var(--cinza-borda);border-radius:8px;padding:6mm;position:relative}
+.plan.rec{border-color:var(--vermelho)}
+.plan-label{font-size:7.5pt;font-weight:600;letter-spacing:.12em;color:var(--vermelho);text-transform:uppercase;margin-bottom:2mm}
+.plan-price{font-family:'Playfair',serif;font-weight:800;font-size:21pt;color:var(--preto);line-height:1;margin-bottom:1.5mm}
+.plan-price small{font-family:'Jost',sans-serif;font-size:9pt;font-weight:300;color:#999}
+.plan-sub{font-size:8pt;font-weight:300;color:#6a5d55;margin-bottom:4mm;line-height:1.45}
+.plan ul{padding-left:12px;margin:0}
+.plan ul li{font-size:8.5pt;font-weight:300;line-height:1.6;color:#5a4f45}
+
+/* ===== PRÓXIMOS PASSOS ===== */
+.passos{display:flex;gap:5mm;margin:6mm 0}
+.passo{flex:1}
+.passo-num{font-family:'Playfair',serif;font-weight:800;font-size:22pt;color:var(--cinza-borda);line-height:1;margin-bottom:2mm}
+.passo h3{font-size:9.5pt;font-weight:600;margin-bottom:2mm}
+.passo p{font-size:8.5pt;font-weight:300;line-height:1.55;color:#6a5d55}
+.cta-box{background:var(--vermelho);color:#fff;border-radius:8px;padding:7mm 8mm;margin-top:6mm}
+.cta-box h2{font-family:'Playfair',serif;font-size:16pt;font-weight:700;margin-bottom:3mm}
+.cta-box p{font-size:8.5pt;font-weight:300;line-height:1.6;opacity:.92}
+.cta-contacts{margin-top:4mm;display:flex;gap:8mm;flex-wrap:wrap;align-items:center}
+.cta-c{font-size:8.5pt;font-weight:500;letter-spacing:.04em;opacity:.95}
+.cta-label{font-size:7pt;opacity:.6;font-weight:300;letter-spacing:.12em;margin-bottom:1mm;text-transform:uppercase}
+.cta-sign{margin-left:auto;display:flex;align-items:center;gap:8px}
+.cta-sign img{width:34px;height:34px;border-radius:50%;border:1px solid rgba(255,255,255,.3)}
+.cta-sign .s-n{font-size:8.5pt;font-weight:600;letter-spacing:.08em}
+.cta-sign .s-l{font-size:6.5pt;opacity:.7;letter-spacing:.14em;text-transform:uppercase}
+.validade{margin-top:5mm;background:var(--cinza-claro);border-radius:6px;padding:5mm 6mm}
+.validade p{font-size:8.5pt;font-weight:300;line-height:1.6;color:#6a5d55}
+.validade strong{font-weight:600;color:var(--preto)}
+
+/* Logo Frida reutilizável */
+.frida{display:inline-block}
+</style>
+</head>
+<body>
+
+<!-- ============ PÁGINA 1 — CAPA ============ -->
+<div class="page cover">
+  <div class="cover-inner">
+    <div class="cover-top">
+      <div class="cover-brand">
+        <svg width="46" height="46" viewBox="0 0 100 100">
+          <path d="M22 62 Q14 38 30 28 Q42 20 50 22 Q58 20 70 28 Q86 38 78 62 Q74 48 68 42 Q60 34 50 34 Q40 34 32 42 Q26 48 22 62Z" fill="#E3C590"/>
+          <circle cx="50" cy="24" r="9" fill="#B93A2B"/><circle cx="36" cy="28" r="7" fill="#D96B2B"/><circle cx="64" cy="28" r="7" fill="#D96B2B"/>
+          <path d="M27 24 Q33 18 38 22Z M73 24 Q67 18 62 22Z" fill="#45703B"/>
+          <path d="M34 56 Q42 50 48 55 M52 55 Q58 50 66 56" stroke="#E3C590" stroke-width="3" fill="none" stroke-linecap="round"/>
+          <path d="M36 64 Q40 67 44 64 M56 64 Q60 67 64 64" stroke="#E3C590" stroke-width="2.4" fill="none" stroke-linecap="round"/>
+        </svg>
+        <div class="cover-brand-name">FRYDA<span class="cover-brand-script"> café</span></div>
+      </div>
+      <div class="cover-author">
+        <div class="cover-author-txt">
+          <div class="l">Apresentado por</div>
+          <div class="n">MARIOLUCASH</div>
+        </div>
+        <img src="mariolucash-logo.jpg" alt="MarioLucash">
+      </div>
+    </div>
+
+    <svg style="position:absolute;top:34mm;right:8mm;opacity:.05;width:70mm;height:70mm" viewBox="0 0 200 200"><path d="M100 10 L115 65 L170 65 L125 100 L140 155 L100 120 L60 155 L75 100 L30 65 L85 65Z" fill="#E3C590"/></svg>
+    <svg style="position:absolute;bottom:60mm;left:4mm;opacity:.04;width:90mm;height:90mm" viewBox="0 0 200 200"><path d="M100 10 L115 65 L170 65 L125 100 L140 155 L100 120 L60 155 L75 100 L30 65 L85 65Z" fill="#E3C590"/></svg>
+
+    <div style="margin-top:22mm">
+      <div class="cover-badge">Apresentação · Presença Digital Completa</div>
+      <div class="cover-headline">
+        O Fryda já é<br>amado.<br>
+        <span class="accent">Agora vamos<br>fazer ele ser<br>encontrado.</span>
+      </div>
+      <div class="cover-lead">
+        Um site completo, o Google trabalhando a favor de vocês e as redes apontando quem já te segue pro lugar certo. Tudo junto, puxando cliente novo pra mesa todo dia.
+      </div>
+    </div>
+
+    <div class="cover-meta">
+      <div class="cover-meta-item"><div class="cover-meta-label">Para</div><div class="cover-meta-value">Maria &amp; Renata · Fryda Café</div></div>
+      <div class="cover-meta-item"><div class="cover-meta-label">Onde</div><div class="cover-meta-value">Centro · Taubaté/SP</div></div>
+      <div class="cover-meta-item"><div class="cover-meta-label">Data</div><div class="cover-meta-value">16 · 06 · 2026</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ PÁGINA 2 — POR QUE AGORA ============ -->
+<div class="page">
+  <div class="page-header">
+    <div class="logo-row">
+      <svg width="20" height="20" viewBox="0 0 100 100"><path d="M22 62 Q14 38 30 28 Q42 20 50 22 Q58 20 70 28 Q86 38 78 62 Q74 48 68 42 Q60 34 50 34 Q40 34 32 42 Q26 48 22 62Z" fill="#221A14"/><circle cx="50" cy="24" r="9" fill="#B93A2B"/><circle cx="36" cy="28" r="7" fill="#D96B2B"/><circle cx="64" cy="28" r="7" fill="#D96B2B"/><path d="M27 24 Q33 18 38 22Z M73 24 Q67 18 62 22Z" fill="#45703B"/></svg>
+      <span class="logo-name">FRYDA <span class="logo-script">café</span></span>
+    </div>
+    <span class="page-right"><img src="mariolucash-logo.jpg" alt="">MARIOLUCASH</span>
+  </div>
+  <div class="pad" style="padding-top:8mm">
+    <div class="eyebrow">01 · Por que agora</div>
+    <div class="h2">O Instagram de vocês é ótimo.<br>O problema é que ele está sozinho.</div>
+    <div class="body" style="max-width:150mm">
+      O Fryda tem público fiel, identidade forte e posts que engajam. Mas quem ainda não conhece dá de cara com paredes: não acha vocês no Google, não tem onde ver cardápio fora do feed, e as redes dependem de tempo que a cozinha não tem. Cada uma dessas portas fechadas é cliente indo pro concorrente.
+    </div>
+    <div class="cards-2col">
+      <div class="ncard"><div class="ncard-num">1</div><h3>Invisível no Google</h3><p>Quem busca "cafeteria em Taubaté" ou "café da manhã Taubaté" não encontra o Fryda. O concorrente com site aparece, vocês não. Busca sem resposta é cliente perdido antes do primeiro oi.</p></div>
+      <div class="ncard"><div class="ncard-num">2</div><h3>Sem casa própria na internet</h3><p>O Instagram é alugado: o algoritmo decide quem vê. Um site é o único canal 100% de vocês: cardápio, história, encomendas, no ar 24h sem depender do feed.</p></div>
+      <div class="ncard"><div class="ncard-num">3</div><h3>Redes pedem tempo que não sobra</h3><p>Postar com constância, pensar legenda e manter o ritmo dá trabalho. Quando a rotina aperta, o conteúdo para. E rede parada some do alcance de quem importa.</p></div>
+      <div class="ncard"><div class="ncard-num">4</div><h3>Ninguém puxando movimento novo</h3><p>Hoje o cliente novo chega por acaso. Sem nada ativo trazendo gente de fora, o Fryda depende só de quem já conhece. Falta uma torneira de gente nova.</p></div>
+    </div>
+  </div>
+  <div class="page-footer"><span>Apresentação Fryda Café · MarioLucash</span><span>02</span></div>
+</div>
+
+<!-- ============ PÁGINA 3 — A ENTREGA ============ -->
+<div class="page">
+  <div class="page-header">
+    <div class="logo-row">
+      <svg width="20" height="20" viewBox="0 0 100 100"><path d="M22 62 Q14 38 30 28 Q42 20 50 22 Q58 20 70 28 Q86 38 78 62 Q74 48 68 42 Q60 34 50 34 Q40 34 32 42 Q26 48 22 62Z" fill="#221A14"/><circle cx="50" cy="24" r="9" fill="#B93A2B"/><circle cx="36" cy="28" r="7" fill="#D96B2B"/><circle cx="64" cy="28" r="7" fill="#D96B2B"/><path d="M27 24 Q33 18 38 22Z M73 24 Q67 18 62 22Z" fill="#45703B"/></svg>
+      <span class="logo-name">FRYDA <span class="logo-script">café</span></span>
+    </div>
+    <span class="page-right"><img src="mariolucash-logo.jpg" alt="">MARIOLUCASH</span>
+  </div>
+  <div class="pad" style="padding-top:8mm">
+    <div class="eyebrow">02 · A entrega</div>
+    <div class="h2">Três frentes trabalhando juntas.</div>
+    <div class="body" style="max-width:150mm;margin-bottom:1mm">
+      Não é site bonito parado. É um sistema: o Google e as redes levam gente até o site, o site mostra o melhor do Fryda e leva pro WhatsApp e pra mesa. Cada peça empurra pra próxima.
+    </div>
+    <div class="pilar">
+      <div class="pilar-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#B93A2B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg></div>
+      <div class="pilar-body">
+        <div class="pilar-body-top"><h3>Site completo com a cara do Fryda</h3><span class="pilar-tag">Frente 1</span></div>
+        <p>Seguindo a identidade que vocês já têm, parece que o site sempre existiu. Rápido no celular, onde o cliente está.</p>
+        <ul>
+          <li>Home, cardápio por categoria, encomendas, história do Fryda e contato</li>
+          <li>Botão de WhatsApp e link pro iFood em todo lugar</li>
+          <li>Domínio próprio (ex: frydacafe.com.br), hospedagem e segurança do site</li>
+          <li>Treinamento pra equipe atualizar cardápio e preços sozinha</li>
+        </ul>
+      </div>
+    </div>
+    <div class="pilar">
+      <div class="pilar-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#B93A2B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg></div>
+      <div class="pilar-body">
+        <div class="pilar-body-top"><h3>Google Meu Negócio ativado</h3><span class="pilar-tag">Frente 2</span></div>
+        <p>O Fryda passa a aparecer no Google e no Maps quando alguém busca café, brunch ou a famosa torta de frango em Taubaté.</p>
+        <ul>
+          <li>Perfil completo e verificado: fotos, horários, endereço e categorias</li>
+          <li>Posts iniciais e configuração das avaliações de clientes</li>
+          <li>Conectado ao site e ao WhatsApp pra fechar o ciclo</li>
+        </ul>
+      </div>
+    </div>
+    <div class="pilar">
+      <div class="pilar-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#B93A2B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l2.5 7h7l-5.7 4.2 2.2 7L12 17l-5.2 3.4 2.2-7L3.3 9h7z"/></svg></div>
+      <div class="pilar-body">
+        <div class="pilar-body-top"><h3>Estrutura de redes que leva pro site</h3><span class="pilar-tag">Frente 3</span></div>
+        <p>A ideia não é tomar conta do Instagram de vocês. É montar a estrutura pra quem já segue chegar no site e no WhatsApp, sem bagunçar o feed.</p>
+        <ul>
+          <li>Posts de estrutura que encaminham o seguidor pro site e pro WhatsApp</li>
+          <li>Link na bio organizado: site, cardápio, encomendas e iFood num lugar só</li>
+          <li>Padrão visual na identidade do Fryda, sem competir com o conteúdo de vocês</li>
+          <li>Gestão completa de conteúdo (estratégia e editorial) fica à parte, sob demanda</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="page-footer"><span>Apresentação Fryda Café · MarioLucash</span><span>03</span></div>
+</div>
+
+<!-- ============ PÁGINA 4 — INVESTIMENTO ============ -->
+<div class="page">
+  <div class="page-header">
+    <div class="logo-row">
+      <svg width="20" height="20" viewBox="0 0 100 100"><path d="M22 62 Q14 38 30 28 Q42 20 50 22 Q58 20 70 28 Q86 38 78 62 Q74 48 68 42 Q60 34 50 34 Q40 34 32 42 Q26 48 22 62Z" fill="#221A14"/><circle cx="50" cy="24" r="9" fill="#B93A2B"/><circle cx="36" cy="28" r="7" fill="#D96B2B"/><circle cx="64" cy="28" r="7" fill="#D96B2B"/><path d="M27 24 Q33 18 38 22Z M73 24 Q67 18 62 22Z" fill="#45703B"/></svg>
+      <span class="logo-name">FRYDA <span class="logo-script">café</span></span>
+    </div>
+    <span class="page-right"><img src="mariolucash-logo.jpg" alt="">MARIOLUCASH</span>
+  </div>
+  <div class="pad" style="padding-top:8mm">
+    <div class="eyebrow">03 · Investimento</div>
+    <div class="h2">Tudo isso, num pacote só.</div>
+
+    <div class="price-hero">
+      <div class="price-hero-left">
+        <div class="ph-label">Presença Digital Completa</div>
+        <div class="ph-title">Site completo + Google Meu Negócio + Redes Sociais</div>
+        <div class="ph-sub">Projeto fechado, entregue pronto pra rodar. Sem mensalidade obrigatória.</div>
+      </div>
+      <div class="price-hero-right">
+        <div class="ph-big">R$ 5.000<small></small></div>
+      </div>
+    </div>
+
+    <div class="pay-grid">
+      <div class="pay rec">
+        <div class="pay-badge">⚡ À VISTA NO PIX</div>
+        <div class="pay-label">Pix</div>
+        <div class="pay-value">R$ 5.000</div>
+        <div class="pay-note">Pagamento único. Projeto inicia na hora.</div>
+      </div>
+      <div class="pay">
+        <div class="pay-label">Parcelado</div>
+        <div class="pay-value">3<small>x de</small> R$ 1.700</div>
+        <div class="pay-note">Em três vezes, pra caber no caixa do mês.</div>
+      </div>
+    </div>
+
+    <div class="boost">
+      <span class="boost-tag">Já incluso</span>
+      <div class="boost-body">
+        <h3>R$ 500 em anúncios no Google, já dentro do pacote</h3>
+        <p>Não é custo extra e não muda o preço. <strong>Do valor do pacote, R$ 500 já vão aplicados em anúncios no Google</strong> no lançamento, pra trazer gente nova de Taubaté enquanto o site e o perfil ganham tração. Vocês não pagam nada a mais por isso: já está no R$ 5.000.</p>
+      </div>
+    </div>
+
+    <div class="eyebrow" style="margin-bottom:3mm">O que está incluso</div>
+    <div class="checklist">
+      <div class="check-item">Site completo e responsivo</div>
+      <div class="check-item">Domínio próprio, hospedagem e segurança</div>
+      <div class="check-item">Cardápio digital por categoria</div>
+      <div class="check-item">Página de encomendas</div>
+      <div class="check-item">Botão de WhatsApp em todo lugar</div>
+      <div class="check-item">Google Meu Negócio verificado</div>
+      <div class="check-item">Fotos e posts iniciais no Google</div>
+      <div class="check-item">Estrutura de redes que leva pro site</div>
+      <div class="check-item">Link na bio organizado</div>
+      <div class="check-item">R$ 500 em anúncios no Google inclusos</div>
+      <div class="check-item">Identidade visual aplicada em tudo</div>
+      <div class="check-item">Treinamento de uso pra equipe</div>
+    </div>
+  </div>
+  <div class="page-footer"><span>Apresentação Fryda Café · MarioLucash</span><span>04</span></div>
+</div>
+
+<!-- ============ PÁGINA 5 — CONTINUIDADE ============ -->
+<div class="page">
+  <div class="page-header">
+    <div class="logo-row">
+      <svg width="20" height="20" viewBox="0 0 100 100"><path d="M22 62 Q14 38 30 28 Q42 20 50 22 Q58 20 70 28 Q86 38 78 62 Q74 48 68 42 Q60 34 50 34 Q40 34 32 42 Q26 48 22 62Z" fill="#221A14"/><circle cx="50" cy="24" r="9" fill="#B93A2B"/><circle cx="36" cy="28" r="7" fill="#D96B2B"/><circle cx="64" cy="28" r="7" fill="#D96B2B"/><path d="M27 24 Q33 18 38 22Z M73 24 Q67 18 62 22Z" fill="#45703B"/></svg>
+      <span class="logo-name">FRYDA <span class="logo-script">café</span></span>
+    </div>
+    <span class="page-right"><img src="mariolucash-logo.jpg" alt="">MARIOLUCASH</span>
+  </div>
+  <div class="pad" style="padding-top:8mm">
+    <div class="eyebrow">04 · Continuidade</div>
+    <div class="h2">Depois do lançamento, é só manter no ar.</div>
+    <div class="body" style="max-width:150mm;margin-bottom:1mm">
+      O pacote entrega tudo pronto pra rodar. Pra continuar liso depois, tem a manutenção mensal: o site sempre no ar e atualizado, e a estrutura de redes apontando pro lugar certo. Opcional, sem fidelidade, começa quando vocês quiserem.
+    </div>
+
+    <div class="price-hero" style="margin-top:6mm">
+      <div class="price-hero-left">
+        <div class="ph-label">Manutenção mensal</div>
+        <div class="ph-title">Site no ar + estrutura de redes</div>
+        <div class="ph-sub">Mês a mês, sem fidelidade. Cancela quando quiser.</div>
+      </div>
+      <div class="price-hero-right">
+        <div class="ph-big">R$ 800<small> /mês</small></div>
+      </div>
+    </div>
+
+    <div class="checklist" style="margin-top:1mm">
+      <div class="check-item">Site no ar: hospedagem e segurança</div>
+      <div class="check-item">Ajustes de cardápio, preços e fotos</div>
+      <div class="check-item">Posts de estrutura que levam pro site e WhatsApp</div>
+      <div class="check-item">Link na bio sempre organizado</div>
+      <div class="check-item">Acompanhamento do Google Meu Negócio</div>
+      <div class="check-item">Suporte direto comigo no WhatsApp</div>
+    </div>
+
+    <div class="validade" style="margin-top:5mm">
+      <p>Quer ir além? <strong>Gestão completa de redes</strong> (estratégia de conteúdo, calendário editorial e produção) e <strong>campanhas de anúncio</strong> são serviços à parte, feitos sob demanda. A manutenção acima já segura tudo rodando depois do lançamento.</p>
+    </div>
+  </div>
+  <div class="page-footer"><span>Apresentação Fryda Café · MarioLucash</span><span>05</span></div>
+</div>
+
+<!-- ============ PÁGINA 6 — PRÓXIMOS PASSOS ============ -->
+<div class="page">
+  <div class="page-header">
+    <div class="logo-row">
+      <svg width="20" height="20" viewBox="0 0 100 100"><path d="M22 62 Q14 38 30 28 Q42 20 50 22 Q58 20 70 28 Q86 38 78 62 Q74 48 68 42 Q60 34 50 34 Q40 34 32 42 Q26 48 22 62Z" fill="#221A14"/><circle cx="50" cy="24" r="9" fill="#B93A2B"/><circle cx="36" cy="28" r="7" fill="#D96B2B"/><circle cx="64" cy="28" r="7" fill="#D96B2B"/><path d="M27 24 Q33 18 38 22Z M73 24 Q67 18 62 22Z" fill="#45703B"/></svg>
+      <span class="logo-name">FRYDA <span class="logo-script">café</span></span>
+    </div>
+    <span class="page-right"><img src="mariolucash-logo.jpg" alt="">MARIOLUCASH</span>
+  </div>
+  <div class="pad" style="padding-top:8mm">
+    <div class="eyebrow">05 · Próximos passos</div>
+    <div class="h2">Como começa.</div>
+    <div class="body" style="margin-bottom:1mm">Três passos simples e o Fryda entra no ar.</div>
+    <div class="passos">
+      <div class="passo"><div class="passo-num">01</div><h3>Aprovação</h3><p>Vocês confirmam o pacote e a forma de pagamento. Um oi no WhatsApp já é suficiente pra começar.</p></div>
+      <div class="passo"><div class="passo-num">02</div><h3>Entrada + material</h3><p>Entrada de 50% e me enviam fotos, cardápio atual e os acessos. Cuido de todo o resto.</p></div>
+      <div class="passo"><div class="passo-num">03</div><h3>Entrega em 7 a 10 dias</h3><p>Site, Google e redes no ar. Saldo na entrega. O Fryda passa a ser encontrado.</p></div>
+    </div>
+    <div class="cta-box">
+      <h2>Bora colocar o Fryda no mapa? ☕</h2>
+      <p>Essa apresentação vale por 7 dias. Qualquer dúvida antes de decidir, é só me chamar. Tô do lado de vocês nessa.</p>
+      <div class="cta-contacts">
+        <div><div class="cta-label">WhatsApp</div><div class="cta-c">(12) 98159-2576</div></div>
+        <div><div class="cta-label">Email</div><div class="cta-c">mariolucasdasilvabarbosa@gmail.com</div></div>
+        <div><div class="cta-label">Instagram</div><div class="cta-c">@mariolucash</div></div>
+        <div class="cta-sign">
+          <img src="mariolucash-logo.jpg" alt="MarioLucash">
+          <div><div class="s-n">MarioLucash</div><div class="s-l">Sites &amp; Presença Digital</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="validade">
+      <p><strong>Condições:</strong> à vista no Pix por R$ 5.000, ou parcelado em 3x de R$ 1.700 (total R$ 5.100). No Pix, entrada de 50% pra dar início e saldo na entrega. Dos R$ 5.000, R$ 500 são reservados a anúncios no Google no lançamento. Prazo de 7 a 10 dias conta a partir do recebimento do material (fotos, cardápio e acessos). Manutenção mensal opcional (site no ar + estrutura de redes) por R$ 800/mês, sem fidelidade, começando quando vocês quiserem. Gestão completa de redes e campanhas de anúncio são serviços à parte, sob demanda.</p>
+    </div>
+  </div>
+  <div class="page-footer"><span>Apresentação Fryda Café · MarioLucash · Confidencial</span><span>06</span></div>
+</div>
+
+</body>
+</html>

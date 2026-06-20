@@ -24,3 +24,14 @@ node_modules/
 # Drop zone do usuário (só o README vai versionado)
 dados/*
 !dados/README.md
+
+# Python
+__pycache__/
+*.pyc
+
+# Conteudo & Redes — fila de runtime (estado, nao versionar)
+marketing/*-fila.json
+marketing/conteudo/
+
+# Lotes de envio (runtime, nao versionar)
+saidas/envio/

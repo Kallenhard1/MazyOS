@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+{% block titulo %}Sistema & Config{% endblock %}
+{% block conteudo %}
+<h1>⚙️ Sistema &amp; Config</h1>
+<p class="sub">As ações de núcleo e os ajustes da operação. As ações rodam como skill no Claude Code (handoff). A config é lida das fontes de verdade; pra mudar, edite o arquivo indicado.</p>
+
+<h2>Ações</h2>
+<div class="conteudo-cols">
+  {% for a in acoes %}
+  <div class="card" style="padding:12px 14px">
+    <strong style="font-size:.92rem">{{ a.nome }}</strong>
+    <span class="muted" style="font-size:.78rem; display:block; margin:4px 0 9px">{{ a.desc }}</span>
+    <button type="button" class="secundario" style="margin:0; padding:5px 10px; font-size:.74rem"
+            data-prompt="{{ a.comando }}" onclick="copiarConfig(this)">📋 {{ a.comando }}</button>
+  </div>
+  {% endfor %}
+</div>
+
+<h2>Contato padrão</h2>
+<div class="card">
+  {% if contato %}
+  <p style="font-size:.9rem; margin:0">{{ contato }}</p>
+  <p class="muted" style="font-size:.76rem; margin-top:6px">Fonte: <code>_memoria/empresa.md</code> · usado em proposta, apresentação e material de cliente. Pra mudar, edite lá.</p>
+  {% else %}
+  <p class="muted">Contato não encontrado em <code>_memoria/empresa.md</code>.</p>
+  {% endif %}
+</div>
+
+<h2>Identidade visual</h2>
+<div class="card">
+  <div style="display:flex; gap:18px; align-items:flex-start; flex-wrap:wrap">
+    {% if identidade.logo %}
+    <img src="{{ url_for('arquivo', rel=identidade.logo) }}" alt="logo" style="width:72px; height:72px; object-fit:contain; border:1px solid var(--linha,#eee); border-radius:8px; background:#fff">
+    {% endif %}
+    <div style="flex:1; min-width:200px">
+      {% if identidade.cores %}
+      <div style="display:flex; gap:10px; flex-wrap:wrap">
+        {% for c in identidade.cores %}
+        <div style="text-align:center">
+          <div style="width:42px; height:42px; border-radius:8px; border:1px solid var(--linha,#eee); background:{{ c.hex }}"></div>
+          <span class="muted" style="font-size:.66rem; display:block; margin-top:3px">{{ c.hex }}</span>
+        </div>
+        {% endfor %}
+      </div>
+      {% else %}
+      <p class="muted">Cores não encontradas no design-guide.</p>
+      {% endif %}
+    </div>
+  </div>
+  <p class="muted" style="font-size:.76rem; margin-top:10px">Fonte: <code>identidade/design-guide.md</code> (marca do MarioLucash). Pra mudar a paleta/logo, edite lá.</p>
+</div>
+
+<h2>Integrações</h2>
+<div class="card">
+  {% if integracoes %}
+  {% for i in integracoes %}
+  <div style="padding:6px 0; font-size:.86rem">{{ '🟢' if i.conectado else '⚪' }} {{ i.nome }} <span class="muted" style="font-size:.76rem">{{ 'conectada' if i.conectado else 'pendente' }}</span></div>
+  {% endfor %}
+  <p class="muted" style="font-size:.76rem; margin-top:8px">Fonte: checklist <code>Ferramentas conectadas</code> do <code>CLAUDE.md</code>. Chaves de API entram via MCP/ambiente, não ficam na plataforma.</p>
+  {% else %}
+  <p class="muted">Checklist de ferramentas não encontrado no CLAUDE.md.</p>
+  {% endif %}
+</div>
+
+<script>
+function copiarConfig(btn){
+  navigator.clipboard.writeText(btn.dataset.prompt).then(()=>{
+    const t = btn.textContent; btn.textContent = '✓ Copiado!';
+    setTimeout(()=>btn.textContent = t, 1400);
+  });
+}
+</script>
+{% endblock %}

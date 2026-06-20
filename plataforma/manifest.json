@@ -1,0 +1,143 @@
+{
+  "gerado_em": "2026-06-20 01:46",
+  "resumo": {
+    "skills": 17,
+    "scripts": 9,
+    "nao_mapeados": 0
+  },
+  "skills": [
+    {
+      "nome": "abrir",
+      "descricao": "Abre uma sessão de trabalho carregando a memória do negócio (empresa, preferências, estratégia, identidade) e devolve um resumo curto pro usuário.",
+      "mapeado": true
+    },
+    {
+      "nome": "analisar-dados",
+      "descricao": "Analisa um arquivo de dados (CSV, Excel, TXT, JSON) e gera um resumo executivo com os principais insights, tendências e recomendações.",
+      "mapeado": true
+    },
+    {
+      "nome": "anuncio-google",
+      "descricao": "Cria estrutura completa de campanha do Google Ads a partir de um briefing ou da pesquisa SEO.",
+      "mapeado": true
+    },
+    {
+      "nome": "aprovar-post",
+      "descricao": "Aprova e publica um post da fila — flipa o blog de draft pra published, copia os PNGs do carrossel pro public folder do site, faz commit e push (Netlify/Vercel",
+      "mapeado": true
+    },
+    {
+      "nome": "atualizar",
+      "descricao": "Varre o projeto e atualiza os arquivos de contexto (`_memoria/empresa.md`, `preferencias.md`, `estrategia.md`, `CLAUDE.md`, `identidade/design-guide.md`) que fi",
+      "mapeado": true
+    },
+    {
+      "nome": "campanha",
+      "descricao": "Roda a campanha de abordagem dos leads em lotes, respeitando as regras de WhatsApp (só celular, lotes pequenos, espaçado, marca no funil depois).",
+      "mapeado": true
+    },
+    {
+      "nome": "carrossel",
+      "descricao": "Cria carrosséis e posts visuais pra Instagram, TikTok, LinkedIn com a identidade visual da marca.",
+      "mapeado": true
+    },
+    {
+      "nome": "email-profissional",
+      "descricao": "Rascunha um email profissional a partir de um contexto livre.",
+      "mapeado": true
+    },
+    {
+      "nome": "instalar",
+      "descricao": "Instala o MazyOS no negócio do usuário.",
+      "mapeado": true
+    },
+    {
+      "nome": "mapear-rotinas",
+      "descricao": "Mapeia tarefas repetitivas que o usuário faz no dia a dia e gera skills personalizadas pra automatizá-las.",
+      "mapeado": true
+    },
+    {
+      "nome": "novo-projeto",
+      "descricao": "Cria uma pasta de projeto nova com `CLAUDE.md` dedicado, depois de uma entrevista curta sobre o projeto (cliente, objetivo, entregas previstas).",
+      "mapeado": true
+    },
+    {
+      "nome": "prospectar",
+      "descricao": "Roda o pipeline completo de prospecção do MarioLucash: qualifica leads, ranqueia por oportunidade, gera abordagem (WhatsApp + e-mail) e diagnóstico PDF dos quen",
+      "mapeado": true
+    },
+    {
+      "nome": "publicar-tema",
+      "descricao": "Orquestra a criação completa de uma peça de conteúdo SEO + redes sociais a partir de um tema.",
+      "mapeado": true
+    },
+    {
+      "nome": "relatorio-ads",
+      "descricao": "Gera relatório semanal de performance de anúncios pagos (Google Ads + Meta Ads).",
+      "mapeado": true
+    },
+    {
+      "nome": "responder-avaliacoes",
+      "descricao": "Escreve respostas curtas e humanas pras avaliações do Google Meu Negócio.",
+      "mapeado": true
+    },
+    {
+      "nome": "salvar",
+      "descricao": "Salva o trabalho do MazyOS no GitHub (commit + push).",
+      "mapeado": true
+    },
+    {
+      "nome": "seo",
+      "descricao": "Fluxo completo de SEO, GEO e Google Ads em 8 passos: pesquisa de demanda, análise de concorrência, Google Meu Negócio, otimização on-page, estratégia de conteúd",
+      "mapeado": true
+    }
+  ],
+  "scripts": [
+    {
+      "nome": "buscar_leads_osm.py",
+      "descricao": "Sourcing de leads via OpenStreetMap (Overpass API) — alternativa GRÁTIS",
+      "mapeado": true
+    },
+    {
+      "nome": "buscar_leads_places.py",
+      "descricao": "Sourcing de leads via Google Places — Etapa 2 (B2C local + B2B).",
+      "mapeado": true
+    },
+    {
+      "nome": "campanha.py",
+      "descricao": "Campanha de abordagem — roda os leads em lotes, respeitando as regras.",
+      "mapeado": true
+    },
+    {
+      "nome": "crm.py",
+      "descricao": "CRM de prospecção — Etapa 4 (fecha o ciclo).",
+      "mapeado": true
+    },
+    {
+      "nome": "filtrar_cnpj.py",
+      "descricao": "Sourcing B2B em escala — filtra os dados abertos de CNPJ da Receita Federal.",
+      "mapeado": true
+    },
+    {
+      "nome": "gerar_abordagem.py",
+      "descricao": "Gerador de abordagem — Etapa 3 (outreach personalizado).",
+      "mapeado": true
+    },
+    {
+      "nome": "gerar_diagnostico.py",
+      "descricao": "Gerador de diagnóstico em PDF — Etapa 3 (o 1-página por lead).",
+      "mapeado": true
+    },
+    {
+      "nome": "notion_payload.py",
+      "descricao": "Gera o payload de páginas pro Notion (create-pages) a partir do pipeline.csv,",
+      "mapeado": true
+    },
+    {
+      "nome": "qualificar_leads.py",
+      "descricao": "Qualificador de leads — o coração da automação de prospecção.",
+      "mapeado": true
+    }
+  ],
+  "nao_mapeados_na_plataforma": []
+}

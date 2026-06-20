@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fryda Café — Coffee Shop in Taubaté, Brazil</title>
+<meta name="description" content="A coffee shop and comfort kitchen in downtown Taubaté. Belgian-chocolate cappuccino, the famous chicken pie, generous cakes and the daily lunch.">
+<link rel="icon" type="image/svg+xml" href="./favicon.svg">
+<link rel="apple-touch-icon" href="./favicon.svg">
+<meta name="theme-color" content="#3A1410">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,800;1,500;1,600&family=Great+Vibes&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#F6EEDD;
+    --cream-2:#FBF7EE;
+    --maroon:#3A1410;
+    --maroon-2:#4B1C15;
+    --ink:#2A1712;
+    --red:#BE4332;
+    --red-d:#A4392A;
+    --orange:#D96B2B;
+    --green:#5E7A45;
+    --line:rgba(42,23,18,.14);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{font-family:'Jost',sans-serif;background:var(--cream);color:var(--ink);line-height:1.6;overflow-x:clip}
+  h1,h2,h3,h4{font-family:'Playfair Display',serif;line-height:1.1}
+  .script{font-family:'Great Vibes',cursive;font-weight:400}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 28px}
+  img{display:block;max-width:100%}
+  a{color:inherit}
+
+  .pill{display:inline-flex;align-items:center;gap:6px;background:var(--cream-2);border:1px solid var(--line);
+    padding:7px 16px;border-radius:999px;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;font-weight:400;color:rgba(42,23,18,.7)}
+  .pill b{font-weight:600;color:var(--ink)}
+  .pill.on-dark{background:rgba(255,255,255,.07);border-color:rgba(255,255,255,.18);color:rgba(246,238,221,.75)}
+  .pill.on-dark b{color:#fff}
+
+  .btn{display:inline-flex;align-items:center;gap:9px;background:var(--red);color:#fff;padding:14px 28px;border-radius:999px;
+    text-decoration:none;font-weight:500;letter-spacing:.03em;font-size:.95rem;transition:.22s;border:none;cursor:pointer}
+  .btn:hover{background:var(--ink);color:var(--cream)}
+  .btn.dark{background:var(--ink);color:var(--cream)}
+  .btn.dark:hover{background:var(--red)}
+  .btn.ghost{background:transparent;border:1.5px solid var(--ink);color:var(--ink)}
+  .btn.ghost:hover{background:var(--ink);color:var(--cream)}
+  .btn.light{background:var(--cream);color:var(--ink)}
+  .btn.light:hover{background:var(--red);color:#fff}
+
+  nav{position:sticky;top:0;z-index:40;background:rgba(246,238,221,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+  .nav-in{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:20px;padding:16px 28px;max-width:1180px;margin:0 auto}
+  .nav-left,.nav-right{display:flex;align-items:center;gap:26px}
+  .nav-right{justify-content:flex-end}
+  .nav-in a.lnk{text-decoration:none;font-weight:500;font-size:.92rem;letter-spacing:.02em;color:var(--ink);white-space:nowrap}
+  .nav-in a.lnk:hover{color:var(--red)}
+  .brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink);justify-self:center}
+  .brand .logo{width:38px;height:38px}
+  .brand .name{font-family:'Playfair Display',serif;font-size:1.45rem;font-weight:700;letter-spacing:.04em;line-height:1}
+  .brand .name .script{font-size:1.05rem;color:var(--red);margin-left:2px}
+  .nav-burger{display:none;background:none;border:none;font-size:1.5rem;cursor:pointer;color:var(--ink)}
+
+  header{position:relative}
+  .hero-img-wrap{position:relative;min-height:clamp(540px,82vh,780px);display:flex;align-items:center;justify-content:center;
+    text-align:center;overflow:hidden;background:var(--maroon)}
+  .hero-img-wrap .hero-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 38%;z-index:0}
+  .hero-scrim{position:absolute;inset:0;z-index:1;
+    background:
+      radial-gradient(60% 45% at 50% 52%,rgba(42,16,12,.50) 0%,rgba(42,16,12,0) 75%),
+      linear-gradient(180deg,rgba(42,16,12,.58) 0%,rgba(42,16,12,.42) 36%,rgba(42,16,12,.50) 60%,rgba(42,16,12,.82) 100%)}
+  .hero-inner{position:relative;z-index:2;max-width:900px;padding:40px 28px;color:var(--cream)}
+  .hero-inner h1{font-size:clamp(2.6rem,6.4vw,5rem);font-weight:600;margin:24px 0 0;color:#fff;text-shadow:0 2px 24px rgba(0,0,0,.35)}
+  .hero-inner h1 em{font-style:italic;color:#F1C97A}
+  .hero-cta-circle{display:inline-flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;
+    width:118px;height:118px;border-radius:50%;background:var(--red);color:#fff;text-decoration:none;margin:32px 0 0;
+    font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;text-align:center;font-weight:500;transition:.22s;box-shadow:0 16px 40px rgba(0,0,0,.4)}
+  .hero-cta-circle:hover{background:var(--ink);transform:translateY(-3px)}
+  .hero-cta-circle .arr{font-size:1.3rem;line-height:1}
+  .hero-stamp{position:absolute;top:104px;right:40px;z-index:3;width:120px;height:120px;border-radius:50%;background:var(--red);color:#fff;
+    display:flex;align-items:center;justify-content:center;text-align:center;font-size:.74rem;font-weight:600;letter-spacing:.06em;
+    line-height:1.35;padding:14px;transform:rotate(8deg);box-shadow:0 14px 30px rgba(0,0,0,.35)}
+
+  section{padding:90px 0}
+  .eyebrow{display:flex;justify-content:center;margin-bottom:18px}
+  .sec-h{font-size:clamp(1.9rem,4vw,3rem);font-weight:600}
+  .center{text-align:center}
+  .lead{font-weight:300;color:rgba(42,23,18,.78);max-width:40rem}
+
+  .about-top{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:14px;margin-bottom:30px}
+  .about-grid{display:grid;grid-template-columns:1.25fr .75fr;gap:54px;align-items:center}
+  .about-grid h2{font-size:clamp(1.9rem,3.6vw,2.7rem);font-weight:600;margin-bottom:26px}
+  .about-cta{display:flex;align-items:center;gap:22px;flex-wrap:wrap}
+  .avatars{display:flex;align-items:center}
+  .avatars span{width:38px;height:38px;border-radius:50%;border:2px solid var(--cream);margin-left:-12px;background-size:cover;background-position:center}
+  .avatars span:first-child{margin-left:0}
+  .proof small{display:block;font-size:.8rem;color:rgba(42,23,18,.6)}
+  .proof strong{font-weight:600;font-size:.95rem}
+  .about-photo{position:relative;border-radius:20px;overflow:hidden;aspect-ratio:4/5;box-shadow:0 24px 56px rgba(42,23,18,.2)}
+  .about-photo img{width:100%;height:100%;object-fit:cover}
+
+  .menu{background:var(--cream)}
+  .menu-head{margin-bottom:36px;max-width:560px}
+  .menu-head h2{font-size:clamp(1.9rem,3.6vw,2.7rem);font-weight:600;margin-top:14px}
+  .menu-grid{display:grid;grid-template-columns:.92fr 1.08fr;gap:30px;align-items:stretch}
+  .feature-card{background:var(--cream-2);border:1px solid var(--line);border-radius:20px;padding:22px 22px 26px;display:flex;flex-direction:column}
+  .feature-card .feature-banner{width:100%;flex:1;min-height:230px;object-fit:cover;object-position:center 58%;border-radius:14px;margin-bottom:18px;box-shadow:0 12px 28px rgba(42,23,18,.18)}
+  .feature-tag{align-self:flex-start;background:var(--red);color:#fff;font-size:.7rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:5px 12px;border-radius:999px;margin-bottom:12px}
+  .feature-card h3{font-size:1.5rem;font-weight:700;margin-bottom:8px}
+  .feature-card .sub{font-size:.92rem;font-weight:300;color:rgba(42,23,18,.72);line-height:1.6;margin-bottom:20px}
+  .feature-foot{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-top:auto}
+  .feature-foot .preco{font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:700;color:var(--red)}
+  .feature-foot .preco small{font-size:.85rem;font-family:'Jost',sans-serif;font-weight:300;color:rgba(42,23,18,.6)}
+  .menu-note{margin-top:26px;font-size:.88rem;font-weight:300;color:rgba(42,23,18,.7);text-align:center}
+  .menu-note a{color:var(--red);font-weight:600;text-decoration:none}
+  .menu-note a:hover{text-decoration:underline}
+  .cat-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+  .cat{background:var(--cream-2);border:1px solid var(--line);border-radius:18px;padding:24px 22px}
+  .cat .ico{font-size:1.4rem;margin-bottom:12px}
+  .cat .cat-thumb{width:56px;height:56px;border-radius:14px;object-fit:cover;margin-bottom:12px;box-shadow:0 6px 16px rgba(42,23,18,.2)}
+  .cat.dark .cat-thumb{box-shadow:0 6px 16px rgba(0,0,0,.35)}
+  .cat h4{font-size:1.1rem;font-weight:700;margin-bottom:4px}
+  .cat p.d{font-size:.83rem;font-weight:300;color:rgba(42,23,18,.65);margin-bottom:14px;min-height:2.6em}
+  .cat ul{list-style:none}
+  .cat ul li{font-size:.84rem;padding:5px 0;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;gap:10px}
+  .cat ul li:last-child{border-bottom:none}
+  .cat ul li .pr{font-weight:600;color:var(--red);white-space:nowrap}
+  .cat.dark{background:var(--maroon);border-color:var(--maroon);color:var(--cream)}
+  .cat.dark p.d{color:rgba(246,238,221,.7)}
+  .cat.dark ul li{border-color:rgba(255,255,255,.14)}
+  .cat.dark ul li .pr{color:var(--orange)}
+
+  .order-grid{display:grid;grid-template-columns:1fr 1fr;gap:54px;align-items:center}
+  .order-grid h2{font-size:clamp(1.9rem,3.6vw,2.7rem);font-weight:600;margin:14px 0 28px}
+  .collage{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:auto auto;gap:14px}
+  .collage img{width:100%;height:100%;object-fit:cover;border-radius:16px;box-shadow:0 16px 40px rgba(42,23,18,.16)}
+  .collage .tall{grid-row:span 2;aspect-ratio:3/5}
+  .collage .wide{aspect-ratio:4/3}
+
+  .gallery{background:var(--maroon);color:var(--cream);overflow:hidden}
+  .gallery .pill{margin:0 auto}
+  .gallery h2{color:#fff}
+  .gallery .strip{display:flex;gap:22px;justify-content:center;flex-wrap:wrap;margin-top:50px}
+  .ig-card{display:block;width:248px;background:var(--cream-2);border-radius:16px;overflow:hidden;text-decoration:none;color:var(--ink);box-shadow:0 18px 42px rgba(0,0,0,.38);transition:.22s}
+  .ig-card:hover{transform:translateY(-6px);box-shadow:0 26px 54px rgba(0,0,0,.5)}
+  .ig-top{display:flex;align-items:center;gap:9px;padding:11px 13px}
+  .ig-ava{width:30px;height:30px;border-radius:50%;border:2px solid var(--orange);background:var(--cream);flex:0 0 auto}
+  .ig-handle{font-weight:600;font-size:.84rem;line-height:1.1}
+  .ig-handle small{display:block;font-weight:300;font-size:.66rem;color:rgba(42,23,18,.55)}
+  .ig-ig{margin-left:auto;width:19px;height:19px;opacity:.85}
+  .ig-photo{aspect-ratio:1/1;overflow:hidden;background:linear-gradient(140deg,#E3C590,#C98A3B)}
+  .ig-photo img{width:100%;height:100%;object-fit:cover;transition:.3s}
+  .ig-card:hover .ig-photo img{transform:scale(1.04)}
+  .ig-actions{display:flex;align-items:center;gap:14px;padding:11px 13px 2px}
+  .ig-actions svg{width:22px;height:22px;stroke:var(--ink);fill:none;stroke-width:1.8}
+  .ig-actions .heart{fill:var(--red);stroke:var(--red)}
+  .ig-actions .seemore{margin-left:auto;font-size:.72rem;font-weight:500;color:var(--red);text-transform:uppercase;letter-spacing:.04em}
+  .ig-cap{padding:6px 13px 14px;font-size:.8rem;line-height:1.45;color:rgba(42,23,18,.85)}
+  .ig-cap b{font-weight:600;color:var(--ink)}
+
+  .tst-grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:50px;align-items:center}
+  .tst-grid h2{font-size:clamp(1.9rem,3.6vw,2.7rem);font-weight:600}
+  .tst-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  .tst{background:var(--cream-2);border:1px solid var(--line);border-radius:18px;padding:24px 22px;display:flex;flex-direction:column;gap:16px}
+  .tst.dark{background:var(--maroon);border-color:var(--maroon);color:var(--cream)}
+  .tst p.q{font-size:.92rem;font-weight:300;line-height:1.65;flex:1}
+  .tst .who{font-weight:600;font-size:.92rem}
+  .tst .who small{display:block;font-weight:300;font-size:.78rem;color:rgba(42,23,18,.6)}
+  .tst.dark .who small{color:rgba(246,238,221,.65)}
+  .tst .stars{color:var(--orange);font-size:.85rem;letter-spacing:2px}
+
+  footer{background:var(--maroon);color:var(--cream);padding:70px 0 36px}
+  .foot-top{display:grid;grid-template-columns:1.1fr 1fr;gap:48px;align-items:center;padding-bottom:40px;border-bottom:1px solid rgba(255,255,255,.14)}
+  .foot-logo{width:64px;height:64px;display:block;margin-bottom:14px}
+  .foot-word{font-family:'Playfair Display',serif;font-size:clamp(3rem,8vw,5.5rem);font-weight:800;line-height:.9;letter-spacing:.01em}
+  .foot-word .dot{color:var(--red)}
+  .foot-word .script{display:block;font-size:.32em;color:var(--orange);letter-spacing:.04em;margin-top:6px}
+  .news h4{font-size:1.4rem;font-weight:600;margin-bottom:8px}
+  .news p{font-size:.88rem;font-weight:300;color:rgba(246,238,221,.7);margin-bottom:18px}
+  .news-form{display:flex;gap:10px;flex-wrap:wrap}
+  .news-form input{flex:1;min-width:180px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.2);border-radius:999px;padding:14px 20px;color:#fff;font-family:inherit;font-size:.9rem}
+  .news-form input::placeholder{color:rgba(246,238,221,.55)}
+  .foot-mid{display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:40px;padding:40px 0}
+  .foot-mid h5{font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(246,238,221,.55);margin-bottom:16px;font-family:'Jost',sans-serif;font-weight:500}
+  .foot-mid a,.foot-mid p{display:block;text-decoration:none;color:rgba(246,238,221,.9);font-size:.92rem;font-weight:300;padding:5px 0}
+  .foot-mid a:hover{color:#fff}
+  .foot-links ol{list-style:none;counter-reset:f;columns:2;column-gap:30px}
+  .foot-links ol li{counter-increment:f;padding:5px 0}
+  .foot-links ol li a::before{content:counter(f)". ";color:rgba(246,238,221,.45)}
+  .socials{display:flex;gap:12px;margin-top:6px}
+  .socials a{width:42px;height:42px;border-radius:50%;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.18);display:flex;align-items:center;justify-content:center;transition:.2s}
+  .socials a:hover{background:var(--red);border-color:var(--red)}
+  .socials svg{width:19px;height:19px;fill:var(--cream)}
+  .foot-bot{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;padding-top:26px;border-top:1px solid rgba(255,255,255,.14);font-size:.82rem;color:rgba(246,238,221,.6);font-weight:300}
+
+  .wa-float{position:fixed;bottom:24px;right:24px;z-index:60;width:60px;height:60px;border-radius:50%;background:#25D366;display:flex;align-items:center;justify-content:center;box-shadow:0 12px 28px rgba(42,23,18,.35);transition:.2s}
+  .wa-float:hover{transform:scale(1.08)}
+  .wa-float svg{width:32px;height:32px;fill:#fff}
+  .mock-note{background:var(--maroon);color:var(--orange);text-align:center;font-size:.74rem;letter-spacing:.1em;padding:8px;text-transform:uppercase}
+
+  /* ===== Owners / team ===== */
+  .team-row{display:grid;grid-template-columns:.8fr 1.2fr;gap:50px;align-items:center;margin-top:54px}
+  .team-row.flip{grid-template-columns:1.2fr .8fr}
+  .team-row.flip .team-photo{order:2}
+  .team-photo{position:relative;border-radius:20px;overflow:hidden;aspect-ratio:4/5;box-shadow:0 24px 56px rgba(42,23,18,.2)}
+  .team-photo img{width:100%;height:100%;object-fit:cover}
+  .role-badge{display:inline-block;background:var(--red);color:#fff;font-size:.7rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:5px 13px;border-radius:999px;margin-bottom:14px}
+  .role-badge.green{background:var(--green)}
+  .team-body h3{font-size:clamp(1.6rem,3vw,2.2rem);font-weight:700;margin-bottom:4px}
+  .team-body .who-sub{font-size:.95rem;color:rgba(42,23,18,.6);margin-bottom:18px}
+  .team-body p{font-weight:300;line-height:1.75;color:rgba(42,23,18,.82);margin-bottom:13px}
+  .team-body p:last-child{margin-bottom:0}
+
+  /* ===== Map ===== */
+  .map-embed{margin-top:42px;border-radius:20px;overflow:hidden;border:1px solid var(--line);box-shadow:0 18px 44px rgba(42,23,18,.14);line-height:0}
+  .map-embed iframe{width:100%;height:380px;border:0;display:block}
+
+  /* ===== Menu note ===== */
+  .menu-head .menu-sub{font-size:.9rem;font-weight:300;color:rgba(42,23,18,.72);margin-top:14px;line-height:1.6}
+  .menu-head .menu-sub b{font-weight:600;color:var(--ink)}
+  .menu-head .pdf-btn{margin-top:20px}
+
+  @media(max-width:980px){
+    .about-grid,.menu-grid,.order-grid,.tst-grid,.foot-top{grid-template-columns:1fr;gap:40px}
+    .team-row,.team-row.flip{grid-template-columns:1fr;gap:26px;margin-top:40px}
+    .team-row.flip .team-photo{order:0}
+    .team-photo{aspect-ratio:16/10}
+    .tst-cards{grid-template-columns:1fr}
+    .foot-mid{grid-template-columns:1fr 1fr}
+    .order-grid .collage{order:-1}
+  }
+  @media(max-width:760px){
+    .nav-in{grid-template-columns:auto 1fr auto}
+    .nav-left{display:none}
+    .nav-right .lnk{display:none}
+    .nav-burger{display:block}
+    .cat-grid{grid-template-columns:1fr}
+    .hero-stamp{right:16px;width:96px;height:96px;font-size:.66rem}
+    .foot-mid{grid-template-columns:1fr}
+    section{padding:66px 0}
+    /* gallery becomes a swipeable carousel */
+    .gallery .strip{flex-wrap:nowrap;overflow-x:auto;justify-content:flex-start;
+      scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;
+      margin:40px -28px 0;padding:6px 28px 18px;scrollbar-width:none}
+    .gallery .strip::-webkit-scrollbar{display:none}
+    .ig-card{flex:0 0 78%;scroll-snap-align:center}
+    .map-embed iframe{height:300px}
+  }
+</style>
+</head>
+<body>
+
+<div class="mock-note">Mockup · website proposal — MarioLucash · sample data, subject to adjustment</div>
+
+<nav>
+  <div class="nav-in">
+    <div class="nav-left">
+      <a class="lnk" href="#about">About</a>
+      <a class="lnk" href="#menu">Menu</a>
+      <a class="lnk" href="#gallery">Gallery</a>
+    </div>
+    <a class="brand" href="#">
+      <svg class="logo" viewBox="0 0 100 100" aria-hidden="true">
+        <path d="M22 62 Q14 38 30 28 Q42 20 50 22 Q58 20 70 28 Q86 38 78 62 Q74 48 68 42 Q60 34 50 34 Q40 34 32 42 Q26 48 22 62Z" fill="#2A1712"/>
+        <circle cx="50" cy="24" r="9" fill="#B93A2B"/>
+        <circle cx="36" cy="28" r="7" fill="#D96B2B"/>
+        <circle cx="64" cy="28" r="7" fill="#D96B2B"/>
+        <path d="M27 24 Q33 18 38 22Z M73 24 Q67 18 62 22Z" fill="#5E7A45"/>
+        <path d="M34 56 Q42 50 48 55 M52 55 Q58 50 66 56" stroke="#2A1712" stroke-width="3" fill="none" stroke-linecap="round"/>
+        <path d="M36 64 Q40 67 44 64 M56 64 Q60 67 64 64" stroke="#2A1712" stroke-width="2.4" fill="none" stroke-linecap="round"/>
+      </svg>
+      <span class="name">Fryda<span class="script"> café</span></span>
+    </a>
+    <div class="nav-right">
+      <a class="lnk" href="#visit">Find Us</a>
+      <a class="lnk" href="https://www.instagram.com/frydacafe/" target="_blank" rel="noopener">Instagram</a>
+      <a class="btn dark" href="https://www.ifood.com.br/delivery/taubate-sp/fryda-cafe-centro/653e8b79-c35f-4094-9ea2-a7fb308f0cef" target="_blank" rel="noopener">Order on iFood</a>
+    </div>
+    <button class="nav-burger" aria-label="Menu" onclick="document.querySelectorAll('.nav-left,.nav-right .lnk').forEach(e=>e.style.display=e.style.display==='flex'||e.style.display==='inline'?'':'flex')">☰</button>
+  </div>
+</nav>
+
+<header>
+  <div class="hero-img-wrap">
+    <img class="hero-bg" src="./cafe-novo-2.jpg" alt="Fryda Café interior with the Frida Kahlo gallery wall" onerror="this.style.display='none'">
+    <div class="hero-scrim"></div>
+    <div class="hero-stamp">THE FAMOUS<br>CHICKEN<br>PIE ★</div>
+    <div class="hero-inner">
+      <span class="pill on-dark">Made with <b>love</b>, served with <b>joy</b></span>
+      <h1>Experience the<br><em>language</em> of coffee</h1>
+      <a class="hero-cta-circle" href="https://wa.me/message/BZHB7FBA2ZPFO1">
+        <span class="arr">↓</span> Order<br>now
+      </a>
+    </div>
+  </div>
+</header>
+
+<!-- ===== About ===== -->
+<section id="about">
+  <div class="wrap">
+    <div class="about-top">
+      <span class="pill">Know <b>Fryda</b></span>
+      <span style="font-size:.92rem;color:rgba(42,23,18,.7)">Where <b style="color:var(--ink)">tradition</b> meets great coffee</span>
+    </div>
+    <div class="about-grid">
+      <div>
+        <h2>Tradition &amp; warmth to create<br>moments worth remembering</h2>
+        <p class="lead" style="margin-bottom:30px">A coffee shop and comfort kitchen in downtown Taubaté, Brazil. Belgian-chocolate cappuccino, generous cakes, the famous chicken pie and the daily lunch — all made in-house, slowly and with care.</p>
+        <div class="about-cta">
+          <a class="btn" href="#history">Read our story</a>
+          <div class="proof" style="display:flex;align-items:center;gap:12px">
+            <div class="avatars">
+              <span style="background-image:url('./cappuccino-fryda.jpg')"></span>
+              <span style="background-image:url('./brownie-com-sorvete.jpg')"></span>
+              <span style="background-image:url('./chai-latte.jpg')"></span>
+            </div>
+            <div>
+              <strong>Happy guests</strong>
+              <small>Thousands of coffees served with love</small>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="about-photo">
+        <img src="./cappuccino-fryda.jpg" alt="Fryda cappuccino" onerror="this.parentNode.style.background='linear-gradient(140deg,#E3C590,#C98A3B)'">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Our story / Owners ===== -->
+<section id="history">
+  <div class="wrap">
+    <div class="eyebrow center"><span class="pill">The people <b>behind Fryda</b></span></div>
+    <h2 class="sec-h center">The story behind the counter</h2>
+    <p class="lead center" style="margin:14px auto 0">Fryda was born from the wish for a warm little corner in downtown Taubaté — where coffee is brewed slowly, food is made with care and everyone is welcomed like family. Behind it, two women.</p>
+
+    <div class="team-row">
+      <div class="team-photo">
+        <img src="./maria-dona.jpg" alt="Maria, owner of Fryda Café" onerror="this.parentNode.style.background='linear-gradient(140deg,#E3C590,#C98A3B)'">
+      </div>
+      <div class="team-body">
+        <span class="role-badge">Owner</span>
+        <h3>Maria</h3>
+        <p class="who-sub">The most emblematic figure of the house ❤️</p>
+        <p>Maria is the definition of strength, optimism, high spirits and good conversation. She believes in Fryda more than anyone — she traded her well-earned retirement to be here, welcoming everyone with love, every single day.</p>
+        <p>With a smile and a simple "Hi, have you been here before? Make yourself at home," she turned countless guests into Frydalovers (and Marialovers). As she likes to say, there are many "Amoras" out there — and she cares for each one as if they were her own blood.</p>
+        <p>Maria teaches us, every day, that you need strength, grit and drive — always. All our admiration and honor for working with you. ❤️</p>
+      </div>
+    </div>
+
+    <div class="team-row flip">
+      <div class="team-photo">
+        <img src="./renata-chef.jpg" alt="Renata, co-owner and head chef of Fryda Café" onerror="this.parentNode.style.background='linear-gradient(140deg,#E3C590,#C98A3B)'">
+      </div>
+      <div class="team-body">
+        <span class="role-badge green">Owner &amp; Head chef</span>
+        <h3>Renata</h3>
+        <p class="who-sub">The hand behind our kitchen</p>
+        <p>Owner of Fryda and the chef of the house, Renata signs everything that comes out of the kitchen: the risottos in natural broth, the melt-in-your-mouth gnocchi and the daily lunch — all made fresh, with technique and the same warmth that drives Fryda.</p>
+        <p>She also looks after every detail of the menu, so that each dish tastes like real, homemade food — the kind that makes you want to come back.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Menu ===== -->
+<section class="menu" id="menu">
+  <div class="wrap">
+    <div class="menu-head">
+      <span class="pill">Discover <b>the menu</b></span>
+      <h2>Your next favorite awaits</h2>
+      <p class="menu-sub">Every drink can be made with <b>plant-based or lactose-free milk</b> · the cheese waffle is <b>gluten-free</b>.</p>
+      <a class="btn dark pdf-btn" href="./cardapio-fryda.pdf" download="Fryda-Cafe-Menu.pdf">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m0 0l-4-4m4 4l4-4M5 21h14"/></svg>
+        Download full menu (PDF)
+      </a>
+    </div>
+    <div class="menu-grid">
+      <div class="feature-card">
+        <img class="feature-banner" src="./famosa-torta-de-frango-1.jpg" alt="A slice of Tia Branca's famous chicken pie on a Fryda plate" onerror="this.style.display='none'">
+        <span class="feature-tag">★ House specialty</span>
+        <h3>The famous Chicken Pie</h3>
+        <p class="sub">Tia Branca's recipe · melt-in-your-mouth crust, creamy chicken filling with catupiry cheese and corn. The reason people drive across town.</p>
+        <div class="feature-foot">
+          <div class="preco">R$ 15 <small>/ slice</small></div>
+          <a class="btn" href="https://wa.me/message/BZHB7FBA2ZPFO1?text=Hi%2C%20Fryda%21%20%F0%9F%A5%A7%20I%27d%20like%20to%20reserve%20the%20famous%20Tia%20Branca%20chicken%20pie.%20Can%20you%20help%3F">Reserve mine</a>
+        </div>
+      </div>
+      <div class="cat-grid">
+          <div class="cat">
+            <img class="cat-thumb" src="./cafes-e-mochas-3.jpg" alt="Cappuccino with latte art" onerror="this.style.display='none'">
+            <h4>Coffee &amp; Mochas</h4>
+            <p class="d">Espressos, cappuccinos and creamy mochas, just the way you like them.</p>
+            <ul>
+              <li>Fryda Cappuccino <span class="pr">R$ 13</span></li>
+              <li>Mari's Mocha <span class="pr">R$ 16</span></li>
+              <li>Chai Tea Latte <span class="pr">R$ 12</span></li>
+            </ul>
+          </div>
+          <div class="cat">
+            <img class="cat-thumb" src="./doces-da-casa-3.jpg" alt="Slice of red velvet cake" onerror="this.style.display='none'">
+            <h4>House sweets</h4>
+            <p class="d">Cakes, brownies and cookies baked daily to sweeten the day.</p>
+            <ul>
+              <li>Brownie &amp; ice cream <span class="pr">R$ 19</span></li>
+              <li>Red Velvet cake <span class="pr">R$ 14</span></li>
+              <li>Cookies <span class="pr">R$ 10</span></li>
+            </ul>
+          </div>
+          <div class="cat dark">
+            <img class="cat-thumb" src="./nhoque.jpg" alt="House gnocchi" onerror="this.style.display='none'">
+            <h4>Daily lunch</h4>
+            <p class="d">Dishes of the day, cooked fresh and served generously.</p>
+            <ul>
+              <li>Beef Stroganoff <span class="pr">R$ 29</span></li>
+              <li>House Gnocchi <span class="pr">R$ 28</span></li>
+              <li>Zucchini Risotto <span class="pr">R$ 35</span></li>
+            </ul>
+          </div>
+          <div class="cat">
+            <img class="cat-thumb" src="./cafes-e-mochas-2.jpg" alt="Iced coffee with orange juice" onerror="this.style.display='none'">
+            <h4>Cold drinks</h4>
+            <p class="d">Frappés, juices and ice-cold sodas for the warm days.</p>
+            <ul>
+              <li>Ninho &amp; Nutella Frappé <span class="pr">R$ 20</span></li>
+              <li>Frafryda <span class="pr">R$ 19</span></li>
+              <li>Italian Soda <span class="pr">R$ 14</span></li>
+            </ul>
+          </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Order ===== -->
+<section id="order">
+  <div class="wrap">
+    <div class="order-grid">
+      <div>
+        <span class="pill">Order <b>yours</b></span>
+        <h2>Reserve the famous pie<br>or order your cake</h2>
+        <p class="lead" style="margin-bottom:30px">Birthdays, an afternoon coffee with friends, or a treat just for you. Cakes, pies and custom orders come fresh from our kitchen — just message us on WhatsApp.</p>
+        <div style="display:flex;gap:12px;flex-wrap:wrap">
+          <a class="btn" href="https://wa.me/message/BZHB7FBA2ZPFO1?text=Hi%2C%20Fryda%21%20%F0%9F%8E%82%20I%27d%20like%20to%20order%20a%20cake.%20Could%20you%20share%20the%20flavors%20and%20timing%3F">Order a cake</a>
+          <a class="btn ghost" href="https://www.instagram.com/frydacafe/" target="_blank" rel="noopener">See on Instagram</a>
+        </div>
+      </div>
+      <div class="collage">
+        <img class="tall" src="./tortas.jpg" alt="Tia Branca's chicken pie" onerror="this.style.background='linear-gradient(140deg,#E3C590,#C98A3B)'">
+        <img class="wide" src="./bolo-chocolate.jpg" alt="Chocolate cake" onerror="this.style.background='linear-gradient(140deg,#E3C590,#C98A3B)'">
+        <img class="wide" src="./nhoque.jpg" alt="House gnocchi" onerror="this.style.background='linear-gradient(140deg,#E3C590,#C98A3B)'">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Gallery ===== -->
+<section class="gallery" id="gallery">
+  <div class="wrap center">
+    <div class="eyebrow"><span class="pill on-dark">A feast <b>for the eyes</b></span></div>
+    <h2 class="sec-h">Taste the vibe through our gallery</h2>
+    <div class="strip">
+      <a class="ig-card" href="https://www.instagram.com/p/DWEnSyPAHs3/?img_index=1" target="_blank" rel="noopener">
+        <div class="ig-top"><img class="ig-ava" src="./favicon.svg" alt=""><span class="ig-handle">frydacafe<small>Fryda Café</small></span>
+          <svg class="ig-ig" viewBox="0 0 24 24" fill="#2A1712"><path d="M12 2.2c3.2 0 3.6 0 4.85.07 1.17.05 1.97.24 2.43.41.61.24 1.05.52 1.5.98.46.45.74.89.98 1.5.17.46.36 1.26.41 2.43.06 1.27.07 1.65.07 4.85s0 3.58-.07 4.85c-.05 1.17-.24 1.97-.41 2.43-.24.61-.52 1.05-.98 1.5-.45.46-.89.74-1.5.98-.46.17-1.26.36-2.43.41-1.27.06-1.65.07-4.85.07s-3.58 0-4.85-.07c-1.17-.05-1.97-.24-2.43-.41a4 4 0 0 1-1.5-.98 4 4 0 0 1-.98-1.5c-.17-.46-.36-1.26-.41-2.43C2.21 15.58 2.2 15.2 2.2 12s0-3.58.07-4.85c.05-1.17.24-1.97.41-2.43.24-.61.52-1.05.98-1.5.45-.46.89-.74 1.5-.98.46-.17 1.26-.36 2.43-.41C8.42 2.21 8.8 2.2 12 2.2zm0 4.86A4.94 4.94 0 1 0 16.94 12 4.94 4.94 0 0 0 12 7.06zm0 8.14A3.2 3.2 0 1 1 15.2 12 3.2 3.2 0 0 1 12 15.2zm6.3-8.34a1.15 1.15 0 1 1-1.15-1.15 1.15 1.15 0 0 1 1.15 1.15z"/></svg>
+        </div>
+        <div class="ig-photo"><img src="./cappuccino-fryda.jpg" alt="Fryda cappuccino" onerror="this.style.display='none'"></div>
+        <div class="ig-actions"><svg class="heart" viewBox="0 0 24 24"><path d="M12 21s-7.5-4.6-9.7-9C.9 8.6 2.4 5.5 5.5 5.1c1.9-.2 3.5.9 4.5 2.3 1-1.4 2.6-2.5 4.5-2.3 3.1.4 4.6 3.5 3.2 6.9C19.5 16.4 12 21 12 21z"/></svg><svg viewBox="0 0 24 24" stroke-linejoin="round"><path d="M21 11.5a8.5 8.5 0 0 1-12.5 7.5L3 21l2-5.5A8.5 8.5 0 1 1 21 11.5z"/></svg><span class="seemore">view post →</span></div>
+        <div class="ig-cap"><b>frydacafe</b> Fryda cappuccino with Belgian chocolate ☕</div>
+      </a>
+      <a class="ig-card" href="https://www.instagram.com/p/DWEnSyPAHs3/?img_index=2" target="_blank" rel="noopener">
+        <div class="ig-top"><img class="ig-ava" src="./favicon.svg" alt=""><span class="ig-handle">frydacafe<small>Fryda Café</small></span>
+          <svg class="ig-ig" viewBox="0 0 24 24" fill="#2A1712"><path d="M12 2.2c3.2 0 3.6 0 4.85.07 1.17.05 1.97.24 2.43.41.61.24 1.05.52 1.5.98.46.45.74.89.98 1.5.17.46.36 1.26.41 2.43.06 1.27.07 1.65.07 4.85s0 3.58-.07 4.85c-.05 1.17-.24 1.97-.41 2.43-.24.61-.52 1.05-.98 1.5-.45.46-.89.74-1.5.98-.46.17-1.26.36-2.43.41-1.27.06-1.65.07-4.85.07s-3.58 0-4.85-.07c-1.17-.05-1.97-.24-2.43-.41a4 4 0 0 1-1.5-.98 4 4 0 0 1-.98-1.5c-.17-.46-.36-1.26-.41-2.43C2.21 15.58 2.2 15.2 2.2 12s0-3.58.07-4.85c.05-1.17.24-1.97.41-2.43.24-.61.52-1.05.98-1.5.45-.46.89-.74 1.5-.98.46-.17 1.26-.36 2.43-.41C8.42 2.21 8.8 2.2 12 2.2zm0 4.86A4.94 4.94 0 1 0 16.94 12 4.94 4.94 0 0 0 12 7.06zm0 8.14A3.2 3.2 0 1 1 15.2 12 3.2 3.2 0 0 1 12 15.2zm6.3-8.34a1.15 1.15 0 1 1-1.15-1.15 1.15 1.15 0 0 1 1.15 1.15z"/></svg>
+        </div>
+        <div class="ig-photo"><img src="./famosa-torta-de-frango-1.jpg" alt="Tia Branca's chicken pie" onerror="this.style.display='none'"></div>
+        <div class="ig-actions"><svg class="heart" viewBox="0 0 24 24"><path d="M12 21s-7.5-4.6-9.7-9C.9 8.6 2.4 5.5 5.5 5.1c1.9-.2 3.5.9 4.5 2.3 1-1.4 2.6-2.5 4.5-2.3 3.1.4 4.6 3.5 3.2 6.9C19.5 16.4 12 21 12 21z"/></svg><svg viewBox="0 0 24 24" stroke-linejoin="round"><path d="M21 11.5a8.5 8.5 0 0 1-12.5 7.5L3 21l2-5.5A8.5 8.5 0 1 1 21 11.5z"/></svg><span class="seemore">view post →</span></div>
+        <div class="ig-cap"><b>frydacafe</b> Tia Branca's famous chicken pie 🥧</div>
+      </a>
+      <a class="ig-card" href="https://www.instagram.com/p/DWEnSyPAHs3/?img_index=3" target="_blank" rel="noopener">
+        <div class="ig-top"><img class="ig-ava" src="./favicon.svg" alt=""><span class="ig-handle">frydacafe<small>Fryda Café</small></span>
+          <svg class="ig-ig" viewBox="0 0 24 24" fill="#2A1712"><path d="M12 2.2c3.2 0 3.6 0 4.85.07 1.17.05 1.97.24 2.43.41.61.24 1.05.52 1.5.98.46.45.74.89.98 1.5.17.46.36 1.26.41 2.43.06 1.27.07 1.65.07 4.85s0 3.58-.07 4.85c-.05 1.17-.24 1.97-.41 2.43-.24.61-.52 1.05-.98 1.5-.45.46-.89.74-1.5.98-.46.17-1.26.36-2.43.41-1.27.06-1.65.07-4.85.07s-3.58 0-4.85-.07c-1.17-.05-1.97-.24-2.43-.41a4 4 0 0 1-1.5-.98 4 4 0 0 1-.98-1.5c-.17-.46-.36-1.26-.41-2.43C2.21 15.58 2.2 15.2 2.2 12s0-3.58.07-4.85c.05-1.17.24-1.97.41-2.43.24-.61.52-1.05.98-1.5.45-.46.89-.74 1.5-.98.46-.17 1.26-.36 2.43-.41C8.42 2.21 8.8 2.2 12 2.2zm0 4.86A4.94 4.94 0 1 0 16.94 12 4.94 4.94 0 0 0 12 7.06zm0 8.14A3.2 3.2 0 1 1 15.2 12 3.2 3.2 0 0 1 12 15.2zm6.3-8.34a1.15 1.15 0 1 1-1.15-1.15 1.15 1.15 0 0 1 1.15 1.15z"/></svg>
+        </div>
+        <div class="ig-photo"><img src="./doces-da-casa-3.jpg" alt="Red velvet cake" onerror="this.style.display='none'"></div>
+        <div class="ig-actions"><svg class="heart" viewBox="0 0 24 24"><path d="M12 21s-7.5-4.6-9.7-9C.9 8.6 2.4 5.5 5.5 5.1c1.9-.2 3.5.9 4.5 2.3 1-1.4 2.6-2.5 4.5-2.3 3.1.4 4.6 3.5 3.2 6.9C19.5 16.4 12 21 12 21z"/></svg><svg viewBox="0 0 24 24" stroke-linejoin="round"><path d="M21 11.5a8.5 8.5 0 0 1-12.5 7.5L3 21l2-5.5A8.5 8.5 0 1 1 21 11.5z"/></svg><span class="seemore">view post →</span></div>
+        <div class="ig-cap"><b>frydacafe</b> Red velvet with cream cheese 🍰</div>
+      </a>
+      <a class="ig-card" href="https://www.instagram.com/p/DWEnSyPAHs3/?img_index=4" target="_blank" rel="noopener">
+        <div class="ig-top"><img class="ig-ava" src="./favicon.svg" alt=""><span class="ig-handle">frydacafe<small>Fryda Café</small></span>
+          <svg class="ig-ig" viewBox="0 0 24 24" fill="#2A1712"><path d="M12 2.2c3.2 0 3.6 0 4.85.07 1.17.05 1.97.24 2.43.41.61.24 1.05.52 1.5.98.46.45.74.89.98 1.5.17.46.36 1.26.41 2.43.06 1.27.07 1.65.07 4.85s0 3.58-.07 4.85c-.05 1.17-.24 1.97-.41 2.43-.24.61-.52 1.05-.98 1.5-.45.46-.89.74-1.5.98-.46.17-1.26.36-2.43.41-1.27.06-1.65.07-4.85.07s-3.58 0-4.85-.07c-1.17-.05-1.97-.24-2.43-.41a4 4 0 0 1-1.5-.98 4 4 0 0 1-.98-1.5c-.17-.46-.36-1.26-.41-2.43C2.21 15.58 2.2 15.2 2.2 12s0-3.58.07-4.85c.05-1.17.24-1.97.41-2.43.24-.61.52-1.05.98-1.5.45-.46.89-.74 1.5-.98.46-.17 1.26-.36 2.43-.41C8.42 2.21 8.8 2.2 12 2.2zm0 4.86A4.94 4.94 0 1 0 16.94 12 4.94 4.94 0 0 0 12 7.06zm0 8.14A3.2 3.2 0 1 1 15.2 12 3.2 3.2 0 0 1 12 15.2zm6.3-8.34a1.15 1.15 0 1 1-1.15-1.15 1.15 1.15 0 0 1 1.15 1.15z"/></svg>
+        </div>
+        <div class="ig-photo"><img src="./wafflw-com-manteiga-e-mel.jpg" alt="Waffle with butter and honey" onerror="this.style.display='none'"></div>
+        <div class="ig-actions"><svg class="heart" viewBox="0 0 24 24"><path d="M12 21s-7.5-4.6-9.7-9C.9 8.6 2.4 5.5 5.5 5.1c1.9-.2 3.5.9 4.5 2.3 1-1.4 2.6-2.5 4.5-2.3 3.1.4 4.6 3.5 3.2 6.9C19.5 16.4 12 21 12 21z"/></svg><svg viewBox="0 0 24 24" stroke-linejoin="round"><path d="M21 11.5a8.5 8.5 0 0 1-12.5 7.5L3 21l2-5.5A8.5 8.5 0 1 1 21 11.5z"/></svg><span class="seemore">view post →</span></div>
+        <div class="ig-cap"><b>frydacafe</b> Warm waffle with butter and honey</div>
+      </a>
+      <a class="ig-card" href="https://www.instagram.com/p/DWEnSyPAHs3/?img_index=5" target="_blank" rel="noopener">
+        <div class="ig-top"><img class="ig-ava" src="./favicon.svg" alt=""><span class="ig-handle">frydacafe<small>Fryda Café</small></span>
+          <svg class="ig-ig" viewBox="0 0 24 24" fill="#2A1712"><path d="M12 2.2c3.2 0 3.6 0 4.85.07 1.17.05 1.97.24 2.43.41.61.24 1.05.52 1.5.98.46.45.74.89.98 1.5.17.46.36 1.26.41 2.43.06 1.27.07 1.65.07 4.85s0 3.58-.07 4.85c-.05 1.17-.24 1.97-.41 2.43-.24.61-.52 1.05-.98 1.5-.45.46-.89.74-1.5.98-.46.17-1.26.36-2.43.41-1.27.06-1.65.07-4.85.07s-3.58 0-4.85-.07c-1.17-.05-1.97-.24-2.43-.41a4 4 0 0 1-1.5-.98 4 4 0 0 1-.98-1.5c-.17-.46-.36-1.26-.41-2.43C2.21 15.58 2.2 15.2 2.2 12s0-3.58.07-4.85c.05-1.17.24-1.97.41-2.43.24-.61.52-1.05.98-1.5.45-.46.89-.74 1.5-.98.46-.17 1.26-.36 2.43-.41C8.42 2.21 8.8 2.2 12 2.2zm0 4.86A4.94 4.94 0 1 0 16.94 12 4.94 4.94 0 0 0 12 7.06zm0 8.14A3.2 3.2 0 1 1 15.2 12 3.2 3.2 0 0 1 12 15.2zm6.3-8.34a1.15 1.15 0 1 1-1.15-1.15 1.15 1.15 0 0 1 1.15 1.15z"/></svg>
+        </div>
+        <div class="ig-photo"><img src="./cafes-e-mochas-2.jpg" alt="Iced coffee with orange" onerror="this.style.display='none'"></div>
+        <div class="ig-actions"><svg class="heart" viewBox="0 0 24 24"><path d="M12 21s-7.5-4.6-9.7-9C.9 8.6 2.4 5.5 5.5 5.1c1.9-.2 3.5.9 4.5 2.3 1-1.4 2.6-2.5 4.5-2.3 3.1.4 4.6 3.5 3.2 6.9C19.5 16.4 12 21 12 21z"/></svg><svg viewBox="0 0 24 24" stroke-linejoin="round"><path d="M21 11.5a8.5 8.5 0 0 1-12.5 7.5L3 21l2-5.5A8.5 8.5 0 1 1 21 11.5z"/></svg><span class="seemore">view post →</span></div>
+        <div class="ig-cap"><b>frydacafe</b> Iced coffee with orange for warm days 🧡</div>
+      </a>
+      <a class="ig-card" href="https://www.instagram.com/p/DWEnSyPAHs3/?img_index=6" target="_blank" rel="noopener">
+        <div class="ig-top"><img class="ig-ava" src="./favicon.svg" alt=""><span class="ig-handle">frydacafe<small>Fryda Café</small></span>
+          <svg class="ig-ig" viewBox="0 0 24 24" fill="#2A1712"><path d="M12 2.2c3.2 0 3.6 0 4.85.07 1.17.05 1.97.24 2.43.41.61.24 1.05.52 1.5.98.46.45.74.89.98 1.5.17.46.36 1.26.41 2.43.06 1.27.07 1.65.07 4.85s0 3.58-.07 4.85c-.05 1.17-.24 1.97-.41 2.43-.24.61-.52 1.05-.98 1.5-.45.46-.89.74-1.5.98-.46.17-1.26.36-2.43.41-1.27.06-1.65.07-4.85.07s-3.58 0-4.85-.07c-1.17-.05-1.97-.24-2.43-.41a4 4 0 0 1-1.5-.98 4 4 0 0 1-.98-1.5c-.17-.46-.36-1.26-.41-2.43C2.21 15.58 2.2 15.2 2.2 12s0-3.58.07-4.85c.05-1.17.24-1.97.41-2.43.24-.61.52-1.05.98-1.5.45-.46.89-.74 1.5-.98.46-.17 1.26-.36 2.43-.41C8.42 2.21 8.8 2.2 12 2.2zm0 4.86A4.94 4.94 0 1 0 16.94 12 4.94 4.94 0 0 0 12 7.06zm0 8.14A3.2 3.2 0 1 1 15.2 12 3.2 3.2 0 0 1 12 15.2zm6.3-8.34a1.15 1.15 0 1 1-1.15-1.15 1.15 1.15 0 0 1 1.15 1.15z"/></svg>
+        </div>
+        <div class="ig-photo"><img src="./brownie-com-sorvete.jpg" alt="Brownie with ice cream" onerror="this.style.display='none'"></div>
+        <div class="ig-actions"><svg class="heart" viewBox="0 0 24 24"><path d="M12 21s-7.5-4.6-9.7-9C.9 8.6 2.4 5.5 5.5 5.1c1.9-.2 3.5.9 4.5 2.3 1-1.4 2.6-2.5 4.5-2.3 3.1.4 4.6 3.5 3.2 6.9C19.5 16.4 12 21 12 21z"/></svg><svg viewBox="0 0 24 24" stroke-linejoin="round"><path d="M21 11.5a8.5 8.5 0 0 1-12.5 7.5L3 21l2-5.5A8.5 8.5 0 1 1 21 11.5z"/></svg><span class="seemore">view post →</span></div>
+        <div class="ig-cap"><b>frydacafe</b> Brownie with ice cream, still warm 🍫</div>
+      </a>
+      <a class="ig-card" href="https://www.instagram.com/p/DWEnSyPAHs3/?img_index=7" target="_blank" rel="noopener">
+        <div class="ig-top"><img class="ig-ava" src="./favicon.svg" alt=""><span class="ig-handle">frydacafe<small>Fryda Café</small></span>
+          <svg class="ig-ig" viewBox="0 0 24 24" fill="#2A1712"><path d="M12 2.2c3.2 0 3.6 0 4.85.07 1.17.05 1.97.24 2.43.41.61.24 1.05.52 1.5.98.46.45.74.89.98 1.5.17.46.36 1.26.41 2.43.06 1.27.07 1.65.07 4.85s0 3.58-.07 4.85c-.05 1.17-.24 1.97-.41 2.43-.24.61-.52 1.05-.98 1.5-.45.46-.89.74-1.5.98-.46.17-1.26.36-2.43.41-1.27.06-1.65.07-4.85.07s-3.58 0-4.85-.07c-1.17-.05-1.97-.24-2.43-.41a4 4 0 0 1-1.5-.98 4 4 0 0 1-.98-1.5c-.17-.46-.36-1.26-.41-2.43C2.21 15.58 2.2 15.2 2.2 12s0-3.58.07-4.85c.05-1.17.24-1.97.41-2.43.24-.61.52-1.05.98-1.5.45-.46.89-.74 1.5-.98.46-.17 1.26-.36 2.43-.41C8.42 2.21 8.8 2.2 12 2.2zm0 4.86A4.94 4.94 0 1 0 16.94 12 4.94 4.94 0 0 0 12 7.06zm0 8.14A3.2 3.2 0 1 1 15.2 12 3.2 3.2 0 0 1 12 15.2zm6.3-8.34a1.15 1.15 0 1 1-1.15-1.15 1.15 1.15 0 0 1 1.15 1.15z"/></svg>
+        </div>
+        <div class="ig-photo"><img src="./chai-latte.jpg" alt="Chai tea latte" onerror="this.style.display='none'"></div>
+        <div class="ig-actions"><svg class="heart" viewBox="0 0 24 24"><path d="M12 21s-7.5-4.6-9.7-9C.9 8.6 2.4 5.5 5.5 5.1c1.9-.2 3.5.9 4.5 2.3 1-1.4 2.6-2.5 4.5-2.3 3.1.4 4.6 3.5 3.2 6.9C19.5 16.4 12 21 12 21z"/></svg><svg viewBox="0 0 24 24" stroke-linejoin="round"><path d="M21 11.5a8.5 8.5 0 0 1-12.5 7.5L3 21l2-5.5A8.5 8.5 0 1 1 21 11.5z"/></svg><span class="seemore">view post →</span></div>
+        <div class="ig-cap"><b>frydacafe</b> Chai tea latte with spices 🍵</div>
+      </a>
+    </div>
+    <a class="btn light" href="https://www.instagram.com/frydacafe/" target="_blank" rel="noopener" style="margin-top:44px">Follow @frydacafe on Instagram</a>
+  </div>
+</section>
+
+<!-- ===== Testimonials ===== -->
+<section id="testimonials">
+  <div class="wrap">
+    <div class="tst-grid">
+      <div>
+        <span class="pill">Loved <b>by guests</b></span>
+        <h2 style="margin-top:18px">Where every visit becomes<br>a great memory</h2>
+      </div>
+      <div class="tst-cards">
+        <div class="tst">
+          <div class="stars">★★★★★</div>
+          <p class="q">"The Belgian-chocolate cappuccino is the best in town. I'm here every week now."</p>
+          <div class="who">Daniela M.<small>Taubaté, Brazil</small></div>
+        </div>
+        <div class="tst dark">
+          <div class="stars">★★★★★</div>
+          <p class="q">"Tia Branca's chicken pie is addictive. I drive across town just for it."</p>
+          <div class="who">Rafael S.<small>Tremembé, Brazil</small></div>
+        </div>
+        <div class="tst">
+          <div class="stars">★★★★★</div>
+          <p class="q">"Warm service and a cozy spot to work. My favorite café, no contest."</p>
+          <div class="who">Camila A.<small>Taubaté, Brazil</small></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Visit ===== -->
+<section id="visit" style="padding-top:0">
+  <div class="wrap">
+    <div class="eyebrow center"><span class="pill">Come <b>for a coffee</b></span></div>
+    <h2 class="sec-h center">In the heart of downtown Taubaté</h2>
+    <p class="lead center" style="margin:14px auto 48px">A table to work, chat or simply linger — with parking nearby and the smell of fresh coffee in the air.</p>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:18px" class="cat-grid">
+      <div class="cat" style="text-align:center">
+        <div class="ico">📍</div>
+        <h4>Address</h4>
+        <p class="d" style="min-height:auto">Rua Dr. Pedro Costa, 531<br>Centro · Taubaté/SP · Brazil<br>ZIP 12010-160</p>
+      </div>
+      <div class="cat" style="text-align:center">
+        <div class="ico">⏰</div>
+        <h4>Hours</h4>
+        <p class="d" style="min-height:auto">Mon–Fri · 9am to 7pm<br>Sat &amp; holidays · 9am to 6pm</p>
+      </div>
+      <div class="cat" style="text-align:center">
+        <div class="ico">🛵</div>
+        <h4>Delivery &amp; Orders</h4>
+        <p class="d" style="min-height:auto">Delivery via iFood<br>Custom orders on WhatsApp</p>
+      </div>
+    </div>
+    <div class="map-embed">
+      <iframe
+        src="https://www.google.com/maps?q=Rua%20Dr.%20Pedro%20Costa%2C%20531%2C%20Centro%2C%20Taubat%C3%A9%20-%20SP%2C%2012010-160&output=embed"
+        loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+        title="Map — Fryda Café, Rua Dr. Pedro Costa 531, Centro, Taubaté/SP, Brazil"></iframe>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Footer ===== -->
+<footer>
+  <div class="wrap">
+    <div class="foot-top">
+      <div>
+        <svg class="foot-logo" viewBox="0 0 100 100" aria-label="Fryda Café logo">
+          <circle cx="50" cy="50" r="50" fill="rgba(255,255,255,.06)"/>
+          <g transform="translate(0,6)">
+            <path d="M22 62 Q14 38 30 28 Q42 20 50 22 Q58 20 70 28 Q86 38 78 62 Q74 48 68 42 Q60 34 50 34 Q40 34 32 42 Q26 48 22 62Z" fill="#F6EEDD"/>
+            <circle cx="50" cy="24" r="9" fill="#B93A2B"/>
+            <circle cx="36" cy="28" r="7" fill="#D96B2B"/>
+            <circle cx="64" cy="28" r="7" fill="#D96B2B"/>
+            <path d="M27 24 Q33 18 38 22Z M73 24 Q67 18 62 22Z" fill="#5E7A45"/>
+            <path d="M34 56 Q42 50 48 55 M52 55 Q58 50 66 56" stroke="#F6EEDD" stroke-width="3" fill="none" stroke-linecap="round"/>
+            <path d="M36 64 Q40 67 44 64 M56 64 Q60 67 64 64" stroke="#F6EEDD" stroke-width="2.4" fill="none" stroke-linecap="round"/>
+          </g>
+        </svg>
+        <div class="foot-word">FRYDA<span class="dot">.</span><span class="script">café</span></div>
+      </div>
+      <div class="news">
+        <h4>Fresh news, straight to your inbox</h4>
+        <p>Cake of the day, daily lunch and offers — follow along so you never miss out.</p>
+        <form class="news-form" onsubmit="return false">
+          <input type="email" placeholder="Your best email" aria-label="Email">
+          <button class="btn" type="submit">Subscribe</button>
+        </form>
+      </div>
+    </div>
+    <div class="foot-mid">
+      <div>
+        <h5>Fryda Café</h5>
+        <p>Rua Dr. Pedro Costa, 531<br>Centro · Taubaté/SP · Brazil</p>
+        <p>Mon–Fri 9am–7pm · Sat 9am–6pm</p>
+        <div class="socials">
+          <a href="https://www.instagram.com/frydacafe/" target="_blank" rel="noopener" aria-label="Instagram">
+            <svg viewBox="0 0 24 24"><path d="M12 2.2c3.2 0 3.6 0 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.42.36 1.06.41 2.23.06 1.27.07 1.65.07 4.85s0 3.58-.07 4.85c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.42.16-1.06.36-2.23.41-1.27.06-1.65.07-4.85.07s-3.58 0-4.85-.07c-1.17-.05-1.8-.25-2.23-.41a3.7 3.7 0 0 1-1.38-.9 3.7 3.7 0 0 1-.9-1.38c-.16-.42-.36-1.06-.41-2.23C2.21 15.58 2.2 15.2 2.2 12s0-3.58.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.16 1.06-.36 2.23-.41C8.42 2.21 8.8 2.2 12 2.2zm0 1.8c-3.15 0-3.5.01-4.74.07-.9.04-1.38.19-1.71.32-.43.17-.74.37-1.06.69-.32.32-.52.63-.69 1.06-.13.33-.28.81-.32 1.71C3.21 8.5 3.2 8.85 3.2 12s.01 3.5.07 4.74c.04.9.19 1.38.32 1.71.17.43.37.74.69 1.06.32.32.63.52 1.06.69.33.13.81.28 1.71.32 1.24.06 1.59.07 4.74.07s3.5-.01 4.74-.07c.9-.04 1.38-.19 1.71-.32.43-.17.74-.37 1.06-.69.32-.32.52-.63.69-1.06.13-.33.28-.81.32-1.71.06-1.24.07-1.59.07-4.74s-.01-3.5-.07-4.74c-.04-.9-.19-1.38-.32-1.71a2.85 2.85 0 0 0-.69-1.06 2.85 2.85 0 0 0-1.06-.69c-.33-.13-.81-.28-1.71-.32C15.5 4.01 15.15 4 12 4zm0 3.06A4.94 4.94 0 1 1 12 16.94 4.94 4.94 0 0 1 12 7.06zm0 8.14A3.2 3.2 0 1 0 12 8.8a3.2 3.2 0 0 0 0 6.4zm6.3-8.34a1.15 1.15 0 1 1-2.3 0 1.15 1.15 0 0 1 2.3 0z"/></svg>
+          </a>
+          <a href="https://www.facebook.com/frydacafe" target="_blank" rel="noopener" aria-label="Facebook">
+            <svg viewBox="0 0 24 24"><path d="M13.5 21v-8h2.7l.4-3.1h-3.1V7.9c0-.9.25-1.5 1.55-1.5h1.65V3.6c-.8-.1-1.6-.15-2.4-.15-2.4 0-4.05 1.46-4.05 4.15v2.3H7.5V13h2.75v8h3.25z"/></svg>
+          </a>
+          <a href="https://wa.me/message/BZHB7FBA2ZPFO1" target="_blank" rel="noopener" aria-label="WhatsApp">
+            <svg viewBox="0 0 32 32"><path d="M16.04 4c-6.6 0-11.96 5.36-11.96 11.96 0 2.11.55 4.16 1.6 5.97L4 28l6.25-1.63a11.9 11.9 0 0 0 5.79 1.47c6.6 0 11.96-5.36 11.96-11.96S22.64 4 16.04 4zm5.43 14.42c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.39-1.47-.88-.79-1.48-1.76-1.65-2.06-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51l-.57-.01c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.49s1.07 2.89 1.22 3.09c.15.2 2.11 3.22 5.1 4.51.71.31 1.27.49 1.7.63.72.23 1.37.2 1.88.12.57-.09 1.76-.72 2.01-1.41.25-.69.25-1.29.17-1.41-.07-.12-.27-.2-.57-.35z"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="foot-mid-col">
+        <h5>Navigation</h5>
+        <a href="#about">About</a>
+        <a href="#menu">Menu</a>
+        <a href="#order">Orders</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#visit">Find us</a>
+      </div>
+      <div class="foot-links">
+        <h5>Order now</h5>
+        <ol>
+          <li><a href="https://wa.me/message/BZHB7FBA2ZPFO1" target="_blank" rel="noopener">WhatsApp</a></li>
+          <li><a href="https://www.ifood.com.br/delivery/taubate-sp/fryda-cafe-centro/653e8b79-c35f-4094-9ea2-a7fb308f0cef" target="_blank" rel="noopener">iFood</a></li>
+          <li><a href="https://www.instagram.com/frydacafe/" target="_blank" rel="noopener">Instagram</a></li>
+          <li><a href="./cardapio-fryda.pdf" download>Menu PDF</a></li>
+        </ol>
+      </div>
+    </div>
+    <div class="foot-bot">
+      <span>© 2026 Fryda Café · Centro, Taubaté/SP, Brazil</span>
+      <span>Site by MarioLucash · <a href="https://www.instagram.com/frydacafe/" target="_blank" rel="noopener" style="color:var(--orange)">@frydacafe</a></span>
+    </div>
+  </div>
+</footer>
+
+<a class="wa-float" href="https://wa.me/message/BZHB7FBA2ZPFO1" aria-label="Chat with Fryda Café on WhatsApp" title="Chat on WhatsApp">
+  <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16.04 4c-6.6 0-11.96 5.36-11.96 11.96 0 2.11.55 4.16 1.6 5.97L4 28l6.25-1.63a11.9 11.9 0 0 0 5.79 1.47c6.6 0 11.96-5.36 11.96-11.96S22.64 4 16.04 4zm0 21.82c-1.8 0-3.56-.48-5.09-1.4l-.36-.21-3.71.97.99-3.62-.24-.37a9.82 9.82 0 0 1-1.51-5.23c0-5.45 4.44-9.89 9.92-9.89 5.45 0 9.89 4.44 9.89 9.89s-4.44 9.86-9.89 9.86zm5.43-7.4c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.39-1.47-.88-.79-1.48-1.76-1.65-2.06-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51l-.57-.01c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.49s1.07 2.89 1.22 3.09c.15.2 2.11 3.22 5.1 4.51.71.31 1.27.49 1.7.63.72.23 1.37.2 1.88.12.57-.09 1.76-.72 2.01-1.41.25-.69.25-1.29.17-1.41-.07-.12-.27-.2-.57-.35z"/></svg>
+</a>
+
+</body>
+</html>

@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<style>
+@font-face{font-family:'Playfair';src:url('fonts/PlayfairDisplay-800.ttf');font-weight:800}
+@font-face{font-family:'Playfair';src:url('fonts/PlayfairDisplay-700.ttf');font-weight:700}
+@font-face{font-family:'Playfair';src:url('fonts/PlayfairDisplay-600.ttf');font-weight:600}
+@font-face{font-family:'PlayfairIt';src:url('fonts/PlayfairDisplay-600.ttf');font-weight:600;font-style:italic}
+@font-face{font-family:'Jost';src:url('fonts/Jost-300.ttf');font-weight:300}
+@font-face{font-family:'Jost';src:url('fonts/Jost-400.ttf');font-weight:400}
+@font-face{font-family:'Jost';src:url('fonts/Jost-500.ttf');font-weight:500}
+@font-face{font-family:'Jost';src:url('fonts/Jost-600.ttf');font-weight:600}
+@font-face{font-family:'Vibes';src:url('fonts/GreatVibes.ttf');font-weight:400}
+
+@page{size:A4;margin:0}
+:root{
+  --cream:#F6EEDD;--cream-2:#FBF7EE;--maroon:#3A1410;--ink:#2A1712;
+  --red:#BE4332;--orange:#D96B2B;--green:#5E7A45;--line:#E6DCC8;--texto:#4a3b30;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Jost',sans-serif;color:var(--texto);background:#fff;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.page{width:210mm;min-height:297mm;position:relative;overflow:hidden;background:var(--cream);page-break-after:always}
+.page:last-child{page-break-after:auto}
+.pad{padding:0 16mm 16mm}
+
+.top{display:flex;justify-content:space-between;align-items:center;background:var(--maroon);padding:9mm 16mm}
+.fbrand{background:#fff;border:1px solid rgba(246,238,221,.2);border-radius:10px;padding:6px 11px;display:inline-flex;align-items:center}
+.fbrand img{height:50px;width:auto;display:block}
+.top .by{display:flex;align-items:center;gap:8px}
+.top .by img{width:28px;height:28px;border-radius:50%;border:1px solid rgba(246,238,221,.25)}
+.top .by-txt{text-align:right}
+.top .by-txt .l{font-size:6pt;font-weight:500;letter-spacing:.16em;color:rgba(246,238,221,.5);text-transform:uppercase}
+.top .by-txt .n{font-size:8.5pt;font-weight:600;letter-spacing:.1em;color:var(--cream)}
+
+.title{padding:8mm 16mm 0}
+.title .eyebrow{font-size:8pt;font-weight:600;letter-spacing:.2em;color:var(--red);text-transform:uppercase;margin-bottom:3mm}
+.title h1{font-family:'Playfair',serif;font-weight:800;font-size:26pt;line-height:1.04;color:var(--maroon);margin-bottom:3mm}
+.title h1 em{font-family:'PlayfairIt';font-style:italic;color:var(--red)}
+.title .lead{font-size:10pt;font-weight:300;line-height:1.55;color:#5a4a3d;max-width:160mm}
+.meta{display:flex;gap:0;margin:5mm 16mm 0;border:1px solid var(--line);border-radius:8px;overflow:hidden;background:var(--cream-2)}
+.meta .m{flex:1;padding:4mm 7mm;border-right:1px solid var(--line)}
+.meta .m:last-child{border-right:none}
+.meta .ml{font-size:7pt;font-weight:600;letter-spacing:.16em;color:#a99;text-transform:uppercase;margin-bottom:2mm}
+.meta .mv{font-size:9.5pt;font-weight:500;color:var(--maroon)}
+
+.sec{margin-top:5.5mm}
+.sec-h{font-family:'Jost';font-size:8pt;font-weight:600;letter-spacing:.18em;color:var(--red);text-transform:uppercase;margin-bottom:3.5mm;display:flex;align-items:center;gap:8px}
+.sec-h::after{content:'';flex:1;height:1px;background:var(--line)}
+.scope{display:grid;grid-template-columns:1fr 1fr;gap:4mm}
+.scope-card{background:var(--cream-2);border:1px solid var(--line);border-radius:8px;padding:5mm 6mm}
+.scope-card h3{font-family:'Playfair',serif;font-weight:700;font-size:13pt;color:var(--maroon);margin-bottom:3mm}
+.scope-card ul{padding-left:14px;margin:0}
+.scope-card ul li{font-size:9pt;font-weight:300;line-height:1.6;color:#6a5a4d}
+
+.price{background:var(--maroon);color:var(--cream);border-radius:10px;padding:6mm 8mm;margin-top:4mm;display:flex;justify-content:space-between;align-items:center;gap:8mm}
+.price-l .pl{font-size:8pt;font-weight:600;letter-spacing:.14em;color:var(--orange);text-transform:uppercase;margin-bottom:2mm}
+.price-l .pt{font-family:'Playfair',serif;font-weight:700;font-size:15pt;color:var(--cream);margin-bottom:2mm}
+.price-l .ps{font-size:8.5pt;font-weight:300;line-height:1.5;color:rgba(246,238,221,.72)}
+.price-r{text-align:right;white-space:nowrap}
+.price-r .pb{font-family:'Playfair',serif;font-weight:800;font-size:40pt;line-height:.9;color:#fff}
+.price-r .pn{font-family:'Vibes',cursive;font-size:18pt;color:var(--orange)}
+
+.terms{font-size:8.5pt;font-weight:300;line-height:1.65;color:#6a5a4d;margin-top:4mm}
+.terms b{font-weight:600;color:var(--maroon)}
+
+.sign{display:flex;gap:6mm;margin-top:6mm}
+.sign .s{flex:1;border-top:1.5px solid var(--maroon);padding-top:3mm}
+.sign .s .sl{font-size:7.5pt;font-weight:500;letter-spacing:.1em;color:#a99;text-transform:uppercase}
+.sign .s .sn{font-size:10pt;font-weight:500;color:var(--maroon);margin-top:1mm}
+.foot{position:absolute;bottom:8mm;left:16mm;right:16mm;display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--line);padding-top:4mm}
+.foot span{font-size:7.5pt;color:#b3a691;font-weight:300}
+.foot .deco{font-family:'Vibes',cursive;font-size:14pt;color:var(--red)}
+</style>
+</head>
+<body>
+
+<div class="page">
+  <div class="top">
+    <div class="fbrand"><img src="fotos/fryda-logo.jpg" alt="Fryda Café"></div>
+    <div class="by">
+      <div class="by-txt"><div class="l">Proposta por</div><div class="n">MARIOLUCASH</div></div>
+      <img src="fotos/mariolucash-logo.jpg" alt="MarioLucash">
+    </div>
+  </div>
+
+  <div class="title">
+    <div class="eyebrow">Proposta · Site do Fryda</div>
+    <h1>O site do Fryda,<br>por minha conta. <em>De presente.</em></h1>
+    <div class="lead">
+      Esta é minha proposta pra dar ao Fryda uma casa própria na internet: um site completo com a identidade de vocês, entregue sem nenhum custo, como meu primeiro cliente. O combinado é simples e está todo aqui.
+    </div>
+  </div>
+
+  <div class="meta">
+    <div class="m"><div class="ml">Para</div><div class="mv">Maria &amp; Renata · Fryda Café</div></div>
+    <div class="m"><div class="ml">Onde</div><div class="mv">Centro · Taubaté/SP</div></div>
+    <div class="m"><div class="ml">Prazo</div><div class="mv">7 dias úteis</div></div>
+    <div class="m"><div class="ml">Validade</div><div class="mv">30 dias</div></div>
+  </div>
+
+  <div class="pad">
+    <div class="sec">
+      <div class="sec-h">O que será entregue</div>
+      <div class="scope">
+        <div class="scope-card">
+          <h3>A casa</h3>
+          <ul>
+            <li>Home, cardápio por categoria e encomendas</li>
+            <li>História do Fryda e página de contato</li>
+            <li>Domínio próprio + hospedagem (cortesia inicial)</li>
+            <li>Fotos do café valorizadas no visual do Fryda</li>
+            <li>Responsivo, rápido no celular</li>
+            <li>Treinamento pra equipe atualizar sozinha</li>
+          </ul>
+        </div>
+        <div class="scope-card">
+          <h3>Pronto pra vender</h3>
+          <ul>
+            <li>Botão de WhatsApp em todas as páginas</li>
+            <li>Link pro iFood em destaque</li>
+            <li>Página de encomendas que já abre o WhatsApp</li>
+            <li>Link único e bonito pra bio do Instagram</li>
+            <li>Identidade visual do Fryda em tudo</li>
+            <li>Suporte direto comigo no WhatsApp</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="sec">
+      <div class="sec-h">Investimento</div>
+      <div class="price">
+        <div class="price-l">
+          <div class="pl">Presente de primeiro cliente</div>
+          <div class="pt">Site completo com a cara do Fryda</div>
+          <div class="ps">Tudo incluso, entregue pronto pra rodar. Sem custo, sem mensalidade obrigatória.</div>
+        </div>
+        <div class="price-r">
+          <div class="pn">apenas</div>
+          <div class="pb">R$ 0</div>
+        </div>
+      </div>
+      <div class="terms">
+        <b>O combinado:</b> entrego o site completo sem cobrar nada, como meu primeiro cliente, e a hospedagem dos primeiros meses fica por minha conta. <b>Em troca</b>, peço um depoimento sincero e a permissão de usar o Fryda como case do meu trabalho (portfólio e redes). <b>Fora do escopo:</b> Google Meu Negócio, anúncios pagos (Google Ads) e gestão completa de redes ficam disponíveis à parte, sob demanda, pra quando o Fryda quiser ir além. <b>Prazo:</b> 7 dias úteis a partir do recebimento do material (fotos e cardápio).
+      </div>
+    </div>
+
+    <div class="sign">
+      <div class="s"><div class="sl">Fryda Café · Maria &amp; Renata</div><div class="sn">De acordo</div></div>
+      <div class="s"><div class="sl">MarioLucash · Mario Lucas</div><div class="sn">(12) 98159-2576 · @mariolucash</div></div>
+    </div>
+  </div>
+
+  <div class="foot"><span>Proposta Fryda Café · MarioLucash · 18/06/2026</span><span class="deco">com carinho</span></div>
+</div>
+
+</body>
+</html>
