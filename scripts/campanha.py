@@ -162,7 +162,14 @@ def cmd_marcar(args):
     info = json.loads(ESTADO.read_text(encoding="utf-8"))
     ids = set(info.get("ids", []))
     leads = carregar()
-    nota = args.nota or "abordado por WhatsApp (campanha)"
+    n = _marcar(leads, ids, args.nota or "abordado por WhatsApp (campanha)")
+    crm.salvar(PIPELINE, leads)
+    ESTADO.unlink()
+    print(f"{n} leads marcados como abordado. Rode 'whatsapp' pro próximo lote.")
+
+
+def _marcar(leads, ids, nota):
+    """Marca uma lista de ids como abordado/whatsapp (mesma regra do crm)."""
     fu = (crm.HOJE + timedelta(days=crm.FOLLOWUP_PADRAO["abordado"])).isoformat()
     n = 0
     for l in leads:
@@ -174,9 +181,29 @@ def cmd_marcar(args):
             carimbo = f"[{crm.HOJE:%d/%m}] {nota}"
             l["notas"] = (l["notas"] + " | " + carimbo).strip(" |") if l.get("notas") else carimbo
             n += 1
+    return n
+
+
+def cmd_rodar(args):
+    """Modo ROTINA: gera o próximo lote E já marca como abordado, num passo só.
+    É o que a rotina (loop/agendamento) chama de hora em hora, avançando o funil
+    até acabar os celulares. O lote sai pronto pra você revisar e disparar."""
+    leads = carregar()
+    pz = pend_zap(leads)
+    if not pz:
+        print("✅ Acabaram os celulares pendentes. Campanha de WhatsApp concluída.")
+        return
+    batch = pz[:args.tamanho]
+    path = escrever_lote(batch, "WhatsApp — lote da rotina (revisar e disparar)")
+    _marcar(leads, {l["id"] for l in batch},
+            "lote da rotina (revisar e disparar no WhatsApp)")
     crm.salvar(PIPELINE, leads)
-    ESTADO.unlink()
-    print(f"{n} leads marcados como abordado (follow-up {fu}). Rode 'whatsapp' pro próximo lote.")
+    restam = len(pz) - len(batch)
+    print(f"Lote da rotina: {len(batch)} celulares (marcados como abordado). "
+          f"Restam {restam} pendentes.")
+    print(f"  -> {path.relative_to(ROOT)}")
+    if restam == 0:
+        print("✅ Esse foi o último. Campanha de WhatsApp concluída.")
 
 
 ROTEIRO = """# Roteiro de ligação — fixos do funil
@@ -238,6 +265,8 @@ def main():
     sub.add_parser("status").set_defaults(func=cmd_status)
     pw = sub.add_parser("whatsapp"); pw.add_argument("--tamanho", type=int, default=4)
     pw.add_argument("--ondas", action="store_true"); pw.set_defaults(func=cmd_whatsapp)
+    pr = sub.add_parser("rodar"); pr.add_argument("--tamanho", type=int, default=4)
+    pr.set_defaults(func=cmd_rodar)
     pm = sub.add_parser("marcar"); pm.add_argument("--nota", default=""); pm.set_defaults(func=cmd_marcar)
     sub.add_parser("ligacao").set_defaults(func=cmd_ligacao)
     args = ap.parse_args()

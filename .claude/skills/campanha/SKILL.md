@@ -38,6 +38,35 @@ mensagem, marcar depois de enviar.
 > em hora, dá pra envolver com `/loop 1h /campanha` — o loop para sozinho
 > quando o status zerar (passo 2).
 
+## Modo rotina (Claude Code na web / agendado)
+
+Pra rodar SOZINHO de hora em hora até acabar os números, sem esperar a
+confirmação manual de cada lote, usar o comando `rodar`:
+
+```
+python scripts/campanha.py rodar --tamanho 4
+```
+
+Ele **gera o lote E já marca como abordado** num passo só (avança o funil),
+e devolve o arquivo pronto. A rotina, a cada disparo:
+1. roda `campanha.py rodar`
+2. se gerou lote → **enviar o arquivo pro Mario** (`SendUserFile`, status
+   *proactive*, pra chegar no celular) com um resumo curto
+3. se imprimiu "Campanha concluída" → **parar a rotina** (acabaram os números)
+
+**Importante:** o `rodar` marca como abordado assumindo que o Mario vai
+disparar aquele lote. Se algum não for enviado, é só reverter pra `novo` no
+funil. Por isso a cadência tem que bater com a presença do Mario (ele recebe e
+dispara cada lote). Respeitar a regra anti-ban: ~4 por hora.
+
+**Como agendar de verdade:**
+- **Sessão viva (hoje):** `/loop 1h` rodando o passo da rotina acima. Como o
+  universo de WhatsApp é pequeno (uns 14), termina em poucas horas numa sessão.
+- **Durável (todo dia):** criar um *trigger agendado* no Claude Code na web
+  apontando pro prompt "rodar o próximo lote da campanha e me enviar". Ver
+  https://code.claude.com/docs/en/claude-code-on-the-web. Bom pra quando
+  entrar gente nova no funil (ex: depois das ligações dos fixos).
+
 ## Roteiro de ligação (fixos)
 
 5. `python scripts/campanha.py ligacao` gera o roteiro pros telefones fixos
