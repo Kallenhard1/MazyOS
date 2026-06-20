@@ -60,6 +60,8 @@ Status: ✅ pronto na plataforma · 🟡 parcial (parte feita ou só handoff) ·
 | `gerar_abordagem.py` | WhatsApp + e-mail por lead | Prospecção/Envio · abordagem | ✅ |
 | `gerar_diagnostico.py` | Diagnóstico PDF 1-página | Lead→Proposta · "Gerar diagnóstico" | ✅ |
 | `crm.py` | Funil (estágios + follow-up) | Funil · kanban e mover card | ✅ |
+| `campanha.py` | Campanha em lotes (WhatsApp só celular + roteiro de ligação dos fixos) | Envio · "Rodar campanha" (lote a lote, marca no funil) | 🔵 |
+| `gerar_manifest.py` | Manifesto que liga MazyOS↔plataforma | Bridge (rodado pelo `/salvar`) | ✅ |
 | `notion_payload.py` | Payload do funil pro Notion | Funil · "Espelhar no Notion" | 🟡 |
 | `propostas/**/gerar_pdf.py` (WeasyPrint) · `gerar-pdf.js` (Playwright) | Render de PDF (proposta, diagnóstico, apresentação) | Motor de PDF (`servicos/pdf.py`) | ✅ |
 

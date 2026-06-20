@@ -1,18 +1,13 @@
 # Funil de prospecção — MarioLucash
 
-> Atualizado em 15/06/2026 · 117 leads no total
+> Atualizado em 20/06/2026 · 110 leads no total
 
-**novo** 114 · **abordado** 1 · **conversa** 1 · **proposta** 1 · **fechado** 0 · **perdido** 0
+**novo** 109 · **abordado** 1 · **conversa** 0 · **proposta** 0 · **fechado** 0 · **perdido** 0
 
-## Novo (114)
+## Novo (109)
 
 | Score | Empresa | Tipo | Cidade | Contato | Follow-up | Notas |
 |---:|---|---|---|---|---|---|
-| 70 | Padaria Trigo de Ouro | b2c | Taubaté | 12988887777 | — | — |
-| 65 | MecânicaPro Industrial | b2b | Jacareí | 1234445555 | — | — |
-| 60 | Clínica OdontoSorriso | b2c | Taubaté | 12977776666 | — | — |
-| 60 | Distribuidora Vale Suprimentos | b2b | São José dos Campos | 1233332222 | — | — |
-| 60 | Pet Shop Amigo Fiel | b2c | Taubaté | 12944443333 | — | — |
 | 55 | M.Nunes | b2b | Taubaté | +55 12 3246 9640 | — | — |
 | 55 | Cantuario & Monteiro Advogados | b2b | Taubaté | +55 12 3413 5083 | — | — |
 | 50 | Consultório Odontológico Caroline De Carlo | b2c | Taubaté | +55 12 3629 1127 | — | — |
@@ -127,19 +122,15 @@
 
 | Score | Empresa | Tipo | Cidade | Contato | Follow-up | Notas |
 |---:|---|---|---|---|---|---|
-| 75 | Contabilidade Prisma | b2b | Taubaté | 1235556666 | 2026-06-17 | [14/06] mandei diagnostico no zap |
+| 70 | Fryda Café | b2c | Taubaté | +551234328445 | 2026-06-21 | [14/06] respondeu, quer ver proposta |
 
-## Conversa (1)
+## Conversa (0)
 
-| Score | Empresa | Tipo | Cidade | Contato | Follow-up | Notas |
-|---:|---|---|---|---|---|---|
-| 70 | Fryda Café | b2c | Taubaté | 12999990000 | 2026-06-16 | [14/06] respondeu, quer ver proposta |
+_vazio_
 
-## Proposta (1)
+## Proposta (0)
 
-| Score | Empresa | Tipo | Cidade | Contato | Follow-up | Notas |
-|---:|---|---|---|---|---|---|
-| 67 | TechParts Componentes | b2b | Campinas | 1932221111 | 2026-06-16 | — |
+_vazio_
 
 ## Fechado (0)
 
