@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+{% block titulo %}Agenda{% endblock %}
+{% block conteudo %}
+<h1>⏰ Agenda</h1>
+<p class="sub">Agende mensagens, eventos e comandos. Quando chega a hora, vira aviso aqui e você só clica <strong>Confirmar</strong>. Comando (ex: a campanha) roda na hora do confirmar, com você no controle.</p>
+
+<div class="card">
+  <h3>Atalho: campanha no automático</h3>
+  <p class="muted" style="font-size:.85rem">Agenda o próximo lote da campanha pra cada hora. Quando vencer, você confirma e os 4 saem prontos.</p>
+  <form hx-post="{{ url_for('agenda_campanha') }}" hx-target="#listas" hx-swap="innerHTML" style="display:flex; gap:8px; align-items:flex-end; flex-wrap:wrap">
+    <div>
+      <label>Intervalo</label>
+      <select name="intervalo">
+        <option value="horaria">A cada hora</option>
+        <option value="diaria">Diária</option>
+      </select>
+    </div>
+    <button type="submit">Agendar campanha</button>
+  </form>
+</div>
+
+<div class="card">
+  <h3>Agendar tarefa</h3>
+  <form hx-post="{{ url_for('agenda_add') }}" hx-target="#listas" hx-swap="innerHTML" hx-on::after-request="this.querySelector('input[name=titulo]').value=''">
+    <label>Título</label>
+    <input type="text" name="titulo" placeholder="ex: ligar pro Restaurante X / publicar carrossel">
+    <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:8px">
+      <div style="flex:1; min-width:170px">
+        <label>Quando</label>
+        <input type="datetime-local" name="quando" value="{{ agora }}">
+      </div>
+      <div style="min-width:140px">
+        <label>Tipo</label>
+        <select name="tipo" onchange="document.getElementById('cmdbox').style.display = this.value=='comando' ? 'block':'none'">
+          <option value="lembrete">Lembrete</option>
+          <option value="evento">Evento</option>
+          <option value="comando">Comando</option>
+        </select>
+      </div>
+      <div style="min-width:140px">
+        <label>Repetir</label>
+        <select name="recorrencia">
+          <option value="nenhuma">Não repete</option>
+          <option value="horaria">A cada hora</option>
+          <option value="diaria">Diária</option>
+          <option value="semanal">Semanal</option>
+        </select>
+      </div>
+    </div>
+    <div id="cmdbox" style="display:none; margin-top:8px">
+      <label>Comando (roda ao confirmar)</label>
+      <select name="comando">
+        {% for k, v in comandos.items() %}<option value="{{ k }}">{{ v.rotulo }}</option>{% endfor %}
+      </select>
+    </div>
+    <label style="margin-top:8px">Detalhe (opcional)</label>
+    <input type="text" name="detalhe" placeholder="nota que aparece no aviso">
+    <button type="submit" style="margin-top:10px">Agendar</button>
+  </form>
+</div>
+
+<div id="listas">
+  {% include "partials/agenda_listas.html" %}
+</div>
+
+<p class="muted" style="font-size:.78rem; margin-top:16px">
+  Os avisos aparecem quando o painel está aberto. Pra disparar com o painel
+  fechado, dá pra parear com um cron do sistema ou um trigger agendado no
+  Claude Code na web apontando pro mesmo comando.
+</p>
+{% endblock %}

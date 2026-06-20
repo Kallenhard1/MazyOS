@@ -1,0 +1,54 @@
+{% if saida %}
+<div class="card" style="border-left:3px solid {{ '#45703B' if saida.ok else '#B93A2B' }}">
+  <strong style="font-size:.85rem">{{ '✓' if saida.ok else '⚠️' }} {{ saida.rotulo }}</strong>
+  {% if saida.texto %}<pre style="white-space:pre-wrap; font-size:.8rem; margin-top:6px">{{ saida.texto }}</pre>{% endif %}
+</div>
+{% endif %}
+
+<h2>🔔 Vencidas ({{ vencidas|length }})</h2>
+{% if not vencidas %}
+<p class="muted">Nada vencido. Quando uma tarefa chega a hora, ela aparece aqui pra você confirmar.</p>
+{% else %}
+{% for t in vencidas %}
+<div class="card" style="padding:12px 14px; border-left:3px solid #B93A2B">
+  <div style="display:flex; align-items:flex-start; gap:8px">
+    <div style="flex:1">
+      <strong>{{ t.titulo }}</strong>
+      <span class="muted" style="font-size:.74rem; display:block">
+        {{ t.quando.replace('T',' ') }} · {{ t.tipo }}{% if t.recorrencia != 'nenhuma' %} · 🔁 {{ t.recorrencia }}{% endif %}
+      </span>
+      {% if t.detalhe %}<span class="muted" style="font-size:.78rem">{{ t.detalhe }}</span>{% endif %}
+    </div>
+  </div>
+  <div style="display:flex; gap:6px; margin-top:9px">
+    <button type="button" style="margin:0; padding:6px 14px; font-size:.78rem"
+            hx-post="{{ url_for('agenda_confirmar') }}" hx-vals='{"id": "{{ t.id }}"}'
+            hx-target="#listas" hx-swap="innerHTML">✓ Confirmar{% if t.tipo == 'comando' %} e rodar{% endif %}</button>
+    <button type="button" class="secundario" style="margin:0; padding:6px 12px; font-size:.78rem"
+            hx-post="{{ url_for('agenda_remover') }}" hx-vals='{"id": "{{ t.id }}"}'
+            hx-target="#listas" hx-swap="innerHTML" hx-confirm="Remover essa tarefa?">remover</button>
+  </div>
+</div>
+{% endfor %}
+{% endif %}
+
+<h2>Próximas ({{ proximas|length }})</h2>
+{% if not proximas %}
+<p class="muted">Nenhuma tarefa agendada à frente.</p>
+{% else %}
+{% for t in proximas %}
+<div class="card" style="padding:10px 14px">
+  <div style="display:flex; align-items:center; gap:8px">
+    <div style="flex:1">
+      <strong style="font-size:.9rem">{{ t.titulo }}</strong>
+      <span class="muted" style="font-size:.74rem; display:block">
+        {{ t.quando.replace('T',' ') }} · {{ t.tipo }}{% if t.recorrencia != 'nenhuma' %} · 🔁 {{ t.recorrencia }}{% endif %}
+      </span>
+    </div>
+    <button type="button" class="modal-x" style="position:static" title="remover"
+            hx-post="{{ url_for('agenda_remover') }}" hx-vals='{"id": "{{ t.id }}"}'
+            hx-target="#listas" hx-swap="innerHTML" hx-confirm="Remover?">×</button>
+  </div>
+</div>
+{% endfor %}
+{% endif %}

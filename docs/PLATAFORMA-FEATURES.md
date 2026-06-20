@@ -84,6 +84,7 @@ JÁ NA PLATAFORMA
   📣 Anúncios             ✅   montar campanha (CSV) + relatório semanal (Fase 6)
   📈 Análise              ✅   /analisar-dados (resumo executivo) (Fase 7)
   ⚙️  Sistema & Config    ✅   salvar, atualizar, rotinas, contato, identidade (Fase 7)
+  ⏰ Agenda               ✅   scheduler de mensagens/eventos/comandos; vence→aviso→Confirmar
   🏠 Hoje                 🟡   dashboard inicial
 
 MAPA COMPLETO — todos os módulos de pé. Restam refinos:

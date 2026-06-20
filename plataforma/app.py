@@ -11,6 +11,7 @@ from flask import (Flask, abort, redirect, render_template,
                    request, send_file, url_for)
 
 from servicos import ads as adssvc
+from servicos import agenda as agsvc
 from servicos import analise as analsvc
 from servicos import arquivos as arq
 from servicos import conteudo as cont
@@ -407,6 +408,51 @@ def config():
                            contato=sissvc.contato(),
                            identidade=sissvc.identidade(),
                            integracoes=sissvc.integracoes())
+
+
+# ---------------- Agenda / scheduler ----------------
+from datetime import datetime as _dt  # noqa: E402
+
+
+def _agenda_listas(saida=None):
+    return render_template("partials/agenda_listas.html",
+                           vencidas=agsvc.vencidas(), proximas=agsvc.proximas(),
+                           saida=saida)
+
+
+@app.get("/agenda")
+def agenda():
+    return render_template("agenda.html", ativa="agenda",
+                           vencidas=agsvc.vencidas(), proximas=agsvc.proximas(),
+                           comandos=agsvc.COMANDOS,
+                           agora=_dt.now().strftime("%Y-%m-%dT%H:%M"), saida=None)
+
+
+@app.post("/agenda/add")
+def agenda_add():
+    agsvc.add(request.form.get("titulo", ""), request.form.get("quando", ""),
+              request.form.get("tipo", "lembrete"),
+              request.form.get("recorrencia", "nenhuma"),
+              request.form.get("comando", ""), request.form.get("detalhe", ""))
+    return _agenda_listas()
+
+
+@app.post("/agenda/campanha")
+def agenda_campanha():
+    agsvc.agendar_campanha(request.form.get("intervalo", "horaria"))
+    return _agenda_listas()
+
+
+@app.post("/agenda/confirmar")
+def agenda_confirmar():
+    saida = agsvc.confirmar(request.form.get("id", ""))
+    return _agenda_listas(saida=saida)
+
+
+@app.post("/agenda/remover")
+def agenda_remover():
+    agsvc.remover(request.form.get("id", ""))
+    return _agenda_listas()
 
 
 # ---------------- Download de arquivos (sandbox) ----------------
