@@ -1,0 +1,308 @@
+<title>Proposta · Visibilidade em IA e Automação — Rede Nacional Inn</title>
+<style>
+  /* Identidade espelhada da marca Nacional Inn: verde vivo, branco,
+     painel chocolate com dourado, cards arredondados, botões pill.
+     Autoria: Mario Lucas. Tema claro por fidelidade à marca. */
+  :root{
+    --green:#00A551; --green-dark:#008843; --green-tint:#E7F6EE;
+    --brown:#3A322A; --brown-2:#443B32; --gold:#D8B45C; --gold-soft:#E6CE96;
+    --paper:#FFFFFF; --ground:#F7F6F3; --ink:#2B2B27; --ink-soft:#6B6A62;
+    --line:#E7E5DE; --shadow:0 10px 30px rgba(43,43,39,.08);
+    --sans:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    --mono:ui-monospace,"SF Mono","Cascadia Code",Menlo,Consolas,monospace;
+    color-scheme:light;
+  }
+
+  *{box-sizing:border-box;}
+  body{margin:0;}
+  .doc{
+    background:var(--ground); color:var(--ink);
+    font-family:var(--sans); font-size:17px; line-height:1.6;
+    -webkit-font-smoothing:antialiased; min-height:100vh;
+  }
+  .wrap{max-width:960px; margin:0 auto; padding:0 28px;}
+  h1,h2,h3{font-weight:800; letter-spacing:-.025em; text-wrap:balance;}
+  p{max-width:62ch;}
+  ::selection{background:rgba(0,165,81,.22);}
+
+  .kicker{
+    font-family:var(--mono); font-size:12px; letter-spacing:.2em; text-transform:uppercase;
+    color:var(--green); font-weight:600; margin:0 0 18px;
+  }
+
+  /* ---------- TOPO ---------- */
+  .top{background:var(--paper); border-bottom:1px solid var(--line);}
+  .top .wrap{display:flex; align-items:center; gap:12px; height:64px;}
+  .top svg{display:block; flex:none;}
+  .top b{font-family:var(--mono); font-size:12px; letter-spacing:.18em; text-transform:uppercase; color:var(--ink);}
+  .top span{font-family:var(--mono); font-size:12px; color:var(--ink-soft); letter-spacing:.04em;}
+  .top .tag{
+    margin-left:auto; font-family:var(--mono); font-size:11.5px; font-weight:600;
+    color:var(--green-dark); background:var(--green-tint); padding:6px 14px; border-radius:100px;
+    letter-spacing:.06em;
+  }
+
+  /* ---------- HERO (painel chocolate, espelho do banner deles) ---------- */
+  .hero{background:var(--brown); color:#F4EFE6; position:relative; overflow:hidden;}
+  .hero::after{
+    content:""; position:absolute; inset:0; pointer-events:none;
+    background:radial-gradient(90% 120% at 85% 0%, rgba(216,180,92,.14), transparent 55%);
+  }
+  .hero .wrap{position:relative; z-index:2; padding-top:84px; padding-bottom:84px;}
+  .hero .kicker{color:var(--gold);}
+  .hero h1{
+    font-size:clamp(34px,5.8vw,58px); line-height:1.06; margin:0 0 24px;
+    max-width:18ch; color:var(--gold-soft);
+  }
+  .hero h1 b{color:#FFFFFF; font-weight:800;}
+  .hero .sub{font-size:19px; line-height:1.6; color:#CDC4B4; max-width:52ch; margin:0;}
+  .hero .meta{
+    margin-top:44px; padding-top:20px; border-top:1px solid rgba(244,239,230,.18);
+    font-family:var(--mono); font-size:12px; letter-spacing:.05em; color:#B3AA94;
+    display:flex; flex-wrap:wrap; gap:8px 22px;
+  }
+
+  /* ---------- SEÇÕES ---------- */
+  section{padding:76px 0;}
+  .sec-head h2{font-size:clamp(26px,3.6vw,36px); line-height:1.12; margin:0 0 16px; max-width:24ch;}
+  .sec-head p{color:var(--ink-soft); margin:0 0 36px;}
+  .prose p{margin:0 0 18px; color:var(--ink-soft);}
+  .prose p:last-child{margin-bottom:0;}
+  .prose strong{color:var(--ink); font-weight:700;}
+
+  /* stats (recap da auditoria) */
+  .stats{display:grid; grid-template-columns:repeat(3,1fr); gap:18px; margin:36px 0 0;}
+  .stat{background:var(--paper); border:1px solid var(--line); border-radius:16px; padding:24px 22px; box-shadow:var(--shadow);}
+  .stat .fig{font-size:44px; font-weight:800; letter-spacing:-.03em; line-height:1; color:var(--ink); font-variant-numeric:tabular-nums;}
+  .stat .fig.g{color:var(--green);}
+  .stat .cap{font-size:13.5px; color:var(--ink-soft); margin-top:10px; max-width:none;}
+  @media(max-width:640px){.stats{grid-template-columns:1fr;}}
+
+  /* fases */
+  .fases{display:flex; flex-direction:column; gap:18px; margin-top:8px;}
+  .fase{
+    background:var(--paper); border:1px solid var(--line); border-radius:18px;
+    padding:30px 30px 26px; box-shadow:var(--shadow);
+    display:grid; grid-template-columns:auto 1fr; gap:10px 26px;
+  }
+  .fase .badge{
+    font-family:var(--mono); font-size:12px; font-weight:700; letter-spacing:.08em;
+    color:var(--green-dark); background:var(--green-tint);
+    padding:7px 14px; border-radius:100px; white-space:nowrap; align-self:start;
+  }
+  .fase h3{font-size:22px; margin:2px 0 10px; letter-spacing:-.02em;}
+  .fase p{font-size:15.5px; line-height:1.6; color:var(--ink-soft); margin:0 0 14px; max-width:60ch;}
+  .fase ul{margin:0; padding-left:0; list-style:none; display:flex; flex-direction:column; gap:8px;}
+  .fase li{
+    font-size:14.5px; color:var(--ink); padding-left:26px; position:relative; max-width:60ch;
+  }
+  .fase li::before{
+    content:""; position:absolute; left:0; top:5px; width:16px; height:16px; border-radius:50%;
+    background:var(--green-tint);
+    background-image:url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="%2300A551" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"%3E%3Cpath d="m5 13 4 4 10-11"/%3E%3C/svg%3E');
+    background-size:10px; background-position:center; background-repeat:no-repeat;
+  }
+  .fase .note{font-size:13px; color:var(--ink-soft); margin:14px 0 0; font-style:italic;}
+  @media(max-width:640px){.fase{grid-template-columns:1fr;}}
+
+  /* como trabalho */
+  .pilares{display:grid; grid-template-columns:repeat(3,1fr); gap:18px; margin-top:8px;}
+  .pilar{background:var(--paper); border:1px solid var(--line); border-radius:16px; padding:24px 22px; box-shadow:var(--shadow);}
+  .pilar h3{font-size:17px; margin:0 0 8px; letter-spacing:-.01em;}
+  .pilar p{font-size:14px; line-height:1.6; color:var(--ink-soft); margin:0;}
+  @media(max-width:640px){.pilares{grid-template-columns:1fr;}}
+
+  /* janela (painel chocolate de volta) */
+  .janela{background:var(--brown); color:#F4EFE6;}
+  .janela .wrap{padding:76px 28px;}
+  .janela .kicker{color:var(--gold);}
+  .janela h2{font-size:clamp(26px,3.8vw,38px); line-height:1.1; margin:0 0 16px; max-width:22ch; color:#FFFFFF;}
+  .janela p{color:#CDC4B4; font-size:17.5px; margin:0; max-width:56ch;}
+  .janela p b{color:var(--gold-soft); font-weight:700;}
+
+  /* CTA */
+  .cta{background:var(--paper); border-top:1px solid var(--line);}
+  .cta .wrap{padding:80px 28px;}
+  .cta h2{font-size:clamp(28px,4.2vw,42px); line-height:1.08; margin:0 0 16px; max-width:20ch;}
+  .cta p{font-size:18px; color:var(--ink-soft); margin:0 0 34px; max-width:50ch;}
+  .btns{display:flex; flex-wrap:wrap; gap:14px;}
+  .btn{
+    display:inline-flex; align-items:center; gap:9px; text-decoration:none;
+    font-size:15.5px; font-weight:700; padding:15px 26px; border-radius:100px;
+    transition:transform .15s ease, background .15s ease, border-color .15s ease;
+  }
+  .btn:focus-visible{outline:2px solid var(--green); outline-offset:3px;}
+  .btn.primary{background:var(--green); color:#FFFFFF;}
+  .btn.primary:hover{background:var(--green-dark); transform:translateY(-1px);}
+  .btn.ghost{background:transparent; color:var(--ink); border:1.5px solid var(--line);}
+  .btn.ghost:hover{border-color:var(--ink-soft); transform:translateY(-1px);}
+  .btn svg{flex:none;}
+
+  footer{background:var(--ground); border-top:1px solid var(--line);}
+  footer .wrap{padding:36px 28px; display:flex; flex-wrap:wrap; gap:16px 40px; justify-content:space-between; align-items:flex-start;}
+  footer .sig{font-family:var(--mono); font-size:12px; letter-spacing:.14em; text-transform:uppercase; color:var(--ink);}
+  footer .disc{font-size:12.5px; line-height:1.6; max-width:56ch; color:var(--ink-soft);}
+  footer a{color:var(--green-dark); text-decoration:none;}
+
+  @media (prefers-reduced-motion:no-preference){
+    .reveal{opacity:0; transform:translateY(12px); animation:rise .8s cubic-bezier(.2,.7,.2,1) forwards;}
+    .reveal.d1{animation-delay:.08s;} .reveal.d2{animation-delay:.16s;} .reveal.d3{animation-delay:.26s;}
+    @keyframes rise{to{opacity:1; transform:none;}}
+  }
+</style>
+
+<div class="doc">
+  <!-- TOPO -->
+  <div class="top">
+    <div class="wrap">
+      <svg width="28" height="28" viewBox="0 0 1080 1080" fill="none" aria-hidden="true">
+        <circle cx="540" cy="540" r="540" fill="#2B2B27"/>
+        <path d="M544.526 40.0661C546.461 40.0238 548.395 40.0019 550.329 40.0002C676.221 39.889 804.26 81.9006 894.576 174.027C987.009 269.882 1039.17 398.759 1039.99 533.263C1040.28 576.051 1035.07 618.698 1024.47 660.099C1002.5 744.855 952.852 827.748 892.864 889.867C803.471 982.441 683.566 1032.07 557.273 1039.33C544.893 1040.04 532.569 1039.97 520.125 1039.96C514.502 1040.17 504.732 1039.56 498.975 1039.21C474.505 1037.67 450.181 1034.27 426.207 1029.03C341.857 1009.91 275.936 970.102 229.082 894.885C171.288 930.245 120.858 870.617 95.1489 823.389C54.3678 748.47 34.6727 655.071 41.243 569.662C43.1712 546.483 46.7511 523.476 51.9545 500.826C53.5546 494.106 55.2903 487.42 57.1606 480.773C62.764 460.687 60.7852 466.214 57.9417 447.054C41.1855 334.154 122.757 236.944 202.254 170.11C220.158 155.058 236.804 141.169 256.223 127.921C317.324 87.0043 386.194 59.7096 458.334 47.8205C477.652 44.5884 497.118 42.3655 516.658 41.1606C525.947 40.6027 535.619 40.6736 544.526 40.0661ZM309.823 312.638C337.235 320.93 371.388 337.548 391.033 359.304C420.025 346.999 450.925 336.846 482.18 332.704C532.589 322.663 624.462 329.042 673.518 344.914C699.754 295.188 714.772 254.808 699.11 197.546C678.383 121.78 595.08 85.4352 523.469 89.1819C464.848 93.2476 410.183 120.824 371.409 165.891C337.549 205.336 319.542 255.227 311.033 306.306C310.693 308.349 310.312 310.647 309.823 312.638ZM658.321 936.357C685.59 919.021 704.183 895.092 714.777 864.253C704.188 866.992 686.274 868.967 675.219 869.741C610.768 874.268 544.849 853.707 489.69 820.108C462.23 803.45 436.548 783.912 413.061 761.811C408.102 757.204 403.267 752.622 398.501 747.837C395.95 745.275 387.95 735.817 385.668 734.253C363.044 773.102 344.589 810.184 356.467 856.152C365.598 891.493 384.385 918.945 415.506 937.632C466.001 968.644 552.695 972.057 608.372 957.49C625.94 952.953 642.763 945.84 658.321 936.357ZM903.151 627.133C903.161 631.376 903.379 635.912 903.433 640.16C904.554 724.324 861.078 802.995 786.281 840.305C777.373 844.75 766.904 849.955 757.088 852.841C753.512 869.62 750.442 879.868 743.295 895.665C724.687 936.812 687.757 970.057 646.165 985.59C642.564 986.912 638.979 988.274 635.413 989.681C639.594 988.81 643.259 987.985 647.385 986.881C766.646 956.209 858.142 891.123 926.516 786.003C976.604 708.998 1002.61 625.877 1001.95 533.302C1001.79 511.445 999.988 480.038 995.669 458.638C991.443 483.434 977.868 518.228 967.21 540.979C952.921 571.49 927.939 604.673 903.151 627.133ZM743.97 375.097C801.061 407.141 847.369 456.005 876.855 515.316C880.654 523.095 883.957 531.118 886.744 539.333C887.895 542.67 890.444 551.075 891.768 553.941C893.221 560.204 896.609 572.365 897.13 578.006C935.478 535.527 963.778 462.34 963.431 403.942C963.049 339.72 903.24 290.679 841.72 294.05C840.446 294.121 839.171 294.21 837.901 294.315C790.745 298.278 762.623 334.316 743.97 375.097ZM709.659 690.255C740.196 685.116 769.269 674.012 796.483 659.101C823.156 644.849 841.314 630.373 864.078 611.22C856.257 538.201 823.231 485.187 768.019 438.607C761.582 433.175 736.322 414.156 729.126 411.198C699.09 486.88 682.738 562.649 697.428 644.418C700.712 662.681 704.625 673.359 709.659 690.255ZM380.859 665.445L383.778 669.815C399.566 647.588 418.613 626.667 436.818 606.47C440.717 602.147 444.812 597.833 448.972 593.767C422.716 538.184 418.814 473.137 389.057 419.056C387.968 417.078 382.997 408.439 381.374 407.38C356.736 422.085 328.818 442.149 309.836 464.109C318.768 536.25 340.818 604.992 380.859 665.445ZM736.054 188.717C747.615 229.318 745.319 269.631 731.754 309.22C729.731 315.118 727.434 320.913 724.875 326.587C723.268 330.221 720.858 336.793 719.271 339.879C720.159 336.728 718.74 341.179 720.173 338.441C726.963 325.44 735.033 314.719 744.01 303.259C765.53 279.154 788.84 263.333 820.944 257.546C851.873 252.277 883.634 256.576 912.153 269.889C917.445 272.345 924.006 275.515 928.708 278.87C860.165 174.746 787.179 123.514 668.91 92.274C669.565 92.7418 670.22 93.2152 670.864 93.6942C696.367 112.497 715.804 136.539 728.208 165.987C730.643 171.769 735.082 182.544 736.054 188.717ZM305.165 414.981C314.356 406.908 322.348 400.543 332.092 393.242C339.491 388.085 347.072 382.903 354.882 378.414C343.988 369.33 318.857 354.243 305.5 351.973C305.524 364.63 304.578 376.993 304.892 389.956C304.998 394.36 305.535 411.922 305.165 414.981ZM272.387 305.674C274.597 294.459 276.394 283.4 278.959 272.28C291.988 215.807 318.13 161.936 360.005 121.983C361.73 120.337 371.727 112.134 371.925 110.819C364.333 114.574 354.889 117.869 346.934 121.428C331.265 128.562 315.949 136.479 301.044 145.152C284.838 154.74 267.803 166.147 253.082 177.965C187.149 230.896 111.045 301.889 95.7074 390.547L96.0174 391.062L96.3819 390.967C121.468 349.706 161.681 320.404 208.057 309.592C224.562 305.787 255.696 302.797 272.387 305.674ZM210.058 861.651C183.07 808.108 175.255 764.161 180.618 703.773C181.366 695.338 182.451 679.83 184.023 671.972C179.939 666.863 175.613 661.952 171.374 656.975C153.399 635.857 138.173 613.382 122.952 590.172C115.412 578.846 108.129 567.343 101.109 555.672C98.7378 551.662 86.7924 529.229 85.2807 527.687C80.8829 552.3 77.8214 576.669 78.0022 601.893C78.5463 677.784 97.9244 757.69 138.683 821.698C149.271 838.325 181.387 877.923 203.991 864.481C205.749 863.691 208.452 862.577 210.058 861.651ZM863.93 661.106C821.023 693.363 778.807 714.927 726.527 726.37C735.796 743.321 748.121 765.832 753.468 784.15C755.576 791.684 758.621 803.172 758.869 810.822C769.706 805.435 777.205 801.688 787.288 794.98C819.015 773.953 842.891 742.642 855.077 706.082C859.387 693.343 863.399 674.974 864.326 661.633L863.93 661.106ZM238.387 832.128C240.527 828.421 242.572 824.655 244.52 820.842C253.949 800.286 260.435 777.396 252.566 754.986C247.543 740.688 235.646 727.706 225.808 716.532C224.47 715.013 219.689 709.844 218.356 708.892C214.884 750.47 218.401 794.833 238.387 832.128ZM449.632 993.377C369.451 973.312 312.236 905.568 314.683 819.034C315.789 779.968 339.775 734.835 360.317 702.923C326.886 655.603 304.156 608.886 288.767 552.432C285.2 539.35 279.454 517.616 277.907 504.494L270.857 516.16C250.862 550.665 238.169 584.325 229.74 623.558C227.235 635.224 225.688 647.071 223.301 658.286C230.575 665.506 237.221 672.995 244.258 680.301C269.595 706.619 293.933 734.283 294.098 773.613C294.253 810.498 280.281 841.373 258.208 869.564C285.735 914.079 318.495 946.154 365.566 967.945C381.146 975.155 397.445 981.575 414.044 985.899C426.241 989.944 436.98 991.357 448.736 994.501L456.561 995.818L457.179 995.473L458.148 995.894L457.02 995.818L456.826 995.306L449.632 993.377ZM653.52 379.393C623.068 371.36 591.996 368.398 560.631 366.73C554.252 366.391 538.451 366.072 532.435 366.648C491.865 368.386 454.433 375.203 416.473 390.476C420.65 397.582 425.023 404.945 428.608 412.407C448.708 454.249 456.702 500.515 470.77 544.539C473.003 551.526 475.66 558.32 477.991 565.257C487.357 555.369 499.036 545.055 509.156 535.839C562.089 486.706 612.221 440.029 653.52 379.393ZM161.632 579.378C169.646 591.676 182.031 609.736 191.622 620.981C192.596 613.068 195.891 600 198.045 592.177C209.151 550.554 227.17 511.186 251.319 475.784C256.064 468.863 264.557 457.153 270.222 451.244C267.221 421.587 265.07 374.113 268.48 343.922C263.224 343.707 257.234 343.32 252.03 343.364C170.111 345.5 129.074 393.56 101.358 466.97C115.342 508.644 137.048 543.405 161.632 579.378ZM670.84 693.672C667.08 683.485 664.635 672.498 662.319 661.896C648.511 598.724 652.593 532.641 669.104 470.432C676.037 444.304 685.788 419.178 694.567 393.679C694.745 393.152 691.045 392.055 690.599 391.916C658.579 444.338 603.244 501.287 558.156 543L518.768 579.317C511.668 585.914 502.331 594.37 495.675 601.412C511.619 626.586 526.369 641.877 550.781 658.539C581.362 678.113 609.697 687.384 645.664 691.981C654.507 693.115 662.482 692.857 670.84 693.672ZM686.398 731.62C620.008 734.82 551.515 715.099 501.711 668.873C492.947 660.686 484.82 651.811 477.404 642.337C475.325 639.644 469.526 630.748 468.039 629.143C462.794 635.897 454.122 644.256 448.211 651.208C434.49 667.354 420.254 683.936 407.907 701.226C465.317 767.983 553.136 825.586 641.801 831.282C648.184 831.692 657.592 832.102 663.955 831.687C683.536 830.791 702.983 827.956 722.028 823.222C721.26 816.422 720.729 809.855 719.132 803.172C713.131 778.135 698.009 754.51 686.398 731.62Z" fill="#F4EFE6"/>
+      </svg>
+      <b>Mario Lucas</b>
+      <span>· Automação &amp; IA</span>
+      <span class="tag">Proposta · Rede Nacional Inn</span>
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <header class="hero">
+    <div class="wrap">
+      <p class="kicker reveal">Proposta de trabalho · julho 2026</p>
+      <h1 class="reveal d1">Mesma rede de sempre, <b>visível para a nova busca.</b></h1>
+      <p class="sub reveal d2">Um plano em fases para a Nacional Inn ser a primeira rede hoteleira do país a dominar as respostas da inteligência artificial do Google, e para automatizar as rotinas que hoje consomem as horas da equipe.</p>
+      <div class="meta reveal d3">
+        <span>Preparado para a Rede Nacional Inn</span>
+        <span>Por Mario Lucas</span>
+        <span>Confidencial</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- 01 CONTEXTO -->
+  <section class="wrap">
+    <p class="kicker">01 · O contexto</p>
+    <div class="sec-head">
+      <h2>A busca mudou. O hóspede lê uma resposta pronta, escrita pela IA.</h2>
+    </div>
+    <div class="prose">
+      <p>No Modo IA do Google, quem pesquisa <strong>"hotéis em Campos do Jordão"</strong> não recebe mais uma lista de links: recebe uma recomendação escrita, com nome, nota e preço de cada hotel. E a IA monta essa resposta lendo uma ficha técnica que cada site publica no próprio código.</p>
+      <p>Nossa auditoria verificou essa ficha nas páginas dos hotéis da rede e nos concorrentes diretos. O resultado resume o tamanho da oportunidade:</p>
+    </div>
+    <div class="stats">
+      <div class="stat"><div class="fig">8</div><div class="cap">informações essenciais que a IA procura e não encontra hoje nas páginas dos hotéis da rede</div></div>
+      <div class="stat"><div class="fig">0</div><div class="cap">sites no destino, incluindo concorrentes, com a ficha completa que a IA lê</div></div>
+      <div class="stat"><div class="fig g">1º</div><div class="cap">lugar disponível para quem estruturar os dados primeiro e virar a fonte preferida da IA</div></div>
+    </div>
+    <div class="prose" style="margin-top:32px">
+      <p>Enquanto isso, quem descreve os hotéis da rede para a IA são <strong>Booking, Agoda e Expedia</strong>: os intermediários que cobram comissão e listam o concorrente ao lado. A auditoria completa acompanha esta proposta.</p>
+    </div>
+  </section>
+
+  <!-- 02 O PLANO -->
+  <section class="wrap" style="padding-top:0">
+    <p class="kicker">02 · O plano</p>
+    <div class="sec-head">
+      <h2>Três fases, começando pelo que trava a visibilidade hoje.</h2>
+      <p>Cada fase entrega valor sozinha. A rede decide se avança para a próxima.</p>
+    </div>
+    <div class="fases">
+      <div class="fase">
+        <span class="badge">FASE 1</span>
+        <div>
+          <h3>Visibilidade em IA</h3>
+          <p>Estruturar, hotel a hotel, a ficha que a inteligência artificial lê: a rede passa a se descrever com as próprias palavras, o próprio preço e a própria nota, apontando para a reserva direta.</p>
+          <ul>
+            <li>Correção feita na fonte, com acesso autorizado e em coordenação com o time de vocês</li>
+            <li>Sem mudança visual no site e sem interferir no funcionamento das reservas</li>
+            <li>Cobertura de todos os hotéis da rede, começando pelos destinos prioritários</li>
+            <li>Verificação técnica de cada página com as ferramentas oficiais do Google</li>
+          </ul>
+          <p class="note">O detalhamento técnico da implementação é apresentado ao time de TI na reunião de kickoff.</p>
+        </div>
+      </div>
+      <div class="fase">
+        <span class="badge">FASE 2</span>
+        <div>
+          <h3>Automação de rotinas</h3>
+          <p>Com a visibilidade corrigida, automatizar o que hoje consome horas da equipe de marketing e atendimento:</p>
+          <ul>
+            <li>Avaliações de hóspedes respondidas no tom da marca, com aprovação da equipe</li>
+            <li>Relatórios de campanhas e desempenho gerados automaticamente</li>
+            <li>Conteúdo para redes sociais criado na identidade da rede, na fila para aprovação</li>
+            <li>E-mails e comunicações de rotina padronizados e automatizados</li>
+          </ul>
+        </div>
+      </div>
+      <div class="fase">
+        <span class="badge">FASE 3</span>
+        <div>
+          <h3>Acompanhamento contínuo</h3>
+          <p>Visibilidade em IA não é projeto de uma vez só: o Google evolui, os concorrentes acordam, novas perguntas surgem.</p>
+          <ul>
+            <li>Monitoramento da presença da rede nas respostas de IA, destino a destino</li>
+            <li>Ajustes contínuos na ficha de cada hotel conforme o Google evolui</li>
+            <li>Novas automações conforme a operação identificar necessidades</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 03 COMO TRABALHO -->
+  <section class="wrap" style="padding-top:0">
+    <p class="kicker">03 · Como eu trabalho</p>
+    <div class="sec-head">
+      <h2>Zero risco para a operação.</h2>
+    </div>
+    <div class="pilares">
+      <div class="pilar">
+        <h3>Acesso autorizado</h3>
+        <p>Todo trabalho no site acontece com autorização formal, em coordenação com o time de TI e os gestores de tráfego da rede.</p>
+      </div>
+      <div class="pilar">
+        <h3>Nada quebra</h3>
+        <p>As correções não alteram o visual nem o funcionamento do site e das reservas. Tudo é verificado e reversível.</p>
+      </div>
+      <div class="pilar">
+        <h3>Vocês aprovam</h3>
+        <p>Cada entrega passa pela aprovação da equipe antes de ir ao ar. Relatório claro do que foi feito, sem caixa-preta.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- JANELA -->
+  <section class="janela">
+    <div class="wrap">
+      <p class="kicker">04 · Por que agora</p>
+      <h2>A janela de first-mover está aberta. E janelas fecham.</h2>
+      <p>Nenhum concorrente do destino estruturou os dados ainda. Quem organizar a ficha primeiro vira a fonte que a IA prefere citar, com o site oficial e a reserva direta na frente, <b>antes que os outros percebam que isso existe.</b></p>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta">
+    <div class="wrap">
+      <p class="kicker">O próximo passo</p>
+      <h2>Uma reunião para apresentar o diagnóstico completo.</h2>
+      <p>Trinta minutos com a equipe: mostro a auditoria na prática, respondo as perguntas técnicas e alinhamos o escopo da Fase 1 com os destinos prioritários da rede.</p>
+      <div class="btns">
+        <a class="btn primary" href="https://wa.me/5512981592576?text=Recebi%20a%20proposta%20da%20Nacional%20Inn%20e%20quero%20agendar%20a%20reuni%C3%A3o" target="_blank" rel="noopener">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.5 15.3L2 22l4.8-1.5A10 10 0 1 0 12 2Zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .1-1.7-.1-.4-.1-.9-.3-1.6-.6-2.8-1.2-4.6-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.8 0-1.3.7-2 .9-2.2.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.3 0 .5l-.4.6c-.2.2-.3.4-.1.7.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.4 2.4 1.5.2.1.4.1.6-.1l.7-.8c.2-.3.4-.2.6-.1l1.9.9c.3.1.4.2.5.3.1.2.1.9-.1 1.5Z"/></svg>
+          Agendar pelo WhatsApp
+        </a>
+        <a class="btn ghost" href="mailto:mariolucas@mariolucash.com.br?subject=Proposta%20Nacional%20Inn%20%C2%B7%20Agendar%20reuni%C3%A3o" target="_blank" rel="noopener">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
+          Responder por e-mail
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap">
+      <div class="sig">Mario Lucas · Automação &amp; IA</div>
+      <p class="disc">Proposta preparada exclusivamente para a Rede Nacional Inn em 14/07/2026, a partir de auditoria técnica independente das páginas públicas de nacionalinn.com.br. Documento confidencial, não afiliado à Rede Nacional Inn. WhatsApp (12) 98159-2576 · <a href="mailto:mariolucas@mariolucash.com.br">mariolucas@mariolucash.com.br</a> · mariolucash.com.br</p>
+    </div>
+  </footer>
+</div>

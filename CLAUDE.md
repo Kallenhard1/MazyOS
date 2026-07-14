@@ -113,3 +113,45 @@ Quando o usuário pedir skill nova:
 4. Se a skill precisar de arquivos de apoio (templates, exemplos),
    criar dentro da pasta da skill
 5. Seguir o fluxo da skill-creator nativa do Claude Code
+
+---
+
+# Negócio do Mario Lucas — perfil Freelancer
+
+> Complemento aplicado pelo `/instalar` em 14/07/2026. Perfil: **Freelancer**.
+
+## O que é esse workspace
+
+Operação freelancer do Mario Lucas (marca **MarioLucash**): automação e IA
+pra negócios. Aqui ficam clientes, propostas, entregas e a marca própria.
+
+**Estrutura de pastas:**
+- `_memoria/` — quem é, como fala, foco atual
+- `identidade/` — marca MarioLucash (logo, cores, fontes em `fontes/`)
+- `saidas/` — entregas: auditorias, propostas, sites, PDFs
+- `dados/` — arquivos a analisar (referências, prints)
+- `scripts/` — utilitários (ex: `html-para-pdf.js`)
+- `marketing/` — conteúdo próprio
+
+## Serviço (carro-chefe primeiro)
+
+1. Visibilidade em IA (auditoria + correção na fonte) — usar `/auditoria-ia`
+2. Automação de rotinas · 3. Conteúdo no automático · 4. Sites e páginas
+
+## Regras do negócio
+
+- **Guarda-corpo de venda:** nas peças de cliente, nunca revelar o método
+  técnico (dados estruturados / JSON-LD / schema). Só o sintoma, nunca a cura.
+- **Nada de travessão (—)** no texto. Ver `_memoria/preferencias.md`.
+- **PDF de proposta:** template HTML print + `node scripts/html-para-pdf.js`.
+  Fontes da marca (Fraunces + Inter) embutidas via `@font-face`.
+- **Peça de cliente** espelha a marca do cliente; **peça própria** usa o
+  `identidade/design-guide.md` (identidade MarioLucash: editorial + terminal).
+- Provas e números só entram se forem verificáveis. Rodapé sempre marca
+  "material independente, não afiliado" e "confidencial".
+
+## Ferramentas conectadas
+
+- [x] Playwright (render PNG/PDF)
+- [ ] Netlify (deploy do mariolucash.com.br)
+- [ ] Gmail · [ ] Google Calendar · [ ] cobrança
