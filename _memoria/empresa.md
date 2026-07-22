@@ -24,3 +24,4 @@
 - E-mail de negócios: **mariolucas@mariolucash.com.br** · WhatsApp (12) 98159-2576.
 - Skill própria criada: `/auditoria-ia` (gera a "prova do problema" pra prospectar).
 - Guarda-corpo de venda: o método técnico (dados estruturados / JSON-LD) nunca é revelado nas peças de cliente. Só sintoma, nunca a solução.
+- Mora no **Residencial Mirantes** (condomínio Mirante da Serra). O residencial reúne cinco condomínios: Mirante das Flores, Mirante das Águas, Mirante da Serra, Mirante dos Ventos e Mirante do Vale. O grupo de WhatsApp de vendas cobre o residencial inteiro: bolsão de potenciais clientes locais.
