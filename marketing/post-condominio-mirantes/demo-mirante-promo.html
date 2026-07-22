@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Demo — Mirante Lanches — estilo promoção</title>
+<style>
+  @font-face { font-family:'Anton'; src:url('../../identidade/fontes/Anton.ttf') format('truetype'); font-weight:400; }
+  @font-face { font-family:'Inter'; src:url('../../identidade/fontes/Inter.ttf') format('truetype'); font-weight:100 900; }
+
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html, body { width:1080px; height:1350px; }
+  body {
+    background:#0d0d0b;
+    color:#fff;
+    font-family:'Inter', sans-serif;
+    position:relative;
+    overflow:hidden;
+  }
+  /* textura sutil de fundo */
+  body::before {
+    content:''; position:absolute; inset:0;
+    background:
+      radial-gradient(120% 80% at 80% 10%, rgba(164,217,10,.08), transparent 55%),
+      radial-gradient(90% 70% at 10% 95%, rgba(164,217,10,.06), transparent 60%);
+    pointer-events:none;
+  }
+
+  .green { color:#A4D904; }
+
+  /* pinceladas verdes */
+  .brush {
+    position:absolute; height:14px; border-radius:8px;
+    background:#A4D904; filter:blur(.3px); transform:rotate(-3deg);
+    box-shadow:0 0 0 4px rgba(164,217,10,.15);
+  }
+
+  /* ---- LOGO ---- */
+  .logo { position:absolute; top:48px; left:0; right:0; text-align:center; z-index:3; }
+  .logo svg { width:70px; height:52px; }
+  .logo .nome {
+    font-family:'Anton'; font-size:52px; letter-spacing:.04em; color:#fff; line-height:1; margin-top:4px;
+  }
+  .logo .sub {
+    font-family:'Inter'; font-weight:700; font-size:22px; letter-spacing:.5em;
+    color:#e8e8e8; margin-top:8px; padding-left:.5em;
+    display:flex; align-items:center; justify-content:center; gap:16px;
+  }
+  .logo .sub::before, .logo .sub::after {
+    content:''; width:44px; height:2px; background:#A4D904; display:inline-block;
+  }
+
+  /* ---- HEADLINE ---- */
+  .head { position:absolute; top:210px; left:64px; right:64px; z-index:3; }
+  .kick {
+    display:inline-block; position:relative;
+    font-family:'Anton'; font-size:132px; line-height:.9; color:#fff;
+    text-shadow:3px 4px 0 rgba(0,0,0,.6);
+  }
+  .kick2 {
+    display:inline-block; margin-top:10px;
+    font-family:'Anton'; font-size:108px; line-height:.9; color:#0d0d0b;
+    background:#A4D904; padding:6px 22px 14px; transform:skewX(-6deg);
+    box-shadow:6px 8px 0 rgba(0,0,0,.4);
+  }
+  .kick2 span { display:inline-block; transform:skewX(6deg); }
+  .subline {
+    margin-top:34px; font-family:'Inter'; font-weight:800; font-size:32px;
+    line-height:1.15; letter-spacing:.01em; color:#fff; text-transform:uppercase; max-width:560px;
+  }
+
+  /* ---- PRODUTO + PREÇO (coluna esquerda) ---- */
+  .oferta { position:absolute; left:64px; top:640px; z-index:3; width:470px; }
+  .produto { font-family:'Anton'; font-size:104px; line-height:.86; color:#fff; }
+  .produto small {
+    display:inline-block; margin-top:14px; font-family:'Anton'; font-size:34px;
+    color:#0d0d0b; background:#A4D904; padding:4px 16px 8px; transform:skewX(-6deg); letter-spacing:.02em;
+  }
+  .produto small span { display:inline-block; transform:skewX(6deg); }
+
+  .de {
+    margin-top:40px; display:inline-block; position:relative;
+    font-family:'Anton'; font-size:64px; color:#cfcfcf;
+  }
+  .de .risco {
+    position:absolute; left:-6px; right:-6px; top:52%; height:8px; background:#A4D904; transform:rotate(-8deg);
+  }
+  .de .lbl { font-size:34px; color:#bcbcbc; vertical-align:middle; margin-right:8px; }
+
+  .badge {
+    margin-top:18px; background:#A4D904; color:#0d0d0b; border-radius:28px;
+    padding:20px 30px 26px; transform:rotate(-2deg); box-shadow:8px 10px 0 rgba(0,0,0,.45);
+    width:max-content;
+  }
+  .badge .por { font-family:'Inter'; font-weight:900; font-size:30px; letter-spacing:.08em; text-transform:uppercase; }
+  .badge .val { font-family:'Anton'; font-size:120px; line-height:.82; display:flex; align-items:baseline; gap:6px; }
+  .badge .val .cifra { font-size:56px; }
+  .badge .val .cents { font-size:52px; }
+
+  /* ---- SELO redondo ---- */
+  .selo {
+    position:absolute; right:70px; top:250px; z-index:4;
+    width:210px; height:210px; border-radius:50%;
+    background:#0d0d0b; border:3px solid #A4D904;
+    display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center;
+    box-shadow:0 0 0 8px rgba(13,13,11,.9), 0 10px 30px rgba(0,0,0,.5);
+    transform:rotate(6deg);
+  }
+  .selo .t { font-family:'Anton'; font-size:34px; line-height:.92; color:#fff; }
+  .selo .t .g { color:#A4D904; }
+
+  /* ---- FOTO (placeholder) ---- */
+  .foto {
+    position:absolute; right:40px; bottom:150px; z-index:2;
+    width:560px; height:560px; border-radius:24px;
+    border:3px dashed rgba(164,217,10,.55);
+    background:
+      radial-gradient(70% 60% at 50% 40%, rgba(164,217,10,.10), transparent 70%),
+      #141410;
+    display:flex; flex-direction:column; align-items:center; justify-content:center; gap:18px; text-align:center;
+  }
+  .foto svg { width:150px; height:150px; opacity:.5; }
+  .foto .txt { font-family:'Inter'; font-weight:800; font-size:26px; color:#9fb84e; text-transform:uppercase; letter-spacing:.06em; }
+  .foto .txt small { display:block; font-weight:600; font-size:18px; color:#6f7a4e; letter-spacing:.02em; margin-top:6px; text-transform:none; }
+
+  /* ---- RODAPÉ ---- */
+  .footer {
+    position:absolute; left:0; right:0; bottom:0; height:120px; z-index:5;
+    background:#A4D904; color:#0d0d0b;
+    display:flex; align-items:center; justify-content:center; gap:0;
+  }
+  .footer .item { display:flex; align-items:center; gap:16px; padding:0 34px; }
+  .footer .item svg { width:44px; height:44px; }
+  .footer .item .l1 { font-family:'Inter'; font-weight:900; font-size:26px; line-height:1.05; text-transform:uppercase; }
+  .footer .item .l2 { font-family:'Inter'; font-weight:900; font-size:26px; line-height:1.05; text-transform:uppercase; }
+  .footer .divisor { width:3px; height:64px; background:rgba(13,13,11,.35); }
+
+  .demoTag {
+    position:absolute; top:14px; right:16px; z-index:9;
+    font-family:'Inter'; font-weight:800; font-size:15px; letter-spacing:.12em;
+    color:rgba(255,255,255,.35); text-transform:uppercase;
+  }
+</style>
+</head>
+<body>
+  <span class="demoTag">demo · layout</span>
+
+  <!-- pinceladas decorativas -->
+  <div class="brush" style="width:120px; top:196px; left:70px;"></div>
+  <div class="brush" style="width:90px; top:196px; right:120px; transform:rotate(4deg);"></div>
+
+  <!-- LOGO -->
+  <div class="logo">
+    <svg viewBox="0 0 120 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M8 46 L40 12 L60 34 L78 18 L112 46 Z" fill="none" stroke="#fff" stroke-width="5" stroke-linejoin="round"/>
+      <circle cx="40" cy="20" r="6" fill="#A4D904"/>
+      <path d="M20 60 Q60 44 100 60 L100 62 Q60 46 20 62 Z" fill="#A4D904"/>
+      <rect x="22" y="66" width="76" height="9" rx="4" fill="#fff"/>
+      <path d="M20 82 Q60 70 100 82 L100 84 L20 84 Z" fill="#A4D904"/>
+    </svg>
+    <div class="nome">MIRANTE</div>
+    <div class="sub">LANCHES</div>
+  </div>
+
+  <!-- HEADLINE -->
+  <div class="head">
+    <div class="kick">PROMOÇÃO</div><br>
+    <div class="kick2"><span>DE QUARTA!</span></div>
+    <div class="subline">Mais sabor, mais economia, só no <span class="green">Mirante Lanches!</span></div>
+  </div>
+
+  <!-- SELO -->
+  <div class="selo">
+    <div class="t">MUITO<br>SABOR<br><span class="g">PELO MELHOR</span><br>PREÇO!</div>
+  </div>
+
+  <!-- OFERTA -->
+  <div class="oferta">
+    <div class="produto">X-SALADA<br><small><span>NO PÃO ARTESANAL</span></small></div>
+    <div class="de"><span class="lbl">DE</span>R$&nbsp;18,00<span class="risco"></span></div>
+    <div class="badge">
+      <div class="por">Por apenas</div>
+      <div class="val"><span class="cifra">R$</span>14<span class="cents">,90</span></div>
+    </div>
+  </div>
+
+  <!-- FOTO placeholder -->
+  <div class="foto">
+    <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M10 26 Q32 10 54 26 Z" fill="#A4D904"/>
+      <rect x="9" y="29" width="46" height="6" rx="3" fill="#c98b4a"/>
+      <path d="M9 38 Q32 30 55 38 Q55 46 32 46 Q9 46 9 38 Z" fill="#7a4a22"/>
+      <path d="M9 33 Q20 37 32 33 Q44 29 55 33 L55 36 Q44 32 32 36 Q20 40 9 36 Z" fill="#3f7d1f"/>
+    </svg>
+    <div class="txt">Foto do lanche aqui<small>a foto real do produto entra neste espaço</small></div>
+  </div>
+
+  <!-- RODAPÉ -->
+  <div class="footer">
+    <div class="item">
+      <svg viewBox="0 0 48 48" fill="none"><path d="M4 30 L4 20 L26 20 L30 12 L38 12 L42 22 L44 22 L44 30 Z" fill="#0d0d0b"/><circle cx="14" cy="32" r="5" fill="#0d0d0b"/><circle cx="36" cy="32" r="5" fill="#0d0d0b"/></svg>
+      <div><div class="l1">Entrega nos</div><div class="l2">condomínios</div></div>
+    </div>
+    <div class="divisor"></div>
+    <div class="item">
+      <svg viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="18" stroke="#0d0d0b" stroke-width="4"/><path d="M24 14 L24 24 L32 28" stroke="#0d0d0b" stroke-width="4" stroke-linecap="round"/></svg>
+      <div><div class="l1">Atendimento</div><div class="l2">até 1h da manhã</div></div>
+    </div>
+  </div>
+</body>
+</html>
