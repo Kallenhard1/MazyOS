@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Post promo — serviço MarioLucash</title>
+<style>
+  @font-face { font-family:'Anton'; src:url('../../identidade/fontes/Anton.ttf') format('truetype'); font-weight:400; }
+  @font-face { font-family:'Fraunces'; src:url('../../identidade/fontes/Fraunces.ttf') format('truetype'); font-weight:100 900; }
+  @font-face { font-family:'Inter'; src:url('../../identidade/fontes/Inter.ttf') format('truetype'); font-weight:100 900; }
+
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html, body { width:1080px; height:1350px; }
+  body {
+    background:#0C0C08;
+    color:#ECEAE0;
+    font-family:'Inter', sans-serif;
+    position:relative;
+    overflow:hidden;
+  }
+  body::before {
+    content:''; position:absolute; inset:0; pointer-events:none;
+    background:
+      radial-gradient(120% 80% at 82% 8%, rgba(62,169,114,.12), transparent 55%),
+      radial-gradient(90% 70% at 8% 96%, rgba(62,169,114,.08), transparent 60%);
+  }
+  .green { color:#3EA972; }
+
+  .brush {
+    position:absolute; height:14px; border-radius:8px; background:#3EA972;
+    transform:rotate(-3deg); box-shadow:0 0 0 4px rgba(62,169,114,.15);
+  }
+
+  /* ---- LOGO ---- */
+  .logo { position:absolute; top:52px; left:64px; z-index:4; display:flex; align-items:center; gap:16px; }
+  .logo img { width:58px; height:58px; border-radius:50%; border:1px solid rgba(236,234,224,.25); }
+  .logo .nome { font-family:'Inter'; font-weight:800; font-size:34px; letter-spacing:.16em; color:#ECEAE0; }
+  .logo .nome span { color:#3EA972; }
+  .logo-tag {
+    position:absolute; top:66px; right:64px; z-index:4;
+    font-family:ui-monospace,'Cascadia Mono',monospace; font-size:22px; letter-spacing:.22em;
+    color:#8a887c; text-transform:uppercase;
+  }
+
+  /* ---- HEADLINE ---- */
+  .head { position:absolute; top:190px; left:64px; right:64px; z-index:3; }
+  .eyebrow {
+    font-family:ui-monospace,'Cascadia Mono',monospace; font-size:24px; font-weight:600;
+    letter-spacing:.22em; color:#3EA972; text-transform:uppercase; margin-bottom:18px;
+  }
+  .kick { font-family:'Anton'; font-size:126px; line-height:.9; color:#F5F3EA; text-shadow:3px 4px 0 rgba(0,0,0,.5); }
+  .kick2 {
+    display:inline-block; margin-top:12px; font-family:'Anton'; font-size:104px; line-height:.9; color:#0C0C08;
+    background:#3EA972; padding:6px 22px 14px; transform:skewX(-6deg); box-shadow:6px 8px 0 rgba(0,0,0,.4);
+  }
+  .kick2 span { display:inline-block; transform:skewX(6deg); }
+  .subline {
+    margin-top:32px; font-family:'Inter'; font-weight:800; font-size:31px; line-height:1.18;
+    color:#ECEAE0; text-transform:uppercase; max-width:560px;
+  }
+
+  /* ---- SELO ---- */
+  .selo {
+    position:absolute; right:70px; top:238px; z-index:5;
+    width:200px; height:200px; border-radius:50%;
+    background:#0C0C08; border:3px solid #3EA972;
+    display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center;
+    box-shadow:0 0 0 8px rgba(12,12,8,.9), 0 10px 30px rgba(0,0,0,.5); transform:rotate(6deg);
+  }
+  .selo .t { font-family:'Anton'; font-size:32px; line-height:.98; color:#F5F3EA; }
+  .selo .t .g { color:#3EA972; }
+
+  /* ---- OFERTA (coluna esquerda) ---- */
+  .oferta { position:absolute; left:64px; top:610px; z-index:3; width:440px; }
+  .produto { font-family:'Anton'; font-size:72px; line-height:.9; color:#F5F3EA; }
+  .produto small {
+    display:inline-block; margin-top:16px; font-family:'Anton'; font-size:30px; color:#0C0C08;
+    background:#3EA972; padding:4px 16px 8px; transform:skewX(-6deg); letter-spacing:.02em;
+  }
+  .produto small span { display:inline-block; transform:skewX(6deg); }
+
+  .lista { margin-top:30px; }
+  .lista .li {
+    display:flex; align-items:center; gap:14px; font-family:ui-monospace,'Cascadia Mono',monospace;
+    font-size:26px; color:#ECEAE0; margin-bottom:15px; white-space:nowrap;
+  }
+  .lista .li .seta { color:#3EA972; font-weight:700; }
+
+  .badge {
+    margin-top:32px; background:#3EA972; color:#0C0C08; border-radius:24px;
+    padding:18px 32px 22px; transform:rotate(-2deg); box-shadow:8px 10px 0 rgba(0,0,0,.45); width:max-content;
+  }
+  .badge .por { font-family:'Inter'; font-weight:900; font-size:25px; letter-spacing:.06em; text-transform:uppercase; }
+  .badge .val { font-family:'Anton'; font-size:64px; line-height:.86; margin-top:4px; }
+
+  /* ---- MOCKUP NAVEGADOR ---- */
+  .mock {
+    position:absolute; right:44px; bottom:180px; z-index:2;
+    width:520px; border-radius:18px; overflow:hidden;
+    background:#13130E; border:1px solid rgba(236,234,224,.16);
+    box-shadow:0 24px 60px rgba(0,0,0,.55); transform:rotate(2deg);
+  }
+  .mock .bar {
+    display:flex; align-items:center; gap:10px; padding:16px 20px; border-bottom:1px solid rgba(236,234,224,.12);
+  }
+  .mock .dot { width:14px; height:14px; border-radius:50%; }
+  .mock .dot.r{background:#B23A26} .mock .dot.y{background:#D8B45C} .mock .dot.g{background:#3EA972}
+  .mock .url {
+    margin-left:10px; flex:1; background:#0C0C08; border-radius:8px; padding:8px 16px;
+    font-family:ui-monospace,'Cascadia Mono',monospace; font-size:20px; color:#8a887c;
+  }
+  .mock .screen { padding:34px 32px 40px; }
+  .mock .screen .eb { font-family:ui-monospace,'Cascadia Mono',monospace; font-size:17px; letter-spacing:.2em; color:#3EA972; text-transform:uppercase; }
+  .mock .screen h3 { font-family:'Fraunces'; font-weight:560; font-size:46px; line-height:1.05; color:#F5F3EA; margin-top:14px; }
+  .mock .screen h3 em { font-style:italic; color:#8FC7A6; }
+  .mock .screen .cta {
+    margin-top:26px; display:inline-block; background:#3EA972; color:#0C0C08; font-family:'Inter'; font-weight:800;
+    font-size:22px; padding:14px 28px; border-radius:100px;
+  }
+  .mock .screen .rows { margin-top:28px; display:flex; flex-direction:column; gap:12px; }
+  .mock .screen .rows span { height:12px; border-radius:6px; background:rgba(236,234,224,.14); }
+  .mock .screen .rows span:nth-child(1){width:90%} .mock .screen .rows span:nth-child(2){width:78%} .mock .screen .rows span:nth-child(3){width:60%}
+
+  /* ---- RODAPÉ ---- */
+  .footer {
+    position:absolute; left:0; right:0; bottom:0; height:120px; z-index:6;
+    background:#3EA972; color:#0C0C08; display:flex; align-items:center; justify-content:center;
+  }
+  .footer .item { display:flex; align-items:center; gap:16px; padding:0 40px; }
+  .footer .item svg { width:44px; height:44px; }
+  .footer .item .l1, .footer .item .l2 { font-family:'Inter'; font-weight:900; font-size:27px; line-height:1.05; }
+  .footer .item .l2 { letter-spacing:.01em; }
+  .footer .divisor { width:3px; height:64px; background:rgba(12,12,8,.35); }
+</style>
+</head>
+<body>
+  <div class="brush" style="width:118px; height:11px; top:220px; left:66px; transform:rotate(-2deg);"></div>
+
+  <!-- LOGO -->
+  <div class="logo">
+    <img src="../../identidade/caos-logo-02.svg" alt="">
+    <div class="nome">MARIO<span>LUCASH</span></div>
+  </div>
+  <div class="logo-tag">Sites · Automação · IA</div>
+
+  <!-- HEADLINE -->
+  <div class="head">
+    <div class="eyebrow">Sites sob medida, com automação e IA</div>
+    <div class="kick">SEU NEGÓCIO</div>
+    <div class="kick2"><span>ACHADO NA IA!</span></div>
+    <div class="subline">Site profissional, pronto pro Google e pras respostas de IA.</div>
+  </div>
+
+  <!-- SELO -->
+  <div class="selo">
+    <div class="t">FEITO<br>SOB<br><span class="g">MEDIDA</span></div>
+  </div>
+
+  <!-- OFERTA -->
+  <div class="oferta">
+    <div class="produto">SITE <span style="position:relative; top:-9px">+</span><br>PRESENÇA<br><small><span>QUE VENDE</span></small></div>
+    <div class="lista">
+      <div class="li"><span class="seta">&#10095;</span> na identidade da marca</div>
+      <div class="li"><span class="seta">&#10095;</span> rápido e leve no celular</div>
+      <div class="li"><span class="seta">&#10095;</span> posts no automático</div>
+    </div>
+    <div class="badge">
+      <div class="por">Comece com um</div>
+      <div class="val">DIAGNÓSTICO<span style="display:block;margin-top:18px">GRÁTIS</span></div>
+    </div>
+  </div>
+
+  <!-- MOCKUP -->
+  <div class="mock">
+    <div class="bar">
+      <div class="dot r"></div><div class="dot y"></div><div class="dot g"></div>
+      <div class="url">mariolucash.com.br</div>
+    </div>
+    <div class="screen">
+      <div class="eb">Seu negócio online</div>
+      <h3>Relevância <em>que vira cliente.</em></h3>
+      <div class="cta">Falar no WhatsApp</div>
+      <div class="rows"><span></span><span></span><span></span></div>
+    </div>
+  </div>
+
+  <!-- RODAPÉ -->
+  <div class="footer">
+    <div class="item">
+      <svg viewBox="0 0 48 48" fill="none"><path d="M24 4C13 4 4 12.8 4 23.6c0 3.8 1.1 7.3 3 10.3L4 44l10.5-3c2.8 1.6 6 2.5 9.5 2.5 11 0 20-8.8 20-19.6S35 4 24 4Z" fill="#0C0C08"/><path d="M18 15c-.6 0-1.3.2-1.9 1-.6.8-2.1 2-2.1 5s2.2 5.8 2.5 6.2c.3.4 4.3 6.8 10.6 9.3 5.2 2 6.3 1.6 7.4 1.5 1.1-.1 3.6-1.4 4.1-2.8.5-1.4.5-2.6.4-2.8-.1-.2-.6-.4-1.2-.7-.6-.3-3.6-1.8-4.2-2-.6-.2-1-.3-1.4.3-.4.6-1.6 2-2 2.4-.4.4-.7.5-1.3.2-.6-.3-2.6-1-4.9-3-1.8-1.6-3-3.6-3.4-4.2-.4-.6 0-.9.3-1.2.3-.3.6-.7.9-1.1.3-.4.4-.6.6-1 .2-.4.1-.8 0-1.1-.1-.3-1.3-3.4-1.8-4.6-.5-1.1-1-1-1.4-1-.3 0-.8-.1-1.2-.1Z" fill="#3EA972"/></svg>
+      <div><div class="l1">WhatsApp</div><div class="l2">(12) 98159-2576</div></div>
+    </div>
+    <div class="divisor"></div>
+    <div class="item">
+      <svg viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="19" stroke="#0C0C08" stroke-width="4"/><path d="M5 24h38M24 5c5 5 5 33 0 38M24 5c-5 5-5 33 0 38" stroke="#0C0C08" stroke-width="3" fill="none"/></svg>
+      <div><div class="l1">mariolucash</div><div class="l2">.com.br</div></div>
+    </div>
+  </div>
+</body>
+</html>
