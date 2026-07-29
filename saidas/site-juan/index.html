@@ -14,13 +14,15 @@
   }
 
   :root {
-    --papel: #F2F1EC;
-    --papel-claro: #FBFAF7;
-    --tinta: #141410;
-    --tinta-suave: #55534A;
-    --filete: #D8D6CC;
-    --terracota: #B0552F;
-    --max: 1200px;
+    --preto: #0A0A0A;
+    --branco: #FFFFFF;
+    --cinza-caixa: #F0F0F0;
+    --cinza-caixa-escura: #161616;
+    --cinza-texto: #6E6E6E;
+    --cinza-claro: #B9B9B9;
+    --fantasma: #E4E4E4;
+    --fantasma-escuro: #2A2A2A;
+    --max: 1280px;
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -29,382 +31,375 @@
 
   body {
     font-family: 'Inter', system-ui, sans-serif;
-    background: var(--papel);
-    color: var(--tinta);
+    background: var(--branco);
+    color: var(--preto);
     line-height: 1.6;
     font-size: 16px;
   }
 
-  ::selection { background: var(--tinta); color: var(--papel); }
+  ::selection { background: var(--preto); color: var(--branco); }
 
-  h1, h2, h3 { line-height: 1.05; }
+  h1, h2, h3 { line-height: 1.08; }
 
-  /* display: título gigante em Inter pesada, caixa alta, tracking apertado */
   .display {
     font-weight: 800;
     text-transform: uppercase;
-    letter-spacing: -0.03em;
+    letter-spacing: -0.02em;
   }
 
   .wrap {
     max-width: var(--max);
     margin: 0 auto;
-    padding: 0 24px;
+    padding: 0 32px;
   }
 
-  .eyebrow {
-    font-size: 11px;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    color: var(--tinta-suave);
-    font-weight: 600;
-  }
+  section { padding: 110px 0; }
+  .secao-escura { background: var(--preto); color: var(--branco); }
 
-  .seta { display: inline-block; margin-left: 10px; }
-
-  /* rótulo dos cards do hero */
-  .rotulo {
-    font-size: 13px;
-    font-weight: 700;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    color: var(--tinta);
-  }
-
-  /* ---------- cabeçalho de seção (01/ ... rótulo) ---------- */
+  /* cabeçalho de seção: número à esquerda, título à direita (padrão da referência) */
   .secao-head {
     display: flex;
     justify-content: space-between;
     align-items: baseline;
-    border-top: 1px solid var(--tinta);
-    padding-top: 18px;
-    margin-bottom: 56px;
+    margin-bottom: 64px;
   }
-  .secao-head .num {
+  .secao-head .num { font-weight: 700; font-size: 16px; }
+  .secao-head .rotulo {
     font-weight: 700;
-    font-size: 14px;
+    font-size: 16px;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
   }
 
-  section { padding: 96px 0; }
+  /* número fantasma gigante (referência: 01 cinza claro atrás do conteúdo) */
+  .fantasma {
+    font-weight: 800;
+    font-size: clamp(72px, 9vw, 128px);
+    line-height: 1;
+    color: var(--fantasma);
+    letter-spacing: -0.02em;
+  }
+  .secao-escura .fantasma { color: var(--fantasma-escuro); }
+
+  .texto-justificado { text-align: justify; }
 
   /* ---------- header ---------- */
   header {
     position: sticky;
     top: 0;
     z-index: 50;
-    background: color-mix(in srgb, var(--papel) 88%, transparent);
-    backdrop-filter: blur(8px);
-    border-bottom: 1px solid var(--filete);
+    background: var(--preto);
+    color: var(--branco);
   }
   .header-inner {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 18px 24px;
+    padding: 20px 32px;
     max-width: var(--max);
     margin: 0 auto;
   }
   .logo {
     font-size: 15px;
-    font-weight: 700;
-    letter-spacing: 0.1em;
+    font-weight: 800;
+    letter-spacing: 0.02em;
     text-transform: uppercase;
     text-decoration: none;
-    color: var(--tinta);
+    color: var(--branco);
   }
-  .logo span { font-weight: 400; color: var(--tinta-suave); }
-  nav { display: flex; gap: 28px; }
+  .logo span { font-weight: 400; color: var(--cinza-claro); }
+  nav { display: flex; gap: 26px; }
   nav a {
-    font-size: 12px;
-    letter-spacing: 0.16em;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
     text-transform: uppercase;
     text-decoration: none;
-    color: var(--tinta);
-    font-weight: 600;
+    color: var(--branco);
   }
-  nav a:hover { color: var(--terracota); }
+  nav a:hover { color: var(--cinza-claro); }
 
-  /* ---------- hero: banner único full-width ---------- */
-  .hero { padding: 48px 0 0; }
-  .hero-kicker { margin-bottom: 28px; }
-  .hero-foto {
+  /* ---------- capa (referência: título gigante branco no preto + foto full) ---------- */
+  .capa {
+    background: var(--preto);
+    color: var(--branco);
+    padding: 72px 0 0;
+  }
+  .capa-topo {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 48px;
+    margin-bottom: 56px;
+    flex-wrap: wrap;
+  }
+  .capa h1 {
+    font-size: clamp(44px, 6.6vw, 96px);
+    max-width: 900px;
+  }
+  .capa-assinatura {
+    text-align: right;
+    font-size: 15px;
+    line-height: 1.5;
+    padding-bottom: 12px;
+  }
+  .capa-assinatura strong { font-weight: 700; }
+  .capa-assinatura small { color: var(--cinza-claro); font-size: 13px; display: block; }
+
+  .capa-foto {
     position: relative;
-    height: min(70vh, 620px);
-    background: #E4E2D9;
-    border: 1px solid var(--filete);
+    height: min(64vh, 560px);
+    background: var(--cinza-caixa-escura);
     overflow: hidden;
   }
-  .hero-foto svg { width: 100%; height: 100%; display: block; }
+  .capa-foto svg { width: 100%; height: 100%; display: block; }
 
   .marcador-foto {
     position: absolute;
     top: 16px;
     left: 16px;
-    background: var(--tinta);
-    color: var(--papel);
+    background: var(--branco);
+    color: var(--preto);
     font-size: 10px;
-    letter-spacing: 0.2em;
+    letter-spacing: 0.14em;
     text-transform: uppercase;
     padding: 6px 10px;
-    font-weight: 600;
+    font-weight: 700;
     z-index: 2;
   }
+  .caixa-clara .marcador-foto { background: var(--preto); color: var(--branco); }
 
-  /* headline gigante cruzando a galeria, como no editorial */
-  .hero h1 {
-    font-size: clamp(48px, 8.6vw, 128px);
-    margin-top: -0.52em;
-    position: relative;
-    z-index: 3;
-    padding: 0 8px;
-    max-width: 900px;
-  }
-  .hero-baixo {
-    display: flex;
-    justify-content: space-between;
-    gap: 32px;
-    padding: 28px 8px 0;
-    flex-wrap: wrap;
-  }
-  .hero-baixo p {
-    max-width: 460px;
-    font-size: 18px;
-    color: var(--tinta-suave);
-  }
-
-  /* ---------- sobre / manifesto ---------- */
-  .sobre-grid {
-    display: grid;
-    grid-template-columns: 1fr 1.4fr;
-    gap: 64px;
-    align-items: start;
-  }
-  .sobre-grid h2 { font-size: clamp(34px, 4.6vw, 60px); }
-  .manifesto p + p { margin-top: 1.2em; }
-  .manifesto strong { font-weight: 700; }
-  .retrato {
-    margin-top: 40px;
-    display: flex;
-    gap: 20px;
-    align-items: center;
-  }
-  .retrato-foto {
-    width: 96px;
-    height: 96px;
-    flex: none;
-    background: #E4E2D9;
-    border: 1px solid var(--filete);
-    display: grid;
-    place-items: center;
-    font-size: 9px;
+  .capa-kicker {
+    font-size: 12px;
+    font-weight: 600;
     letter-spacing: 0.18em;
     text-transform: uppercase;
-    color: var(--tinta-suave);
-    text-align: center;
-    padding: 6px;
+    color: var(--cinza-claro);
+    margin-bottom: 20px;
   }
-  .retrato small { display: block; color: var(--tinta-suave); }
 
-  /* ---------- processo ---------- */
-  .fase {
+  /* ---------- sobre (branco: foto esquerda, texto direita) ---------- */
+  .sobre-grid {
     display: grid;
-    grid-template-columns: 72px 1fr 1.1fr;
-    gap: 40px;
-    padding: 44px 0;
-    border-top: 1px solid var(--filete);
-    align-items: center;
+    grid-template-columns: 0.9fr 1.1fr;
+    gap: 72px;
+    align-items: start;
   }
-  .fase:last-child { border-bottom: 1px solid var(--filete); }
+  .sobre-foto {
+    position: relative;
+    background: var(--cinza-caixa);
+    aspect-ratio: 4 / 5;
+  }
+  .sobre-foto svg { width: 100%; height: 100%; display: block; }
+  .sobre-abre {
+    font-size: clamp(24px, 2.6vw, 34px);
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: -0.01em;
+    line-height: 1.25;
+    margin-bottom: 36px;
+  }
+  .manifesto p { color: #3A3A3A; }
+  .manifesto p + p { margin-top: 1.2em; }
+  .manifesto strong { font-weight: 700; color: var(--preto); }
+  .sobre-bio {
+    margin-top: 44px;
+    padding-top: 24px;
+    border-top: 1px solid var(--preto);
+  }
+  .sobre-bio strong { font-weight: 700; }
+  .sobre-bio small { color: var(--cinza-texto); display: block; margin-top: 2px; }
+
+  /* ---------- processo (preto: 4 colunas com número grande, referência do index) ---------- */
+  .fases-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 32px;
+  }
   .fase .num-fase {
     font-weight: 800;
-    font-size: 36px;
-    color: var(--papel);
-    -webkit-text-stroke: 1px var(--tinta-suave);
-    letter-spacing: -0.02em;
+    font-size: clamp(40px, 4.4vw, 64px);
+    line-height: 1;
+    margin-bottom: 20px;
   }
+  .fase-visual {
+    position: relative;
+    background: var(--cinza-caixa-escura);
+    aspect-ratio: 3 / 4;
+    margin-bottom: 22px;
+  }
+  .fase-visual svg { width: 100%; height: 100%; display: block; }
   .fase h3 {
+    font-size: 17px;
+    font-weight: 700;
+    margin-bottom: 10px;
+  }
+  .fase p { font-size: 14px; color: var(--cinza-claro); }
+  .fase .porque { margin-top: 10px; }
+  .fase .porque strong { color: var(--branco); font-weight: 700; }
+
+  /* ---------- estudo de caso (branco: páginas de detalhe da referência) ---------- */
+  .caso-intro {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 48px;
+    margin-bottom: 32px;
+    flex-wrap: wrap;
+  }
+  .caso-intro h2 { font-size: clamp(30px, 3.6vw, 48px); margin-bottom: 20px; }
+  .caso-intro > div:first-child { max-width: 620px; }
+  .caso-intro > p, .caso-intro-texto { color: #3A3A3A; }
+
+  .ficha { margin-top: 8px; }
+  .ficha div { margin-bottom: 18px; }
+  .ficha div strong {
+    display: block;
+    font-weight: 700;
+    margin-bottom: 2px;
+  }
+  .ficha div span { color: var(--cinza-texto); }
+
+  .caso-fase {
+    display: grid;
+    grid-template-columns: 1fr 1.05fr;
+    gap: 64px;
+    padding: 72px 0;
+    align-items: start;
+  }
+  .caso-fase + .caso-fase { border-top: 1px solid #E6E6E6; }
+  .caso-fase:nth-child(even) .caso-texto { order: 2; }
+  .caso-fase .fantasma { margin-bottom: 18px; }
+  .caso-etiqueta {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--cinza-texto);
+    margin-bottom: 12px;
+  }
+  .caso-fase h3 {
     font-size: 26px;
     font-weight: 800;
     text-transform: uppercase;
     letter-spacing: -0.01em;
-    margin-bottom: 10px;
+    margin-bottom: 18px;
   }
-  .fase .porque {
-    margin-top: 12px;
-    padding-left: 14px;
-    border-left: 2px solid var(--terracota);
-    color: var(--tinta-suave);
-    font-size: 15px;
-  }
-  .fase-visual {
-    background: var(--papel-claro);
-    border: 1px solid var(--filete);
-    padding: 20px;
-  }
-  .fase-visual svg { width: 100%; height: auto; display: block; }
-  .fase-visual figcaption {
-    margin-top: 10px;
-    font-size: 11px;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    color: var(--tinta-suave);
-    font-weight: 600;
-  }
-
-  /* ---------- estudo de caso ---------- */
-  .caso-intro { max-width: 720px; margin-bottom: 72px; }
-  .caso-intro h2 { font-size: clamp(38px, 5.6vw, 80px); margin-bottom: 24px; }
-  .caso-intro .ficha {
-    display: flex;
-    gap: 40px;
-    margin-top: 28px;
-    flex-wrap: wrap;
-  }
-  .ficha div strong {
-    display: block;
-    font-size: 11px;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--tinta-suave);
-    margin-bottom: 4px;
-  }
-
-  .caso-fase {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 56px;
-    padding: 64px 0;
-    border-top: 1px solid var(--filete);
-    align-items: start;
-  }
-  .caso-fase:nth-child(even) .caso-texto { order: 2; }
-  .caso-etiqueta {
-    font-size: 11px;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    font-weight: 700;
-    color: var(--terracota);
-    margin-bottom: 14px;
-  }
-  .caso-fase h3 {
-    font-size: 28px;
-    font-weight: 800;
-    text-transform: uppercase;
-    letter-spacing: -0.01em;
-    margin-bottom: 16px;
-  }
-  .caso-fase .caso-texto > p { color: var(--tinta-suave); }
+  .caso-fase .caso-texto > p { color: #3A3A3A; }
 
   .decisao {
-    margin-top: 28px;
-    background: var(--tinta);
-    color: var(--papel);
-    padding: 24px 26px;
+    margin-top: 30px;
+    background: var(--preto);
+    color: var(--branco);
+    padding: 26px 28px;
   }
   .decisao .decisao-rotulo {
-    font-size: 10px;
-    letter-spacing: 0.24em;
-    text-transform: uppercase;
-    color: #B9B7AA;
-    margin-bottom: 10px;
+    font-size: 11px;
     font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--cinza-claro);
+    margin-bottom: 12px;
   }
   .decisao p { font-size: 15px; line-height: 1.55; }
-  .decisao em { color: #E8C3A8; font-style: normal; }
+  .decisao em { font-style: normal; font-weight: 700; color: var(--branco); }
+  .seta { display: inline-block; margin-left: 8px; }
 
   .caso-artefato {
-    background: var(--papel-claro);
-    border: 1px solid var(--filete);
-    padding: 24px;
     position: relative;
+    background: var(--cinza-caixa);
+    padding: 0;
   }
   .caso-artefato svg { width: 100%; height: auto; display: block; }
-  .caso-artefato .marcador-foto { position: static; display: inline-block; margin-bottom: 16px; }
 
-  /* ---------- princípios (faixa preta) ---------- */
-  .principios { background: var(--tinta); color: var(--papel); }
-  .principios .secao-head { border-top-color: var(--papel); }
-  .principios .secao-head .num { color: var(--papel); }
-  .principios .secao-head .eyebrow { color: #B9B7AA; }
+  /* ---------- princípios (preto, 3 colunas) ---------- */
   .principios-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 48px;
   }
-  .principios h3 {
-    font-size: 24px;
-    font-weight: 800;
-    text-transform: uppercase;
-    letter-spacing: -0.01em;
-    margin-bottom: 14px;
-  }
-  .principios p { color: #C6C4B8; font-size: 15px; }
-  .principios .num {
-    color: var(--terracota);
-    font-weight: 700;
-    font-size: 13px;
+  .principio .num {
     display: block;
-    margin-bottom: 18px;
+    font-weight: 800;
+    font-size: 40px;
+    line-height: 1;
+    margin-bottom: 22px;
+    color: var(--fantasma-escuro);
+    -webkit-text-stroke: 1px var(--cinza-texto);
   }
+  .principio h3 {
+    font-size: 18px;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .principio p { color: var(--cinza-claro); font-size: 14px; }
 
-  /* ---------- contato ---------- */
+  /* ---------- contato (branco) ---------- */
   .contato h2 {
-    font-size: clamp(44px, 8vw, 110px);
-    margin-bottom: 40px;
+    font-size: clamp(40px, 6vw, 88px);
+    margin-bottom: 56px;
+    max-width: 980px;
   }
   .contato-lista {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 32px;
-    max-width: 900px;
+    max-width: 920px;
   }
   .contato-lista a {
     display: block;
-    border-top: 1px solid var(--tinta);
-    padding-top: 14px;
+    border-top: 2px solid var(--preto);
+    padding-top: 16px;
     text-decoration: none;
-    color: var(--tinta);
+    color: var(--preto);
   }
-  .contato-lista a:hover { color: var(--terracota); }
+  .contato-lista a:hover { opacity: 0.55; }
   .contato-lista strong {
     display: block;
-    font-size: 11px;
-    letter-spacing: 0.18em;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
     text-transform: uppercase;
-    color: var(--tinta-suave);
     margin-bottom: 6px;
   }
-  .contato-nota { margin-top: 48px; color: var(--tinta-suave); max-width: 520px; }
+  .contato-lista span:not(.seta) { color: var(--cinza-texto); }
+  .contato-nota { margin-top: 52px; color: var(--cinza-texto); max-width: 500px; font-size: 15px; }
 
-  footer { border-top: 1px solid var(--filete); }
+  /* ---------- footer (preto) ---------- */
+  footer { background: var(--preto); color: var(--cinza-claro); }
   .footer-inner {
     max-width: var(--max);
     margin: 0 auto;
-    padding: 28px 24px 40px;
+    padding: 28px 32px 40px;
     display: flex;
     justify-content: space-between;
     align-items: baseline;
     gap: 16px;
-    font-size: 12px;
-    color: var(--tinta-suave);
+    font-size: 13px;
     flex-wrap: wrap;
   }
 
   /* ---------- responsivo ---------- */
-  @media (max-width: 860px) {
-    section { padding: 64px 0; }
-    .header-inner { flex-wrap: wrap; gap: 8px 16px; padding: 14px 24px; }
+  @media (max-width: 900px) {
+    section { padding: 72px 0; }
+    .header-inner { flex-wrap: wrap; gap: 10px 16px; padding: 16px 24px; }
     nav { gap: 16px; flex-wrap: wrap; }
-    nav a { font-size: 11px; }
-    .hero-foto { height: 300px; }
-    .hero h1 { margin-top: -0.4em; padding: 0 4px; }
-    .hero-baixo { padding: 24px 0 0; }
-    .sobre-grid, .caso-fase { grid-template-columns: 1fr; gap: 32px; }
+    nav a { font-size: 12px; }
+    .wrap { padding: 0 24px; }
+    .capa { padding-top: 48px; }
+    .capa-topo { margin-bottom: 40px; }
+    .capa-assinatura { text-align: left; }
+    .capa-foto { height: 320px; }
+    .sobre-grid { grid-template-columns: 1fr; gap: 40px; }
+    .fases-grid { grid-template-columns: 1fr 1fr; gap: 28px; }
+    .caso-fase { grid-template-columns: 1fr; gap: 32px; padding: 48px 0; }
     .caso-fase:nth-child(even) .caso-texto { order: 0; }
-    .fase { grid-template-columns: 1fr; gap: 20px; padding: 32px 0; }
-    .fase .num-fase { font-size: 28px; }
     .principios-grid, .contato-lista { grid-template-columns: 1fr; }
     .footer-inner { flex-direction: column; gap: 6px; }
+  }
+  @media (max-width: 560px) {
+    .fases-grid { grid-template-columns: 1fr; }
   }
 </style>
 </head>
@@ -423,33 +418,33 @@
   </div>
 </header>
 
-<!-- ============ HERO: um projeto em três momentos ============ -->
-<div class="hero wrap">
-  <p class="eyebrow hero-kicker">Do rabisco à obra: aqui todo trabalho é mostrado por inteiro</p>
-
-  <!-- banner: a mesma casa saindo do esboço (esquerda, traço à mão) pra obra (direita, traço preciso) -->
-  <div class="hero-foto">
+<!-- ============ CAPA ============ -->
+<div class="capa">
+  <div class="wrap">
+    <p class="capa-kicker">Do rabisco à obra: aqui todo trabalho é mostrado por inteiro</p>
+    <div class="capa-topo">
+      <h1 class="display">Arquitetura pra morar</h1>
+      <!-- TROCAR: sobrenome e cidade do Juan -->
+      <p class="capa-assinatura">
+        <strong>Juan [Sobrenome]</strong>
+        <small>Arquiteto · [Cidade, UF]<br>Projetos residenciais</small>
+      </p>
+    </div>
+  </div>
+  <div class="capa-foto">
     <span class="marcador-foto">[Foto: a melhor obra do Juan, formato banner]</span>
-    <svg viewBox="0 0 1200 620" fill="none" stroke="#9B9889" stroke-width="1.6" preserveAspectRatio="xMidYMax slice">
-      <!-- metade esboço -->
+    <!-- placeholder: a mesma casa saindo do esboço (esquerda) pra obra (direita) -->
+    <svg viewBox="0 0 1200 620" fill="none" stroke="#4A4A4A" stroke-width="1.6" preserveAspectRatio="xMidYMax slice">
       <path d="M240 470 q3 -6 -2 -180 l180 -98"/>
       <path d="M282 472 q-3 -80 3 -100 l62 3 q4 60 2 96"/>
       <path d="M420 190 q3 -25 -1 -46"/>
-      <path d="M60 476 q180 -12 360 -2" stroke-dasharray="1 0" stroke-width="1.3"/>
-      <!-- metade obra (mesma casa, traço reto) -->
+      <path d="M60 476 q180 -12 360 -2" stroke-width="1.3"/>
       <path d="M420 192 L600 290 V470 M600 350 H820 V470 M660 380 H740 V446 H660 Z"/>
       <path d="M480 250 H560 V320 H480 Z"/>
       <path d="M420 470 H1140" stroke-width="1.3"/>
       <path d="M820 350 L940 350 V470 M980 470 V400 H1080 V470" stroke-width="1"/>
-      <!-- cota discreta marcando a parte "projeto" -->
       <path d="M600 520 H820 M600 514 v12 M820 514 v12" stroke-width="1"/>
     </svg>
-  </div>
-
-  <h1 class="display">Arquitetura pra morar</h1>
-  <div class="hero-baixo">
-    <p>Projetos de casas de verdade, pra gente de verdade: bem desenhadas, bem resolvidas e dentro do orçamento de quem vai morar nelas.</p>
-    <p class="eyebrow">[Cidade · UF]<br>Projetos residenciais</p>
   </div>
 </div>
 
@@ -457,19 +452,29 @@
 <section id="sobre">
   <div class="wrap">
     <div class="secao-head">
-      <span class="num">01/</span>
-      <span class="eyebrow">Sobre o Juan</span>
+      <span class="num">01</span>
+      <span class="rotulo">Sobre o Juan</span>
     </div>
     <div class="sobre-grid">
-      <h2 class="display">Casa é lar, não vitrine</h2>
-      <div class="manifesto">
-        <p><strong>Boa arquitetura não é privilégio.</strong> As técnicas mais modernas de projeto servem justamente pra fazer mais com menos: aproveitar a luz que já existe, ventilar sem ar-condicionado, escolher o material certo pro clima e pro bolso. Quem tem pouco pra investir é quem mais ganha com um bom projeto.</p>
-        <p>Cada casa que o Juan desenha nasce de uma conversa, não de um catálogo. O projeto organiza o essencial e deixa espaço de sobra pro morador dar o próprio toque: a parede que vai ganhar cor, o canto que vira jardim, a estante que a família monta junta. A casa fica pronta, mas nunca fica fechada.</p>
-        <p>O resultado que ele busca é simples de descrever e difícil de fazer: um lugar onde a pessoa entra e sente que pode confiar. Que aquilo é dela.</p>
+      <div class="sobre-foto caixa-clara">
+        <span class="marcador-foto">[Retrato do Juan trabalhando]</span>
+        <svg viewBox="0 0 400 500" fill="none" stroke="#B9B9B9" stroke-width="1.4">
+          <circle cx="200" cy="170" r="58"/>
+          <path d="M110 420 q0 -110 90 -110 q90 0 90 110"/>
+          <path d="M80 460 h240" stroke-width="1"/>
+        </svg>
+      </div>
+      <div>
+        <p class="sobre-abre">Olá, meu nome é Juan e eu projeto casas pra morar: casa é lar, não vitrine.</p>
+        <div class="manifesto texto-justificado">
+          <p><strong>Boa arquitetura não é privilégio.</strong> As técnicas mais modernas de projeto servem justamente pra fazer mais com menos: aproveitar a luz que já existe, ventilar sem ar-condicionado, escolher o material certo pro clima e pro bolso. Quem tem pouco pra investir é quem mais ganha com um bom projeto.</p>
+          <p>Cada casa que o Juan desenha nasce de uma conversa, não de um catálogo. O projeto organiza o essencial e deixa espaço de sobra pro morador dar o próprio toque: a parede que vai ganhar cor, o canto que vira jardim, a estante que a família monta junta. A casa fica pronta, mas nunca fica fechada.</p>
+          <p>O resultado que ele busca é simples de descrever e difícil de fazer: um lugar onde a pessoa entra e sente que pode confiar. Que aquilo é dela.</p>
+        </div>
         <!-- TROCAR: mini-bio real do Juan (formação, cidade, desde quando projeta) -->
-        <div class="retrato">
-          <div class="retrato-foto">[Retrato do Juan]</div>
-          <p><strong>Juan [Sobrenome]</strong><br><small>[Formação · CAU nº · cidade]. Projeta casas residenciais com foco em moradia acessível.</small></p>
+        <div class="sobre-bio">
+          <strong>Juan [Sobrenome]</strong>
+          <small>[Formação · CAU nº · cidade]. Projeta casas residenciais com foco em moradia acessível.</small>
         </div>
       </div>
     </div>
@@ -477,101 +482,86 @@
 </section>
 
 <!-- ============ 02 PROCESSO ============ -->
-<section id="processo">
+<section id="processo" class="secao-escura">
   <div class="wrap">
     <div class="secao-head">
-      <span class="num">02/</span>
-      <span class="eyebrow">Como um projeto nasce</span>
+      <span class="num">02</span>
+      <span class="rotulo">Como um projeto nasce</span>
     </div>
+    <div class="fases-grid">
 
-    <div class="fase">
-      <div class="num-fase">A/</div>
-      <div>
+      <div class="fase">
+        <div class="num-fase">A</div>
+        <div class="fase-visual">
+          <svg viewBox="0 0 300 400" fill="none" stroke="#6E6E6E" stroke-width="1.4">
+            <path d="M40 80 q50 -14 100 -5 t120 3"/>
+            <path d="M40 115 q60 -10 120 -2 t100 5"/>
+            <path d="M40 150 q40 -8 90 -3"/>
+            <circle cx="210" cy="240" r="42"/>
+            <path d="M210 198 v-26 M168 240 h-28 M210 282 v24 M252 240 h26" stroke-width="1"/>
+            <path d="M60 300 l50 26 M110 326 l-11 -5 m11 5 l-5 -11"/>
+          </svg>
+        </div>
         <h3>Escuta</h3>
-        <p>Tudo começa com uma conversa longa: como a família vive, o que incomoda na casa de hoje, quanto dá pra investir. O pedido do cliente vira uma lista de necessidades reais, com prioridades claras.</p>
-        <p class="porque">Por que essa fase existe: projeto bom resolve a vida de quem mora, não a vaidade de quem desenha. Sem escuta, o resto é chute.</p>
+        <p>Tudo começa com uma conversa longa: como a família vive, o que incomoda na casa de hoje, quanto dá pra investir. O pedido vira uma lista de necessidades reais, com prioridades claras.</p>
+        <p class="porque"><strong>Por quê:</strong> projeto bom resolve a vida de quem mora, não a vaidade de quem desenha. Sem escuta, o resto é chute.</p>
       </div>
-      <figure class="fase-visual">
-        <svg viewBox="0 0 400 220" fill="none" stroke="#55534A" stroke-width="1.4">
-          <path d="M40 50 q60 -18 120 -6 t150 4"/>
-          <path d="M40 85 q80 -12 160 -2 t120 6"/>
-          <path d="M40 120 q50 -10 110 -4"/>
-          <circle cx="300" cy="120" r="34"/>
-          <path d="M300 86 v-22 M266 120 h-24 M300 154 v20 M334 120 h22" stroke-width="1"/>
-          <path d="M70 160 l60 30 M130 190 l-12 -6 m12 6 l-6 -12"/>
-          <path d="M180 170 q30 20 70 10" stroke-dasharray="4 4"/>
-        </svg>
-        <figcaption>Anotações da primeira conversa</figcaption>
-      </figure>
-    </div>
 
-    <div class="fase">
-      <div class="num-fase">B/</div>
-      <div>
+      <div class="fase">
+        <div class="num-fase">B</div>
+        <div class="fase-visual">
+          <svg viewBox="0 0 300 400" fill="none" stroke="#6E6E6E" stroke-width="1.6">
+            <path d="M50 280 q2 -3 -1 -80 l72 -40 q3 -1 5 0 l70 38 q2 52 1 82"/>
+            <path d="M76 282 q-1 -38 1 -50 l26 1 q2 28 1 49"/>
+            <path d="M138 218 q18 -3 34 1 l1 38 q-18 3 -35 0 z"/>
+            <path d="M30 284 q120 -6 240 0" stroke-width="1.2"/>
+            <path d="M122 158 l-4 -16 M130 156 l6 -15 M114 162 l-13 -11" stroke-width="1"/>
+          </svg>
+        </div>
         <h3>Esboço</h3>
-        <p>As necessidades viram forma: sketches à mão, estudos de volume, primeiras ideias de implantação no terreno. Nada é definitivo, e é exatamente essa a graça: errar barato no papel pra acertar na obra.</p>
-        <p class="porque">Por que essa fase existe: mudar uma parede a lápis custa zero. Mudar na obra custa caro. O esboço é onde a família ainda pode mudar de ideia à vontade.</p>
+        <p>As necessidades viram forma: sketches à mão, estudos de volume, primeiras ideias de implantação. Nada é definitivo, e essa é a graça: errar barato no papel pra acertar na obra.</p>
+        <p class="porque"><strong>Por quê:</strong> mudar uma parede a lápis custa zero. Mudar na obra custa caro. Aqui a família ainda muda de ideia à vontade.</p>
       </div>
-      <figure class="fase-visual">
-        <svg viewBox="0 0 400 220" fill="none" stroke="#55534A" stroke-width="1.6">
-          <path d="M60 170 q2 -3 -1 -60 l82 -44 q3 -1 5 0 l80 42 q2 40 1 62"/>
-          <path d="M90 172 q-1 -30 1 -40 l28 1 q2 22 1 39"/>
-          <path d="M160 120 q20 -3 38 1 l1 30 q-20 3 -39 0 z"/>
-          <path d="M228 168 q60 -4 110 1"/>
-          <path d="M238 166 v-52 q30 -8 66 -2 l2 54"/>
-          <path d="M40 172 q160 -6 330 0" stroke-width="1.2"/>
-          <path d="M142 64 l-4 -18 M150 62 l6 -16 M134 68 l-14 -12" stroke-width="1"/>
-        </svg>
-        <figcaption>Sketch de estudo · fase B</figcaption>
-      </figure>
-    </div>
 
-    <div class="fase">
-      <div class="num-fase">C/</div>
-      <div>
+      <div class="fase">
+        <div class="num-fase">C</div>
+        <div class="fase-visual">
+          <svg viewBox="0 0 300 400" fill="none" stroke="#6E6E6E" stroke-width="1.4">
+            <rect x="50" y="90" width="200" height="220"/>
+            <path d="M130 90 V210 M130 210 H50 M180 310 V180 M180 180 H250"/>
+            <path d="M85 210 h24 M205 310 h24" stroke="#161616" stroke-width="6"/>
+            <path d="M109 210 a15 15 0 0 1 -15 15 M229 310 a16 16 0 0 1 16 -16" stroke-width="1"/>
+            <path d="M26 90 v220 M22 90 h8 M22 310 h8" stroke-width="1"/>
+            <path d="M50 330 h200 M50 326 v8 M250 326 v8" stroke-width="1"/>
+            <path d="M215 115 l14 -14 m0 10 v-10 h-10" stroke-width="1"/>
+          </svg>
+        </div>
         <h3>Layout</h3>
-        <p>O esboço aprovado vira planta: cada ambiente com medida, o caminho do sol marcado, a ventilação cruzada resolvida, os fluxos da casa testados no desenho. É aqui que o projeto ganha precisão.</p>
-        <p class="porque">Por que essa fase existe: luz e vento são de graça. Uma planta bem orientada economiza conta de luz pela vida inteira da casa.</p>
+        <p>O esboço aprovado vira planta: cada ambiente com medida, o caminho do sol marcado, a ventilação cruzada resolvida, os fluxos testados no desenho. O projeto ganha precisão.</p>
+        <p class="porque"><strong>Por quê:</strong> luz e vento são de graça. Uma planta bem orientada economiza conta de luz pela vida inteira da casa.</p>
       </div>
-      <figure class="fase-visual">
-        <svg viewBox="0 0 400 220" fill="none" stroke="#55534A" stroke-width="1.4">
-          <rect x="60" y="30" width="280" height="160"/>
-          <path d="M170 30 V120 M170 120 H60 M240 190 V100 M240 100 H340"/>
-          <path d="M110 120 h30 M205 190 h30" stroke="#FBFAF7" stroke-width="6"/>
-          <path d="M140 120 a18 18 0 0 1 -18 18" stroke-width="1"/>
-          <path d="M235 190 a20 20 0 0 1 20 -20" stroke-width="1"/>
-          <path d="M30 30 v160 M26 30 h8 M26 190 h8" stroke-width="1"/>
-          <path d="M60 210 h280 M60 206 v8 M340 206 v8" stroke-width="1"/>
-          <path d="M300 55 l18 -18 m0 12 v-12 h-12" stroke-width="1"/>
-          <path d="M85 60 h50 M85 75 h35" stroke-width="1" stroke-dasharray="3 4"/>
-        </svg>
-        <figcaption>Planta de estudo · fase C</figcaption>
-      </figure>
-    </div>
 
-    <div class="fase">
-      <div class="num-fase">D/</div>
-      <div>
+      <div class="fase">
+        <div class="num-fase">D</div>
+        <div class="fase-visual">
+          <svg viewBox="0 0 300 400" fill="none" stroke="#6E6E6E" stroke-width="1.4">
+            <path d="M40 310 H260 M50 310 V170 L150 118 L250 170 V310"/>
+            <path d="M50 170 H250 M50 240 H250" stroke-width="1"/>
+            <rect x="75" y="262" width="30" height="48"/>
+            <rect x="185" y="190" width="28" height="28"/>
+            <rect x="125" y="185" width="35" height="125" stroke-width="1"/>
+            <path d="M28 170 v140 M24 170 h8 M24 310 h8 M28 240 h-6" stroke-width="1"/>
+            <path d="M50 330 h200 M50 326 v8 M250 326 v8 M150 326 v8" stroke-width="1"/>
+            <circle cx="240" cy="90" r="13" stroke-width="1"/>
+            <path d="M240 77 v-14 h18" stroke-width="1"/>
+          </svg>
+        </div>
         <h3>Projeto</h3>
-        <p>Detalhamento completo pra obra: pranchas técnicas, especificação de materiais, alternativas de acabamento por faixa de preço e um caderno que o pedreiro entende. A casa sai do papel sem surpresa no orçamento.</p>
-        <p class="porque">Por que essa fase existe: obra sem detalhamento vira improviso, e improviso é o jeito mais caro de construir. O projeto protege o dinheiro de quem constrói.</p>
+        <p>Detalhamento completo pra obra: pranchas técnicas, especificação de materiais, alternativas de acabamento por faixa de preço e um caderno que o pedreiro entende.</p>
+        <p class="porque"><strong>Por quê:</strong> obra sem detalhamento vira improviso, e improviso é o jeito mais caro de construir. O projeto protege o dinheiro de quem constrói.</p>
       </div>
-      <figure class="fase-visual">
-        <svg viewBox="0 0 400 220" fill="none" stroke="#55534A" stroke-width="1.4">
-          <path d="M60 180 H340 M70 180 V80 L200 40 L330 80 V180"/>
-          <path d="M70 80 H330 M70 130 H330" stroke-width="1"/>
-          <rect x="100" y="145" width="34" height="35"/>
-          <rect x="240" y="95" width="30" height="30"/>
-          <rect x="160" y="90" width="40" height="90" stroke-width="1"/>
-          <path d="M46 80 v100 M42 80 h8 M42 180 h8 M46 130 h-6" stroke-width="1"/>
-          <path d="M70 200 h260 M70 196 v8 M330 196 v8 M200 196 v8" stroke-width="1"/>
-          <circle cx="352" cy="60" r="14" stroke-width="1"/>
-          <path d="M352 46 v-14 h20" stroke-width="1"/>
-        </svg>
-        <figcaption>Corte com cotas · fase D</figcaption>
-      </figure>
-    </div>
 
+    </div>
   </div>
 </section>
 
@@ -579,116 +569,122 @@
 <section id="projeto">
   <div class="wrap">
     <div class="secao-head">
-      <span class="num">03/</span>
-      <span class="eyebrow">Um projeto, decisão por decisão</span>
+      <span class="num">03</span>
+      <span class="rotulo">Um projeto, decisão por decisão</span>
     </div>
 
     <div class="caso-intro">
-      <!-- TROCAR: nome e dados de um projeto real do Juan -->
-      <h2 class="display">Casa [Nome do Projeto]</h2>
-      <p>Como um pedido vira uma casa. Este é um projeto de exemplo, fase a fase, mostrando o que o cliente pediu e o que cada decisão de projeto respondeu.</p>
+      <div>
+        <!-- TROCAR: nome e dados de um projeto real do Juan -->
+        <h2 class="display">Casa [Nome do Projeto]</h2>
+        <p class="caso-intro-texto texto-justificado">Como um pedido vira uma casa. Este é um projeto de exemplo, fase a fase, mostrando o que o cliente pediu e o que cada decisão de projeto respondeu.</p>
+      </div>
       <div class="ficha">
-        <div><strong>Local</strong>[Bairro, cidade]</div>
-        <div><strong>Área</strong>[00 m²]</div>
-        <div><strong>Programa</strong>[2 quartos, varanda]</div>
-        <div><strong>Ano</strong>[20XX]</div>
+        <div><strong>Local:</strong><span>[Bairro, cidade]</span></div>
+        <div><strong>Área:</strong><span>[00 m²]</span></div>
+        <div><strong>Programa:</strong><span>[2 quartos, varanda]</span></div>
+        <div><strong>Ano:</strong><span>[20XX]</span></div>
       </div>
     </div>
 
     <div class="caso-fase">
       <div class="caso-texto">
+        <div class="fantasma">A</div>
         <div class="caso-etiqueta">Fase A · Escuta</div>
         <h3>O pedido</h3>
-        <p>[Exemplo] Um casal com uma filha pequena, terreno estreito de 7 metros de frente, orçamento fechado. O pedido: dois quartos, um quintal que a criança use de verdade e uma cozinha que converse com a sala, porque quem cozinha não quer ficar isolado da visita.</p>
+        <p class="texto-justificado">[Exemplo] Um casal com uma filha pequena, terreno estreito de 7 metros de frente, orçamento fechado. O pedido: dois quartos, um quintal que a criança use de verdade e uma cozinha que converse com a sala, porque quem cozinha não quer ficar isolado da visita.</p>
         <div class="decisao">
           <div class="decisao-rotulo">A decisão<span class="seta">&#8594;</span></div>
           <p>O orçamento não muda no meio do caminho: ele vira <em>premissa de projeto</em>. Todas as escolhas das fases seguintes partem desse teto, e não o contrário.</p>
         </div>
       </div>
-      <figure class="caso-artefato">
+      <figure class="caso-artefato caixa-clara">
         <span class="marcador-foto">[Foto: caderno de anotações / programa de necessidades]</span>
-        <svg viewBox="0 0 520 300" fill="none" stroke="#9B9889" stroke-width="1.4">
-          <rect x="70" y="30" width="380" height="240" stroke-width="1"/>
-          <path d="M100 70 h200 M100 100 h240 M100 130 h180"/>
-          <path d="M100 170 h16 m14 0 h130 M100 200 h16 m14 0 h170 M100 230 h16 m14 0 h110" stroke-width="1"/>
-          <path d="M104 166 l6 8 10 -14 M104 196 l6 8 10 -14" stroke-width="1.6" stroke="#B0552F"/>
-          <circle cx="390" cy="200" r="34" stroke-dasharray="4 4"/>
+        <svg viewBox="0 0 520 340" fill="none" stroke="#B9B9B9" stroke-width="1.4">
+          <rect x="70" y="50" width="380" height="240" stroke-width="1"/>
+          <path d="M100 90 h200 M100 120 h240 M100 150 h180"/>
+          <path d="M100 190 h16 m14 0 h130 M100 220 h16 m14 0 h170 M100 250 h16 m14 0 h110" stroke-width="1"/>
+          <path d="M104 186 l6 8 10 -14 M104 216 l6 8 10 -14" stroke-width="1.6" stroke="#0A0A0A"/>
+          <circle cx="390" cy="220" r="34" stroke-dasharray="4 4"/>
         </svg>
       </figure>
     </div>
 
     <div class="caso-fase">
       <div class="caso-texto">
+        <div class="fantasma">B</div>
         <div class="caso-etiqueta">Fase B · Esboço</div>
         <h3>A primeira forma</h3>
-        <p>[Exemplo] Nos sketches, a casa se alonga pro fundo do terreno e abre pro norte. A sala e a cozinha viram um ambiente só, na frente do quintal, pra quem cozinha enxergar a filha brincando.</p>
+        <p class="texto-justificado">[Exemplo] Nos sketches, a casa se alonga pro fundo do terreno e abre pro norte. A sala e a cozinha viram um ambiente só, na frente do quintal, pra quem cozinha enxergar a filha brincando.</p>
         <div class="decisao">
           <div class="decisao-rotulo">A decisão<span class="seta">&#8594;</span></div>
           <p>O cliente pediu "quintal que a criança use". A resposta não foi um quintal maior, foi <em>posição</em>: área de estar e quintal no mesmo eixo visual. Custa zero e resolve o pedido.</p>
         </div>
       </div>
-      <figure class="caso-artefato">
+      <figure class="caso-artefato caixa-clara">
         <span class="marcador-foto">[Imagem: sketch à mão desta fase]</span>
-        <svg viewBox="0 0 520 300" fill="none" stroke="#9B9889" stroke-width="1.6">
-          <path d="M80 240 q3 -4 0 -90 l110 -50 q4 -2 8 0 l104 48 q3 60 1 92"/>
-          <path d="M120 242 q-2 -40 2 -52 l40 2 q3 30 1 50"/>
-          <path d="M210 160 q26 -4 50 2 l2 40 q-26 4 -53 0 z"/>
-          <path d="M310 238 q80 -6 130 2"/>
-          <path d="M320 236 v-60 q36 -10 80 -2 l3 62"/>
-          <path d="M60 244 q200 -8 400 0" stroke-width="1.2"/>
-          <path d="M330 120 q30 -30 80 -20" stroke-dasharray="4 5" stroke="#B0552F"/>
-          <path d="M402 96 l8 4 -6 8" stroke="#B0552F"/>
+        <svg viewBox="0 0 520 340" fill="none" stroke="#B9B9B9" stroke-width="1.6">
+          <path d="M80 270 q3 -4 0 -90 l110 -50 q4 -2 8 0 l104 48 q3 60 1 92"/>
+          <path d="M120 272 q-2 -40 2 -52 l40 2 q3 30 1 50"/>
+          <path d="M210 190 q26 -4 50 2 l2 40 q-26 4 -53 0 z"/>
+          <path d="M310 268 q80 -6 130 2"/>
+          <path d="M320 266 v-60 q36 -10 80 -2 l3 62"/>
+          <path d="M60 274 q200 -8 400 0" stroke-width="1.2"/>
+          <path d="M330 150 q30 -30 80 -20" stroke-dasharray="4 5" stroke="#0A0A0A"/>
+          <path d="M402 126 l8 4 -6 8" stroke="#0A0A0A"/>
         </svg>
       </figure>
     </div>
 
     <div class="caso-fase">
       <div class="caso-texto">
+        <div class="fantasma">C</div>
         <div class="caso-etiqueta">Fase C · Layout</div>
         <h3>A planta que respira</h3>
-        <p>[Exemplo] Na planta, os quartos vão pro lado da sombra e os ambientes de estar pro lado do sol da manhã. Janelas alinhadas criam ventilação cruzada: o vento entra pela sala e sai pelo corredor, sem precisar de ar-condicionado.</p>
+        <p class="texto-justificado">[Exemplo] Na planta, os quartos vão pro lado da sombra e os ambientes de estar pro lado do sol da manhã. Janelas alinhadas criam ventilação cruzada: o vento entra pela sala e sai pelo corredor, sem precisar de ar-condicionado.</p>
         <div class="decisao">
           <div class="decisao-rotulo">A decisão<span class="seta">&#8594;</span></div>
           <p>Conforto térmico aqui não é equipamento, é <em>orientação</em>. A família economiza na conta de luz todo mês, pra sempre. É a técnica moderna trabalhando pra quem tem orçamento apertado.</p>
         </div>
       </div>
-      <figure class="caso-artefato">
+      <figure class="caso-artefato caixa-clara">
         <span class="marcador-foto">[Imagem: planta humanizada desta fase]</span>
-        <svg viewBox="0 0 520 300" fill="none" stroke="#9B9889" stroke-width="1.4">
-          <rect x="90" y="40" width="340" height="210"/>
-          <path d="M230 40 V150 M230 150 H90 M310 250 V130 M310 130 H430"/>
-          <path d="M150 150 h36 M255 250 h36 M430 180 v-36" stroke="#FBFAF7" stroke-width="7"/>
-          <path d="M186 150 a22 22 0 0 1 -22 22 M291 250 a24 24 0 0 1 24 -24" stroke-width="1"/>
-          <path d="M60 90 q60 10 120 0 t150 -4 t140 8" stroke-dasharray="3 5" stroke="#B0552F" stroke-width="1.2"/>
-          <path d="M462 92 l10 2 -4 10" stroke="#B0552F" stroke-width="1.2"/>
-          <path d="M110 70 h60 M110 85 h42" stroke-width="1" stroke-dasharray="3 4"/>
-          <path d="M60 40 v210 M56 40 h8 M56 250 h8" stroke-width="1"/>
+        <svg viewBox="0 0 520 340" fill="none" stroke="#B9B9B9" stroke-width="1.4">
+          <rect x="90" y="60" width="340" height="210"/>
+          <path d="M230 60 V170 M230 170 H90 M310 270 V150 M310 150 H430"/>
+          <path d="M150 170 h36 M255 270 h36 M430 200 v-36" stroke="#F0F0F0" stroke-width="7"/>
+          <path d="M186 170 a22 22 0 0 1 -22 22 M291 270 a24 24 0 0 1 24 -24" stroke-width="1"/>
+          <path d="M60 110 q60 10 120 0 t150 -4 t140 8" stroke-dasharray="3 5" stroke="#0A0A0A" stroke-width="1.2"/>
+          <path d="M462 112 l10 2 -4 10" stroke="#0A0A0A" stroke-width="1.2"/>
+          <path d="M110 90 h60 M110 105 h42" stroke-width="1" stroke-dasharray="3 4"/>
+          <path d="M60 60 v210 M56 60 h8 M56 270 h8" stroke-width="1"/>
         </svg>
       </figure>
     </div>
 
     <div class="caso-fase">
       <div class="caso-texto">
+        <div class="fantasma">D</div>
         <div class="caso-etiqueta">Fase D · Projeto</div>
         <h3>Pronta pra obra, aberta pro morador</h3>
-        <p>[Exemplo] O caderno de obra especifica cada material com uma alternativa mais em conta de mesmo desempenho. Algumas escolhas ficam de propósito em aberto: a cor das paredes, o revestimento do quintal, a marcenaria que pode vir depois.</p>
+        <p class="texto-justificado">[Exemplo] O caderno de obra especifica cada material com uma alternativa mais em conta de mesmo desempenho. Algumas escolhas ficam de propósito em aberto: a cor das paredes, o revestimento do quintal, a marcenaria que pode vir depois.</p>
         <div class="decisao">
           <div class="decisao-rotulo">A decisão<span class="seta">&#8594;</span></div>
           <p>A casa é entregue resolvida, mas não fechada. O que é estrutura, o projeto garante. O que é identidade, <em>fica com a família</em>: é ela quem termina a casa, no seu tempo e do seu jeito.</p>
         </div>
       </div>
-      <figure class="caso-artefato">
+      <figure class="caso-artefato caixa-clara">
         <span class="marcador-foto">[Foto: prancha técnica ou foto da obra]</span>
-        <svg viewBox="0 0 520 300" fill="none" stroke="#9B9889" stroke-width="1.4">
-          <path d="M80 250 H440 M92 250 V120 L260 68 L428 120 V250"/>
-          <path d="M92 120 H428 M92 185 H428" stroke-width="1"/>
-          <rect x="130" y="200" width="44" height="50"/>
-          <rect x="330" y="140" width="40" height="34"/>
-          <rect x="220" y="130" width="56" height="120" stroke-width="1"/>
-          <path d="M62 120 v130 M58 120 h8 M58 250 h8 M62 185 h-8" stroke-width="1"/>
-          <path d="M92 272 h336 M92 268 v8 M428 268 v8 M260 268 v8" stroke-width="1"/>
-          <circle cx="463" cy="90" r="16" stroke-width="1"/>
-          <path d="M463 74 v-18 h24" stroke-width="1"/>
+        <svg viewBox="0 0 520 340" fill="none" stroke="#B9B9B9" stroke-width="1.4">
+          <path d="M80 290 H440 M92 290 V160 L260 108 L428 160 V290"/>
+          <path d="M92 160 H428 M92 225 H428" stroke-width="1"/>
+          <rect x="130" y="240" width="44" height="50"/>
+          <rect x="330" y="180" width="40" height="34"/>
+          <rect x="220" y="170" width="56" height="120" stroke-width="1"/>
+          <path d="M62 160 v130 M58 160 h8 M58 290 h8 M62 225 h-8" stroke-width="1"/>
+          <path d="M92 312 h336 M92 308 v8 M428 308 v8 M260 308 v8" stroke-width="1"/>
+          <circle cx="463" cy="130" r="16" stroke-width="1"/>
+          <path d="M463 114 v-18 h24" stroke-width="1"/>
         </svg>
       </figure>
     </div>
@@ -697,25 +693,25 @@
 </section>
 
 <!-- ============ 04 PRINCÍPIOS ============ -->
-<section class="principios">
+<section class="secao-escura">
   <div class="wrap">
     <div class="secao-head">
-      <span class="num">04/</span>
-      <span class="eyebrow">O que guia todo projeto</span>
+      <span class="num">04</span>
+      <span class="rotulo">O que guia todo projeto</span>
     </div>
     <div class="principios-grid">
-      <div>
-        <span class="num">I/</span>
+      <div class="principio">
+        <span class="num">I</span>
         <h3>Acessível de verdade</h3>
         <p>O orçamento da família é premissa, não obstáculo. Um bom projeto cabe no dinheiro que existe, sem fingir que ele é maior.</p>
       </div>
-      <div>
-        <span class="num">II/</span>
+      <div class="principio">
+        <span class="num">II</span>
         <h3>Técnica a favor de quem mora</h3>
         <p>Luz natural, ventilação cruzada, material certo pro clima. O que há de mais moderno em projeto serve pra economizar, não pra encarecer.</p>
       </div>
-      <div>
-        <span class="num">III/</span>
+      <div class="principio">
+        <span class="num">III</span>
         <h3>Lar com o toque do morador</h3>
         <p>A casa sai resolvida, mas nunca fechada. Cada família termina o próprio lar, no seu tempo, do seu jeito.</p>
       </div>
@@ -727,15 +723,15 @@
 <section id="contato" class="contato">
   <div class="wrap">
     <div class="secao-head">
-      <span class="num">05/</span>
-      <span class="eyebrow">Contato</span>
+      <span class="num">05</span>
+      <span class="rotulo">Contato</span>
     </div>
     <h2 class="display">Vamos conversar sobre a sua casa</h2>
     <!-- TROCAR: contatos reais do Juan -->
     <div class="contato-lista">
-      <a href="#"><strong>WhatsApp</strong>[PREENCHER número]<span class="seta">&#8594;</span></a>
-      <a href="#"><strong>Instagram</strong>[PREENCHER @perfil]<span class="seta">&#8594;</span></a>
-      <a href="#"><strong>E-mail</strong>[PREENCHER e-mail]<span class="seta">&#8594;</span></a>
+      <a href="#"><strong>WhatsApp</strong><span>[PREENCHER número]</span><span class="seta">&#8594;</span></a>
+      <a href="#"><strong>Instagram</strong><span>[PREENCHER @perfil]</span><span class="seta">&#8594;</span></a>
+      <a href="#"><strong>E-mail</strong><span>[PREENCHER e-mail]</span><span class="seta">&#8594;</span></a>
     </div>
     <p class="contato-nota">Toda casa começa numa conversa. Sem compromisso: conta o que você precisa e o Juan te diz, com franqueza, o que um projeto pode fazer por você.</p>
   </div>
