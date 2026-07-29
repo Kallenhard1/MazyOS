@@ -120,8 +120,9 @@
   }
   nav a:hover { opacity: 0.55; }
 
-  /* ---------- hero: galeria escalonada (referência Nordic) ---------- */
+  /* ---------- hero: um projeto em três momentos (galeria escalonada) ---------- */
   .hero { padding: 40px 0 110px; }
+  .hero-kicker { margin-bottom: 28px; }
   .hero-galeria {
     display: grid;
     grid-template-columns: 1.1fr 0.9fr 1.1fr;
@@ -441,57 +442,58 @@
   </div>
 </header>
 
-<!-- ============ HERO: galeria escalonada ============ -->
+<!-- ============ HERO: um projeto em três momentos ============ -->
 <div class="hero wrap">
+  <p class="eyebrow hero-kicker">Um projeto, três momentos: aqui todo trabalho é mostrado do rabisco à obra</p>
   <div class="hero-galeria">
 
-    <div class="hero-item">
-      <a href="#projeto">
-        <div class="hero-foto">
-          <span class="marcador-foto">[Foto: projeto 1]</span>
-          <svg viewBox="0 0 400 440" fill="none" stroke="#B5B5B5" stroke-width="1.5" preserveAspectRatio="xMidYMax slice">
-            <line x1="0" y1="380" x2="400" y2="380"/>
-            <path d="M70 380 V210 L200 140 L330 210 V380"/>
-            <path d="M120 380 V290 H200 V380 M240 240 H300 V300 H240 Z"/>
-            <path d="M200 140 V110" />
-            <circle cx="330" cy="70" r="26" stroke-width="1"/>
-            <path d="M20 420 Q120 400 220 412 T400 408" stroke-width="1" stroke-dasharray="2 6"/>
-          </svg>
-        </div>
-        <span class="rotulo">Casa [Exemplo 01]<span class="seta">&#8594;</span></span>
-      </a>
-    </div>
-
+    <!-- momento 1: o esboço (a mesma casa dos 3 cards, em traço à mão) -->
     <div class="hero-item">
       <a href="#processo">
         <div class="hero-foto">
-          <span class="marcador-foto">[Foto: sketch em cima da mesa]</span>
-          <svg viewBox="0 0 400 340" fill="none" stroke="#B5B5B5" stroke-width="1.5">
-            <path d="M60 250 q3 -4 0 -80 l100 -46 q4 -2 8 0 l94 44 q3 52 1 82"/>
-            <path d="M95 252 q-2 -34 2 -44 l36 2 q3 26 1 42"/>
-            <path d="M190 190 q24 -4 46 2 l2 34 q-24 4 -49 0 z"/>
-            <path d="M40 254 q160 -8 320 0" stroke-width="1.2"/>
-            <path d="M280 120 q26 -24 64 -16" stroke-dasharray="4 5"/>
+          <span class="marcador-foto">[Foto: esboço à mão deste projeto]</span>
+          <svg viewBox="0 0 400 440" fill="none" stroke="#B5B5B5" stroke-width="1.6" preserveAspectRatio="xMidYMid meet">
+            <path d="M75 350 q3 -5 -1 -130 l122 -66 q4 -2 8 0 l118 64 q4 90 1 134"/>
+            <path d="M118 352 q-2 -60 2 -74 l44 2 q3 44 1 70"/>
+            <path d="M232 240 q30 -5 58 2 l2 52 q-30 5 -61 0 z"/>
+            <path d="M199 154 q2 -20 0 -34"/>
+            <path d="M40 354 q160 -10 330 2" stroke-width="1.2"/>
           </svg>
         </div>
-        <span class="rotulo">O processo<span class="seta">&#8594;</span></span>
+        <span class="rotulo">1 · O esboço<span class="seta">&#8594;</span></span>
       </a>
     </div>
 
+    <!-- momento 2: a planta da mesma casa -->
+    <div class="hero-item">
+      <a href="#processo">
+        <div class="hero-foto">
+          <span class="marcador-foto">[Imagem: planta deste projeto]</span>
+          <svg viewBox="0 0 400 340" fill="none" stroke="#B5B5B5" stroke-width="1.4">
+            <rect x="70" y="50" width="260" height="240"/>
+            <path d="M175 50 V170 M175 170 H70 M240 290 V160 M240 160 H330"/>
+            <path d="M115 170 h30 M255 290 h30" stroke="#FFFFFF" stroke-width="7"/>
+            <path d="M145 170 a20 20 0 0 1 -20 20 M285 290 a22 22 0 0 1 22 -22" stroke-width="1"/>
+            <path d="M40 50 v240 M36 50 h8 M36 290 h8" stroke-width="1"/>
+          </svg>
+        </div>
+        <span class="rotulo">2 · A planta<span class="seta">&#8594;</span></span>
+      </a>
+    </div>
+
+    <!-- momento 3: a casa construída (mesma geometria do esboço, traço preciso) -->
     <div class="hero-item">
       <a href="#projeto">
         <div class="hero-foto">
-          <span class="marcador-foto">[Foto: projeto 2]</span>
-          <svg viewBox="0 0 400 380" fill="none" stroke="#B5B5B5" stroke-width="1.4">
-            <rect x="70" y="60" width="260" height="240"/>
-            <path d="M175 60 V180 M175 180 H70 M240 300 V170 M240 170 H330"/>
-            <path d="M115 180 h30 M255 300 h30" stroke="#FFFFFF" stroke-width="7"/>
-            <path d="M145 180 a20 20 0 0 1 -20 20 M285 300 a22 22 0 0 1 22 -22" stroke-width="1"/>
-            <path d="M40 60 v240 M36 60 h8 M36 300 h8" stroke-width="1"/>
-            <path d="M300 90 l16 -16 m0 11 v-11 h-11" stroke-width="1"/>
+          <span class="marcador-foto">[Foto: a casa construída]</span>
+          <svg viewBox="0 0 400 380" fill="none" stroke="#B5B5B5" stroke-width="1.5" preserveAspectRatio="xMidYMid meet">
+            <path d="M75 310 V190 L200 122 L325 190 V310 H75 Z"/>
+            <path d="M118 310 V236 H162 V310 M232 210 H290 V262 H232 Z"/>
+            <path d="M200 122 V88"/>
+            <line x1="40" y1="310" x2="370" y2="310" stroke-width="1.2"/>
           </svg>
         </div>
-        <span class="rotulo">Como um projeto nasce<span class="seta">&#8594;</span></span>
+        <span class="rotulo">3 · A casa pronta<span class="seta">&#8594;</span></span>
       </a>
     </div>
 
