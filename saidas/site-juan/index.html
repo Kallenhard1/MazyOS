@@ -83,6 +83,9 @@
 
   .texto-justificado { text-align: justify; }
 
+  /* fotos: sempre preenchem a caixa sem distorcer */
+  img { display: block; width: 100%; height: 100%; object-fit: cover; }
+
   /* ---------- header ---------- */
   header {
     position: sticky;
@@ -311,6 +314,26 @@
     padding: 0;
   }
   .caso-artefato svg { width: 100%; height: auto; display: block; }
+  .caso-artefato.tem-foto { aspect-ratio: 4 / 3; overflow: hidden; }
+
+  /* ---------- galeria de ambientes (grid de fotos verticais) ---------- */
+  .galeria-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+  }
+  .galeria-item figure {
+    aspect-ratio: 3 / 4;
+    overflow: hidden;
+    background: var(--cinza-caixa-escura);
+    margin-bottom: 18px;
+  }
+  .galeria-item h3 {
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+  .galeria-item p { font-size: 14px; color: var(--cinza-claro); }
 
   /* ---------- princípios (preto, 3 colunas) ---------- */
   .principios-grid {
@@ -324,8 +347,7 @@
     font-size: 40px;
     line-height: 1;
     margin-bottom: 22px;
-    color: var(--fantasma-escuro);
-    -webkit-text-stroke: 1px var(--cinza-texto);
+    color: var(--fantasma);
   }
   .principio h3 {
     font-size: 18px;
@@ -333,7 +355,7 @@
     text-transform: uppercase;
     margin-bottom: 12px;
   }
-  .principio p { color: var(--cinza-claro); font-size: 14px; }
+  .principio p { color: var(--cinza-texto); font-size: 15px; }
 
   /* ---------- contato (branco) ---------- */
   .contato h2 {
@@ -349,10 +371,10 @@
   }
   .contato-lista a {
     display: block;
-    border-top: 2px solid var(--preto);
+    border-top: 2px solid currentColor;
     padding-top: 16px;
     text-decoration: none;
-    color: var(--preto);
+    color: inherit;
   }
   .contato-lista a:hover { opacity: 0.55; }
   .contato-lista strong {
@@ -364,7 +386,9 @@
     margin-bottom: 6px;
   }
   .contato-lista span:not(.seta) { color: var(--cinza-texto); }
+  .secao-escura .contato-lista span:not(.seta) { color: var(--cinza-claro); }
   .contato-nota { margin-top: 52px; color: var(--cinza-texto); max-width: 500px; font-size: 15px; }
+  .secao-escura .contato-nota { color: var(--cinza-claro); }
 
   /* ---------- footer (preto) ---------- */
   footer { background: var(--preto); color: var(--cinza-claro); }
@@ -392,14 +416,14 @@
     .capa-assinatura { text-align: left; }
     .capa-foto { height: 320px; }
     .sobre-grid { grid-template-columns: 1fr; gap: 40px; }
-    .fases-grid { grid-template-columns: 1fr 1fr; gap: 28px; }
+    .fases-grid, .galeria-grid { grid-template-columns: 1fr 1fr; gap: 28px; }
     .caso-fase { grid-template-columns: 1fr; gap: 32px; padding: 48px 0; }
     .caso-fase:nth-child(even) .caso-texto { order: 0; }
     .principios-grid, .contato-lista { grid-template-columns: 1fr; }
     .footer-inner { flex-direction: column; gap: 6px; }
   }
   @media (max-width: 560px) {
-    .fases-grid { grid-template-columns: 1fr; }
+    .fases-grid, .galeria-grid { grid-template-columns: 1fr; }
   }
 </style>
 </head>
@@ -432,19 +456,8 @@
     </div>
   </div>
   <div class="capa-foto">
-    <span class="marcador-foto">[Foto: a melhor obra do Juan, formato banner]</span>
-    <!-- placeholder: a mesma casa saindo do esboço (esquerda) pra obra (direita) -->
-    <svg viewBox="0 0 1200 620" fill="none" stroke="#4A4A4A" stroke-width="1.6" preserveAspectRatio="xMidYMax slice">
-      <path d="M240 470 q3 -6 -2 -180 l180 -98"/>
-      <path d="M282 472 q-3 -80 3 -100 l62 3 q4 60 2 96"/>
-      <path d="M420 190 q3 -25 -1 -46"/>
-      <path d="M60 476 q180 -12 360 -2" stroke-width="1.3"/>
-      <path d="M420 192 L600 290 V470 M600 350 H820 V470 M660 380 H740 V446 H660 Z"/>
-      <path d="M480 250 H560 V320 H480 Z"/>
-      <path d="M420 470 H1140" stroke-width="1.3"/>
-      <path d="M820 350 L940 350 V470 M980 470 V400 H1080 V470" stroke-width="1"/>
-      <path d="M600 520 H820 M600 514 v12 M820 514 v12" stroke-width="1"/>
-    </svg>
+    <!-- TROCAR: foto de referência. Substituir pela melhor obra construída do Juan -->
+    <img src="imagens/capa-banner.png" alt="Fachada em lâminas de concreto e vidro">
   </div>
 </div>
 
@@ -457,12 +470,8 @@
     </div>
     <div class="sobre-grid">
       <div class="sobre-foto caixa-clara">
-        <span class="marcador-foto">[Retrato do Juan trabalhando]</span>
-        <svg viewBox="0 0 400 500" fill="none" stroke="#B9B9B9" stroke-width="1.4">
-          <circle cx="200" cy="170" r="58"/>
-          <path d="M110 420 q0 -110 90 -110 q90 0 90 110"/>
-          <path d="M80 460 h240" stroke-width="1"/>
-        </svg>
+        <!-- TROCAR: idealmente um retrato do Juan trabalhando, ou uma obra dele -->
+        <img src="imagens/sobre-vertical.png" alt="Varandas curvas de um edifício ao fim da tarde">
       </div>
       <div>
         <p class="sobre-abre">Olá, meu nome é Juan e eu projeto casas pra morar: casa é lar, não vitrine.</p>
@@ -673,30 +682,69 @@
           <p>A casa é entregue resolvida, mas não fechada. O que é estrutura, o projeto garante. O que é identidade, <em>fica com a família</em>: é ela quem termina a casa, no seu tempo e do seu jeito.</p>
         </div>
       </div>
-      <figure class="caso-artefato caixa-clara">
-        <span class="marcador-foto">[Foto: prancha técnica ou foto da obra]</span>
-        <svg viewBox="0 0 520 340" fill="none" stroke="#B9B9B9" stroke-width="1.4">
-          <path d="M80 290 H440 M92 290 V160 L260 108 L428 160 V290"/>
-          <path d="M92 160 H428 M92 225 H428" stroke-width="1"/>
-          <rect x="130" y="240" width="44" height="50"/>
-          <rect x="330" y="180" width="40" height="34"/>
-          <rect x="220" y="170" width="56" height="120" stroke-width="1"/>
-          <path d="M62 160 v130 M58 160 h8 M58 290 h8 M62 225 h-8" stroke-width="1"/>
-          <path d="M92 312 h336 M92 308 v8 M428 308 v8 M260 308 v8" stroke-width="1"/>
-          <circle cx="463" cy="130" r="16" stroke-width="1"/>
-          <path d="M463 114 v-18 h24" stroke-width="1"/>
-        </svg>
+      <figure class="caso-artefato tem-foto">
+        <!-- TROCAR: foto de referência. Substituir pela casa do Juan já habitada -->
+        <img src="imagens/casa-habitada.png" alt="Sala de estar com quadros na parede, livros e objetos da família">
       </figure>
     </div>
 
   </div>
 </section>
 
-<!-- ============ 04 PRINCÍPIOS ============ -->
+<!-- ============ 04 AMBIENTES ============ -->
 <section class="secao-escura">
   <div class="wrap">
     <div class="secao-head">
       <span class="num">04</span>
+      <span class="rotulo">O que o processo entrega</span>
+    </div>
+    <div class="galeria-grid">
+
+      <div class="galeria-item">
+        <figure>
+          <!-- TROCAR: foto de referência. Substituir por ambiente projetado pelo Juan -->
+          <img src="imagens/ambiente-01.png" alt="Poltrona em um canto de parede verde escura, com planta e luminária">
+        </figure>
+        <h3>Cantos que convidam</h3>
+        <p>Um recanto bem resolvido não precisa de metro quadrado extra. Precisa de luz, de cor e de um lugar certo pra sentar.</p>
+      </div>
+
+      <div class="galeria-item">
+        <figure>
+          <!-- TROCAR: foto de referência. Substituir por ambiente projetado pelo Juan -->
+          <img src="imagens/ambiente-02.png" alt="Sala clara com cortina leve, mesa baixa e cadeira de palhinha">
+        </figure>
+        <h3>Luz que a cortina filtra</h3>
+        <p>Luz natural bem trabalhada troca lâmpada acesa por conforto o dia inteiro, sem custo nenhum de energia.</p>
+      </div>
+
+      <div class="galeria-item">
+        <figure>
+          <!-- TROCAR: foto de referência. Substituir por ambiente projetado pelo Juan -->
+          <img src="imagens/ambiente-03.png" alt="Parede clara servindo de fundo para quadros e uma poltrona escura">
+        </figure>
+        <h3>A parede como suporte</h3>
+        <p>O projeto entrega a superfície pronta e a família decide o que vai nela. A casa ganha cara com o tempo.</p>
+      </div>
+
+      <div class="galeria-item">
+        <figure>
+          <!-- TROCAR: foto de referência. Substituir por ambiente projetado pelo Juan -->
+          <img src="imagens/ambiente-04.png" alt="Ambiente de estar com pendentes baixos e poltronas claras">
+        </figure>
+        <h3>Luz baixa, ambiente calmo</h3>
+        <p>Iluminação pontual muda a sensação de um espaço mais do que qualquer revestimento caro.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ 05 PRINCÍPIOS ============ -->
+<section>
+  <div class="wrap">
+    <div class="secao-head">
+      <span class="num">05</span>
       <span class="rotulo">O que guia todo projeto</span>
     </div>
     <div class="principios-grid">
@@ -719,11 +767,11 @@
   </div>
 </section>
 
-<!-- ============ 05 CONTATO ============ -->
-<section id="contato" class="contato">
+<!-- ============ 06 CONTATO ============ -->
+<section id="contato" class="contato secao-escura">
   <div class="wrap">
     <div class="secao-head">
-      <span class="num">05</span>
+      <span class="num">06</span>
       <span class="rotulo">Contato</span>
     </div>
     <h2 class="display">Vamos conversar sobre a sua casa</h2>
